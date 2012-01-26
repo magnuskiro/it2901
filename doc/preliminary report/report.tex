@@ -1,16 +1,27 @@
 \documentclass[12pt]{article}
-\title{IT2901 - Preliminary Report}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage {babel}
-
+\title{Quality of Service - FFI}
 \author{
+<<<<<<< HEAD
         Magnus L Kirø \\
         Jørgen Nordmoen \\
         Stig Tore Johannesen \\
         Håvard Tørresen \\
         Jan Alexander S. Bremnes \\
         Ola Martin Støvneng 
+=======
+        IT2901 - Group 7  \\ 
+        Preliminary Report 
+        \\ \\
+        Jan Aleksander Bremnes - \\
+        Jørgen Nordmoen - jorgno@stud.ntnu.no\\
+        Håvard Tørresen - \\
+        Magnus L Kirø - kiro@stud.ntnu.no\\
+        Ola Martin Støvneng - \\
+        Stig Tore Johannesen - \\
+>>>>>>> ea3e00c675700f3eac1b4d045ef222db51cb663f
 }
 \date{\today}
 
@@ -19,27 +30,55 @@
 \titlepage
 \pagenumbering{arabic}
 
-\begin{abstract}
+\begin{should contain}
+This version is intended to help you get started with important aspects of the project work. As regards analysis and design, you are not expected to provide elaborate accounts in the report; some initial thoughts and sketches will do. However, you should demonstrate in your report that you have come to a mutual understanding with the customer about the project task (including its motivation and scope), and that your team has thoroughly worked on the planning and organization of the project. 
+
+We want you to create a chapter structure for the whole report and start filling it with contents. You may modify the structure later. 
+
+Contents:
+\begin{itemize}
+\item A description, in your own words, of the problem that you are going to solve for the customer. It might be useful to provide a high-level description of the current situation (AS-IS) and of the target situation (TO-BE).
+\item A high-level description of the main requirements (functional and non-functional) for the system to be developed. The level of details depends on the type of project and the approach you are choosing. It is however important that you work to reach an agreement with the customer.
+\item A brief outline of alternative solutions. The relevance of this point depends on your project. In general, you are expected to check if there are already existing solutions available on the market or as open source and make an evaluation of them. When you are evaluating different alternatives, it is important to make clear your evaluation criteria. Evaluation should be discussed with the customer and any choice should be agreed upon with the customer.
+\item A tentative outline / sketch of the architecture of your solution. 
+We do not require much here, but make a try!  
+\item A description of your team organization
+Roles and responsibilities
+\item A justified choice of process model for the development work 
+Will you work iteratively and/or incrementally, will you make a mock-up or prototype; phases and iterations…
+\item A preliminary overview of the development environment 
+Which tools/infrastructure do you plan to use for development and collaboration, e.g. for programming, versioning, testing, documenting, archiving, communicating within your team, communicating with other stakeholders,..
+\item A tentative time-plan of the project
+\end{itemize}
+\end{should contain}
+
+\newpage
+\begin{abstract}\label{abstract}
 This is the paper's abstract \ldots
 \end{abstract}
 
-\section{Introduction}
-This is time for all good men to come to the aid of their party!
+\newpage
+\tableofcontents
+\newpage
 
-\paragraph{Outline}
-The remainder of this article is organized as follows.
-Section~\ref{previous work} gives account of previous work.
-Our new and exciting results are described in Section~\ref{results}.
-Finally, Section~\ref{conclusions} gives the conclusions.
+\section{Project Introduction}\label{intoduction}
+\subsection{Outline}\label{outline} 
+The remainder of this article is organized as follows. Section~\ref{previous work} gives account of previous work. Our new and exciting results are described in Section~\ref{results}. Finally, Section~\ref{conclusion} gives the conclusions.
 
-\section{Previous work}\label{previous work}
-A much longer \LaTeXe{} example was written by Gil~\cite{Gil:02}.
-
+\section{Task Description and Requirements}\label{tanskreq}
+\subsection{Task Description}\label{task}
+\subsection{Requirements}\label{requirements}
+\section{Project Management}\label{management}
+\subsection{Risk Assesment}\label{risk}
+\subsection{Team Organization}\label{team}
+\section{Prestudy}\label{prestudy}
+\section{Design}\label{design}
+\section{Implementation}\label{implementation}
+\section{Testing}\label{teting}
 \section{Results}\label{results}
-In this section we describe the results.
-
-\section{Conclusions}\label{conclusions}
-We worked hard, and achieved very little.
+\section{Conclusion}\label{conclusion}
+\subsection{Future Work}\label{future}
+\section{Project Evaluation}\label{evaluation}
 
 \bibliographystyle{abbrv}
 \bibliography{main}
