@@ -1,4 +1,5 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
 \contentsline {section}{\numberline {2}Progress summary}{2}
-\contentsline {section}{\numberline {3}Open$/$closed problems}{2}
-\contentsline {section}{\numberline {4}Updated risks analysis}{2}
+\contentsline {section}{\numberline {3}Completed tasks}{3}
+\contentsline {section}{\numberline {4}New tasks}{3}
+\contentsline {section}{\numberline {5}Planned work for next period}{3}

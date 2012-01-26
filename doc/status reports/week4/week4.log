@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.24)  26 JAN 2012 11:10
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.24)  26 JAN 2012 15:45
 entering extended mode
  %&-line parsing enabled.
 **\nonstopmode \input{"/home/alex/Documents/git/it2901/doc/status reports/week4
@@ -299,82 +299,58 @@ Now handling font encoding U ...
 (/home/alex/Documents/git/it2901/doc/status reports/week4/week4.aux)
 \openout1 = `week4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-
-
-LaTeX Warning: No \author given.
-
-[1
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(/home/alex/Documents/git/it2901/doc/status reports/week4/week4.toc)
-\tf@toc=\write3
-\openout3 = `week4.toc'.
+Underfull \hbox (badness 10000) in paragraph at lines 18--31
 
- [1]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.19 ...be related to the milestone plan (see WBS_
-                                                  and_MilestonePlan_Intro).]
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+ []
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.20 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.25 ...n for the coming period; see ActivityPlan_
-                                                  Template]
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Underfull \hbox (badness 10000) in paragraph at lines 18--31
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.26 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+ []
 
-[2] (/home/alex/Documents/git/it2901/doc/status reports/week4/week4.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--31
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--31
+
+ []
+
+[1] [2] (/home/alex/Documents/git/it2901/doc/status reports/week4/week4.aux) ) 
 Here is how much of TeX's memory you used:
- 1044 strings out of 495061
- 11499 string characters out of 1182621
- 60016 words of memory out of 3000000
- 4258 multiletter control sequences out of 15000+50000
- 9555 words of font info for 35 fonts, out of 3000000 for 9000
+ 1036 strings out of 495061
+ 11293 string characters out of 1182621
+ 65016 words of memory out of 3000000
+ 4254 multiletter control sequences out of 15000+50000
+ 8408 words of font info for 31 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 28i,6n,20p,322b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on week4.pdf (3 pages, 93991 bytes).
+ 28i,7n,20p,609b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
+<
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmr17.pfb>
+Output written on week4.pdf (3 pages, 74489 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
+ 32 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
