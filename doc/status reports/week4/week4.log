@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.24)  26 JAN 2012 15:45
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.24)  26 JAN 2012 16:13
 entering extended mode
  %&-line parsing enabled.
 **\nonstopmode \input{"/home/alex/Documents/git/it2901/doc/status reports/week4
@@ -348,7 +348,7 @@ texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmr17.pfb>
-Output written on week4.pdf (3 pages, 74489 bytes).
+Output written on week4.pdf (3 pages, 74466 bytes).
 PDF statistics:
  32 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
