@@ -29,8 +29,8 @@
 
     Contents:
     \begin{itemize}
-    \item A description, in your own words, of the problem that you are going to solve for the customer. It might be useful to provide a high-level description of the current situation (AS-IS) and of the target situation (TO-BE).
-    \item A high-level description of the main requirements (functional and non-functional) for the system to be developed. The level of details depends on the type of project and the approach you are choosing. It is however important that you work to reach an agreement with the customer.
+    \item A description, in your own words, of the problem that you are going to solve for the customer. It might be useful to provide a high-level description of the current situation (AS-IS) and of the target situation (TO-BE). \ref{taskdesc}[taskdesc]
+    \item A high-level description of the main requirements (functional and non-functional) for the system to be developed. The level of details depends on the  type of project and the approach you are choosing. It is however important that you work to reach an agreement with the customer.\ref{taskreq}[taskreq]
     \item A brief outline of alternative solutions. The relevance of this point depends on your project. In general, you are expected to check if there are already existing solutions available on the market or as open source and make an evaluation of them. When you are evaluating different alternatives, it is important to make clear your evaluation criteria. Evaluation should be discussed with the customer and any choice should be agreed upon with the customer.
     \item A tentative outline / sketch of the architecture of your solution. 
     We do not require much here, but make a try!
@@ -56,11 +56,29 @@ This is the paper's abstract \ldots
 \subsection{Outline}\label{outline} 
 The remainder of this article is organized as follows. Section~\ref{previous work} gives account of previous work. Our new and exciting results are described in Section~\ref{results}. Finally, Section~\ref{conclusion} gives the conclusions.
 
-\section{Task Description and Requirements}\label{taskreq}
-    \subsection{Task Description}\label{taskdesc}
+\section{Task Description and Requirements}\label{taskdescreq}
+    \subsection{Task Description}\label{taskdef}
         \subsubsection{Abstract}\label{taskabst} Our task is to provide a quality of service (QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and together with the service they are trying to communicate with, decide the priority of the message. 
-        \subsubsection{Description}\label{} 
-    \subsection{Requirements}\label{requirements}
+        \subsubsection{Description}\label{taskdesc} 
+    \subsection{Requirements}\label{taskreq}
+    \begin{itemize}
+        \item Written in java
+        \item High priority messages must arrive, even at the cost of dropping lower priority messages.
+        \item Use standards where they can be used
+            \subitem SAML
+            \subitem Diffserv
+            \subitem XACML
+            \subitem WS-Security
+        \item Test thoroughly
+            \subitem Use NS3 for testing
+        \item Extensive documentation
+        \item Use metadata to determine priority
+        \item GlassFish must be supported as the application server
+        \item Must be able to set priority on network layer packets
+            \subitem Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future.
+        \item There are no requirements on resource usage, but we should try to keep it lightweight.
+            \subitem The customer has only said that we can expect the product to be used on a standard current laptop with full Java support
+    \end{itemize}
 \section{Project Management}\label{management} How we organize ourselves. 
     \subsection{Team Organization}\label{team}
     \subsection{Risk Assesment}\label{risk}
