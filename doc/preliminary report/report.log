@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.24)  26 JAN 2012 10:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.1.21)  30 JAN 2012 11:41
 entering extended mode
  %&-line parsing enabled.
-**\nonstopmode \input{"/home/alex/Documents/git/it2901/doc/preliminary report/r
-eport.tex"}
-(/home/alex/Documents/git/it2901/doc/preliminary report/report.tex
+**\nonstopmode \input{"/home/dusken/repos/it2901/doc/preliminary report/report.
+tex"}
+(/home/dusken/repos/it2901/doc/preliminary report/report.tex
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size12.clo
@@ -377,7 +377,7 @@ File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count94
 \U@D=\dimen106
 ))
-(/home/alex/Documents/git/it2901/doc/preliminary report/report.aux
+(/home/dusken/repos/it2901/doc/preliminary report/report.aux
 
 ! Package babel Error: You haven't loaded the option english yet.
 
@@ -392,21 +392,21 @@ You may proceed, but expect unexpected results
 )
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-Package hyperref Info: Link coloring OFF on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+Package hyperref Info: Link coloring OFF on input line 19.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -415,11 +415,11 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count95
 )
-LaTeX Info: Redefining \ref on input line 17.
-LaTeX Info: Redefining \pageref on input line 17.
+LaTeX Info: Redefining \ref on input line 19.
+LaTeX Info: Redefining \pageref on input line 19.
 
-(/home/alex/Documents/git/it2901/doc/preliminary report/report.out)
-(/home/alex/Documents/git/it2901/doc/preliminary report/report.out)
+(/home/dusken/repos/it2901/doc/preliminary report/report.out)
+(/home/dusken/repos/it2901/doc/preliminary report/report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
@@ -432,35 +432,89 @@ See the babel package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.17 \begin{document}
+l.19 \begin{document}
                      
 You may proceed, but expect unexpected results
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 19.
+(Font)              <14.4> on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 19.
+(Font)              <7> on input line 21.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 36.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 36.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 36.
 
+! LaTeX Error: Environment should contain undefined.
 
-LaTeX Warning: Citation `Gil:02' on page 1 undefined on input line 36.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 \begin{should contain}
+                           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-No file report.bbl.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+
+Overfull \hbox (60.20653pt too wide) in paragraph at lines 40--42
+[]\OT1/cmr/m/n/12 A pre-lim-i-nary overview of the de-vel-op-ment en-vi-ron-men
+t Which tools/infrastructure
+ []
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 \end{document}
-                    [1]
-(/home/alex/Documents/git/it2901/doc/preliminary report/report.aux
+l.42     \item A
+                 tentative time-plan of the project [1]
+
+! LaTeX Error: \begin{document} ended by \end{should contain}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 \end{should contain}
+                         
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[2] (/home/dusken/repos/it2901/doc/preliminary report/report.toc
+
+! Package babel Error: You haven't loaded the option english yet.
+
+See the babel package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \select@language {english}
+                              
+You may proceed, but expect unexpected results
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+)
+\tf@toc=\write4
+\openout4 = `report.toc'.
+
+ [3]
+
+LaTeX Warning: Reference `previous work' on page 4 undefined on input line 56.
+
+No file report.bbl.
+[4] (/home/dusken/repos/it2901/doc/preliminary report/report.aux
 
 ! Package babel Error: You haven't loaded the option english yet.
 
@@ -476,24 +530,27 @@ You may proceed, but expect unexpected results
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3975 strings out of 495061
- 57512 string characters out of 1182621
- 125950 words of memory out of 3000000
- 7116 multiletter control sequences out of 15000+50000
- 9109 words of font info for 32 fonts, out of 3000000 for 9000
+ 4039 strings out of 495061
+ 58357 string characters out of 1182621
+ 129925 words of memory out of 3000000
+ 7159 multiletter control sequences out of 15000+50000
+ 9416 words of font info for 33 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 39i,7n,36p,356b,304s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,7n,36p,585b,367s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on report.pdf (2 pages, 84715 bytes).
+xlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb>
+Output written on report.pdf (5 pages, 94294 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 7 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 22 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 
