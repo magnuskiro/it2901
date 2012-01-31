@@ -58,8 +58,20 @@ The remainder of this article is organized as follows. Section~\ref{previous wor
 
 \section{Task Description and Requirements}\label{taskdescreq}
     \subsection{Task Description}\label{taskdef}
-        \subsubsection{Abstract}\label{taskabst} Our task is to provide a quality of service (QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and together with the service they are trying to communicate with, decide the priority of the message. 
+        \subsubsection{Abstract}\label{taskabst} 
+        [High level desscription of the task.]
+        
+        Our task is to provide a quality of service (QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and together with the service they are trying to communicate with, decide the priority of the message.
         \subsubsection{Description}\label{taskdesc} 
+        [Description of the task at hand.]
+        
+        Our assignment is to create a Java application which will function as a middleware layer between web services, and clients trying to use these services. The middleware needs to process SOAP messages, which is the communication protocol for most web services, in order to be able to do its task. On the client side, the middleware needs to process messages and understand SAML in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
+
+        Our middleware needs to be able to modify the TOS/Diffserv IP packet header in order for the tactical router to prioritize correctly. Currently NATO has just defined one class, BULK, which is to be used with web services, but this may change in the future and our middleware should handle this upcoming change gracefully.
+
+        In addition to this, the middleware needs to be able to retrieve the available bandwidth in the network, which in the real system will be retrieved from the tactical routers. In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
+
+        With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, XACML, WS-Security and WSO2 ESB. In addition to this, our middleware needs to work with GlassFish, as that is the application server the customer uses.
     \subsection{Requirements}\label{taskreq}
     \begin{itemize}
         \item Written in java
@@ -83,7 +95,28 @@ The remainder of this article is organized as follows. Section~\ref{previous wor
     \subsection{Team Organization}\label{team}
     \subsection{Risk Assesment}\label{risk}
     \subsection{Process Evaluation}\label{processevaluation}
-\section{Project Methodoloogy}\label{methodology} How we organize the project.
+\section{Project Methodoloogy}\label{methodology} [How we organize the project]
+
+    As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
+
+    We will work together from 10 to 16, Monday through Thursday every week, with allowed exceptions for lectures and such. Group members can also work in their free time to make up for missed collaboration hours or to just put in some extra work. This means more work than the course requires, but we decided that we want to do it this way so we can either take some time off now and then, or have more time for the exams in May.
+
+    The customer has not given us many strict requirements, but instead they have suggested a few things that we could do. Given this freedom, we decided that we should improve on the base requirements by adding most of the things mentioned in this section.
+
+    This is a project that requires quite a lot of planning before any programming can be done. This necessitates that we start the development according to a waterfall model in terms of the architecture planning as well as the requirements specification.
+    
+    As the project progresses we’ll be switching to a more agile development method, so as to allow for iterative development and facilitate for any necessary changes that may turn up as code is produced. Agile also allows for a far flatter organisational structure, which we believe will greatly help cooperation within the team.
+    
+    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver two prototypes, an alfa and a beta version, to the customer before the final delivery in May.
+
+    We will not be able to have face to face meetings with the customer, but we will have weekly online meetings with them instead, as well as e-mail communication as needed. Since we have seen what happens in projects where there is little to no communication, we decided, in agreement with the costumer, that we at least wanted to have weekly meetings in order  to keep a good dialog with the customer, and also give them the opportunity to take part in the development of the project. Since we have some challenges in the fact that the customer is in Oslo, we decided that the weekly meetings will be held over Skype.
+
+    We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use JUnit as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer also can use to evaluate the product.
+
+    We will use Git and GitHub to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use Subversion, we decided against this as Git gives us more options to develop code which will not greatly effect other parts of the codebase before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with LaTeX, which we prefer over standard word processors.
+
+    Each of us is free to choose his own IDE for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
+
     \subsection{Tools}\label{tools}
 \section{Prestudy}\label{prestudy}
 \section{Design}\label{design}
