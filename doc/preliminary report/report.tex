@@ -4,6 +4,7 @@
 \usepackage {babel}
 \usepackage{graphicx}
 \usepackage{pdfpages}
+\usepackage{attachfile}
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./graphics/}}
 \title{
@@ -143,13 +144,25 @@ The customer does not require any prototypes along the way, just a working proto
     \end{itemize}
 \section{Prestudy}\label{prestudy}
 \section{Design}\label{design}
-    \subsection{Architecture}\label{architecture}
-    This is dog
+    \subsection{Server side Architecture}\label{serversidearch} [The architecture of the server side module we are to create.] 
+    
+        The server side architecture consists of several components, the WSO2 ESB, the WSO2 Identity Server, the Tactical Router and the GlassFish server. All of these components are already available, so what we will have to make is mediators in the ESB.
+
+        Before the client can request a web service it has to have an identification. To get an ID-token it has to contact the Identity Server using the ESB as a proxy.
+        
+        Then the client can request a web service from the ESB. Several things will then happen in the ESB. First the request message is sent to the SAML mediator, this mediator contacts the Identity Server to validate the clients ID-token. If the token is validated and the client is supposed to have access to the requested service the message is passed on to the GlassFish proxies, otherwise it is dropped. The ESB acting as a proxy will then send the request along to the requested service on the GlassFish server.
+
         \begin{figure}
             \includegraphics[scale=0.5]{serverside}
             \caption{The serverside architecture}
             \label{fig:serverside}
         \end{figure}
+
+        When the request is received at the service, it will probably start sending some data to the client. This is also done through the ESB. First the message is sent to the QoS mediator. This mediator will first look at the role, or identity, of the client and the service requested, and use this information to assign a priority to the connection. Then the Tactical Router is contacted for bandwidth information, which is used together with the priority to determine whether the message should be sent right away or held back until some higher priority message is finished sending.
+
+        Either in the QoS mediator, in the ESB’s network layer, or after that, the Diffserv (ToS) field of the IP header will have to be set before the message is sent to the client. This field is used by the routers in the network to prioritize packet sending. This step is quite important to the whole procedure as this is one of the few requirements the customer has given us, as such this step can not be dropped from the final product.
+        
+    \subsection{Client side Architecture}\label{clientsidearch}        
         
 \section{Implementation}\label{implementation}
 \section{Testing}\label{teting}
@@ -161,6 +174,8 @@ The customer does not require any prototypes along the way, just a working proto
 \appendix
 \section{Techical Glossary}\label{glossary}
     \includepdf{Glossary.pdf}
+\section{File Attachments}
+    \attachfile[description=TEST log,icon=Paperclip]{report.log} Attached file
 
 
 \bibliographystyle{abbrv}
