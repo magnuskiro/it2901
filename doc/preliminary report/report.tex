@@ -3,7 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage {babel}
 \usepackage{graphicx}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+\usepackage{pdfpages}
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./graphics/}}
 \title{
     Quality of Service - FFI \\
@@ -53,6 +54,8 @@ This is the paper's abstract \ldots
 \end{abstract}
 
 \tableofcontents
+\listoffigures
+\listoftables
 \newpage
 
 \section{Project Introduction}\label{intoduction}
@@ -142,11 +145,12 @@ The customer does not require any prototypes along the way, just a working proto
 \section{Design}\label{design}
     \subsection{Architecture}\label{architecture}
     This is dog
-        \begin{figure}[htb]
+        \begin{figure}
             \includegraphics[scale=0.5]{serverside}
             \caption{The serverside architecture}
             \label{fig:serverside}
         \end{figure}
+        
 \section{Implementation}\label{implementation}
 \section{Testing}\label{teting}
 \section{Results}\label{results}
@@ -154,7 +158,25 @@ The customer does not require any prototypes along the way, just a working proto
     \subsection{Future Work}\label{future}
 \section{Project Evaluation}\label{evaluation}
 
+\appendix
+\section{Techical Glossary}\label{glossary}
+    \includepdf{Glossary.pdf}
+
+
 \bibliographystyle{abbrv}
 \bibliography{main}
+\begin{thebibliography}{0}
+    \bibitem{lamport94} Leslie Lamport,
+        \emph{\LaTeX: A Document Preparation System}.
+        Addison Wesley, Massachusetts,
+        2nd Edition,
+        1994.
+    \bibitem{lamport94} 
+        Leslie Lamport,
+        \emph{\LaTeX: A Document Preparation System}.
+        Addison Wesley, Massachusetts,
+        2nd Edition,
+        1994.
+\end{thebibliography}
 
 \end{document}
