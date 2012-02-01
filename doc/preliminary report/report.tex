@@ -2,6 +2,9 @@
 \usepackage[pdfborder=0 0 0]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage {babel}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+\graphicspath{{./graphics/}}
 \title{
     Quality of Service - FFI \\
     IT2901 - Group 7  \\ 
@@ -89,13 +92,20 @@ The remainder of this article is organized as follows. Section~\ref{previous wor
         \item Must be able to set priority on network layer packets
             \subitem Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future.
         \item There are no requirements on resource usage, but we should try to keep it lightweight.
-            \subitem The customer has only said that we can expect the product to be used on a standard current laptop with full Java support
+            \subitem The customer has only said that we can expect the product to be used on a standard laptop with full Java support
     \end{itemize}
-\section{Project Management}\label{management} How we organize ourselves. 
-    \subsection{Team Organization}\label{team}
+\section{Project Management}\label{management} How we organize ourselves in the group and work together. 
+    \subsection{Team Organization}\label{team} [The team structure and roles.]
+    
+    We already know each other coming into the project so we’ve chosen a flat organisational structure for the team, since all decisions within the team will more or less be made by the entire group together either way. Relying on the entire group for decisions will both involve and invest all group members in the project as a whole and will work well with our already existing group dynamic.
+
+Since this is a research project, the customer will act more as an advisor than a customer, and will have more suggestions and advice than demands and requirements. We have been given a clear understanding of what the final product should be, and we have a list of requirements that should be met. Other than that, we are relatively free regarding how we go about solving the problem. Because of this, a methodology like Scrum won't work for us, as it requires us to be in close and frequent contact with the customer, presenting a prototype every other week and continue development based on the customers feedback and demands.
+
+The customer does not require any prototypes along the way, just a working prototype by the end of the project, so the deadlines we have set for the alpha and beta, are self-imposed by us.
     \subsection{Risk Assesment}\label{risk}
     \subsection{Process Evaluation}\label{processevaluation}
-\section{Project Methodoloogy}\label{methodology} [How we organize the project]
+\section{Project Methodoloogy}\label{methodology} 
+    \subsection{Project Organization}\label{projectorg} [How we organize the project]
 
     As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
 
@@ -117,9 +127,26 @@ The remainder of this article is organized as follows. Section~\ref{previous wor
 
     Each of us is free to choose his own IDE for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
 
-    \subsection{Tools}\label{tools}
+    \subsection{Tools}\label{tools} [The tools that we will use in the project.]
+    
+    Since we were so free to chose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
+    \begin{itemize}
+        \item Git version 1.7.x
+        \item Java version 1.6.x
+        \item Free choice of IDE
+        \item JUnit version 4.x
+        \item NS3 unknown at present time
+        \item WSO2 ESB 4.0.3
+    \end{itemize}
 \section{Prestudy}\label{prestudy}
 \section{Design}\label{design}
+    \subsection{Architecture}\label{architecture}
+    This is dog
+        \begin{figure}[htb]
+            \includegraphics[scale=0.5]{serverside}
+            \caption{The serverside architecture}
+            \label{fig:serverside}
+        \end{figure}
 \section{Implementation}\label{implementation}
 \section{Testing}\label{teting}
 \section{Results}\label{results}
