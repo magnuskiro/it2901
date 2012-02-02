@@ -40,11 +40,8 @@ This is the paper's abstract \ldots
 \section{Project Introduction}\label{intoduction}
     This report is intended to guide you, through our work, decisions and results. This report will detail how we planned the project, how we designed the architecture and how we tested and evaluated the result. Hopefully by the end of this report you will understand how and why we made the decisions that we did, and additionally we hope you will enjoy or work in the same way that we have enjoyed working on it. We have intended for the results to be both verifiable and interesting for the right audience and we hope our customer will be pleased with it. If we have done this report right you will, by the end, be able to take an informed decision about how and why you should implement quality of service in networks were bandwidth is a scarce resources.
 
-\section{Task Description and Requirements}\label{taskdescreq} This is the section where we describe the task and it's requirements in detail.
-    \subsection{Abstract}\label{taskabst} 
-    [High level desscription of the task.]
-        
-    Our task is to provide a quality of service (QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and together with the service they are trying to communicate with, decide the priority of the message.
+\section{Task Description and Requirements}\label{taskdescreq} 
+    Our task is to provide a Quality of Service (QoS) layer to web services for use in military tactical networks. As these networks tend to have severely limited bandwidth, and our QoS-layer must therefore prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
     
     \subsection{Description}\label{taskdesc} 
     [Description of the task at hand.]
@@ -56,6 +53,7 @@ This is the paper's abstract \ldots
     In addition to this, the middleware needs to be able to retrieve the available bandwidth in the network, which in the real system will be retrieved from the tactical routers. In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
 
     With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, XACML, WS-Security and WSO2 ESB. In addition to this, our middleware needs to work with GlassFish, as that is the application server the customer uses.
+   
     \subsection{Requirements}\label{taskreq}
     \begin{itemize}
         \item Written in java
@@ -75,18 +73,27 @@ This is the paper's abstract \ldots
         \item There are no requirements on resource usage, but we should try to keep it lightweight.
             \subitem The customer has only said that we can expect the product to be used on a standard laptop with full Java support
     \end{itemize}
-\section{Project Management}\label{management} How we organize ourselves in the group and work together. 
-    \subsection{Team Organization}\label{team} [The team structure and roles.]
+    
+\section{Project Management}\label{management} 
+    In this section, we'll take look at how we organized the team, a brief risk assesment, and an evaluation of the work process 
+    
+    \subsection{Team Organization}\label{team} 
+        [The team structure and roles.]
     
     We already know each other coming into the project so we’ve chosen a flat organisational structure, since all decisions within the team will more or less be made by all the members together either way. Relying on the entire group for decisions will both involve and invest everyone in the project and will work well with our already existing group dynamic.
 
     Since this is a research project, the customer will act more as an advisor than a customer, and will have more suggestions and advice than demands and requirements. We have been given a clear understanding of what the final product should be, and we have a list of requirements that should be met. Other than that, we are relatively free regarding how we go about solving the problem. Because of this, a methodology like Scrum won't work for us, as it requires us to be in close and frequent contact with the customer, presenting a prototype every other week and continue development based on the customers feedback and demands.
 
     The customer does not require any prototypes along the way, just a working prototype by the end of the project, so the deadlines we have set for the alpha and beta, are self-imposed.
+    
     \subsection{Risk Assesment}\label{risk}
+    
     \subsection{Process Evaluation}\label{processevaluation}
-\section{Project Methodoloogy}\label{methodology} How we organize the project, the workflow and the work methods. 
-    \subsection{Project Organization}\label{projectorg} [How we organize the project]
+    
+\section{Project Methodology}\label{methodology} 
+    We did not follow any established development methodology, such as Scrum or XP, as this project required more planning and configuration of existing solutions, than actual coding. We therefore chose a mix of waterfall and agile methods, we discuss these decisions in the sections below. You will also find a list of the tools we chose to work with, and why we decided to use them. 
+
+    \subsection{Project Organization}\label{projectorg}[How we organize the project]
 
     As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
 
@@ -120,7 +127,7 @@ This is the paper's abstract \ldots
         \item WSO2 ESB 4.0.3
     \end{itemize}
     
-\section{Prestudy}\label{prestudy} The research, information gathering of technology understanding in the beginning of the project, before we finalise architecture and start implementation.
+\section{Prestudy}\label{prestudy} This project is one that requires quite a lot of prestudy before we can begin coding or even designing the architecture. Since the customer wanted us to implement existing technologies, such as Glassfish, WSO2, SAML etc. we need to spend some time researching those technologies to figure out what to use, and how to use it. The following sections will describe the overall architecture of how we, at this point in time, imagine our system will be like. 
 
     \subsection{Server side Architecture}\label{serversidearch} [The architecture of the server side module we are to create.] 
     
