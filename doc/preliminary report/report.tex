@@ -38,7 +38,7 @@ This is the paper's abstract \ldots
 \newpage
 
 \section{Project Introduction}\label{intoduction}
-    This report is intended to guide you, through our work, decisions and results. It will detail how we planned the project, how we designed the architecture and how we tested and evaluated the result. Hopefully by the end of this report you will understand how and why we made the decisions that we did, and additionally we hope you will enjoy or work in the same way that we have enjoyed working on it. We have intended for the results to be both verifiable and interesting for the right audience and we hope our customer will be pleased with it. If we have done this report right you will, by the end, be able to take an informed decision about how and why you should implement quality of service in networks were bandwidth is a scarce resources.
+    This is a preliminary report documenting our progress so far in the course IT2901 - Informatikk Prosjektarbeid II. It will give a description of the problem we were presented with, how we have planned the work for the weeks ahead, how we have organized our group and what development methodology we have chosen etc. We will also give a brief discussion about why we have made the decisions we have.
 
 \section{Task Description and Requirements}\label{taskdescreq} 
 
@@ -57,6 +57,12 @@ This is the paper's abstract \ldots
     With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, XACML, WS-Security and WSO2 ESB. In addition to this, our middleware needs to work with GlassFish, as that is the application server the customer uses.
    
     \subsection{Requirements}\label{taskreq}
+    As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
+    
+    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver two prototypes, an alfa and a beta version, to the customer before the final delivery in May.
+    
+        The customer does not require any prototypes along the way, just a working prototype by the end of the project, so the deadlines we have set for the alpha and beta, are self-imposed. The following is a list of technology requirements. 
+    
     \begin{itemize}
         \item Written in java
         \item High priority messages must arrive, even at the cost of dropping lower priority messages.
@@ -82,42 +88,47 @@ This is the paper's abstract \ldots
     \subsection{Team Organization}\label{team} 
         [The team structure and roles.]
     
+    \subsubsection{Team Structure}
     We already know each other coming into the project so we’ve chosen a flat organisational structure, since all decisions within the team will more or less be made by all the members together either way. Relying on the entire group for decisions will both involve and invest everyone in the project and will work well with our already existing group dynamic.
+    \footnote[1]{ 
+        \href{http://en.wikipedia.org/wiki/Flat_organization}{Flat Organization Structure - Wikipedia} 
+    % description to be inserteds
+    }
+    
+    %group organization chart
+    
+    \subsubsection {Team communication}
+    We will work together from 10 to 16, Monday through Thursday every week, with allowed exceptions for lectures and such. Group members can also work in their free time to make up for missed collaboration hours or to just put in some extra work. This means more work than the course requires, but we decided that we want to do it this way so we can either take some time off now and then, or have more time for the exams in May.
 
-    Since this is a research project, the customer will act more as an advisor than a customer, and will have more suggestions and advice than demands and requirements. We have been given a clear understanding of what the final product should be, and we have a list of requirements that should be met. Other than that, we are relatively free regarding how we go about solving the problem. Because of this, a methodology like Scrum won't work for us, as it requires us to be in close and frequent contact with the customer, presenting a prototype every other week and continue development based on the customers feedback and demands.
-
-    The customer does not require any prototypes along the way, just a working prototype by the end of the project, so the deadlines we have set for the alpha and beta, are self-imposed.
+    The customer has not given us many strict requirements, but instead they have suggested a few things that we could do. Given this freedom, we decided that we should improve on the base requirements by adding most of the things mentioned in this section.
+    
+    We will not be able to have face to face meetings with the customer, but we will have weekly online meetings with them instead, as well as e-mail communication as needed. Since we have seen what happens in projects where there is little to no communication, we decided, in agreement with the costumer, that we at least wanted to have weekly meetings in order  to keep a good dialog with the customer, and also give them the opportunity to take part in the development of the project. Since we have some challenges in the fact that the customer is in Oslo, we decided that the weekly meetings will be held over Skype.
     
     \subsection{Risk Assesment}\label{risk}
     
     \subsection{Process Evaluation}\label{processevaluation}
     
-\section{Project Methodology}\label{methodology} 
+\section{Development Methodology}\label{methodology} 
     We did not follow any established development methodology, such as Scrum or XP, as this project required more planning and configuration of existing solutions, than actual coding. We therefore chose a mix of waterfall and agile methods, we discuss these decisions in the sections below. You will also find a list of the tools we chose to work with, and why we decided to use them. 
-
-    \subsection{Project Organization}\label{projectorg}[How we organize the project]
-
-    As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
-
-    We will work together from 10 to 16, Monday through Thursday every week, with allowed exceptions for lectures and such. Group members can also work in their free time to make up for missed collaboration hours or to just put in some extra work. This means more work than the course requires, but we decided that we want to do it this way so we can either take some time off now and then, or have more time for the exams in May.
-
-    The customer has not given us many strict requirements, but instead they have suggested a few things that we could do. Given this freedom, we decided that we should improve on the base requirements by adding most of the things mentioned in this section.
-
+    
+    Since this is a research project, the customer will act more as an advisor than a customer, and will have more suggestions and advice than demands and requirements. We have been given a clear understanding of what the final product should be, and we have a list of requirements that should be met. Other than that, we are relatively free regarding how we go about solving the problem. Because of this, a methodology like Scrum won't work for us, as it requires us to be in close and frequent contact with the customer, presenting a prototype every other week and continue development based on the customers feedback and demands.
+    
     This is a project that requires quite a lot of planning before any programming can be done. This necessitates that we start the development according to a waterfall model in terms of the architecture planning as well as the requirements specification.
     
     As the project progresses we’ll be switching to a more agile development method, so as to allow for iterative development and facilitate for any necessary changes that may turn up as code is produced. Agile also allows for a far flatter organisational structure, which we believe will greatly help cooperation within the team.
+
+    \subsection{Project Organization}\label{projectorg}[How we organize the project]
     
-    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver two prototypes, an alfa and a beta version, to the customer before the final delivery in May.
+    \subsection{Software project life cycle}
+        To be specified and elaborated later. 
 
-    We will not be able to have face to face meetings with the customer, but we will have weekly online meetings with them instead, as well as e-mail communication as needed. Since we have seen what happens in projects where there is little to no communication, we decided, in agreement with the costumer, that we at least wanted to have weekly meetings in order  to keep a good dialog with the customer, and also give them the opportunity to take part in the development of the project. Since we have some challenges in the fact that the customer is in Oslo, we decided that the weekly meetings will be held over Skype.
-
+    \subsection{System Technology}\label{tools} [The tools and thecknologies that we will use in the project.]
+    
     We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use JUnit as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer also can use to evaluate the product.
 
     We will use Git and GitHub to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use Subversion, we decided against this as Git gives us more options to develop code which will not greatly effect other parts of the codebase before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with LaTeX, which we prefer over standard word processors.
 
     Each of us is free to choose his own IDE for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
-
-    \subsection{Tools}\label{tools} [The tools that we will use in the project.]
     
     Since we were so free to chose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
     \begin{itemize}
@@ -194,7 +205,11 @@ This is the paper's abstract \ldots
 \appendix
 \section{Techical Glossary}\label{glossary}
     \includepdf{Glossary.pdf}
-\section{File Attachments}\label{attachments}
+\section{Work brakdown structure}\label{wbs}
+    WBS to be completly implemented later, it is also attached under \ref{attachments}
+    \includepdf{wbs.pdf}
+\section{File Attachments}\label{attachments} 
+Clik the paperclip to open attachements. \\
     \attachfile[description=Risk List,icon=Paperclip]{risklist.pdf} Risk List \\
     \attachfile[description=WBS,icon=Paperclip]{wbs.html} Work breakdown structure \\
     
