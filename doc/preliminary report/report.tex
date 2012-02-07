@@ -142,6 +142,13 @@ This is the paper's abstract \ldots
     
 \section{Prestudy}\label{prestudy} This project is one that requires quite a lot of prestudy before we can begin coding or even designing the architecture. Since the customer wanted us to implement existing technologies, such as Glassfish, WSO2, SAML etc. we need to spend some time researching those technologies to figure out what to use, and how to use it. The following sections will describe the overall architecture of how we, at this point in time, imagine our system will be like. 
 
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[scale=0.3]{birdarch}
+            \caption{Bird view of the thought of architecture.}
+            \label{fig:birdarch}
+        \end{figure}
+
     \subsection{Server side Architecture}\label{serversidearch} [The architecture of the server side module we are to create.] 
     
         The server side architecture consists of several components, the WSO2 ESB, the WSO2 Identity Server, the Tactical Router and the GlassFish server. All of these components are already available, so what we will have to make is mediators in the ESB.
@@ -157,7 +164,7 @@ This is the paper's abstract \ldots
         When the request is received at the service, it will probably start sending some data to the client. This is also done through the ESB. First the message is sent to the QoS mediator (6). This mediator will first look at the role, or identity, of the client and the service requested, and use this information to assign a priority to the connection. Then the Tactical Router is contacted for bandwidth information (7), which is used together with the priority to determine whether the message should be sent right away or held back until some higher priority message is finished sending.
 
         Either in the QoS mediator, in the ESB’s network layer, or after that, the Diffserv (ToS) field of the IP header will have to be set (8) before the message is sent to the client (9). This field is used by the routers in the network to prioritize packet sending. This step is quite important to the whole procedure as this is one of the few requirements the customer has given us, as such this step can not be dropped from the final product.
-
+ 
     \subsection{Client side Architecture}\label{clientsidearch} [The architecture of the client side module we are goint to create.] 
     
         The client-side architecture will be composed of altered (already existing) client software, the OpenSAML library as well as our client library implementation.
@@ -205,13 +212,27 @@ This is the paper's abstract \ldots
 \appendix
 \section{Techical Glossary}\label{glossary}
     \includepdf{Glossary.pdf}
-\section{Work brakdown structure}\label{wbs}
+\section{Work breakdown structure}\label{wbs}
     WBS to be completly implemented later, it is also attached under \ref{attachments}
-    \includepdf{wbs.pdf}
+    
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[scale=0.3]{wbsClient}
+            \caption{The work break down structure for the client.}
+            \label{fig:wbsClient}
+        \end{figure}
+        
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[scale=0.2]{wbsServer}
+            \caption{The work break down structure for the server.}
+            \label{fig:wbdServer}
+        \end{figure}
+    
 \section{File Attachments}\label{attachments} 
 Clik the paperclip to open attachements. \\
     \attachfile[description=Risk List,icon=Paperclip]{risklist.pdf} Risk List \\
-    \attachfile[description=WBS,icon=Paperclip]{wbs.html} Work breakdown structure \\
+    \attachfile[description=gantt,icon=Paperclip]{gantt.html} Gantt Diagram \\
     
 %    \attachfile[description=TEST log,icon=Paperclip]{report.log} Paperclip
 %    \attachfile[description=TEST log,icon=Graph]{report.log} Graph
