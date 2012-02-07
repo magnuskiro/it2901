@@ -21,10 +21,10 @@
   </calendars>
   <tasks>
     <task id="1" name="Planning" note="" work="518400" start="20120118T000000Z" end="20120120T170000Z" work-start="20120118T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
-    <task id="2" name="Work on preliminary report" note="" work="5702400" start="20120123T000000Z" end="20120307T170000Z" work-start="20120123T080000Z" percent-complete="90" priority="10" type="normal" scheduling="fixed-work">
+    <task id="2" name="Work on preliminary report" note="" work="1728000" start="20120123T000000Z" end="20120203T170000Z" work-start="20120123T080000Z" percent-complete="100" priority="10" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120123T000000Z"/>
     </task>
-    <task id="3" name="Submission of Preliminary Report" note="Thu 26 Jan 2012, 14:55&#10;This is a note" work="0" duration="0" start="20120307T170000Z" end="20120307T170000Z" work-start="20120307T170000Z" percent-complete="90" priority="0" type="milestone" scheduling="fixed-duration">
+    <task id="3" name="Submission of Preliminary Report" note="Thu 26 Jan 2012, 14:55&#10;This is a note" work="0" duration="0" start="20120206T000000Z" end="20120206T000000Z" work-start="20120206T080000Z" percent-complete="90" priority="0" type="milestone" scheduling="fixed-duration">
       <constraint type="start-no-earlier-than" time="20120206T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="2" type="FS"/>
@@ -33,29 +33,29 @@
     <task id="4" name="Architecture planning" note="" work="3628800" start="20120206T000000Z" end="20120305T170000Z" work-start="20120206T080000Z" percent-complete="8" priority="9" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120206T000000Z"/>
     </task>
-    <task id="5" name="Work on midterm report" note="" work="714600" start="20120206T000000Z" end="20120210T090500Z" work-start="20120206T080000Z" percent-complete="0" priority="7" type="normal" scheduling="fixed-work">
+    <task id="5" name="Work on midterm report" note="" work="4320000" start="20120206T000000Z" end="20120309T170000Z" work-start="20120206T080000Z" percent-complete="0" priority="7" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120206T000000Z"/>
     </task>
-    <task id="6" name="Work on prototype client" note="" work="2799000" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="6" name="Work on prototype client" note="" work="2428200" start="20120308T000000Z" end="20120416T160000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120306T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
-      <task id="7" name="Open SAML" note="" work="921600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="7" name="Open SAML" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20120308T000000Z"/>
       </task>
-      <task id="8" name="Client library" note="" work="1877400" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="8" name="Client library" note="" work="1636200" start="20120308T000000Z" end="20120416T160000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <task id="9" name="Metadata interpreter" note="" work="300600" start="20120308T000000Z" end="20120322T113000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120308T000000Z"/>
         </task>
         <task id="10" name="Prioritizer" note="" work="358200" start="20120322T000000Z" end="20120409T113000Z" work-start="20120322T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120322T000000Z"/>
         </task>
-        <task id="11" name="Tactical router communication" note="" work="288000" start="20120409T000000Z" end="20120420T170000Z" work-start="20120409T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="11" name="Tactical router communication" note="" work="169200" start="20120409T000000Z" end="20120416T160000Z" work-start="20120409T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="start-no-earlier-than" time="20120409T000000Z"/>
         </task>
-        <task id="12" name="Interface" note="" work="930600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <task id="13" name="Client integration manual" note="" work="547200" start="20120327T000000Z" end="20120420T170000Z" work-start="20120327T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="12" name="Interface" note="" work="808200" start="20120308T000000Z" end="20120416T150000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="13" name="Client integration manual" note="" work="424800" start="20120327T000000Z" end="20120416T150000Z" work-start="20120327T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
             <constraint type="must-start-on" time="20120327T000000Z"/>
           </task>
           <task id="14" name="API" note="" work="383400" start="20120308T000000Z" end="20120327T103000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
@@ -64,7 +64,7 @@
         </task>
       </task>
     </task>
-    <task id="15" name="Work on prototype server" note="" work="4320000" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="15" name="Work on prototype server" note="" work="3790800" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120306T000000Z"/>
       <task id="16" name="ESB" note="" work="345600" start="20120308T000000Z" end="20120323T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120308T000000Z"/>
@@ -72,16 +72,16 @@
       <task id="17" name="Identity server" note="" work="316800" start="20120320T000000Z" end="20120403T170000Z" work-start="20120320T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120320T000000Z"/>
       </task>
-      <task id="18" name="Glassfish" note="" work="489600" start="20120329T000000Z" end="20120420T170000Z" work-start="20120329T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="18" name="Glassfish" note="" work="360000" start="20120329T000000Z" end="20120416T120000Z" work-start="20120329T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120329T000000Z"/>
       </task>
-      <task id="19" name="SAML mediator" note="" work="921600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="20" name="?" note="" work="921600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="19" name="SAML mediator" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="20" name="?" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120308T000000Z"/>
         </task>
       </task>
-      <task id="21" name="QoS mediator" note="" work="1324800" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="22" name="Metadata interpreter" note="" work="432000" start="20120402T000000Z" end="20120420T170000Z" work-start="20120402T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="21" name="QoS mediator" note="" work="1191600" start="20120308T000000Z" end="20120416T110000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="22" name="Metadata interpreter" note="" work="298800" start="20120402T000000Z" end="20120416T110000Z" work-start="20120402T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="start-no-earlier-than" time="20120402T000000Z"/>
         </task>
         <task id="23" name="Prioritizer" note="" work="633600" start="20120308T000000Z" end="20120406T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
@@ -91,8 +91,8 @@
           <constraint type="must-start-on" time="20120328T000000Z"/>
         </task>
       </task>
-      <task id="25" name="WSO2 network layer" note="" work="921600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="26" name="?" note="" work="921600" start="20120308T000000Z" end="20120420T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="25" name="WSO2 network layer" note="" work="784800" start="20120308T000000Z" end="20120416T100000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="26" name="?" note="" work="784800" start="20120308T000000Z" end="20120416T100000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120308T000000Z"/>
         </task>
       </task>
@@ -111,7 +111,7 @@
         <predecessor id="1" predecessor-id="27" type="FS"/>
       </predecessors>
     </task>
-    <task id="29" name="Work on final report" note="" work="4579200" start="20120309T000000Z" end="20120416T120000Z" work-start="20120309T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="29" name="Work on final report" note="" work="4384800" start="20120309T170000Z" end="20120416T110000Z" work-start="20120312T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="31" type="FS"/>
         <predecessor id="1" predecessor-id="3" type="FS"/>
@@ -120,7 +120,7 @@
     <task id="30" name="Submission of Alpha" note="" work="0" start="20120309T000000Z" end="20120309T000000Z" work-start="20120309T080000Z" percent-complete="0" priority="3" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120309T000000Z"/>
     </task>
-    <task id="31" name="Submission of midterm report" note="" work="0" start="20120309T000000Z" end="20120309T000000Z" work-start="20120309T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
+    <task id="31" name="Submission of midterm report" note="" work="0" start="20120309T170000Z" end="20120309T170000Z" work-start="20120309T170000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120309T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="5" type="FS"/>
@@ -137,7 +137,10 @@
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
     </task>
-    <task id="34" name="Deadline" note="" work="0" start="20120525T000000Z" end="20120525T000000Z" work-start="20120525T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
+    <task id="34" name="Bug fix, polishing, wrapping things up, buffer" note="" work="812700" start="20120417T000000Z" end="20120525T094500Z" work-start="20120417T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20120417T000000Z"/>
+    </task>
+    <task id="35" name="Deadline" note="" work="0" start="20120525T000000Z" end="20120525T000000Z" work-start="20120525T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120525T000000Z"/>
     </task>
   </tasks>
