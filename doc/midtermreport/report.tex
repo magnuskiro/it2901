@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[pdfborder=0 0 0]{hyperref}
 \usepackage[utf8]{inputenc}
-\usepackage{babel}
+\usepackage[english, norsk]{babel}
 \usepackage{graphicx}
 \usepackage{pdfpages}
 \usepackage{attachfile}
@@ -21,6 +21,14 @@
     Tørresen, Håvard \\
 }
 \date{\today}
+
+\hypersetup{
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,
+    urlcolor=blue
+}
 
 \begin{document}
 \maketitle
@@ -87,6 +95,7 @@ This is the paper's abstract \ldots
     
     \subsection{Team Organization}\label{team} 
         [The team structure and roles.]
+        %Describe short our organization. And the purpose of this section.
     
     \subsubsection{Team Structure}
     We already know each other coming into the project so we’ve chosen a flat organisational structure, since all decisions within the team will more or less be made by all the members together either way. Relying on the entire group for decisions will both involve and invest everyone in the project and will work well with our already existing group dynamic.
@@ -96,6 +105,13 @@ This is the paper's abstract \ldots
     }
     
     %group organization chart
+    
+    %Why changing roles does not work in our structure and how we solve the challenges that might occur in this association. 
+    %%scrum master / methodology guy / Meeting leader.
+    
+    %Specify and explain the group dynamic
+    %Task division and delegation. 
+    %benefits of a flat team structure.
     
     \subsubsection {Team communication}
     We will work together from 10 to 16, Monday through Thursday every week, with allowed exceptions for lectures and such. Group members can also work in their free time to make up for missed collaboration hours or to just put in some extra work. This means more work than the course requires, but we decided that we want to do it this way so we can either take some time off now and then, or have more time for the exams in May.
@@ -222,13 +238,31 @@ This is the paper's abstract \ldots
 
         One architecture, which our customer suggested for the project, was to have a proxy in between nodes and creating a custom QoS layer which would sit in front of both the client and the services. This layer would then communicate with a SAML server for authentication, and would have to do all the message prioritization based on the same criteria as our architecture. There are several points about this architecture which would make it a good fit for us. Since the QoS layer would be identical on both client and server side it would mean less work, and more code that could be shared among components, but this freedom comes with some downsides. The first and most glaring problem encountered would be that services on the server would have to be altered to be able to communicate with this front end. Even though we were free to choose architecture ourselves, the client expressed a wish that we would not choose this model because the customer wants to use COTS(\ref{glossary}) services which would not be compatible with the new front end.
 
-        Even though the above mentioned architecture is not the best fit for us we wanted to take some aspects of the architecture further. Since clients can easily be altered, the above mentioned solution is not applicable for server side, the solution could however be used for the clients. Having a proxy on the client side could be quite good, but because of the work involved and probable time constraints we chose not to go with this solution. On the server side however a front end is not the best solution for us. What we instead are looking into, is to use an ESB (\ref{glossary}) which would be configured together with the services and work as a proxy. Because many ESBs have integrated SAML processing we could easily take advantage of such facilities along with custom message processing, with which we would then extend the ESB to support our needs. The clients would have to point to the ESB, but this should both be trivial to do and the customer has expressed their agreement that this is satisfactory. We could eventually expand the functionality with service discovery, which then would be a good solution to the problem.
+        Even though the above mentioned architecture is not the best fit for us we wanted to take some aspects of the architecture further. Since clients can easily be altered, the above mentioned solution is not applicable for server side, the solution could however be used for the clients. Having a proxy on the client side could be quite good, but because of the work involved and probable time constraints we chose not to go with this solution. On the server side however a front end is not the best solution for us. What we instead are looking into, is to use an ESB(\ref{glossary}) which would be configured together with the services and work as a proxy. Because many ESBs have integrated SAML processing we could easily take advantage of such facilities along with custom message processing, with which we would then extend the ESB to support our needs. The clients would have to point to the ESB, but this should both be trivial to do and the customer has expressed their agreement that this is satisfactory. We could eventually expand the functionality with service discovery, which then would be a good solution to the problem.
 
         So far we have outlined major alternative architectures which could be alternatives to our project, but there are also alternatives within our proposed solution. One such alternative is not to use a premade ESB, but rather build one ourselves. This solution was thoroughly investigated, but was eventually turned down because of the massive amount of work that had to be done, the quality of an already made ESB is much higher than we could ever achieve during this project, and lastly, the open source tools available to implement the functionality needed for SAML was not very well documented, and would take considerable time to get familiar with.
 
         On the client side we also have the choice of having either a HTTP proxy or writing our own custom library. Both have some advantages and disadvantages, a proxy would be better for integration with client programs, but creating this proxy or configuring and customizing an already existing solution is not trivial. On the same note, creating a library for use in client programs is easier, but this would mean that client programs would need to be altered to be usable with our middleware, which isn’t that desirable. We chose to go down the road of least resistance, as we see it currently we would have do quite a lot of research into proxies which could in the worst case scenario result in just wasted time as far as our product goes. A client library would from our perspective be easier as we would have more control, the overall design should be easier and we know that with this sort of library we can integrate OpenSAML which is a huge advantage.  
               
 \section{Design}\label{design}
+    \subsection{Client Side}\label{clientdesign}
+        \subsubsection{Data Flow}\label{dataflow}
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[scale=0.5]{client_data_flow}
+            \caption{Client Data Flow}
+            How data flows on the client side.
+            \label{fig:clientdata}
+        \end{figure}
+        
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[scale=0.5]{client_credentials_flow}
+            \caption{Client Credentials Flow}
+            The flow of the credentials to and in the client side.
+            \label{fig:clientcredentials}
+        \end{figure}
+    
 \section{Implementation}\label{implementation}
 \section{Testing}\label{teting}
 \section{Results}\label{results}
@@ -245,18 +279,21 @@ This is the paper's abstract \ldots
         \begin{figure}[htb]
             \centering
             \includegraphics[scale=0.3]{wbsClient}
-            \caption{The work break down structure for the client.}
+            \caption{WBS-Client}
+            The work break down structure for the client.
             \label{fig:wbsClient}
         \end{figure}
         
         \begin{figure}[htb]
             \centering
             \includegraphics[scale=0.2]{wbsServer}
-            \caption{The work break down structure for the server.}
+            \caption{WBS-Server}
+            The work break down structure for the server.
             \label{fig:wbdServer}
         \end{figure}
     
 \section{File Attachments}\label{attachments} 
+%make sure they work!
 Clik the paperclip to open attachements. \\
     \attachfile[description=Risk List,icon=Paperclip]{risklist.pdf} Risk List \\
     \attachfile[description=gantt,icon=Paperclip]{gantt.html} Gantt Diagram \\
@@ -266,9 +303,8 @@ Clik the paperclip to open attachements. \\
 %    \attachfile[description=TEST log,icon=PushPin]{report.log} PushPin
 %    \attachfile[description=TEST log,icon=Tag]{report.log} Tag
 
-
+%refs
 \bibliographystyle{abbrv}
-\bibliography{main}
 \begin{thebibliography}{0}
 %    \bibitem{Dumy00} Dummy Dum,
 %        \emph{\LaTeX: A Dummy Bibliography Item}.
