@@ -100,11 +100,18 @@ This is the paper's abstract \ldots
     \subsubsection{Team Structure}
     We already know each other coming into the project so we’ve chosen a flat organisational structure, since all decisions within the team will more or less be made by all the members together either way. Relying on the entire group for decisions will both involve and invest everyone in the project and will work well with our already existing group dynamic.
     \footnote{ 
-        \href{http://en.wikipedia.org/wiki/Flat_organization}{Flat Organization Structure - Wikipedia} 
-    % description to be inserteds
+        Flat organization structure is a structure with few or no levels of intervening management. The idea is that well-trained workers will be more productive when they are directly involved with decision making. 
+        \href{http://en.wikipedia.org/wiki/Flat_organization}{Wikipedia: Flat Ogranization Structure} 
     }
     
     %group organization chart
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.5]{TeamOrganizationchart}
+        \caption{Team Organization chart}
+        It was made during lunch, but the genereal principle still remains, that the structure is flat.
+        \label{fig:teamOrgchart}
+    \end{figure}
     
     %Why changing roles does not work in our structure and how we solve the challenges that might occur in this association. 
     %%scrum master / methodology guy / Meeting leader.
@@ -147,12 +154,12 @@ This is the paper's abstract \ldots
     \subsection{Software project life cycle} [The development cycle. Scrum and Agile, why and how.]
     
     For our project life cycle we chose agile, with a pinch of scrum. Originally we started out with the intention of using scrum and scrum only. That intention was quickly scrapped as we found out that our task was very research heavy. This made us rethink our approach to the development cycle and turn in the direction agile software development\footnote
-        {Agile software development is a group of software development methodologies based on iterative and incremental development, where requirements and solutions evolve through collaboration between self-organizing, cross-functional teams \href{http://en.wikipedia.org/wiki/Agile_software_development.}{[Wikipedia: Agile Software Development]}}. 
-    With the agile method there is elements that suits us better then others. "Individuals and Interaction" and "Customer Collaboration" are two importand elements that we use. The full description of the agile method can be found in the Agile Manifesto\footnote
-        {Agile Manifesto, the key elements of the agile software development method. \href{http://http://agilemanifesto.org/}{[AgileManifesto.org]}}.
+        {Agile software development is a group of software development methodologies based on iterative and incremental development, where requirements and solutions evolve through collaboration between self-organizing, cross-functional teams [\href{http://en.wikipedia.org/wiki/Agile_software_development.}{Wikipedia: Agile Software Development}]}. 
+    With the agile method there is elements that suits us better then others. "Individuals and Interaction" and "Customer Collaboration" are two important elements that we use. The full description of the agile method can be found in the Agile Manifesto\footnote
+        {Agile Manifesto, the key elements of the agile software development method. [\href{http://http://agilemanifesto.org/}{AgileManifesto.org}]}.
     
     %elaborate the benefits an usage of individuals and interaction
-    Individuals and interactions are strongly connected with the organization of our team (\ref{team}).
+    Individuals and interactions are strongly connected with the organization of our team (\ref{team}). With the flat structure we use there is more room for each individuals voice, something that increases the team interaction. 
     
     %elaborate the benefits and usage of Customer collaboration.
     Customer Collaboration ...
@@ -168,9 +175,10 @@ This is the paper's abstract \ldots
     
     We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use JUnit as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer also can use to evaluate the product.
 
-    We will use Git and GitHub to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use Subversion, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the codebase before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with LaTeX, which we prefer over standard word processors.
+    We will use Git and GitHub to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use Subversion, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the code base before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with \href{http://www.latex-project.org/}{\LaTeX}, which we prefer over standard word processors.
 
-    Each of us is free to choose his own IDE for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
+    Each of us is free to choose his own IDE\footnote
+        {Integrated development environment [\href{http://en.wikipedia.org/wiki/Integrated_development_environment}{Wikipedia: IDE}]} for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
     
     Since we were so free to choose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
     \begin{itemize}
@@ -290,7 +298,7 @@ This is the paper's abstract \ldots
 \appendix
 \section{Techical Glossary}\label{glossary}
     \includepdf{Glossary.pdf}
-\section{Work breakdown structure}\label{wbs}
+\section{Work breakdown structure}\label{WBS}
     WBS to be completly implemented later, it is also attached under (\ref{attachments})
     
         \begin{figure}[htb]
@@ -323,11 +331,13 @@ Clik the paperclip to open attachements. \\
 %refs
 \bibliographystyle{abbrv}
 \begin{thebibliography}{0}
-%    \bibitem{Dumy00} Dummy Dum,
-%        \emph{\LaTeX: A Dummy Bibliography Item}.
-%        Latex Experts, Lake Tahoe,
-%        4nd Edition,
-%        ca 1000.
+%  \begin{Bib - template}
+%       \bibitem{Dumy00} Dummy Dum,
+%           \emph{\LaTeX: A Dummy Bibliography Item}.
+%           Latex Experts, Lake Tahoe,
+%           4nd Edition,
+%           ca 1000.
+%   \end{Bib - template}
 
     %must be corrected.
     \bibitem{soa-qos-pdf} Dummy Dum, 
