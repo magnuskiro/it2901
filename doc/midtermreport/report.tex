@@ -262,6 +262,23 @@ This is the paper's abstract \ldots
             The flow of the credentials to and in the client side.
             \label{fig:clientcredentials}
         \end{figure}
+        
+    \subsection{Server Side}\label{serverdesign}
+        \subsubsection{SAML Authentication}\label{samlauth}
+            \begin{figure}[htb]
+                \centering
+                \includegraphics[scale=0.5]{SAMLauthenticationflow}
+                \caption{SAML Authentication Flow}
+                \label{fig:SAMLflow}
+            \end{figure}
+        \subsubsection{Data Flow}\label{serverdataflow}
+            \begin{figure}[htb]
+                \centering
+                \includegraphics[scale=0.4]{DataFlowDiagramServer}
+                \caption{Server Data Flow}
+                \label{fig:serverDataFlow}
+            \end{figure}
+        
     
 \section{Implementation}\label{implementation}
 \section{Testing}\label{teting}
@@ -286,7 +303,7 @@ This is the paper's abstract \ldots
         
         \begin{figure}[htb]
             \centering
-            \includegraphics[scale=0.2]{wbsServer}
+            \includegraphics[scale=0.3]{wbsServer}
             \caption{WBS-Server}
             The work break down structure for the server.
             \label{fig:wbdServer}
