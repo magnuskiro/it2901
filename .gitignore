@@ -1,5 +1,10 @@
-.aux
-.log
-.out
-.class
-.toc
+*.aux
+*.log
+*.out
+*.class
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+.*.xml

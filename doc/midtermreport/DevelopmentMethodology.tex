@@ -1,0 +1,64 @@
+    
+\section{Development Methodology}\label{methodology} 
+    We did not follow any established development methodology, such as Scrum or XP, as this project required more planning and configuration of existing solutions, than actual coding. We therefore chose a mix of waterfall and agile methods, we discuss these decisions in the sections below. You will also find a list of the tools we chose to work with, and why we decided to use them. 
+    
+    Since this is a research project, the customer will act more as an advisor than a customer, and will have more suggestions and advice than demands and requirements. We have been given a clear understanding of what the final product should be, and we have a list of requirements that should be met. Other than that, we are relatively free regarding how we go about solving the problem. Because of this, a methodology like Scrum won't work for us, as it requires us to be in close and frequent contact with the customer, presenting a prototype every other week and continue development based on the customers feedback and demands.
+    
+    This is a project that requires quite a lot of planning before any programming can be done. This necessitates that we start the development according to a waterfall model in terms of the architecture planning as well as the requirements specification.
+    
+    As the project progresses we’ll be switching to a more agile development method, so as to allow for iterative development and facilitate for any necessary changes that may turn up as code is produced. Agile also allows for a far flatter organisational structure, which we believe will greatly help cooperation within the team.
+
+    \subsection{Project Organization}\label{projectorg}[How we organize the project]
+    
+    We have devided the project tasks in to work packages. These packages are represented in a work breakdown structure(WBS) (\ref{WBS}). The timeplan for the project is represented in a Gantt diagram (Fig.\ref{fig:gantt}). The figure is part of our full gantt diagram. As the full diagram cannot be included nicely in the report we have attached it as an html document (\ref{attachments}).
+     
+        \begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.3]{gantt}
+            \caption{Part of our Gantt diagram} Se full diagram in attachments: (\ref{attachments})
+            \label{fig:gantt}
+        \end{figure}
+    
+    \subsection{Software project life cycle} [The development cycle. Scrum and Agile, why and how.]
+    
+    For our project life cycle we chose agile, with a pinch of scrum. Originally we started out with the intention of using scrum and scrum only. That intention was quickly scrapped as we found out that our task was very research heavy. This made us rethink our approach to the development cycle and turn in the direction agile software development\footnote
+        {Agile software development is a group of software development methodologies based on iterative and incremental development, where requirements and solutions evolve through collaboration between self-organizing, cross-functional teams [\href{http://en.wikipedia.org/wiki/Agile_software_development.}{Wikipedia: Agile Software Development}]}. 
+    With the agile method there is elements that suits us better then others. "Individuals and Interaction" and "Customer Collaboration" are two important elements that we use. The full description of the agile method can be found in the Agile Manifesto\footnote
+        {Agile Manifesto, the key elements of the agile software development method. [\href{http://http://agilemanifesto.org/}{AgileManifesto.org}]}.
+    
+    %elaborate the benefits and usage of individuals and interaction
+    Individuals and interactions are strongly connected with the organization of our team (\ref{team}). With the flat structure we use there is more room for each individuals voice, something that increases the team interaction. 
+    
+    
+    %elaborate the benefits and usage of Customer collaboration.
+    Customer Collaboration ...
+    
+    
+    %Elaborate the scrum elements that we use and what benefits they have for us. <-- anything at all ?
+    The pinch of Scrum\footnote
+        {Scrum is a form of agile project management [\href{http://en.wikipedia.org/wiki/Scrum_(development)}{Wikipedia: Scrum}]}. 
+    We use some elements from scrum that is 
+
+
+
+    \subsection{System Technology}\label{tools} [The tools and thecknologies that we will use in the project.]
+    
+    We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use JUnit as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer also can use to evaluate the product.
+
+    We will use Git and GitHub to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use Subversion, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the code base before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with \href{http://www.latex-project.org/}{\LaTeX}, which we prefer over standard word processors.
+
+    Each of us is free to choose his own IDE\footnote
+        {Integrated development environment [\href{http://en.wikipedia.org/wiki/Integrated_development_environment}{Wikipedia: IDE}]} for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard Java Coding Conventions.
+    
+    Since we were so free to choose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
+    \begin{itemize}
+    %we must have a full list of tested versions of technologies in the full version of this report, probably under testing.
+        \item Git version 1.7.x
+        \item Java version 1.6.x
+        \item Free choice of IDE
+        \item JUnit version 4.x
+        \item NS3 unknown at present time
+        \item WSO2 ESB 4.0.3
+    \end{itemize}
+    
+

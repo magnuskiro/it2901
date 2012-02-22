@@ -1,0 +1,42 @@
+\section{Task Description and Requirements}\label{taskdescreq} 
+
+    Our task is to provide a Quality of Service (QoS) layer to web services for use in military tactical networks. As these networks tend to have severely limited bandwidth, and our QoS-layer must therefore prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
+    
+    
+    \subsection{Description}\label{taskdesc} 
+    [Description of the task at hand.]
+        
+    Our assignment is to create a Java application which will function as a middleware layer between web services, and clients trying to use these services. The middleware needs to process SOAP messages, which is the communication protocol for most web services, in order to be able to do its task. On the client side, the middleware needs to process messages and understand SAML in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
+
+    Our middleware needs to be able to modify the TOS/Diffserv IP packet header in order for the tactical router to prioritize correctly. Currently NATO has just defined one class, BULK, which is to be used with web services, but this may change in the future and our middleware should handle this upcoming change gracefully.
+
+    In addition to this, the middleware needs to be able to retrieve the available bandwidth in the network, which in the real system will be retrieved from the tactical routers. In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
+
+    With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, XACML, WS-Security and WSO2 ESB. In addition to this, our middleware needs to work with GlassFish, as that is the application server the customer uses.
+   
+    \subsection{Requirements}\label{taskreq}
+    As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
+    
+    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver two prototypes, an alpha and a beta version, to the customer before the final delivery in May.
+    
+        The customer does not require any prototypes along the way, just a working prototype by the end of the project, so the deadlines we have set for the alpha and beta, are self-imposed. The following is a list of technology requirements. 
+    
+    \begin{itemize}
+        \item Written in java
+        \item High priority messages must arrive, even at the cost of dropping lower priority messages.
+        \item Use standards where they can be used
+            \subitem SAML
+            \subitem Diffserv
+            \subitem XACML
+            \subitem WS-Security
+        \item Test thoroughly
+            \subitem Use NS3 for testing
+        \item Extensive documentation
+        \item Use metadata to determine priority
+        \item GlassFish must be supported as the application server
+        \item Must be able to set priority on network layer packets
+            \subitem Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future.
+        \item There are no requirements on resource usage, but we should try to keep it lightweight.
+            \subitem The customer has only said that we can expect the product to be used on a standard laptop with full Java support
+    \end{itemize}
+
