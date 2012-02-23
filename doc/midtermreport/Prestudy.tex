@@ -2,7 +2,7 @@
 
         \begin{figure}[htb]
             \centering
-            \includegraphics[scale=0.3]{birdarch}
+            \includegraphics[scale=0.4]{birdarch}
             \caption{Bird view of the thought of architecture.}
             \label{fig:birdarch}
         \end{figure}
@@ -12,9 +12,9 @@
         The server side architecture consists of several components, the WSO2 ESB, the WSO2 Identity Server, the Tactical Router and the GlassFish server. All of these components are already available, so what we will have to make is mediators in the ESB.
 
         Before the client can request a web service it has to have an identification. To get an ID-token it has to contact the Identity Server using the ESB as a proxy (Fig.\ref{fig:serverside}-1). Then the client can request a web service from the ESB. Several things will then happen in the ESB. First the request message is sent to the SAML mediator (Fig.\ref{fig:serverside}-2), this mediator contacts the Identity Server to validate the clients ID-token (Fig.\ref{fig:serverside}-3). If the token is validated and the client is supposed to have access to the requested service the message is passed on to the GlassFish proxies (Fig.\ref{fig:serverside}-4), otherwise it is dropped. The ESB acting as a proxy will then send the request along to the requested service on the GlassFish server (Fig.\ref{fig:serverside}-5).
-        
+
         \begin{figure}[htb]
-            \includegraphics[scale=0.4]{serverside}
+            \includegraphics[scale=0.5]{Serversidearchitecture}
             \caption{The Server side Architecture}
             \label{fig:serverside}
         \end{figure}
@@ -29,7 +29,7 @@
         
         \begin{figure}[htb]
             \centering
-            \includegraphics[scale=0.4]{clientside}
+            \includegraphics[scale=0.5]{Client-sideArchitechture}
             \caption{The Client side Architecture}
             \label{fig:clientside}
         \end{figure}
