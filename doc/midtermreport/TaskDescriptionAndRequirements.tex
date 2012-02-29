@@ -1,9 +1,9 @@
-\section{Task Description and Requirements}\label{taskdescreq} 
+\section{Task Description and Requirements}\label{Task Description and Requirements} 
 
     Our task is to provide a Quality of Service (QoS) layer to web services for use in military tactical networks. As these networks tend to have severely limited bandwidth, and our QoS-layer must therefore prioritise between different messages, of varying importance, that clients and services want to send. Our middleware will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
     
     
-    \subsection{Description}\label{taskdesc} 
+    \subsection{Description}\label{Description} 
     [Description of the task at hand.]
         
     Our assignment is to create a Java application which will function as a middleware layer between web services, and clients trying to use these services. The middleware needs to process SOAP messages, which is the communication protocol for most web services, in order to be able to do its task. On the client side, the middleware needs to process messages and understand SAML in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
@@ -14,7 +14,7 @@
 
     With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, XACML, WS-Security and WSO2 ESB. In addition to this, our middleware needs to work with GlassFish, as that is the application server the customer uses.
    
-    \subsection{Requirements}\label{taskreq}
+    \subsection{Requirements}\label{Requirements}
     As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
     
     The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver two prototypes, an alpha and a beta version, to the customer before the final delivery in May.
