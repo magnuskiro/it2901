@@ -1,19 +1,219 @@
-    \subsection{Client Side}\label{Client Side}
-        [The client side design.]
-        \subsubsection{Data Flow}\label{Data Flow}
-        [how the data moves through the client.]
-            \begin{figure}[h]
-            \centering
-            \includegraphics[scale=0.5]{ClientCredentialsDataFlowDiagram}
-            \caption{Client Data Flow}
-            How data flows on the client side.
-            \label{fig:ClientCredentialsDataFlowDiagram}
-        \end{figure}
-        
+\subsection{Client Side}\label{Client Side}
+[The client side design.]
+
+		This chapter will introduce the design and architecture of the client side of our system. The  section \ref{client introduction} will introduce the different components that make up the entire client, and is followed by the use cases \ref{client use cases}. Next, section \ref{detailed client library description} will describe the different components that make up the client library. Then the data flow \ref{client data flow} will be described, followed by a detailed architecture description \ref{detailed client architecture}. Finally, the last section \ref{client sequence diagrams} will go through the sequence diagrams.
+		
+    \subsubsection{Introduction}\label{client introduction}
+		The client architecture consists of the following components: The client application, the client library and the monitoring service. Our work will be done in the client library, which the client application will connect to through a simple interface. All client applications will have to be modified to use the library.The monitoring service is assumed to exist in the network, most likely (at least in the short term) residing on a nearby tactical router.
+\\
+The library will handle all communication between the client and the server, and manages the authorization and prioritization of clients and their messages. It will use some external libraries to handle parts of this process, but will mostly be custom code.
+
+	\subsubsection{Use Cases}\label{Client Use Cases}
+		\textbf{Title:} Accept client info \\
+		\textbf{Actors:} Client software, Client Library Interface \\
+		\textbf{Main:}
+		\begin{enumerate}
+			\item Client software connects to the library interface
+			\item Client delivers its credentials
+			\item Credentials are passed from interface to sequencer.
+			\item Credentials are sanity checked by sanity checker and passes.
+			\item Credentials are passed from sequencer to Token manger, then to credential storage.
+			\item Credentials are stored
+			\item Buffer for previous tokens is flushed
+		\end{enumerate}
+		\textbf{Extension:} 
+		\begin{itemize}
+			  \item[] 4a. Credentials are obviously invalid
+			  \item[] 5a. Return error
+		\end{itemize}
+		\\\\
+		\textbf{Title:} Accept data to be sent \\
+		\textbf{Actors:} Client software, Client Library Interface \\
+		\textbf{Main:}
+		\begin{enumerate}
+			\item Client delivers data it wishes to send
+			\item Data is passed to the sequencer.
+			\item Sequencer creates DataObject
+		\end{enumerate}
+		\textbf{Extension:}
+		\begin{itemize}
+			 \item[] none
+		\end{itemize}
+		\textbf{Precondition:} Client has established connection to the Library interface and delivered its credentials. \\
+		\textbf{See:} accept client info
+		\\\\
+		\textbf{Title:} Fetch Bandwidth info \\
+		\textbf{Actors:} client library, Monitoring Service(MS) (probably on tactical router(TR)) \\
+		\textbf{Main:}
+		\begin{enumerate}
+			\item Establish connection to MS
+			\item Read MS’s bandwidth info for the route between it and the server.
+			\item Set bandwidth info for this connection in the DataObject.
+		\end{enumerate}
+		\textbf{Extension:}
+		\begin{itemize}
+			  \item[] 3a. Bandwidth info not in MS
+			  \item[] 4a. Connection is local, set bandwidth info to a default for local network.
+		\end{itemize}
+		\textbf{Precondition:} Client has delivered library both credentials and data to be sent (with a destination). \\
+		\textbf{See:} Accept client credentials & Accept data to be sent 
+		\\\\
+		\textbd{Title:} Connect to server \\
+		\textbd{Actors:} Client Library, Server \\
+		\textbd{Main:}
+		\begin{enumerate}	
+			\item Connection manager connects to the server
+			\item Set priority on socket based on SAML-token and related metadata
+		\end{enumerate}
+		\textbf{Extension:}
+		\begin{itemize}
+			  \item[] 1a. Unable to connect to server
+			  \item[] 2a. Return error
+		\end{itemize}
+		\textbf{Precondition:} DataObject has been created, and contains both bandwidth info and a token \\
+		\textbf{See:} Accept client credentials, Accept data to be sent & Fetch bandwidth info
+		\\\\
+		\textbf{Title:} Get SAML token \\
+		\textbf{Actors:} Client library, Server \\
+		\textbf{Main:}
+		\begin{enumerate}
+			\item Client library sends client credentials to server
+			\item Server verifies the credentials
+			\item Server returns SAML-token
+			\item Token is parsed into Token object
+			\item Token object is put into DataObject.
+		\end{enumerate}
+		\textbf{Extension:}
+		\begin{itemize}
+			  \item 2a. Client credentials not valid
+			  \item 3a. Server returns error
+			  \item 4a. Client library throws error
+		\end{itemize}
+		\textbf{Precondition:} Client has given library credentials and data to send, and a SAML token for the destination doesn’t already exist. Connection to server established. \\
+		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info & Connect to server
+		\\\\
+		\textbf{Title:} Transaction towards server \\
+		\textbf{Actors:} Client lib, server, client \\
+		\textbf{Main:}
+		\begin{enumerate}
+			\item MessageHandler sends buffered data to server
+			\item Server returns reply to data.
+			\item The ReturnObject in the DataObject gets the data from the server.
+			\item MessageHandler send data to sequencer.
+			\item Sequencer sends data to interface (QosClient)
+			\item Client fires a data received event to all listeners.
+		\end{enumerate}
+		\textbf{Extension:}
+		\begin{itemize}
+			 \item[] 2a. Server unavailable, reply doesn’t arrive within timeout, etc.
+			 \item[] 3a. Throw error.
+		\end{itemize}
+		\textbf{Precondition:} Data to send exists, SAML token is in cache, connection to server active.\\
+		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info, Connect to server & Get SAML token
+		
+		
+	\subsubsection{Textual Data Flow}\label{Textual Client Data Flow}
         \begin{figure}[h]
-            \centering
-            \includegraphics[scale=0.5]{ClientDataFlowDiagram}
-            \caption{Client Credentials Flow}
-            The flow of the credentials to and in the client side.
-            \label{fig:ClientDataFlowDiagram}
-        \end{figure}
+        \centering
+        \includegraphics[scale=0.5]{ClientCredentialsDataFlowDiagram}
+        \caption{Client Data Flow}
+        \label{fig:ClientCredentialsDataFlowDiagram}
+    \end{figure}
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.5]{ClientDataFlowDiagram}
+        \caption{Client Credentials Flow}
+        \label{fig:ClientDataFlowDiagram}
+    \end{figure}
+    
+		Client credentials
+		\begin{enumerate}
+			\item From client application
+			\item To client library via API/interface
+			\item Via SAML to ID-server
+			\item Back to client library as valid SAML-token
+			\item Stored in library until client App changes credentials
+		\end{enumerate}
+		\\\\
+		Bandwidth/link data
+		\begin{enumerate}
+			\item Generated by all Tactical Routers
+			\item Delivered to clients and servers on request
+		\end{enumerate}
+		\\\\
+		Client data
+		\begin{enumerate}
+			\item Generated by client application
+			\item Sent to client library via API/interface
+			\item Buffered in library
+			\item Sent from library to server
+			\item Answer returned to client through library
+		\end{enumerate}
+		
+	\subsubsection{Architecture}\label{Client Architecture}
+		\begin{figure}[h]
+			\centering	
+			\includegraphics[scale=0.5]{Detailedclientarchitecture}
+			\caption{Detailed Client Architecture}
+			\label{fig:DetailedClientArchitecture}
+		\end{figure}
+
+		\textbf{Interface} \\
+Known in the class diagram as “QosClient”, responsible for providing a clean and easy to use interface for the clients.
+\\\\
+		\textbf{Sequencer} \\
+The central piece of the client library. Responsible for keeping a record of all other modules in the system and communicate between them as well as making sure everything happens in the right order.
+\\\\
+		\textbf{Sanity checker} \\
+This module is simply there to do some easy verification of data that comes from the client to make sure that it isn’t faulty in any obvious way. (e.g: Data that isn’t xml, or credentials that are empty)
+\\\\
+		\textbf{Token Manager} \\
+This provides a nice and clean interface for the sequencer to store credentials and fetch tokens for data transmissions.
+\\\\
+		\textbf{Saml Communicator} \\
+This module will take care of the communication between the client library and the identity server.
+\\\\
+		\textbf{Saml Parser} \\
+This takes the reply from the identity server and parses it into a token object so that it can be easily used and stored.
+\\\\
+		\textbf{Credential Storage} \\
+Responsible for storing token objects as well as user supplied credentials. Also makes sure that no token objects are returned if they are invalid or expired.
+\\\\
+		\textbf{MsCommunicator} \\
+Responsible for communicating with the monitoring service to get information about the bandwidth available to a given destination, as well as supplying some identifying information for the route used.
+
+	\subsubsection{Sequence Diagrams}\label{Client Sequence Diagrams}
+		\begin{figure}[H]
+			\centering	
+			\includegraphics[scale=0.4]{CliSeqDiaAcceptclientinfo}
+			\caption{Accept client info}
+			\label{fig:CliSeqDiaAcceptclientinfo}
+		\end{figure}
+		\begin{figure}[H]
+			\centering	
+			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
+			\caption{Getting non-stored token}
+			\label{fig:CliSeqDiaGettingnon-storedtoken}
+		\end{figure}
+		\begin{figure}[H]
+			\centering	
+			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingStoredToken}
+			\caption{Getting stored token}
+			\label{fig:CliSeqDiaGettingStoredToken}
+		\end{figure}
+		\begin{figure}[H]
+			\centering	
+			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaReceivereply}
+			\caption{Receive reply}
+			\label{fig:CliSeqDiaReceivereply}
+		\end{figure}
+		\begin{figure}[H]
+			\centering	
+			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaSendData}
+			\caption{Send data}
+			\label{fig:CliSeqDiaSendData}
+		\end{figure}
+
+		
+

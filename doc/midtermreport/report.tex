@@ -1,10 +1,11 @@
-\documentclass[12pt]{article}
+\documentclass[titlepage]{article}
 \usepackage[pdfborder=0 0 0]{hyperref}
 \usepackage[utf8]{inputenc}
-\usepackage[english, norsk]{babel}
+\usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{pdfpages}
 \usepackage{attachfile}
+\usepackage{float}
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./graphics/}}
 \title{
@@ -30,22 +31,21 @@
 }
 
 \begin{document}
+\pagenumbering{RomanType}
 \maketitle
-\titlepage
-\pagenumbering{arabic}
-\newpage
-
-\begin{abstract}\label{abstract}
-This is the paper's abstract \ldots
-\end{abstract}
-
 \tableofcontents
 \listoffigures
 \listoftables
 \newpage
 
+\pagenumbering{arabic}
+
+\section*{Abstract}\label{abstract}
+	TODO \ldots
+\end{abstract}
+
 \section{Project Introduction}\label{Project Introduction}
-    This is a preliminary report documenting our progress so far in the course IT2901 - Informatikk Prosjektarbeid II. It will give a description of the problem we were presented with, how we have planned the work for the weeks ahead, how we have organized our group and what development methodology we have chosen etc. We will also give a brief discussion about why we have made the decisions we have.
+    This is the midterm report documenting our progress so far in the course IT2901 - Informatikk Prosjektarbeid II. It will give a description of the problem we were presented with, how we have planned the work for the weeks ahead, how we have organized our group and what development methodology we have chosen etc. We will also give a brief discussion about why we have made the decisions we have. For the midterm report we added detailed design description for both client and server and elaborated more on existing parts of the report. 
 
 %sections
 \input{TaskDescriptionAndRequirements}

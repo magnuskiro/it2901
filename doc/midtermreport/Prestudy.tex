@@ -3,7 +3,7 @@
         \begin{figure}[htb]
             \centering
             \includegraphics[scale=0.4]{birdarch}
-            \caption{Bird view of the thought of architecture.}
+            \caption{Birds eye view of the overall architecture.}
             \label{fig:birdarch}
         \end{figure}
 
@@ -23,7 +23,7 @@
 
         Either in the QoS mediator, in the ESB’s network layer, or after that, the Diffserv (ToS) field of the IP header will have to be set (Fig.\ref{fig:Serversidearchitecture}-8) before the message is sent to the client (Fig.\ref{fig:Serversidearchitecture}-9). This field is used by the routers in the network to prioritize packet sending. This step is quite important to the whole procedure as this is one of the few requirements the customer has given us, as such this step can not be dropped from the final product.
  
-    \subsection{Client side Architecture}\label{Client side Architecture} [The architecture of the client side module we are goint to create.] 
+    \subsection{Client side Architecture}\label{Client side Architecture} [The architecture of the client side module we are going to create.] 
     
         The client-side architecture will be composed of altered (already existing) client software, the OpenSAML library as well as our client library implementation.
         
@@ -40,14 +40,10 @@
 
         The reply from the server is examined by our client library for the metadata the server has embedded in the SOAP header, relevant metadata is stored for future communication and the package is passed to the client application (Fig.\ref{fig:Client-sideArchitechture}-3).
 
-        When new communication is initiated after this first connection is made the client should, if everything went as expected, have the necessary information to prioritize new messages. This means that the client can now take quite an informed decision about how it should prioritize messages, but in order to do this to the best of it’s abilities it also has to take into consideration available bandwidth (Fig.\ref{fig:Client-sideArchitechture}-4).
+        When new communication is initiated after this first connection is made the client should, if everything went as expected, have the necessary information to prioritize new messages. This means that the client can now take an informed decision about how it should prioritize messages, but in order to do this to the best of it’s abilities it also has to take into consideration available bandwidth (Fig.\ref{fig:Client-sideArchitechture}-4).
     
            
-    \subsection{Alternative solutions}\label{Alternative solutions} [Solutions that we have, thought about but discarded.]
-    
-        Since this is only the preliminary report we have not yet decided on a final solution to the task at hand. But we have taken some decisions which will influence alternative solutions and will lock out some possible avenues of research.
-
-        Since you can see an outline to the architecture in (\ref{Prestudy}) we will instead use this section to outline some of the alternative architectures which we looked at, but rejected for the moment.
+    \subsection{Alternative solutions}\label{Alternative solutions} [Solutions that we have thought about but discarded.]
 
         The customer also gave us a paper\cite{soa-qos-pdf} which described a previous project they had worked on which tried to solve something quite similar to what we were tasked with. The paper described a system which were used in conjunction with Tactical routers(\ref{glossary:tactical router}) to retrieve bandwidth information and to control sending of messages into this network. As the customer explained this work was not something we could directly copy as the project had not used a lot of web standards and had focused more on the tactical routers as opposed to web services. What we could take out of it however was how they throttled messages. The paper contained five methods which we could easily implement and use their result as an indication of what methods we should use to throttle or hold back messages.
 

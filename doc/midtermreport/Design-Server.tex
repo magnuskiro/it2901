@@ -1,14 +1,14 @@
     \subsection{Server Side}\label{Server Side Design} [The server side design specifics.]
 
-    In this chapter we are going to introduce the design, configuration and modification that we are going to do to the server side. In section \ref{Server Introduction} we are going to introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, \ref{Server Use Cases}. Section \ref{Description of ESB concepts} will go into more detail about what the framework consist off. The section will also guide you through the basic processing units which is used in the framework. The next section, \ref{Textual Server Dataflow}, contains the dataflow through the server side which will help you get a good overview of our thoughts about the design. \ref{Extensions to the ESB} goes into detail in describing our custom components in the framework and together with the dataflow should give you a good understanding of the whole server side. Together with the section \ref{Server Sequence Diagrams} you should get good overview even down to some of the details. Section \ref{Configuration of the ESB} will give you the details about how we have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and going. The last section, \ref{Modification of the ESB} will depict how we have modified the framework to be able to meet our requirements, with this section you should be able to tell what modifications were needed and how we have altered those pieces. 
+    In this chapter we are going to introduce the design, configuration and modification that we are going to do on the server side. In section \ref{Server Introduction} we are going to introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, \ref{Server Use Cases}. Section \ref{Description of ESB concepts} will go into more detail about what the framework consist off. The section will also guide you through the basic processing units which is used in the framework. The next section, \ref{Textual Server Dataflow}, contains the dataflow through the server side which will help you get a good overview of our thoughts about the design. \ref{Extensions to the ESB} goes into detail in describing our custom components in the framework and together with the dataflow should give you a good understanding of the whole server side. Together with the section \ref{Server Sequence Diagrams} you should get good overview even down to some of the details. Section \ref{Configuration of the ESB} will give you the details about how we have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and going. The last section, \ref{Modification of the ESB} will depict how we have modified the framework to be able to meet our requirements, with this section you should be able to tell what modifications were needed and how we have altered those pieces. 
 
     \subsubsection{Introduction}\label{Server Introduction}
-    The server side architecture consists of several components, the WSO2 ESB(\ref{glossary:wso2 esb}), the WSO2 Identity Server(\ref{glossary:identity server}), the Monitoring Service (\ref{glossary:ms} and the GlassFish server(\ref{glossary:glassfish}. The GlassFish server is not necessary to modify, the Monitoring Service (MS) is something we must assume exist in the network and in the Identity Server (IS) we only have to configure it to work with the ESB. The ESB is what we have to modify, configure and extend to meet the requirements set.
+    The server side architecture consists of several components, the WSO2 ESB(\ref{glossary:wso2 esb}), the WSO2 Identity Server(\ref{glossary:identity server}), the Monitoring Service (\ref{glossary:ms}) and the GlassFish server(\ref{glossary:glassfish}). The GlassFish server is not necessary to modify, the Monitoring Service (MS) is something we must assume exist in the network and in the Identity Server (IS) we only have to configure it to work with the ESB. The ESB is what we have to modify, configure and extend to meet the requirements set.
 
     The ESB will be used to implement QoS(\ref{glossary:qos}) for the web services(\ref{glossary:web service}). To do this it will have to communicate with the IS, and the MS in addition to the clients and the services. The ESB must be configured to work as a proxy for the services on the GlassFish server and the IS. It will also be configured to use certain mediation sequences for incoming requests and outgoing responses. The extensions to the ESB consists mainly of custom mediators (\ref{glossary:mediator}) used in the mediation sequences. These mediators will have the tasks of determining priority of messages, contacting the MS for bandwidth data, and enforcing the priority. There will also be made modifications to the ESB source code to allow for setting the diffserv field in the IP header.
     
     \subsubsection{Use Cases}\label{Server Use Cases}
-    This section will outline the use cases that we have thought of in relation to the server side. With the help of these you should get a rough idea of what we want the server side to be able to do.\\
+    This section will outline the use cases that we have thought of in relation to the server side. With the help of these you should get a rough idea of what we want the server side to be able to do.\\\\
     \textbf{Title:} Request for SAML authentication \\
     \textbf{Actors:} Client, Enterprise service bus(ESB) and Identity server(IS)\\
     \textbf{Main}
@@ -128,7 +128,7 @@
 
     Each mediator in the sequence get access to the message context of the incoming or the outgoing message and can thus manipulate the context to its liking. When the mediator is done with the work it is supposed to do it either call the next mediator sending it the possibly altered message context or returning true to indicate that is done.
 
-    \subsubsection{Textual Dataflow}\label{Textual Server Dataflow} 
+    \subsubsection{Dataflow}\label{Textual Server Dataflow} 
         This section describes the data flow through the ESB with the help of two diagrams. As a bonus, these diagrams show the general architecture of the server side very well.
 
         \begin{figure}[h]
@@ -139,10 +139,10 @@
         \end{figure}
 
 Service Request :\\
-To follow this flow follow the green arrows in the figure \ref{DataFlowDiagramServer}. The ESB receives a request message from a Client, it is then authenticated or if not an error is sent back to the client. If it is not authenticated the flow stops, otherwise the message is sent to the SAML mediator, and then to the send mediator which sends it to the service endpoint on the GlassFish server, and the flow is over.
+To follow this flow follow the green arrows in the figure \ref{fig:DataFlowDiagramServer}. The ESB receives a request message from a Client, it is then authenticated or if not an error is sent back to the client. If it is not authenticated the flow stops, otherwise the message is sent to the SAML mediator, and then to the send mediator which sends it to the service endpoint on the GlassFish server, and the flow is over.
 
 Service Response:\\
-To follow this flow follow the blue arrows in the figure \ref{DataFlowDiagramServer}. The ESB receives a response message from the Service, it is then sent through a sequence of mediators, first the Metadata mediator, and then  the Store mediator. The Store mediator stores the message in the Prioritized Message Store. The message is stored in the message store until the Sampling Message Processor picks it out before sending it on to another sequence of mediators. First in the sequence is the MS mediator, then the Throttle Mediator and finally the Send mediator. The send mediator sends the message back to the client and the flow is completed.
+To follow this flow follow the blue arrows in the figure \ref{fig:DataFlowDiagramServer}. The ESB receives a response message from the Service, it is then sent through a sequence of mediators, first the Metadata mediator, and then  the Store mediator. The Store mediator stores the message in the Prioritized Message Store. The message is stored in the message store until the Sampling Message Processor picks it out before sending it on to another sequence of mediators. First in the sequence is the MS mediator, then the Throttle Mediator and finally the Send mediator. The send mediator sends the message back to the client and the flow is completed.
 
     \begin{figure}[h]
         \centering
@@ -158,6 +158,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
     This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and extensions we make to the ESB, and then a short description of the built-in mediators we will use.
 
     \subsubsubsection{Custom mediators}\label{Custom mediators}:
+    \\
     SAML mediator:\\
     This mediator retrieves the user role from the SAML authentication and set this as a property in the message context. The service is retrieved from the endpoint reference and set as another property.
 
@@ -166,7 +167,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
 
     Metadata mediator:\\
     This mediator retrieves the client role and service properties from the message context. These properties are then used along with a persistent registry to infer a priority for the message, and what the diffserv field in the IP header should be set as. The priority and diffserv values are then set as new properties in the message context.
-    The diffserv property in the message context will be used in the synapse core to set the diffserv field before sending the message (See “Modifications to Synapse and HTTP Components”).
+    The diffserv property in the message context will be used in the synapse core to set the diffserv field before sending the message (See \ref{Modification of the ESB}).
 
     Prioritized Message store:\\
     This is not a mediator, but it is an important part of the response mediation sequence. This is a message store that stores messages in a priority queue. The queue is ordered by mainly the priority property of the message context, and secondly by the time when added. When retrieving messages from this store the message on the top of the queue is returned. This ensures that high priority messages is processed further before lower priority messages.
@@ -178,6 +179,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
     This mediator is used to ensure that high priority messages are sent first by disrupting already sending messages, and it tries to ensure that the network is not being overflowed by this server by holding back messages. To determine what to disrupt and what to hold back, and for how long several properties are used, the priority of the message, the available bandwidth, the IP address of the client side Tactical Router and the real time demand of the request. In order to do this the mediator must keep a list of sending messages and where those messages are going. This mediator does not have a companion sequence diagram as of the midterm report. The reason behind this is currently a lack of possibility to test the mediator, this will however be remedied when we start to implement the mediators. Once we are more sure of what this mediator will be capable of we will make a sequence diagram for it.
 
     \subsubsubsection{Built in Mediators}\label{Built in Mediators}
+    \\
     Drop mediator:\\
     This is a built in mediator that drops the message preventing further processing.
 
@@ -193,7 +195,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
     \subsubsection{Sequence Diagrams}\label{Server Sequence Diagrams}
     This section contains some sequence diagrams which you can use to get a more in dept look into the code and methods used in the mediators above.
     
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[scale=0.3]{System-levelsequencediagram}
             \caption{System-level sequence diagram}
@@ -201,7 +203,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
             \label{fig:System-levelsequencediagram}
         \end{figure}
         
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[scale=0.3]{SAMLmediator}
             \caption{SAML mediator sequence diagram}
@@ -209,14 +211,14 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
             \label{fig:SAMLmediator}
         \end{figure}
         
-        \begin{figure}[h]
+        \begin{figure}[H]
             \includegraphics[scale=0.28,angle=-90]{Responsesequencediagram}
             \caption{Response sequence sequence diagram}
             This diagram describes in some detail how a response message from the web service to the Client is passed through the ESB.
             \label{fig:Responsesequencediagram}
         \end{figure}
     
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[scale=0.3]{MSmediatorsequence}
             \caption{Metadata mediator sequence}
@@ -224,7 +226,7 @@ The ESB receives a request (from a Client) directed at the Identity Server (IS),
             \label{fig:MSmediatorsequence}
         \end{figure}
         
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[scale=0.4]{Metadatamediatorsequencediagram}
             \caption{MS mediator sequence diagram}
