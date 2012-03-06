@@ -1,0 +1,4 @@
+To compile report with glossary:
+	first compile report.tex
+	run makeglossaries report
+	recompile report.tex
