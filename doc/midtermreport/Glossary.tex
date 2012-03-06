@@ -1,114 +1,136 @@
-\section{Techical Glossary}\label{Techical Glossary}
-\begin{description}\label{glossary}
-
 %B
-\item[Bandwidth]\label{glossary:bandwidth} \hfill\\
-Available or consumed data communication resources \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/Bandwidth_(computing)}
+\newglossaryentry{bandwidth}{name={bandwidth}, description={
+Available or consumed data communication resources  url{https://secure.wikimedia.org/wikipedia/en/wiki/Bandwidth_(computing)}}}
 
-\item[Broker]\label{glossary:broker} \hfill\\
-Our middleware layer works as a QoS broker for services and clients \\
-Broker as referred to by the report given to us from FFI: a centralized ‘server’ of sorts which gathered Bandwidth data from tactical routers.
+\newglossaryentry{Broker}{name={broker} , description={
+Our middleware layer works as a QoS broker for services and clients 
+Broker as referred to by the report given to us from FFI: a centralized ‘server’ of sorts which gathered Bandwidth data from tactical routers.}}
 
 %C
-\item[COTS]\label{glossary:cots} \hfill\\
-Commercially available Off-The-Shelf often used to talk about services which the customer wants to use server side \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/Commercial_off-the-shelf}
+\newglossaryentry{COTS}{name={cots} , description={
+Commercially available Off-The-Shelf often used to talk about services which the customer wants to use server side  url{https://secure.wikimedia.org/wikipedia/en/wiki/Commercial_off-the-shelf}}}
 
-\item[Credentials]\label{glossary:credentials} \hfill\\
-User-supplied credentials in the form of a username, password, role tripple.
+\newglossaryentry{Credentials}{name={credentials} , description={
+User-supplied credentials in the form of a username, password, role tripple.}}
 
 %D
-\item[DiffServ]\label{glossary:diffserv} \hfill\\
-Differentiated services, a field in the IPv4 header \\ \url{http://www.networksorcery.com/enp/rfc/rfc2474.txt}
+\newglossaryentry{DiffServ}{name={diffserv} , description={
+Differentiated services, a field in the IPv4 header  url{http://www.networksorcery.com/enp/rfc/rfc2474.txt}}}
+
+%E
+\newglossaryentry{ESB}{name={esb} , description={
+ESB description  
+url{http://www.esb.link}}}
 
 %G
-\item[Git]\label{glossary:git} \hfill\\
-A free and open source, distributed version control system \\ \url{http://www.git-scm.com}
+\newglossaryentry{Git}{name={git} , description={
+A free and open source, distributed version control system  url{http://www.git-scm.com}}}
 
-\item[Github]\label{glossary:github} \hfill\\
-a web-based hosting service for software development projects that use the Git version control system \\ \url{http://www.github.com}
+\newglossaryentry{Github}{name={github} , description={
+a web-based hosting service for software development projects that use the Git version control system  url{http://www.github.com}}}
 
-\item[GlassFish]\label{glossary:glassfish} \hfill\\
-Application server written in Java \\ \url{http://glassfish.java.net/}
+\newglossaryentry{GlassFish}{name={glassfish} , description={
+Application server written in Java  url{http://glassfish.java.net/}}}
 
 %I
-\item[IDE]\label{glossary:ide} \hfill\\
-Integrated Development Environment
+\newglossaryentry{IDE}{name={ide} , description={
+Integrated Development Environment}}
 
-\item[Identity Server]\label{glossary:identity server} \hfill\\
-\url{http://wso2.com/products/identity-server/}
+\newglossaryentry{Identity Server}{name={identity server} , description={
+url{http://wso2.com/products/identity-server/}}}
+
+\newglossaryentry{IP header}{name={ip header} , description={
+url{}}}
 
 %J
-\item[Java Coding Conventions]\label{glossary:java coding conventions} \hfill\\
-\url{http://www.oracle.com/technetwork/java/codeconv-138413.html}
+\newglossaryentry{Java}{name={java} , description={
+url{http://www.oracle.com/us/technologies/java/overview/index.html}}}
 
-\item[JUnit]\label{glossary:junit} \hfill\\
-A testing framework for the Java programming language \\ \url{http://junit.org/}
+\newglossaryentry{Java Coding Conventions}{name={java coding conventions} , description={
+url{http://www.oracle.com/technetwork/java/codeconv-138413.html}}}
+
+\newglossaryentry{JUnit}{name={junit} , description={
+A testing framework for the Java programming language  url{http://junit.org/}}}
 
 %L
-\item[LaTeX]\label{glossary:latex} \hfill\\
-A document preparation system \\ \url{http://www.latex-project.org/}
+\newglossaryentry{LaTeX}{name={latex} , description={
+A document preparation system  url{http://www.latex-project.org/}}}
 
 %M
-\item[Mediator]\label{glossary:mediator} \hfill\\
-A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB \\ \url{http://synapse.apache.org/Synapse_QuickStart.html}
+\newglossaryentry{Maven}{name={maven}, description={
+Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information. 
+url{https://maven.apache.org/}}}
 
-\item[Message]\label{glossary:message} \hfill\\
-SOAP message  \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/SOAP#Message_format}
+\newglossaryentry{Mediator}{name={mediator} , description={
+A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB  url{http://synapse.apache.org/Synapse_QuickStart.html}}}
 
-\item[Message Context]\label{glossary:message context} \hfill\\
-Component in the ESB, contains the message, as well as all information about it, including network sockets. \\ \url{http://synapse.apache.org/apidocs/org/apache/synapse/MessageContext.htm}l
+\newglossaryentry{Message}{name={message} , description={
+SOAP message   url{https://secure.wikimedia.org/wikipedia/en/wiki/SOAP#Message_format}}}
 
-\item[Middleware]\label{glossary:middleware} \hfill\\
-In most reports middleware will refer to the program we are making. Other distinctions should be made explicitly in the text.
+\newglossaryentry{Message Context}{name={message context} , description={
+Component in the ESB, contains the message, as well as all information about it, including network sockets.  url{http://synapse.apache.org/apidocs/org/apache/synapse/MessageContext.htm}}}
 
-\item[MS]\label{glossary:ms} \hfill\\
-Monitoring Service, a service that provides bandwidth monitoring, running on the same server as the Tactical Router.
+\newglossaryentry{Middleware}{name={middleware} , description={
+In most reports middleware will refer to the program we are making. Other distinctions should be made explicitly in the text.}}
+
+\newglossaryentry{MS}{name={ms} , description={
+Monitoring Service, a service that provides bandwidth monitoring, running on the same server as the Tactical Router.}}
 
 %N
-\item[NS3]\label{glossary:ns3} \hfill\\
-A network simulator \\ \url{http://www.nsnam.org/}
+\newglossaryentry{NS3}{name={ns3} , description={
+A network simulator  url{http://www.nsnam.org/}}}
 
 %O
-\item[OpenSAML]\label{glossary:opensaml} \hfill\\
-A set of open source C++ & Java libraries to support developers working with SAML. \\ \url{https://wiki.shibboleth.net/confluence/display/OpenSAML/Home/}
+\newglossaryentry{OpenSAML}{name={opensaml} , description={
+A set of open source C++ & Java libraries to support developers working with SAML.  url{https://wiki.shibboleth.net/confluence/display/OpenSAML/Home/}}}
 
 %P
-\item[Packet]\label{glossary:packet} \hfill\\
-IP packet  \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/Transmission_Control_Protocol#TCP_segment_structure}
+\newglossaryentry{Packet}{name={packet} , description={
+IP packet refers to the format to which a TCP connection has formated its bytes as url{https://secure.wikimedia.org/wikipedia/en/wiki/Transmission_Control_Protocol#TCP_segment_structure}}}
+
+\newglossaryentry{Packet Sniffer}{name={packet sniffer} , description={
+description}}
+
+
+\newglossaryentry{pcap}{name={pcap}, description={
+pcap is short for Packet capture which in our text this usually refers to a program which captures the traffic on a given socket.
+url{https://secure.wikimedia.org/wikipedia/en/wiki/Pcap}}}
 
 %Q
-\item[QoS]\label{glossary:qos} \hfill\\
-Quality of Service refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements
+\newglossaryentry{QoS}{name={qos} , description={
+Quality of Service refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements}}
 
 %S
-\item[SAML]\label{glossary:saml} \hfill\\
-Security Assertion Markup Language  \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/SAML}
+\newglossaryentry{SAML}{name={saml} , description={
+Security Assertion Markup Language   url{https://secure.wikimedia.org/wikipedia/en/wiki/SAML}}}
 
-\item[SOAP]\label{glossary:soap} \hfill\\
-A lightweight protocol intended for exchanging structured information in the implementaion of web services in computer networks \\ \url{http://www.w3.org/TR/soap12-part1/#intro}
+\newglossaryentry{SOAP}{name={soap} , description={
+A lightweight protocol intended for exchanging structured information in the implementaion of web services in computer networks  url{http://www.w3.org/TR/soap12-part1/#intro}}}
+
+\newglossaryentry{SVN}{name={svn} , description={
+Subversion exists to be universally recognized and adopted as an open-source, centralized version control system characterized by its reliability as a safe haven for valuable data; the simplicity of its model and usage; and its ability to support the needs of a wide variety of users and projects, from individuals to large-scale enterprise operations. 
+url{https://subversion.apache.org/}}}
 
 %T
-\item[Tactical Router]\label{glossary:tactical router} \hfill\\
-Router used in military networks, Multi-Topology Router(MTR)
+\newglossaryentry{tactical router}{name={Tactical router} , description={
+Router used in military networks, Multi-Topology Router(MTR)}}
 
-\item[Token]\label{glossary:token} \hfill\\
-A SAML token from some form of identity server, possibly with additional meta data.
+\newglossaryentry{Token}{name={token} , description={
+ A SAML token from some form of identity server, possibly with additional meta data.}}
 
-\item[TOS]\label{glossary:tos} \hfill \\ 
-Type of service, a field in the IPv4 header, now obsolete and replaced by diffserv.
+\newglossaryentry{TOS}{name={tos} , description={
+Type of service, a field in the IPv4 header, now obsolete and replaced by diffserv}}
 
 %W
-\item[Web Service]\label{glossary:web service} \hfill\\
-A software system designed to support interoperable machine-to-machine interaction over a network \\ \url{http://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/#soapmessage}
+\newglossaryentry{Web Service}{name={web service} , description={
+A software system designed to support interoperable machine-to-machine interaction over a network  url{http://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/#soapmessage}}}
 
-\item[WS-Security]\label{glossary:ws-security} \hfill\\
-An extension to SOAP to apply security to web services
+\newglossaryentry{WS-Security}{name={ws-security} , description={
+An extension to SOAP to apply security to web services}}
 
-\item[WSO2 ESB]\label{glossary:wso2 esb} \hfill\\
-An Enterprise Service Bus built on top of Apache Synapse \\ \url{http://wso2.com/products/enterprise-service-bus/}
+\newglossaryentry{WSO2 ESB}{name={wso2 esb} , description={
+An Enterprise Service Bus built on top of Apache Synapse  url{http://wso2.com/products/enterprise-service-bus/}}}
 
 %X
-\item[XACML]\label{glossary:xacml} \hfill\\
-eXtensible Access Control Markup Language  \\ \url{https://secure.wikimedia.org/wikipedia/en/wiki/Xacml}
-
-\end{description}
+\newglossaryentry{XACML}{name={xacml} , description={
+eXtensible Access Control Markup Language   url{https://secure.wikimedia.org/wikipedia/en/wiki/Xacml}}}

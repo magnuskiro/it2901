@@ -7,4 +7,9 @@
 *.lot
 *.bbl
 *.blg
-.*.xml
+*.xml
+*.glg
+*.glo
+*.gls
+*.ist
+*.xdy

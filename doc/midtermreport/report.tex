@@ -6,6 +6,8 @@
 \usepackage{pdfpages}
 \usepackage{attachfile}
 \usepackage{float}
+\usepackage{glossaries}
+\input{Glossary}
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./graphics/}}
 \title{
@@ -29,6 +31,7 @@
     filecolor=red,
     urlcolor=blue
 }
+\makeglossaries
 
 \begin{document}
 \pagenumbering{RomanType}
@@ -59,7 +62,7 @@
 \input{Conclusion}
 \input{ProjectEvaluation}
 \appendix
-\input{Glossary}
+\printglossaries
 \input{WorkBreakdownStructure}
 \input{FileAttachments}
 \input{Bibliography}
