@@ -1,18 +1,18 @@
 \section{Task Description and Requirements}\label{Task Description and Requirements} 
 
-    Our task is to provide a Quality of Service (QoS)\gls{qos} layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must therefore prioritise between different messages, of varying importance, that clients and services want to send. Our software will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
+    Our task is to provide a \gls{qos}\footnote{Quality of Service refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements} (QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must therefore prioritise between different messages, of varying importance, that clients and services want to send. Our software will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
     
     
     \subsection{Description}\label{Description} 
     [Description of the task at hand.]
         
-    Our assignment is to create a Java application which will function as a middleware layer between web services, and clients trying to use these services. The middleware needs to process \gls{soap} messages, which is the communication protocol for most web services, in order to be able to do its task. On the client side, the middleware needs to process messages and understand \gls{saml} in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
+    Our assignment is to create a Java application which will function as a middleware layer between web services, and clients trying to use these services. The middleware needs to process \gls{soap}\footnote{A lightweight protocol intended for exchanging structured information in the implementaion of web services in computer networks} messages, which is the communication protocol for most web services, in order to be able to do its task. On the client side, the middleware needs to process messages and understand \gls{saml}\footnote{Security Assertion Markup Language. See glossary for more info} in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
 
-    Our software needs to be able to modify the TOS/Diffserv \gls{ip packet} header in order for the tactical router to prioritize correctly. Currently NATO has just defined one class, BULK, which is to be used with web services, but this may change in the future and our middleware should handle this upcoming change gracefully.
+    Our software needs to be able to modify the \gls{tos}/\gls{diffserv} \gls{packet} header\footnote{Type of Service, a field in the IPv4 header, now obsolete and replaced by diffserv. See glossary for more info on IP header and packets} in order for the \gls{tactical router}\footnote{A Multi-topology router used in military networks} to prioritize correctly. Currently NATO has just defined one class, BULK, which is to be used with web services, but this may change in the future and our middleware should handle this upcoming change gracefully.
 
-    In addition to this, the middleware needs to be able to retrieve the available bandwidth in the network, which in the real system will be retrieved from the tactical routers (TR). In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
+    In addition to this, the middleware needs to be able to retrieve the available bandwidth in the network, which in the real system will be retrieved from the tactical routers. In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
 
-    With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, \gls{xacml}, \gls{ws-security} and \gls{wso2} \glo{esb}. In addition to this, our middleware needs to work with \gls{glassfish}, as that is the application server the customer uses.
+    With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, \gls{xacml}\footnote{eXtensible Access Control Markup Language}, \gls{ws-security}\footnote{An extension to SOAP to apply security to web services} and \gls{wso2 esb}\footnote{An Enterprise Service Bus built on top of Apache Synapse}. In addition to this, our middleware needs to work with \gls{glassfish}\footnote{Application server written in Java }, as that is the application server the customer uses.
    
     \subsection{Requirements}\label{Requirements}
     As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
@@ -34,7 +34,7 @@
             \subitem XACML
             \subitem WS-Security
         \item Test thoroughly
-            \subitem Use \gls{ns3} for testing
+            \subitem Use \gls{ns3}\footnote{NS3 is a network simulator. See glossary for more info} for testing
         \item Extensive documentation
         \item Use metadata to determine priority
         \item GlassFish must be supported as the application server

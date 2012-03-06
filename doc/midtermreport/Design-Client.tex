@@ -1,14 +1,14 @@
-\subsection{Client Side}\label{Client Side}
+\subsection{Client Side}\label{client side}
 [The client side design.]
 
-		This chapter will introduce the design and architecture of the client side of our system. The  section \ref{client introduction} will introduce the different components that make up the entire client, and is followed by the use cases \ref{client use cases}. Next, section \ref{detailed client library description} will describe the different components that make up the client library. Then the data flow \ref{client data flow} will be described, followed by a detailed architecture description \ref{detailed client architecture}. Finally, the last section \ref{client sequence diagrams} will go through the sequence diagrams.
+		This chapter will introduce the design and architecture of the client side of our system. The  section \ref{client introduction} will introduce the different components that make up the entire client, and is followed by the use cases \ref{client use cases}. Next, section \ref{detailed client library description} will describe the different components that make up the client library. Then the data flow \ref{textual client data flow} will be described, followed by a detailed architecture description \ref{detailed client architecture}. Finally, the last section \ref{client sequence diagrams} will go through the sequence diagrams.
 		
     \subsubsection{Introduction}\label{client introduction}
 		The client architecture consists of the following components: The client application, the client library and the monitoring service. Our work will be done in the client library, which the client application will connect to through a simple interface. All client applications will have to be modified to use the library.The monitoring service is assumed to exist in the network, most likely (at least in the short term) residing on a nearby tactical router.
 \\
 The library will handle all communication between the client and the server, and manages the authorization and prioritization of clients and their messages. It will use some external libraries to handle parts of this process, but will mostly be custom code.
 
-	\subsubsection{Use Cases}\label{Client Use Cases}
+	\subsubsection{Use Cases}\label{client use cases}
 		\textbf{Title:} Accept client info \\
 		\textbf{Actors:} Client software, Client Library Interface \\
 		\textbf{Main:}
@@ -56,11 +56,11 @@ The library will handle all communication between the client and the server, and
 			  \item[] 4a. Connection is local, set bandwidth info to a default for local network.
 		\end{itemize}
 		\textbf{Precondition:} Client has delivered library both credentials and data to be sent (with a destination). \\
-		\textbf{See:} Accept client credentials & Accept data to be sent 
+		\textbf{See:} Accept client credentials and Accept data to be sent 
 		\\\\
-		\textbd{Title:} Connect to server \\
-		\textbd{Actors:} Client Library, Server \\
-		\textbd{Main:}
+		\textbf{Title:} Connect to server \\
+		\textbf{Actors:} Client Library, Server \\
+		\textbf{Main:}
 		\begin{enumerate}	
 			\item Connection manager connects to the server
 			\item Set priority on socket based on SAML-token and related metadata
@@ -71,7 +71,7 @@ The library will handle all communication between the client and the server, and
 			  \item[] 2a. Return error
 		\end{itemize}
 		\textbf{Precondition:} DataObject has been created, and contains both bandwidth info and a token \\
-		\textbf{See:} Accept client credentials, Accept data to be sent & Fetch bandwidth info
+		\textbf{See:} Accept client credentials, Accept data to be sent and Fetch bandwidth info
 		\\\\
 		\textbf{Title:} Get SAML token \\
 		\textbf{Actors:} Client library, Server \\
@@ -112,7 +112,7 @@ The library will handle all communication between the client and the server, and
 		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info, Connect to server & Get SAML token
 		
 		
-	\subsubsection{Textual Data Flow}\label{Textual Client Data Flow}
+	\subsubsection{Textual Data Flow}\label{textual client data flow}
         \begin{figure}[h]
         \centering
         \includegraphics[scale=0.5]{ClientCredentialsDataFlowDiagram}
@@ -183,7 +183,7 @@ Responsible for storing token objects as well as user supplied credentials. Also
 		\textbf{MsCommunicator} \\
 Responsible for communicating with the monitoring service to get information about the bandwidth available to a given destination, as well as supplying some identifying information for the route used.
 
-	\subsubsection{Sequence Diagrams}\label{Client Sequence Diagrams}
+	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}
 		\begin{figure}[H]
 			\centering	
 			\includegraphics[scale=0.4]{CliSeqDiaAcceptclientinfo}
