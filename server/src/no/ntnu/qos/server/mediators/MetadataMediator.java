@@ -10,7 +10,8 @@ import org.apache.synapse.mediators.MediatorProperty;
 
 public class MetadataMediator extends AbstractMediator {
 
-	public final static String FILENAME = "filename";
+	
+	private final static PersistentPriorityData ppd = new PersistentPriorityData();
 	private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
 	@Override
 	public boolean mediate(MessageContext synCtx) {
@@ -23,6 +24,14 @@ public class MetadataMediator extends AbstractMediator {
             if (synLog.isTraceTraceEnabled()) {
                 synLog.traceTrace("Message : " + synCtx.getEnvelope());
             }
+        }
+        if(ppd.getFilename()==null){
+        	for(MediatorProperty mp:properties){
+        		if(mp.getName().equals(MediatorConstants.PRIORITY_DATA_FILENAME)){
+        			ppd.setFilename(mp.getValue());
+        			break;
+        		}
+        	}        	
         }
         
         final String clientRole = (String)synCtx.getProperty(MediatorConstants.CLIENT_ROLE);
