@@ -1,5 +1,4 @@
 \subsection{Client Side}\label{client side}
-[The client side design.]
 
 This chapter will introduce the design and architecture of the client side of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
 		
@@ -132,7 +131,8 @@ While not strictly necessary this component will allow us to connect and communi
 		
 		
 	\subsubsection{Textual Data Flow}\label{textual client data flow}
-        \begin{figure}[h]
+        
+    \begin{figure}[h]
         \centering
         \includegraphics[scale=0.5]{ClientCredentialsDataFlowDiagram}
         \caption{Client Data Flow}
@@ -185,7 +185,7 @@ Known in the class diagram as “QosClient”, responsible for providing a clean
 The central piece of the client library. Responsible for keeping a record of all other modules in the system and communicate between them as well as making sure everything happens in the right order.
 \\\\
 		\textbf{Sanity checker} \\
-This module is simply there to do some easy verification of data that comes from the client to make sure that it isn’t faulty in any obvious way. (e.g: Data that isn’t xml, or credentials that are empty)
+This module is simply there to do some easy verification of data that comes from the client, to make sure that it isn’t faulty in any obvious way. (e.g: Data that isn’t xml, or credentials that are empty)
 \\\\
 		\textbf{Token Manager} \\
 This provides a nice and clean interface for the sequencer to store credentials and fetch tokens for data transmissions.
