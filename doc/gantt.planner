@@ -24,19 +24,19 @@
     <task id="2" name="Work on preliminary report" note="" work="1728000" start="20120123T000000Z" end="20120203T170000Z" work-start="20120123T080000Z" percent-complete="100" priority="10" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120123T000000Z"/>
     </task>
-    <task id="3" name="Submission of Preliminary Report" note="Thu 26 Jan 2012, 14:55&#10;This is a note" work="0" duration="0" start="20120206T000000Z" end="20120206T000000Z" work-start="20120206T080000Z" percent-complete="90" priority="0" type="milestone" scheduling="fixed-duration">
+    <task id="3" name="Submission of Preliminary Report" note="Thu 26 Jan 2012, 14:55&#10;This is a note" work="0" duration="0" start="20120206T000000Z" end="20120206T000000Z" work-start="20120206T080000Z" percent-complete="100" priority="0" type="milestone" scheduling="fixed-duration">
       <constraint type="start-no-earlier-than" time="20120206T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="2" type="FS"/>
       </predecessors>
     </task>
-    <task id="4" name="Architecture planning" note="" work="3628800" start="20120206T000000Z" end="20120305T170000Z" work-start="20120206T080000Z" percent-complete="8" priority="9" type="normal" scheduling="fixed-work">
+    <task id="4" name="Architecture planning" note="" work="3628800" start="20120206T000000Z" end="20120305T170000Z" work-start="20120206T080000Z" percent-complete="100" priority="9" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120206T000000Z"/>
     </task>
-    <task id="5" name="Work on midterm report" note="" work="4320000" start="20120206T000000Z" end="20120309T170000Z" work-start="20120206T080000Z" percent-complete="0" priority="7" type="normal" scheduling="fixed-work">
+    <task id="5" name="Midterm report" note="" work="4320000" start="20120206T000000Z" end="20120309T170000Z" work-start="20120206T080000Z" percent-complete="100" priority="10" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120206T000000Z"/>
     </task>
-    <task id="6" name="Work on prototype client" note="" work="2428200" start="20120308T000000Z" end="20120416T160000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="6" name="Client" note="" work="2543400" start="20120305T000000Z" end="20120416T160000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120306T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="3" type="FS"/>
@@ -63,152 +63,169 @@
           </task>
         </task>
       </task>
+      <task id="15" name="Documentation" note="" work="86400" start="20120305T000000Z" end="20120307T150000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="16" name="Client report introduction" note="" work="7200" start="20120305T000000Z" end="20120305T100000Z" work-start="20120305T080000Z" percent-complete="32" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+        <task id="17" name="Update client use cases" note="" work="3600" start="20120305T000000Z" end="20120305T090000Z" work-start="20120305T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+        <task id="18" name="Integrate client documentation" note="" work="21600" start="20120305T000000Z" end="20120305T150000Z" work-start="20120305T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+        <task id="19" name="update client WBS" note="" work="3600" start="20120305T000000Z" end="20120305T090000Z" work-start="20120305T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+        <task id="20" name="update client documentation" note="" work="50400" start="20120306T000000Z" end="20120307T150000Z" work-start="20120306T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120306T000000Z"/>
+        </task>
+      </task>
+      <task id="21" name="Implementation" note="" work="28800" start="20120307T000000Z" end="20120307T170000Z" work-start="20120307T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="22" name="startup" note="" work="28800" start="20120307T000000Z" end="20120307T170000Z" work-start="20120307T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120307T000000Z"/>
+        </task>
+      </task>
     </task>
-    <task id="15" name="Work on prototype server" note="" work="3790800" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="23" name="Server" note="" work="2228400" start="20120305T000000Z" end="20120416T120000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120306T000000Z"/>
-      <task id="16" name="ESB" note="" work="345600" start="20120308T000000Z" end="20120323T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="24" name="ESB" note="" work="345600" start="20120308T000000Z" end="20120323T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120308T000000Z"/>
       </task>
-      <task id="17" name="Identity server" note="" work="316800" start="20120320T000000Z" end="20120403T170000Z" work-start="20120320T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="25" name="Identity server" note="" work="316800" start="20120320T000000Z" end="20120403T170000Z" work-start="20120320T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120320T000000Z"/>
       </task>
-      <task id="18" name="Glassfish" note="" work="360000" start="20120329T000000Z" end="20120416T120000Z" work-start="20120329T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="26" name="Glassfish" note="" work="360000" start="20120329T000000Z" end="20120416T120000Z" work-start="20120329T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20120329T000000Z"/>
       </task>
-      <task id="19" name="SAML mediator" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="20" name="?" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="27" name="SAML mediator" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="28" name="?" note="" work="792000" start="20120308T000000Z" end="20120416T120000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120308T000000Z"/>
         </task>
       </task>
-      <task id="21" name="QoS mediator" note="" work="1191600" start="20120308T000000Z" end="20120416T110000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="22" name="Metadata interpreter" note="" work="298800" start="20120402T000000Z" end="20120416T110000Z" work-start="20120402T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <constraint type="start-no-earlier-than" time="20120402T000000Z"/>
-        </task>
-        <task id="23" name="Prioritizer" note="" work="633600" start="20120308T000000Z" end="20120406T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="29" name="QoS mediator" note="" work="309600" start="20120308T000000Z" end="20120320T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="30" name="Metadata mediator" note="" work="43200" start="20120308T000000Z" end="20120309T120000Z" work-start="20120308T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="start-no-earlier-than" time="20120308T000000Z"/>
         </task>
-        <task id="24" name="Tactical router communicator" note="" work="259200" start="20120328T000000Z" end="20120409T170000Z" work-start="20120328T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20120328T000000Z"/>
+        <task id="31" name="Prioritized message store" note="" work="7200" start="20120308T000000Z" end="20120308T100000Z" work-start="20120308T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="start-no-earlier-than" time="20120308T000000Z"/>
         </task>
-      </task>
-      <task id="25" name="WSO2 network layer" note="" work="784800" start="20120308T000000Z" end="20120416T100000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="26" name="?" note="" work="784800" start="20120308T000000Z" end="20120416T100000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="32" name="MS mediator" note="" work="259200" start="20120308T000000Z" end="20120320T170000Z" work-start="20120308T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20120308T000000Z"/>
         </task>
       </task>
+      <task id="33" name="WSO2 network layer" note="" work="72000" start="20120305T000000Z" end="20120307T110000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="34" name="Set up Apache synapse, HTTPComponents and WSO2 so we can make changes" note="" work="3600" start="20120305T000000Z" end="20120305T090000Z" work-start="20120305T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+        <task id="35" name="Compile WSO2 with modified Apache Synapse" note="" work="39600" start="20120306T000000Z" end="20120307T110000Z" work-start="20120306T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120306T000000Z"/>
+        </task>
+        <task id="36" name="Modify Apache Synapse and HTTPComponents" note="" work="28800" start="20120306T000000Z" end="20120306T170000Z" work-start="20120306T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120306T000000Z"/>
+        </task>
+      </task>
+      <task id="37" name="Documentation" note="" work="32400" start="20120305T000000Z" end="20120306T090000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="38" name="Finalize Server documentation for Midterm report" note="" work="32400" start="20120305T000000Z" end="20120306T090000Z" work-start="20120305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20120305T000000Z"/>
+        </task>
+      </task>
     </task>
-    <task id="27" name="Creation of test suite" note="" work="1094400" start="20120313T000000Z" end="20120406T170000Z" work-start="20120313T080000Z" percent-complete="1" priority="0" type="normal" scheduling="fixed-work">
+    <task id="39" name="Creation of test suite" note="" work="1094400" start="20120313T000000Z" end="20120406T170000Z" work-start="20120313T080000Z" percent-complete="1" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120313T000000Z"/>
       <predecessors>
-        <predecessor id="1" predecessor-id="15" type="SS"/>
+        <predecessor id="1" predecessor-id="23" type="SS"/>
         <predecessor id="1" predecessor-id="6" type="SS"/>
       </predecessors>
     </task>
-    <task id="28" name="Testing of prototype" note="" work="316800" start="20120406T170000Z" end="20120416T120000Z" work-start="20120409T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="40" name="Testing of prototype" note="" work="316800" start="20120406T170000Z" end="20120416T120000Z" work-start="20120409T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="15" type="SS"/>
+        <predecessor id="1" predecessor-id="23" type="SS"/>
         <predecessor id="1" predecessor-id="6" type="SS"/>
-        <predecessor id="1" predecessor-id="27" type="FS"/>
+        <predecessor id="1" predecessor-id="39" type="FS"/>
       </predecessors>
     </task>
-    <task id="29" name="Work on final report" note="" work="4384800" start="20120309T170000Z" end="20120416T110000Z" work-start="20120312T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="41" name="Final report" note="" work="10519200" start="20120206T000000Z" end="20120430T160000Z" work-start="20120206T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="31" type="FS"/>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
     </task>
-    <task id="30" name="Submission of Alpha" note="" work="0" start="20120309T000000Z" end="20120309T000000Z" work-start="20120309T080000Z" percent-complete="0" priority="3" type="milestone" scheduling="fixed-work">
-      <constraint type="must-start-on" time="20120309T000000Z"/>
-    </task>
-    <task id="31" name="Submission of midterm report" note="" work="0" start="20120309T170000Z" end="20120309T170000Z" work-start="20120309T170000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20120309T000000Z"/>
-      <predecessors>
-        <predecessor id="1" predecessor-id="5" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="32" name="Submission of Beta " note="" work="0" start="20120416T000000Z" end="20120416T000000Z" work-start="20120416T080000Z" percent-complete="0" priority="8" type="milestone" scheduling="fixed-work">
+    <task id="42" name="Presentation of Beta " note="" work="0" start="20120416T000000Z" end="20120416T000000Z" work-start="20120416T080000Z" percent-complete="0" priority="8" type="milestone" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120416T000000Z"/>
     </task>
-    <task id="33" name="Submission of final report draft" note="" work="0" start="20120416T000000Z" end="20120416T000000Z" work-start="20120416T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
+    <task id="43" name="Last feedback on the final report" note="" work="0" start="20120416T000000Z" end="20120416T000000Z" work-start="20120416T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120416T000000Z"/>
       <predecessors>
-        <predecessor id="1" predecessor-id="29" type="SS"/>
+        <predecessor id="1" predecessor-id="41" type="SS"/>
         <predecessor id="1" predecessor-id="5" type="FS"/>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
     </task>
-    <task id="34" name="Bug fix, polishing, wrapping things up, buffer" note="" work="812700" start="20120417T000000Z" end="20120525T094500Z" work-start="20120417T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="44" name="Bug fix, polishing, wrapping things up, buffer" note="" work="812700" start="20120417T000000Z" end="20120525T094500Z" work-start="20120417T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20120417T000000Z"/>
     </task>
-    <task id="35" name="Deadline" note="" work="0" start="20120525T000000Z" end="20120525T000000Z" work-start="20120525T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
+    <task id="45" name="Deadline" note="" work="0" start="20120525T000000Z" end="20120525T000000Z" work-start="20120525T080000Z" percent-complete="0" priority="10" type="milestone" scheduling="fixed-work">
       <constraint type="must-start-on" time="20120525T000000Z"/>
     </task>
   </tasks>
   <resource-groups/>
   <resources>
-    <resource id="1" name="Jan Bremnes" short-name="Jan" type="1" units="0" email="janbremnes@gmail.com" note="" std-rate="0"/>
-    <resource id="2" name="J&#xF8;rgen Nordmoen" short-name="J&#xF8;rgen" type="1" units="0" email="nordmoen90@gmail.com" note="" std-rate="0"/>
-    <resource id="3" name="Magnus Kir&#xF8;" short-name="Magnus" type="1" units="0" email="magnuskiro@gmail.com" note="" std-rate="0"/>
-    <resource id="4" name="H&#xE5;vard T&#xF8;rresen" short-name="H&#xE5;vard" type="1" units="0" email="skabbkladden@gmail.com" note="" std-rate="0"/>
-    <resource id="5" name="Ola Martin St&#xF8;vneng" short-name="Ola Martin" type="1" units="0" email="ola.martin.st@gmail.com" note="" std-rate="0"/>
-    <resource id="6" name="Stig Tore Johannesen" short-name="Stig" type="1" units="0" email="kure.ji.karasu@gmail.com" note="" std-rate="0"/>
+    <resource id="1" name="Stig Tore Johannesen" short-name="Stig" type="1" units="0" email="kure.ji.karasu@gmail.com" note="" std-rate="0"/>
+    <resource id="2" name="Ola Martin St&#xF8;vneng" short-name="Ola Martin" type="1" units="0" email="ola.martin.st@gmail.com" note="" std-rate="0"/>
+    <resource id="3" name="H&#xE5;vard T&#xF8;rresen" short-name="H&#xE5;vard" type="1" units="0" email="skabbkladden@gmail.com" note="" std-rate="0"/>
+    <resource id="4" name="Magnus Kir&#xF8;" short-name="Magnus" type="1" units="0" email="magnuskiro@gmail.com" note="" std-rate="0"/>
+    <resource id="5" name="J&#xF8;rgen Nordmoen" short-name="J&#xF8;rgen" type="1" units="0" email="nordmoen90@gmail.com" note="" std-rate="0"/>
+    <resource id="6" name="Jan Bremnes" short-name="Jan" type="1" units="0" email="janbremnes@gmail.com" note="" std-rate="0"/>
   </resources>
   <allocations>
-    <allocation task-id="28" resource-id="1" units="100"/>
-    <allocation task-id="27" resource-id="1" units="100"/>
-    <allocation task-id="29" resource-id="1" units="100"/>
+    <allocation task-id="41" resource-id="1" units="100"/>
     <allocation task-id="5" resource-id="1" units="100"/>
     <allocation task-id="4" resource-id="1" units="100"/>
     <allocation task-id="2" resource-id="1" units="100"/>
     <allocation task-id="1" resource-id="1" units="100"/>
-    <allocation task-id="32" resource-id="1" units="100"/>
-    <allocation task-id="30" resource-id="1" units="100"/>
+    <allocation task-id="6" resource-id="1" units="100"/>
+    <allocation task-id="42" resource-id="1" units="100"/>
     <allocation task-id="3" resource-id="1" units="34"/>
-    <allocation task-id="28" resource-id="2" units="100"/>
-    <allocation task-id="27" resource-id="2" units="100"/>
-    <allocation task-id="29" resource-id="2" units="100"/>
+    <allocation task-id="41" resource-id="2" units="100"/>
     <allocation task-id="5" resource-id="2" units="100"/>
     <allocation task-id="4" resource-id="2" units="100"/>
     <allocation task-id="2" resource-id="2" units="100"/>
     <allocation task-id="1" resource-id="2" units="100"/>
-    <allocation task-id="32" resource-id="2" units="100"/>
-    <allocation task-id="30" resource-id="2" units="100"/>
+    <allocation task-id="6" resource-id="2" units="100"/>
+    <allocation task-id="42" resource-id="2" units="100"/>
     <allocation task-id="3" resource-id="2" units="34"/>
-    <allocation task-id="15" resource-id="3" units="100"/>
-    <allocation task-id="29" resource-id="3" units="100"/>
+    <allocation task-id="23" resource-id="3" units="100"/>
+    <allocation task-id="41" resource-id="3" units="100"/>
     <allocation task-id="5" resource-id="3" units="100"/>
     <allocation task-id="4" resource-id="3" units="100"/>
     <allocation task-id="2" resource-id="3" units="100"/>
     <allocation task-id="1" resource-id="3" units="100"/>
-    <allocation task-id="32" resource-id="3" units="100"/>
-    <allocation task-id="30" resource-id="3" units="100"/>
+    <allocation task-id="42" resource-id="3" units="100"/>
     <allocation task-id="3" resource-id="3" units="34"/>
-    <allocation task-id="15" resource-id="4" units="100"/>
-    <allocation task-id="29" resource-id="4" units="100"/>
+    <allocation task-id="23" resource-id="4" units="100"/>
+    <allocation task-id="41" resource-id="4" units="100"/>
     <allocation task-id="5" resource-id="4" units="100"/>
     <allocation task-id="4" resource-id="4" units="100"/>
     <allocation task-id="2" resource-id="4" units="100"/>
     <allocation task-id="1" resource-id="4" units="100"/>
-    <allocation task-id="32" resource-id="4" units="100"/>
-    <allocation task-id="30" resource-id="4" units="100"/>
+    <allocation task-id="42" resource-id="4" units="100"/>
     <allocation task-id="3" resource-id="4" units="34"/>
-    <allocation task-id="29" resource-id="5" units="100"/>
+    <allocation task-id="40" resource-id="5" units="100"/>
+    <allocation task-id="39" resource-id="5" units="100"/>
+    <allocation task-id="41" resource-id="5" units="100"/>
     <allocation task-id="5" resource-id="5" units="100"/>
     <allocation task-id="4" resource-id="5" units="100"/>
     <allocation task-id="2" resource-id="5" units="100"/>
     <allocation task-id="1" resource-id="5" units="100"/>
-    <allocation task-id="6" resource-id="5" units="100"/>
-    <allocation task-id="32" resource-id="5" units="100"/>
-    <allocation task-id="30" resource-id="5" units="100"/>
+    <allocation task-id="42" resource-id="5" units="100"/>
     <allocation task-id="3" resource-id="5" units="34"/>
-    <allocation task-id="29" resource-id="6" units="100"/>
+    <allocation task-id="40" resource-id="6" units="100"/>
+    <allocation task-id="39" resource-id="6" units="100"/>
+    <allocation task-id="41" resource-id="6" units="100"/>
     <allocation task-id="5" resource-id="6" units="100"/>
     <allocation task-id="4" resource-id="6" units="100"/>
     <allocation task-id="2" resource-id="6" units="100"/>
     <allocation task-id="1" resource-id="6" units="100"/>
-    <allocation task-id="6" resource-id="6" units="100"/>
-    <allocation task-id="32" resource-id="6" units="100"/>
-    <allocation task-id="30" resource-id="6" units="100"/>
+    <allocation task-id="42" resource-id="6" units="100"/>
     <allocation task-id="3" resource-id="6" units="34"/>
   </allocations>
 </project>
