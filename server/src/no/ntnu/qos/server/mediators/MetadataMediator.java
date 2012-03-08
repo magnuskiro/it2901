@@ -62,6 +62,7 @@ public class MetadataMediator extends AbstractMediator {
 		final int dif = ppd.getDiffserv(clientRole, service);
 		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, pri);
 		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
+		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
 		if (synLog.isTraceOrDebugEnabled()) {
 			synLog.traceOrDebug("Successfully added metadata to message context. " +
 					"Added priority="+pri+", diffserv="+dif);
