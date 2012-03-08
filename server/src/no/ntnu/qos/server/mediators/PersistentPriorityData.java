@@ -44,10 +44,12 @@ public class PersistentPriorityData {
 	public String getFilename() {
 		return filename;
 	}
-	/*
-	 * Reads data from xml file, filename, and puts it in priorities and diffservs maps.
+	/**
+	 * Reads priority data from XML-file filename.
+	 * 
+	 * @throws FileNotFoundException
 	 */
-	private void readData() throws FileNotFoundException{
+	public void readData() throws FileNotFoundException{
 		InputStream in = new FileInputStream(new File(filename));
 		OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
 		servicesElement = builder.getDocumentElement();
@@ -91,21 +93,12 @@ public class PersistentPriorityData {
 	}
 	
 	/**
-	 * If user has set filename, this method checks if data is loaded
-	 * if it is not, it tries to read it from disk.
-	 * Data is stored in XML.
+	 * Checks whether or not data is loaded in to memory.
 	 * 
-	 * @return {@link Boolean} true if filename is non-empty, else false
-	 * @throws FileNotFoundException
+	 * @return {@link Boolean} true if data is loaded, otherwise false.
 	 */
-	public boolean isDataAvailable() throws FileNotFoundException{
-		if(filename.isEmpty() || filename.trim().equals("")){
-			return false;
-		}
-		if(servicesElement==null){
-			readData();
-		}
-		return true;
+	public boolean isDataAvailable(){
+		return servicesElement!=null;
 	}
 	/**
 	 * Get the priority for messages between client and service.

@@ -29,6 +29,7 @@ public class PersistentPriorityDataTest {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename(FILENAME);
+		ppd.readData();
 		assertTrue(ppd.isDataAvailable());
 	}
 
@@ -37,13 +38,14 @@ public class PersistentPriorityDataTest {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename("ppdtestfail.xml");
-		ppd.isDataAvailable();
+		ppd.readData();
 	}
 	
 	@Test
 	public void testGetPriority() throws FileNotFoundException {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME);
+		ppd.readData();
 		assertTrue(ppd.isDataAvailable());
 		assertEquals(123, ppd.getPriority("testRole", "testService"));
 		assertEquals(321, ppd.getPriority("nonexistentrole", "testService"));
@@ -51,6 +53,7 @@ public class PersistentPriorityDataTest {
 		
 		ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME2);
+		ppd.readData();
 		assertTrue(ppd.isDataAvailable());
 		assertEquals(123, ppd.getPriority("testRole", "testService"));
 		assertEquals(-1, ppd.getPriority("nonexistentrole", "testService"));
@@ -61,6 +64,7 @@ public class PersistentPriorityDataTest {
 	public void testGetDiffserv() throws FileNotFoundException {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME);
+		ppd.readData();
 		assertTrue(ppd.isDataAvailable());
 		assertEquals(16, ppd.getDiffserv("testRole", "testService"));
 		assertEquals(8, ppd.getDiffserv("nonexistentrole", "testService"));
@@ -68,6 +72,7 @@ public class PersistentPriorityDataTest {
 		
 		ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME2);
+		ppd.readData();
 		assertTrue(ppd.isDataAvailable());
 		assertEquals(16, ppd.getDiffserv("testRole", "testService"));
 		assertEquals(-1, ppd.getDiffserv("nonexistentrole", "testService"));
