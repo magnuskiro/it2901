@@ -3,7 +3,7 @@
 This chapter will introduce the design and architecture of the client side of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
 		
     \subsubsection{Introduction}\label{client introduction}
-The client architecture consists of the following components: The client application, the client library and the monitoring service. Additionally, the library makes use of some external components to do some of its work.
+The client architecture consists of the following components: The client application, the client library and the \gls{ms}.\footnote{Monitoring Service, a service that provides bandwidth monitoring, running on the same server as the Tactical Router} Additionally, the library makes use of some external components to do some of its work.
 \\\\
 \textbf{Component description:}
 \\\\
@@ -20,9 +20,9 @@ For our implementation we will most likely make extensive simplifying assumption
 \textbf{External libraries:}
 \\\\
 OpenSAML:\\
-This component will be used to parse and manipulate XML data in the form of SOAP and SAML. These are fairly extensive and complex data structures so a easy to use external library is essential here.
+This component will be used to parse and manipulate \gls{xml}\footnote{eXtensible Markup Language} data in the form of SOAP and SAML. These are fairly extensive and complex data structures so a easy to use external library is essential here.
 \\\\
-Apache HTTPComponents:\\
+Apache \gls{httpcomponents}:\\
 A lightweight component for easily setting up and using HTTP connections.
 While not strictly necessary this component will allow us to connect and communicate across networks far more easily than built in java components.
 
