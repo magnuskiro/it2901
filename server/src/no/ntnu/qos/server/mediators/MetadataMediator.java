@@ -9,6 +9,11 @@ import org.apache.synapse.SynapseLog;
 import org.apache.synapse.mediators.AbstractMediator;
 import org.apache.synapse.mediators.MediatorProperty;
 
+/**
+ * This mediator adds priority metadata to Message Context based on client role and service.
+ * @author Ola Martin & Jørgen
+ *
+ */
 public class MetadataMediator extends AbstractMediator {
 
 
@@ -26,6 +31,8 @@ public class MetadataMediator extends AbstractMediator {
 				synLog.traceTrace("Message : " + synCtx.getEnvelope());
 			}
 		}
+		
+		//Check if data is available, if not, try reading it, if it fails return false
 		if(!ppd.isDataAvailable()){
 			for(MediatorProperty mp:properties){
 				if(mp.getName().equals(MediatorConstants.PRIORITY_DATA_FILENAME)){
@@ -48,10 +55,17 @@ public class MetadataMediator extends AbstractMediator {
 			}        	
 		}
 
-
-		final String clientRole = (String)synCtx.getProperty(MediatorConstants.CLIENT_ROLE);
-		final String service = (String)synCtx.getProperty(MediatorConstants.SERVICE);
-
+		//This is the work this mediator does.
+		final String clientRole = (String)synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE);
+		final String service = (String)synCtx.getProperty(MediatorConstants.QOS_SERVICE);
+		final int pri = ppd.getPriority(clientRole, service);
+		final int dif = ppd.getDiffserv(clientRole, service);
+		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, pri);
+		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
+		if (synLog.isTraceOrDebugEnabled()) {
+			synLog.traceOrDebug("Successfully added metadata to message context. " +
+					"Added priority="+pri+", diffserv="+dif);
+		}
 		return true;
 	}
 
