@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
 
@@ -21,7 +23,8 @@ import org.apache.synapse.message.store.AbstractMessageStore;
 public class PrioritizedMessageStore extends AbstractMessageStore {
 
 	private final PriorityQueue<MessageContext> queue;
-	
+	private final Lock lock = new ReentrantLock();
+
 	public PrioritizedMessageStore() {
 		super();
 		queue = new PriorityQueue<MessageContext>(100, new Comparator<MessageContext>() {
@@ -45,25 +48,35 @@ public class PrioritizedMessageStore extends AbstractMessageStore {
 			}
 		});
 	}
-	
+
 	@Override
 	public void clear() {
-		queue.clear();
+		lock.lock();
+		try{
+			queue.clear();
+		}finally{
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public MessageContext get(int index) {
 		//Probably not used at all.
-		Iterator<MessageContext> ittr = queue.iterator();
-		int i = 0;
+		lock.lock();
 		MessageContext result = null;
-		while(ittr.hasNext()){
-			if(i==index){
-				result = ittr.next();
-			}else{
-				ittr.next();
+		try{
+			Iterator<MessageContext> ittr = queue.iterator();
+			int i = 0;
+			while(ittr.hasNext()){
+				if(i==index){
+					result = ittr.next();
+				}else{
+					ittr.next();
+				}
+				i++;
 			}
-			i++;
+		}finally{
+			lock.unlock();
 		}
 		return result;
 	}
@@ -76,18 +89,28 @@ public class PrioritizedMessageStore extends AbstractMessageStore {
 
 	@Override
 	public List<MessageContext> getAll() {
+		lock.lock();
 		List<MessageContext> result = new ArrayList<MessageContext>();
-		Iterator<MessageContext> ittr = queue.iterator();
-		while(ittr.hasNext()){
-			result.add(ittr.next());
+		try{
+			Iterator<MessageContext> ittr = queue.iterator();
+			while(ittr.hasNext()){
+				result.add(ittr.next());
+			}
+		}finally{
+			lock.unlock();
 		}
 		return result;
 	}
 
 	@Override
 	public boolean offer(MessageContext mc) {
-		return queue.offer(mc);
-		
+		lock.lock();
+
+		try{
+			return queue.offer(mc);
+		}finally{
+			lock.unlock();
+		}
 	}
 
 	@Override
@@ -96,13 +119,22 @@ public class PrioritizedMessageStore extends AbstractMessageStore {
 	}
 
 	@Override
-	public MessageContext poll() {
-		return queue.poll();
+	public MessageContext poll() {		
+		lock.lock();
+		try{
+			return queue.poll();
+		}finally{
+			lock.unlock();
+		}
 	}
 
 	@Override
 	public MessageContext remove() throws NoSuchElementException {
-		return queue.remove();
+		MessageContext result = this.poll();
+		if(result == null){
+			throw new NoSuchElementException();
+		}
+		return result;
 	}
 
 	@Override
