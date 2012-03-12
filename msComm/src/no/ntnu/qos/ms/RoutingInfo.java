@@ -1,6 +1,5 @@
 package no.ntnu.qos.ms;
 
-import java.net.URI;
 /**
  * This Object holds the address of the last Tactical Router in a path
  * as well as the bandwidth of the limiting link on the path.

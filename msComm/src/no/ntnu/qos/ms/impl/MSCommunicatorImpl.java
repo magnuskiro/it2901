@@ -36,21 +36,24 @@ public class MSCommunicatorImpl implements MSCommunicator {
 		try {
 			in = new FileInputStream(new File(msXML));
 			OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
-			OMElement routingInfosEle = builder.getDocumentElement();
+			OMElement config = builder.getDocumentElement();
+			OMElement routingInfosEle = config.getFirstChildWithName(new QName("RoutingInfos"));
 			Iterator<OMContainer> routingInfoIterator =
 					routingInfosEle.getChildrenWithLocalName("RoutingInfo");
 			while(routingInfoIterator.hasNext()){
 				OMElement routingInfo = (OMElement)routingInfoIterator.next();
 
-				Iterator lastTRitt = routingInfo.getChildrenWithLocalName("lastTR");
-				OMElement lastTRele = (OMElement)lastTRitt.next();
-				String lastTR = lastTRele.getText();
+				OMElement lastTREle = routingInfo.getFirstChildWithName(new QName("lastTR"));
+				String lastTR = lastTREle.getText();
 
-				Iterator bandwidthItt = routingInfo.getChildrenWithLocalName("bandwidth");
-				OMElement bandwidthEle = (OMElement)bandwidthItt.next();
+				OMElement bandwidthEle = routingInfo.getFirstChildWithName(new QName("bandwidth"));
 				double bandwidth = Double.parseDouble(bandwidthEle.getText());
+				
+				OMElement destIPEle = routingInfo.getFirstChildWithName(new QName("destIP"));
+				String destIP = destIPEle.getText();
+
 				try {
-					routingInfos.put(new URI(routingInfo.getAttributeValue(new QName("destIP"))), 
+					routingInfos.put(new URI(destIP), 
 							new RoutingInfo(lastTR, bandwidth));
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
