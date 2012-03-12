@@ -36,8 +36,9 @@
 \begin{document}
 \pagenumbering{RomanType}
 \maketitle
-\section*{Abstract}\label{abstract}
+\begin{abstract}\label{abstract}
 	TODO \ldots
+\end{abstract}
 \newpage
 
 \tableofcontents
@@ -61,9 +62,11 @@
 \input{Conclusion}
 \input{ProjectEvaluation}
 \appendix
-\printglossaries
 \input{WorkBreakdownStructure}
 \input{FileAttachments}
+\addcontentsline{toc}{section}{Glossary}
+\label{Glossary}
+\printglossaries
 %\input{Bibliography}
 \bibliographystyle{plain}
 \addcontentsline{toc}{section}{Bibliography}
