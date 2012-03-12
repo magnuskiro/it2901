@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <services>
-	<service name="testService">
+	<service name="testService" useDefault="true">
 		<client role="testRole">
 			<priority>123</priority>
 			<diffserv>16</diffserv>
 		</client>
+		<client role="Default">
+			<priority>321</priority>
+			<diffserv>8</diffserv>
+		</client>
 	</service>
-	<defaultPriority usedefault="true">
-		<priority>321</priority>
-		<diffserv>8</diffserv>
-	</defaultPriority>
 </services>

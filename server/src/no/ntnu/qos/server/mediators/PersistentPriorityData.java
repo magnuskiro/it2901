@@ -25,11 +25,9 @@ import org.apache.axiom.om.OMXMLParserWrapper;
 public class PersistentPriorityData {
 	private String filename="";
 	private OMElement servicesElement = null;
-	private boolean useDefault = false;
-	private Map<String, Map<String, Integer>> priorities = new HashMap<String, Map<String,Integer>>();
-	private Map<String, Map<String, Integer>> diffservs = new HashMap<String, Map<String,Integer>>();
-	private int defaultPri = -1;
-	private int defaultDif = -1;
+	final private Map<String, Map<String, Integer>> priorities = new HashMap<String, Map<String,Integer>>();
+	final private Map<String, Map<String, Integer>> diffservs = new HashMap<String, Map<String,Integer>>();
+	final private Map<String, Boolean> useDefaults = new HashMap<String, Boolean>();
 	private final Lock lock = new ReentrantLock();
 
 	/**
@@ -67,50 +65,60 @@ public class PersistentPriorityData {
 	public  void readData() throws FileNotFoundException{
 		lock.lock();
 		try{
-			//Clear data in case of multiple simultaneous calls
-			this.priorities.clear();
-			this.diffservs.clear();
+			//Check if someone else has already read the data
+			if(this.priorities.isEmpty() 
+					&& this.diffservs.isEmpty() 
+					&& this.useDefaults.isEmpty()){
+				//Clear data in case of multiple simultaneous calls
+				this.priorities.clear();
+				this.diffservs.clear();
+				this.useDefaults.clear();
 
-			InputStream in = new FileInputStream(new File(filename));
-			OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
-			servicesElement = builder.getDocumentElement();
+				InputStream in = new FileInputStream(new File(filename));
+				OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
+				servicesElement = builder.getDocumentElement();
 
-			Iterator<OMContainer> serviceIterator = servicesElement.getChildrenWithLocalName("service");
-			QName name = new QName("name");
-			QName role = new QName("role");
-			while(serviceIterator.hasNext()){
-				OMElement service = (OMElement)serviceIterator.next();
-				Map<String, Integer> pri = new HashMap<String, Integer>();
-				Map<String, Integer> dif = new HashMap<String, Integer>();
-				priorities.put(service.getAttributeValue(name), pri);
-				diffservs.put(service.getAttributeValue(name), dif);
+				Iterator<OMContainer> serviceIterator = 
+						servicesElement.getChildrenWithLocalName("service");
+				QName name = new QName("name");
+				QName role = new QName("role");
+				QName useDefault = new QName("useDefault");
+				while(serviceIterator.hasNext()){
+					OMElement service = (OMElement)serviceIterator.next();
+					Map<String, Integer> pri = new HashMap<String, Integer>();
+					Map<String, Integer> dif = new HashMap<String, Integer>();
+					priorities.put(service.getAttributeValue(name), pri);
+					diffservs.put(service.getAttributeValue(name), dif);
+					useDefaults.put(service.getAttributeValue(name), 
+							Boolean.parseBoolean(service.getAttributeValue(useDefault)));
 
-				Iterator<OMContainer> clientIterator = service.getChildrenWithLocalName("client");
-				while(clientIterator.hasNext()){
-					OMElement client = (OMElement)clientIterator.next();
+					Iterator<OMContainer> clientIterator = service.getChildrenWithLocalName("client");
+					while(clientIterator.hasNext()){
+						OMElement client = (OMElement)clientIterator.next();
 
-					Iterator clientpriIterator = client.getChildrenWithLocalName("priority");
-					OMElement priority = (OMElement)clientpriIterator.next();
-					pri.put(client.getAttributeValue(role), Integer.parseInt(priority.getText()));
+						Iterator clientpriIterator = client.getChildrenWithLocalName("priority");
+						OMElement priority = (OMElement)clientpriIterator.next();
+						pri.put(client.getAttributeValue(role), Integer.parseInt(priority.getText()));
 
-					Iterator clientdifIterator = client.getChildrenWithLocalName("diffserv");
-					OMElement diffserv = (OMElement)clientdifIterator.next();
-					dif.put(client.getAttributeValue(role), Integer.parseInt(diffserv.getText()));
+						Iterator clientdifIterator = client.getChildrenWithLocalName("diffserv");
+						OMElement diffserv = (OMElement)clientdifIterator.next();
+						dif.put(client.getAttributeValue(role), Integer.parseInt(diffserv.getText()));
 
+					}
 				}
+//
+//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
+//
+//				Iterator clientpriIterator = defaultPriority.getChildrenWithLocalName("priority");
+//				OMElement priority = (OMElement)clientpriIterator.next();
+//				defaultPri = Integer.parseInt(priority.getText());
+//
+//				Iterator clientdifIterator = defaultPriority.getChildrenWithLocalName("diffserv");
+//				OMElement diffserv = (OMElement)clientdifIterator.next();
+//				defaultDif = Integer.parseInt(diffserv.getText());
+//
+//				useDefault = defaultPriority.getAttributeValue(new QName("usedefault")).trim().equals("true");
 			}
-
-			OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
-
-			Iterator clientpriIterator = defaultPriority.getChildrenWithLocalName("priority");
-			OMElement priority = (OMElement)clientpriIterator.next();
-			defaultPri = Integer.parseInt(priority.getText());
-
-			Iterator clientdifIterator = defaultPriority.getChildrenWithLocalName("diffserv");
-			OMElement diffserv = (OMElement)clientdifIterator.next();
-			defaultDif = Integer.parseInt(diffserv.getText());
-
-			useDefault = defaultPriority.getAttributeValue(new QName("usedefault")).trim().equals("true");
 		}finally{
 			lock.unlock();
 		}
@@ -144,7 +152,9 @@ public class PersistentPriorityData {
 					return priorities.get(service).get(clientRole);
 				}
 			}
-			if(useDefault) return defaultPri;
+			if(useDefaults.get(service)){
+				return priorities.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+			}
 		}finally{
 			lock.unlock();
 		}
@@ -165,7 +175,9 @@ public class PersistentPriorityData {
 					return diffservs.get(service).get(clientRole);
 				}
 			}
-			if(useDefault) return defaultDif;
+			if(useDefaults.get(service)){
+				return diffservs.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+			}
 		}finally{
 			lock.unlock();
 		}
@@ -174,12 +186,13 @@ public class PersistentPriorityData {
 	/**
 	 * Check if we should use default values if client-service pair does not exist.
 	 * This is configured in the XML file.
+	 * @param service - the service to check against
 	 * @return whether or not to use default values.
 	 */
-	public boolean isUseDefault() {
+	public boolean isUseDefault(String service) {
 		lock.lock();
 		try{
-			return useDefault;
+			return this.useDefaults.get(service);
 		}finally{
 			lock.unlock();
 		}

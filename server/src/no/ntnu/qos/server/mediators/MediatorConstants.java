@@ -7,4 +7,5 @@ public final class MediatorConstants {
 	public static final String QOS_DIFFSERV = "qosDiffserv";
 	public static final String PRIORITY_DATA_FILENAME = "ppdFilename";
 	public static final String QOS_TIME_ADDED = "qosTimeAdded";
+	public static final String QOS_DEFAULT_CLIENT_ROLE = "Default";
 }
