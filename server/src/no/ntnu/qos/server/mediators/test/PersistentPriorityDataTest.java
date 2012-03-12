@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import no.ntnu.qos.server.mediators.PersistentPriorityData;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -16,7 +17,8 @@ public class PersistentPriorityDataTest {
 	private static String FILENAME2;
 	private static String FILENAME3;
 
-	public PersistentPriorityDataTest(){
+	@BeforeClass
+	public static void setUp(){
 		if(FILENAME == null || FILENAME2 == null || FILENAME3 == null){
 			Scanner in = new Scanner(System.in);
 			System.out.println("Where is ppdtest.xml:");
