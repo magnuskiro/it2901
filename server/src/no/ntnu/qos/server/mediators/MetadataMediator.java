@@ -4,6 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.namespace.QName;
+
+import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.impl.llom.OMElementImpl;
+import org.apache.axiom.soap.impl.llom.soap12.SOAP12Factory;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
 import org.apache.synapse.mediators.AbstractMediator;
@@ -44,7 +49,9 @@ public class MetadataMediator extends AbstractMediator {
 						ppd.readData();
 					} catch (FileNotFoundException e) {
 						//This means that the supplied file could not be found.
-						e.printStackTrace();
+						if (synLog.isTraceOrDebugEnabled()) {
+							e.printStackTrace();
+						}
 						return false;
 					}
 					if (synLog.isTraceOrDebugEnabled()) {
@@ -63,12 +70,45 @@ public class MetadataMediator extends AbstractMediator {
 		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, pri);
 		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
+		
+		addOrUpdateSOAPHeaders(pri, dif, synCtx);
+		
 		if (synLog.isTraceOrDebugEnabled()) {
 			synLog.traceOrDebug("Successfully added metadata to message context. " +
 					"Added priority="+pri+", diffserv="+dif);
 		}
 		return true;
 	}
+	
+	private void addOrUpdateSOAPHeaders(int pri, int dif, MessageContext synCtx){
+		OMElement header = synCtx.getEnvelope().getHeader();
+		
+		/*
+		 * Sets the Priority value in the SOAP header.
+		 */
+		QName priName = new QName(MediatorConstants.QOS_PRIORITY);
+		OMElement priHeader = header.getFirstChildWithName(priName);
+		if(priHeader==null){
+			priHeader = new OMElementImpl(new QName(MediatorConstants.QOS_PRIORITY), 
+					synCtx.getEnvelope().getHeader(), new SOAP12Factory());			
+			synCtx.getEnvelope().getHeader().addChild(priHeader);	
+		}
+		priHeader.setText(pri+"");
+		
+		/*
+		 * Sets the Diffserv value in the SOAP header.
+		 */
+		QName difName = new QName(MediatorConstants.QOS_DIFFSERV);
+		OMElement difHeader = header.getFirstChildWithName(difName);
+		if(difHeader==null){
+			difHeader = new OMElementImpl(new QName(MediatorConstants.QOS_DIFFSERV), 
+					synCtx.getEnvelope().getHeader(), new SOAP12Factory());			
+			synCtx.getEnvelope().getHeader().addChild(difHeader);
+		}
+		difHeader.setText(dif+"");
+	}
+	
+	
 
 	public void addProperty(MediatorProperty mp){
 		properties.add(mp);
