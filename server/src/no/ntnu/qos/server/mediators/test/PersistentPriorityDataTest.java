@@ -14,14 +14,17 @@ public class PersistentPriorityDataTest {
 
 	private static String FILENAME;
 	private static String FILENAME2;
+	private static String FILENAME3;
 
 	public PersistentPriorityDataTest(){
-		if(FILENAME == null || FILENAME2 == null){
+		if(FILENAME == null || FILENAME2 == null || FILENAME3 == null){
 			Scanner in = new Scanner(System.in);
 			System.out.println("Where is ppdtest.xml:");
 			FILENAME = in.nextLine();
 			System.out.println("Where is ppdtest2.xml:");
 			FILENAME2 = in.nextLine();
+			System.out.println("Where is ppdtest3.xml:");
+			FILENAME3 = in.nextLine();
 		}
 	}
 
@@ -49,6 +52,14 @@ public class PersistentPriorityDataTest {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename("ppdtestfail.xml");
+		ppd.readData();
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testReadDataMallformedXML() throws FileNotFoundException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		assertFalse(ppd.isDataAvailable());
+		ppd.setFilename(FILENAME3);
 		ppd.readData();
 	}
 

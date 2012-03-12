@@ -113,6 +113,11 @@ public class PersistentPriorityData {
 							dif.put(clientRole, Integer.parseInt(diffserv.getText()));
 						}
 					}
+					if(!pri.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE) 
+							|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE)){
+						throw new IllegalArgumentException("No Default client for service: " + 
+							service.getAttributeValue(name) + ", in file: " + this.getFilename());
+					}
 				}
 				//
 				//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
