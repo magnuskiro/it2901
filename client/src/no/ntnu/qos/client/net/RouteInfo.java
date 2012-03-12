@@ -1,6 +1,9 @@
 package no.ntnu.qos.client.net;
 
 /**
+ * 
+ * NOT USED
+ * 
  * class used to contain link and bandwidth data acquired from the Monitoring Service
  * @author Håvard
  *
