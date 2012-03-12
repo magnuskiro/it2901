@@ -95,29 +95,37 @@ public class PersistentPriorityData {
 					Iterator<OMContainer> clientIterator = service.getChildrenWithLocalName("client");
 					while(clientIterator.hasNext()){
 						OMElement client = (OMElement)clientIterator.next();
+						String clientRole = client.getAttributeValue(role);
 
 						Iterator clientpriIterator = client.getChildrenWithLocalName("priority");
 						OMElement priority = (OMElement)clientpriIterator.next();
-						pri.put(client.getAttributeValue(role), Integer.parseInt(priority.getText()));
 
 						Iterator clientdifIterator = client.getChildrenWithLocalName("diffserv");
 						OMElement diffserv = (OMElement)clientdifIterator.next();
-						dif.put(client.getAttributeValue(role), Integer.parseInt(diffserv.getText()));
 
+						if(clientRole.equalsIgnoreCase("default")){
+							pri.put(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE, 
+									Integer.parseInt(priority.getText()));
+							dif.put(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE,
+									Integer.parseInt(diffserv.getText()));
+						}else{
+							pri.put(clientRole, Integer.parseInt(priority.getText()));
+							dif.put(clientRole, Integer.parseInt(diffserv.getText()));
+						}
 					}
 				}
-//
-//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
-//
-//				Iterator clientpriIterator = defaultPriority.getChildrenWithLocalName("priority");
-//				OMElement priority = (OMElement)clientpriIterator.next();
-//				defaultPri = Integer.parseInt(priority.getText());
-//
-//				Iterator clientdifIterator = defaultPriority.getChildrenWithLocalName("diffserv");
-//				OMElement diffserv = (OMElement)clientdifIterator.next();
-//				defaultDif = Integer.parseInt(diffserv.getText());
-//
-//				useDefault = defaultPriority.getAttributeValue(new QName("usedefault")).trim().equals("true");
+				//
+				//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
+				//
+				//				Iterator clientpriIterator = defaultPriority.getChildrenWithLocalName("priority");
+				//				OMElement priority = (OMElement)clientpriIterator.next();
+				//				defaultPri = Integer.parseInt(priority.getText());
+				//
+				//				Iterator clientdifIterator = defaultPriority.getChildrenWithLocalName("diffserv");
+				//				OMElement diffserv = (OMElement)clientdifIterator.next();
+				//				defaultDif = Integer.parseInt(diffserv.getText());
+				//
+				//				useDefault = defaultPriority.getAttributeValue(new QName("usedefault")).trim().equals("true");
 			}
 		}finally{
 			lock.unlock();
