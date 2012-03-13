@@ -3,6 +3,7 @@ package no.ntnu.qos.server.mediators;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -118,6 +119,12 @@ public class PersistentPriorityData {
 						throw new IllegalArgumentException("No Default client for service: " + 
 							service.getAttributeValue(name) + ", in file: " + this.getFilename());
 					}
+				}
+				try {
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				//
 				//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();

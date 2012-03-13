@@ -17,7 +17,6 @@ import org.apache.axis2.AxisFault;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
-import org.apache.synapse.mediators.MediatorProperty;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -35,10 +34,11 @@ public class MetadataMediatorTest {
 	public void testEmptyFileNameMediat(){
 		MessageContext synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), new SynapseConfiguration(),null);
 		MetadataMediator mm = new MetadataMediator();
-		MediatorProperty mp = new MediatorProperty();
-		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
-		mp.setValue("");
-		mm.addProperty(mp);
+//		MediatorProperty mp = new MediatorProperty();
+//		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
+//		mp.setValue("");
+//		mm.addProperty(mp);
+		mm.setPpdFilename("");
 		assertFalse(mm.mediate(synCtx));
 	}
 
@@ -54,10 +54,11 @@ public class MetadataMediatorTest {
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, "testService");
 		assertEquals(synCtx.getProperty(MediatorConstants.QOS_PRIORITY), null);
 		assertEquals(synCtx.getProperty(MediatorConstants.QOS_DIFFSERV), null);
-		MediatorProperty mp = new MediatorProperty();
-		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
-		mp.setValue(FILENAME);
-		mm.addProperty(mp);
+//		MediatorProperty mp = new MediatorProperty();
+//		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
+//		mp.setValue(FILENAME);
+//		mm.addProperty(mp);
+		mm.setPpdFilename(FILENAME);
 		assertTrue(mm.mediate(synCtx));
 		assertEquals(synCtx.getProperty(MediatorConstants.QOS_PRIORITY), 123);
 		assertEquals(synCtx.getProperty(MediatorConstants.QOS_DIFFSERV), 16);
