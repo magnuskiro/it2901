@@ -1,8 +1,6 @@
 package no.ntnu.qos.server.mediators;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.namespace.QName;
 
@@ -12,7 +10,6 @@ import org.apache.axiom.soap.impl.llom.soap12.SOAP12Factory;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
 import org.apache.synapse.mediators.AbstractMediator;
-import org.apache.synapse.mediators.MediatorProperty;
 
 /**
  * This mediator adds priority metadata to Message Context based on client role and service.
@@ -23,7 +20,8 @@ public class MetadataMediator extends AbstractMediator {
 
 
 	private final static PersistentPriorityData ppd = new PersistentPriorityData();
-	private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
+	//private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
+	private static String ppdFilename;
 	@Override
 	public boolean mediate(MessageContext synCtx) {
 
@@ -36,28 +34,25 @@ public class MetadataMediator extends AbstractMediator {
 				synLog.traceTrace("Message : " + synCtx.getEnvelope());
 			}
 		}
-		
+
 		//Check if data is available, if not, try reading it, if it fails return false
 		if(!ppd.isDataAvailable()){
-			for(MediatorProperty mp:properties){
-				if(mp.getName().equals(MediatorConstants.PRIORITY_DATA_FILENAME)){
-					ppd.setFilename(mp.getValue());
+			if(ppdFilename!=null){
+				ppd.setFilename(ppdFilename);
+				if (synLog.isTraceOrDebugEnabled()) {
+					synLog.traceOrDebug("Set Filename in Persistent Data Store, filename="+ppd.getFilename());
+				}
+				try {
+					ppd.readData();
+				} catch (FileNotFoundException e) {
+					//This means that the supplied file could not be found.
 					if (synLog.isTraceOrDebugEnabled()) {
-						synLog.traceOrDebug("Set Filename in Persistent Data Store, filename="+ppd.getFilename());
+						e.printStackTrace();
 					}
-					try {
-						ppd.readData();
-					} catch (FileNotFoundException e) {
-						//This means that the supplied file could not be found.
-						if (synLog.isTraceOrDebugEnabled()) {
-							e.printStackTrace();
-						}
-						return false;
-					}
-					if (synLog.isTraceOrDebugEnabled()) {
-						synLog.traceOrDebug("Successfully read file into persistent storage");
-					}
-					break;
+					return false;
+				}
+				if (synLog.isTraceOrDebugEnabled()) {
+					synLog.traceOrDebug("Successfully read file into persistent storage");
 				}
 			}        	
 		}
@@ -70,9 +65,9 @@ public class MetadataMediator extends AbstractMediator {
 		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, pri);
 		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
-		
+
 		addOrUpdateSOAPHeaders(pri, dif, synCtx);
-		
+
 		if (synLog.isTraceOrDebugEnabled()) {
 			synLog.traceOrDebug(MediatorConstants.DEBUG_END + "Successfully " +
 					"added metadata to message context. " +
@@ -80,10 +75,10 @@ public class MetadataMediator extends AbstractMediator {
 		}
 		return true;
 	}
-	
+
 	private void addOrUpdateSOAPHeaders(int pri, int dif, MessageContext synCtx){
 		OMElement header = synCtx.getEnvelope().getHeader();
-		
+
 		/*
 		 * Sets the Priority value in the SOAP header.
 		 */
@@ -95,7 +90,7 @@ public class MetadataMediator extends AbstractMediator {
 			synCtx.getEnvelope().getHeader().addChild(priHeader);	
 		}
 		priHeader.setText(pri+"");
-		
+
 		/*
 		 * Sets the Diffserv value in the SOAP header.
 		 */
@@ -108,19 +103,27 @@ public class MetadataMediator extends AbstractMediator {
 		}
 		difHeader.setText(dif+"");
 	}
+
+
+
+//	public void addProperty(MediatorProperty mp){
+//		properties.add(mp);
+//	}
+//
+//	public void addAllProperties(List<MediatorProperty> lmp){
+//		properties.addAll(lmp);
+//	}
+//
+//	public List<MediatorProperty> getProperties(){
+//		return properties;
+//	}
 	
+	public void setPpdFilename(String ppdFilename) {
+		MetadataMediator.ppdFilename = ppdFilename;
+	}
 	
-
-	public void addProperty(MediatorProperty mp){
-		properties.add(mp);
-	}
-
-	public void addAllProperties(List<MediatorProperty> lmp){
-		properties.addAll(lmp);
-	}
-
-	public List<MediatorProperty> getProperties(){
-		return properties;
+	public String getPpdFilename() {
+		return ppdFilename;
 	}
 
 }
