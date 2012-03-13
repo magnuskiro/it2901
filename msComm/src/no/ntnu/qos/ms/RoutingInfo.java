@@ -1,36 +1,21 @@
 package no.ntnu.qos.ms;
 
 /**
- * This Object holds the address of the last Tactical Router in a path
+ * This interface for Routing Info, an implementation should
+ * return the address of the last Tactical Router in a path
  * as well as the bandwidth of the limiting link on the path.
  * @author Ola Martin
  *
  */
-public class RoutingInfo {
-	final private String lastTR;
-	final private double bandwidth;
-	
-	/**
-	 * Builds the object
-	 * @param lastTR the IP address of the last tactical router on the path, "" if no TR.
-	 * @param bandwidth the limiting bandwidth on the path.
-	 */
-	public RoutingInfo(String lastTR, double bandwidth) {
-		this.lastTR=lastTR;
-		this.bandwidth=bandwidth;
-	}
+public interface RoutingInfo {
 	/**
 	 * 
-	 * @return {@link double} the limiting bandwidth on the path.
+	 * @return {@link double} the limiting bandwidth on the path, -1 if no TR on path.
 	 */
-	public double getBandwidth() {
-		return bandwidth;
-	}
+	public double getBandwidth();
 	/**
 	 * 
-	 * @return {@link String} the IP address of the last Tactical Router on the path.
+	 * @return {@link String} the GUID of the last Tactical Router on the path, "" if no TR.
 	 */
-	public String getLastTR() {
-		return lastTR;
-	}
+	public String getLastTR();
 }

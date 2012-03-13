@@ -54,7 +54,7 @@ public class MSCommunicatorImpl implements MSCommunicator {
 
 				try {
 					routingInfos.put(new URI(destIP), 
-							new RoutingInfo(lastTR, bandwidth));
+							new RoutingInfoImpl(lastTR, bandwidth));
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
 				}
@@ -70,7 +70,7 @@ public class MSCommunicatorImpl implements MSCommunicator {
 		if(routingInfos.containsKey(destIP)){
 			return routingInfos.get(destIP);			
 		}else{
-			return new RoutingInfo("", -1);
+			return new RoutingInfoImpl("", -1);
 		}
 	}
 
