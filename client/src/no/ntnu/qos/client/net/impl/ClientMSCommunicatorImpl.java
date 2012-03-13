@@ -3,6 +3,8 @@ package no.ntnu.qos.client.net.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.net.ClientMSCommunicator;
+import no.ntnu.qos.ms.MSCommunicator;
+import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
 
 
 /**
@@ -42,8 +44,8 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 		@Override
 		public void run() {
 			// TODO fetch the routing info and insert it into the DataObject
-			//MSCommunicator meh = new MSCommunicatorImlp(ms);
-			//dataObj.setRouteInfo(meh.getblah());
+//			MSCommunicator msComm = new MSCommunicatorImpl(ms);
+//			dataObj.setRouteInfo(msComm.getRoutingInfo(destIP));
 		}
 		
 	}
