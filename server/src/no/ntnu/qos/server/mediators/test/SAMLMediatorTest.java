@@ -27,7 +27,7 @@ import org.junit.Test;
 public class SAMLMediatorTest {
 
 	private static MessageContext synCtx;
-	private static final String CLIENT_ROLE = "client_role1";
+	private static final String CLIENT_ROLE = "clientRole1";
 	private static final String SERVICE = "127.0.0.1";
 	private static final String SAML_BODY = "SAMLinSOAP.xml";
 	
@@ -64,8 +64,8 @@ public class SAMLMediatorTest {
 	public void testMediate() {
 		SAMLMediator sm = new SAMLMediator();
 		assertTrue("Mediate synapse context", sm.mediate(synCtx));
-		assertEquals("Client role", CLIENT_ROLE, synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE));
 		assertEquals("Service", SERVICE, synCtx.getProperty(MediatorConstants.QOS_SERVICE));
+		assertEquals("Client role", CLIENT_ROLE, synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE));
 	}
 
 }

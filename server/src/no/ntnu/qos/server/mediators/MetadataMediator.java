@@ -30,7 +30,7 @@ public class MetadataMediator extends AbstractMediator {
 		SynapseLog synLog = getLog(synCtx);
 
 		if (synLog.isTraceOrDebugEnabled()) {
-			synLog.traceOrDebug("Start : Metadata mediator");
+			synLog.traceOrDebug(MediatorConstants.DEBUG_START + "Metadata mediator");
 
 			if (synLog.isTraceTraceEnabled()) {
 				synLog.traceTrace("Message : " + synCtx.getEnvelope());
@@ -74,7 +74,8 @@ public class MetadataMediator extends AbstractMediator {
 		addOrUpdateSOAPHeaders(pri, dif, synCtx);
 		
 		if (synLog.isTraceOrDebugEnabled()) {
-			synLog.traceOrDebug("Successfully added metadata to message context. " +
+			synLog.traceOrDebug(MediatorConstants.DEBUG_END + "Successfully " +
+					"added metadata to message context. " +
 					"Added priority="+pri+", diffserv="+dif);
 		}
 		return true;
