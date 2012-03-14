@@ -63,6 +63,7 @@ public class PersistentPriorityData {
 	 * 
 	 * @throws FileNotFoundException
 	 */
+	@SuppressWarnings("unchecked")
 	public  void readData() throws FileNotFoundException{
 		lock.lock();
 		try{
@@ -98,10 +99,10 @@ public class PersistentPriorityData {
 						OMElement client = (OMElement)clientIterator.next();
 						String clientRole = client.getAttributeValue(role);
 
-						Iterator clientpriIterator = client.getChildrenWithLocalName("priority");
+						Iterator<OMElement> clientpriIterator = client.getChildrenWithLocalName("priority");
 						OMElement priority = (OMElement)clientpriIterator.next();
 
-						Iterator clientdifIterator = client.getChildrenWithLocalName("diffserv");
+						Iterator<OMElement> clientdifIterator = client.getChildrenWithLocalName("diffserv");
 						OMElement diffserv = (OMElement)clientdifIterator.next();
 
 						if(clientRole.equalsIgnoreCase("default")){
