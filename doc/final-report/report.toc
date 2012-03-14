@@ -1,0 +1,50 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Project Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Task Description and Requirements}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Description}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Requirements}{3}{subsection.2.2}
+\contentsline {section}{\numberline {3}Project Management}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Team Organization}{4}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Team Structure}{4}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Team communication}{5}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Risk Assesment}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Process Evaluation}{6}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Progress tracking and Documentation}{6}{subsection.3.4}
+\contentsline {section}{\numberline {4}Development Methodology}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Project Organization}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Software project life cycle}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}System Technology}{9}{subsection.4.3}
+\contentsline {section}{\numberline {5}Prestudy}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}Server side Architecture}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Client side Architecture}{12}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Alternative solutions}{13}{subsection.5.3}
+\contentsline {section}{\numberline {6}Design}{15}{section.6}
+\contentsline {subsection}{\numberline {6.1}Client Side}{15}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}Introduction}{15}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {6.1.2}Use Cases}{16}{subsubsection.6.1.2}
+\contentsline {subsubsection}{\numberline {6.1.3}Data Flow}{18}{subsubsection.6.1.3}
+\contentsline {subsubsection}{\numberline {6.1.4}Architecture}{19}{subsubsection.6.1.4}
+\contentsline {subsubsection}{\numberline {6.1.5}Sequence Diagrams}{21}{subsubsection.6.1.5}
+\contentsline {subsection}{\numberline {6.2}Server Side}{26}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}Introduction}{26}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}Use Cases}{26}{subsubsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.3}Description of ESB concepts}{29}{subsubsection.6.2.3}
+\contentsline {subsubsection}{\numberline {6.2.4}Dataflow}{29}{subsubsection.6.2.4}
+\contentsline {subsubsection}{\numberline {6.2.5}Extensions to the ESB}{30}{subsubsection.6.2.5}
+\contentsline {subsubsection}{\numberline {6.2.6}Sequence Diagrams}{32}{subsubsection.6.2.6}
+\contentsline {subsubsection}{\numberline {6.2.7}Configuration of the ESB}{37}{subsubsection.6.2.7}
+\contentsline {subsubsection}{\numberline {6.2.8}Modification of the ESB}{38}{subsubsection.6.2.8}
+\contentsline {section}{\numberline {7}Implementation}{38}{section.7}
+\contentsline {section}{\numberline {8}Testing}{38}{section.8}
+\contentsline {subsection}{\numberline {8.1}Unit testing}{38}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Integration testing}{39}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}System testing}{39}{subsection.8.3}
+\contentsline {section}{\numberline {9}Results}{42}{section.9}
+\contentsline {section}{\numberline {10}Conclusion}{42}{section.10}
+\contentsline {subsection}{\numberline {10.1}Project accomplishments}{42}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Future Work}{42}{subsection.10.2}
+\contentsline {section}{\numberline {11}Project Evaluation}{42}{section.11}
+\contentsline {section}{\numberline {A}Work Breakdown Structure}{42}{appendix.A}
+\contentsline {section}{\numberline {B}File Attachments}{43}{appendix.B}
+\contentsline {section}{Glossary}{43}{appendix.B}
+\contentsline {section}{Bibliography}{46}{section*.5}

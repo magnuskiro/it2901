@@ -1,0 +1,1517 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.2.6)  14 MAR 2012 13:19
+entering extended mode
+ %&-line parsing enabled.
+**\nonstopmode \input{"/home/kiro/repos/it2901/doc/final-report/report.tex"}
+(/home/kiro/repos/it2901/doc/final-report/report.tex
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen103
+\Hy@linkcounter=\count87
+\Hy@pagecounter=\count88
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count89
+\Field@Width=\dimen104
+\Fld@charsize=\dimen105
+\Field@toks=\toks15
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count90
+\c@Item=\count91
+\c@Hfootnote=\count92
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count93
+)
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
+(/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2008/07/06 v3.8l The Babel package
+
+(/usr/share/texmf-texlive/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count94
+\U@D=\dimen106
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+\Gread@gobject=\count95
+))
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+)
+(/usr/share/texmf-texlive/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2009/02/07 v0.4g Insert pages of external PDF documents (AM)
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count96
+\calc@Bcount=\count97
+\calc@Adimen=\dimen109
+\calc@Bdimen=\dimen110
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count98
+\calc@Cskip=\skip45
+)
+(/usr/share/texmf-texlive/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2006/07/14 v1.1d eso-pic (RN)
+
+(/usr/share/texmf-texlive/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf-texlive/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2009/02/07 v0.4g Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box26
+\AM@toc@title=\toks18
+\c@AM@survey=\count99
+\AM@templatesizebox=\box27
+)
+(/usr/share/texmf-texlive/tex/latex/attachfile/attachfile.sty
+Package: attachfile 2008/08/15 v1.3a PDF 1.3+ file attachment
+
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+\c@atfi@embedfileobj=\count100
+\atfi@appearancewidth=\skip46
+\atfi@appearanceheight=\skip47
+\atfi@appearancedepth=\skip48
+\c@atfi@appearanceobj=\count101
+\atfi@appearancebox=\box28
+\c@atfi@flags=\count102
+\c@atfi@hours=\count103
+\c@atfi@minutes=\count104
+)
+(/usr/share/texmf-texlive/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count105
+\float@exts=\toks19
+\float@box=\box29
+\@float@everytoks=\toks20
+\@floatcapt=\box30
+)
+(/usr/share/texmf-texlive/tex/latex/glossaries/base/glossaries.sty
+Package: glossaries 2009/09/23 v2.03 (NLCT)
+
+(/usr/share/texmf-texlive/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks21
+\XKV@tempa@toks=\toks22
+\XKV@depth=\count106
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+(/usr/share/texmf-texlive/tex/latex/glossaries/base/mfirstuc.sty
+Package: mfirstuc 2008/12/22 v1.03 (NLCT)
+)
+(/usr/share/texmf-texlive/tex/latex/xfor/xfor.sty
+Package: xfor 2009/02/05 v1.05 (NLCT)
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks23
+\ex@=\dimen111
+)
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator.sty
+Package: translator 2010/06/12 ver 1.10
+
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator-language-mappings
+.tex))
+\gls@level=\count107
+\@gls@tmpb=\toks24
+\gls@tmplen=\skip49
+\istfile=\write3
+
+(/usr/share/texmf-texlive/tex/latex/glossaries/styles/glossary-hypernav.sty
+Package: glossary-hypernav 2007/07/04 v1.01 (NLCT)
+)
+(/usr/share/texmf-texlive/tex/latex/glossaries/styles/glossary-list.sty
+Package: glossary-list 2009/05/30 v2.01 (NLCT)
+\glslistdottedwidth=\skip50
+)
+(/usr/share/texmf-texlive/tex/latex/glossaries/styles/glossary-long.sty
+Package: glossary-long 2009/05/30 v2.01 (NLCT)
+
+(/usr/share/texmf-texlive/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip51
+\LTright=\skip52
+\LTpre=\skip53
+\LTpost=\skip54
+\LTchunksize=\count108
+\LTcapwidth=\dimen112
+\LT@head=\box31
+\LT@firsthead=\box32
+\LT@foot=\box33
+\LT@lastfoot=\box34
+\LT@cols=\count109
+\LT@rows=\count110
+\c@LT@tables=\count111
+\c@LT@chunks=\count112
+\LT@p@ftn=\toks25
+)
+\glsdescwidth=\skip55
+\glspagelistwidth=\skip56
+)
+(/usr/share/texmf-texlive/tex/latex/glossaries/styles/glossary-super.sty
+Package: glossary-super 2009/05/30 v2.01 (NLCT)
+
+(/usr/share/texmf-texlive/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
+\c@tracingst=\count113
+\ST@wd=\dimen113
+\ST@rightskip=\skip57
+\ST@leftskip=\skip58
+\ST@parfillskip=\skip59
+\ST@pageleft=\dimen114
+\ST@headht=\dimen115
+\ST@tailht=\dimen116
+\ST@pagesofar=\dimen117
+\ST@pboxht=\dimen118
+\ST@lineht=\dimen119
+\ST@stretchht=\dimen120
+\ST@prevht=\dimen121
+\ST@toadd=\dimen122
+\ST@dimen=\dimen123
+\ST@pbox=\box35
+))
+(/usr/share/texmf-texlive/tex/latex/glossaries/styles/glossary-tree.sty
+Package: glossary-tree 2009/01/14 v1.01 (NLCT)
+\glstreeindent=\skip60
+))
+(/home/kiro/repos/it2901/doc/final-report/Glossary.tex)
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 33.
+Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+\glo@main@file=\write4
+\openout4 = `report.glo'.
+
+Package glossaries Info: Writing glossary file report.glo on input line 34.
+
+(/home/kiro/repos/it2901/doc/final-report/report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+Package hyperref Info: Link coloring ON on input line 36.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count114
+)
+LaTeX Info: Redefining \ref on input line 36.
+LaTeX Info: Redefining \pageref on input line 36.
+
+(/home/kiro/repos/it2901/doc/final-report/report.out)
+(/home/kiro/repos/it2901/doc/final-report/report.out)
+\@outlinefile=\write5
+\openout5 = `report.out'.
+
+\AtBeginShipoutBox=\box36
+
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count115
+\scratchdimen=\dimen124
+\scratchbox=\box37
+\nofMPsegments=\count116
+\nofMParguments=\count117
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen125
+\MPnumerator=\count119
+\everyMPtoPDFconversion=\toks27
+) ABD: EveryShipout initializing macros
+(/usr/share/texmf-texlive/tex/latex/glossaries/dict/glossaries-dictionary-Engli
+sh.dict
+Dictionary: glossaries-dictionary, Language: English 
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 39.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 39.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 39.
+
+[1
+
+\openout3 = `report.ist'.
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 41.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 41.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 41.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 41.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.41 \end{abstract}
+                    [1] (/home/kiro/repos/it2901/doc/final-report/report.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 4.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \hfil 
+l.44 ...ject accomplishments}{42}{subsection.10.1}
+                                                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 44.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 44.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@RomanType' on input line 44.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\c@page' on input line 44.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.44 ...ject accomplishments}{42}{subsection.10.1}
+                                                   [1])
+\tf@toc=\write6
+\openout6 = `report.toc'.
+
+
+(/home/kiro/repos/it2901/doc/final-report/report.lof)
+\tf@lof=\write7
+\openout7 = `report.lof'.
+
+
+(/home/kiro/repos/it2901/doc/final-report/report.lot)
+\tf@lot=\write8
+\openout8 = `report.lot'.
+
+ [1]
+(/home/kiro/repos/it2901/doc/final-report/TaskDescriptionAndRequirements.tex
+Underfull \hbox (badness 8132) in paragraph at lines 7--7
+[][][][][][]\OT1/cmr/m/n/8 SAML[][] - Se-cu-rity As-ser-tion Markup Lan-guage.[
+[][]$\OT1/cmtt/m/n/8 https : / / secure . wikimedia . org /
+ []
+
+[2]
+Underfull \hbox (badness 2980) in paragraph at lines 13--13
+[][][]\OT1/cmr/m/n/8 eXtensible Ac-cess Con-trol Markup Lan-guage. [[][]$\OT1/c
+mtt/m/n/8 https : / / secure . wikimedia . org /
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 27.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
+ [3])
+(/home/kiro/repos/it2901/doc/final-report/ProjectManagement.tex
+<./graphics/TeamOrganizationchart.png, id=426, 900.36375pt x 176.66pt>
+File: ./graphics/TeamOrganizationchart.png Graphic file (type png)
+
+<use ./graphics/TeamOrganizationchart.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.36     \subsection
+                    {Risk Assesment}\label{Risk Assesment} <./graphics/TeamOrga
+nizationchart.png>]
+<./graphics/Week8activityplan.png, id=441, 660.4675pt x 332.24126pt>
+File: ./graphics/Week8activityplan.png Graphic file (type png)
+
+<use ./graphics/Week8activityplan.png>
+<./graphics/Week7statusreport.png, id=443, 470.75874pt x 547.04375pt>
+File: ./graphics/Week7statusreport.png Graphic file (type png)
+
+<use ./graphics/Week7statusreport.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (/home/kiro/repos/it2901/doc/final-report/DevelopmentMethodology.tex
+Underfull \hbox (badness 1082) in paragraph at lines 3--3
+[][][][][][]\OT1/cmr/m/n/8 Waterfall model[][] - A se-quen-tial de-sign pro-ces
+s. [[][]$\OT1/cmtt/m/n/8 http : / / en . wikipedia . org / wiki /
+ []
+
+[6pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.4 
+     <./graphics/Week8activityplan.png>] [7pdfTeX warning (ext4): destination w
+ith the same identifier (name{figure.3}) has been already used, duplicate ignor
+ed
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.7     A
+         s mentioned, this is a project that requires quite a lot of plannin...
+ <./graphics/Week7statusreport.png (PNG copy)>]
+<./graphics/gantt.png, id=492, 1284.8pt x 803.0pt>
+File: ./graphics/gantt.png Graphic file (type png)
+ <use ./graphics/gantt.png>
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.33 
+      <./graphics/gantt.png (PNG copy)>] [9])
+(/home/kiro/repos/it2901/doc/final-report/Prestudy.tex [10]
+<./graphics/birdarch.png, id=557, 1045.78941pt x 510.14117pt>
+File: ./graphics/birdarch.png Graphic file (type png)
+
+<use ./graphics/birdarch.png>
+<./graphics/Serversidearchitecture.png, id=571, 914.41624pt x 642.4pt>
+File: ./graphics/Serversidearchitecture.png Graphic file (type png)
+
+<use ./graphics/Serversidearchitecture.png> [11pdfTeX warning (ext4): destinati
+on with the same identifier (name{figure.5}) has been already used, duplicate i
+gnored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.23 
+      <./graphics/birdarch.png (PNG copy)>]
+<./graphics/Client-sideArchitechture.png, id=590, 539.01375pt x 473.77pt>
+File: ./graphics/Client-sideArchitechture.png Graphic file (type png)
+
+<use ./graphics/Client-sideArchitechture.png> [12pdfTeX warning (ext4): destina
+tion with the same identifier (name{figure.6}) has been already used, duplicate
+ ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.41         T
+              he reply from the server is examined by our client library for...
+ <./graphics/Serversidearchitecture.png>] [13pdfTeX warning (ext4): destination
+ with the same identifier (name{figure.7}) has been already used, duplicate ign
+ored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.50         O
+              ne architecture, which our customer suggested for the project,...
+ <./graphics/Client-sideArchitechture.png>] [14])
+(/home/kiro/repos/it2901/doc/final-report/Design.tex
+(/home/kiro/repos/it2901/doc/final-report/Design-Client.tex
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--28
+
+ []
+
+[15]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 		\\\\
+           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 		\textbf
+              {Title:} Accept data to be sent \\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--66
+
+ []
+
+
+Overfull \hbox (6.216pt too wide) in paragraph at lines 60--66
+\OT1/cmr/bx/n/10 Actors: \OT1/cmr/m/n/10 client li-brary, Mon-i-tor-ing Ser-vic
+e(MS) (prob-a-bly on tac-ti-cal router(TR)) 
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 76--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--97
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 110--116
+
+ []
+
+
+<./graphics/ClientCredentialsDataFlowDiagram.png, id=671, 669.50125pt x 553.066
+25pt>
+File: ./graphics/ClientCredentialsDataFlowDiagram.png Graphic file (type png)
+ <use ./graphics/ClientCredentialsDataFlowDiagram.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./graphics/ClientDataFlowDiagram.png, id=672, 755.82375pt x 593.21625pt>
+File: ./graphics/ClientDataFlowDiagram.png Graphic file (type png)
+
+<use ./graphics/ClientDataFlowDiagram.png>
+Overfull \hbox (32.91095pt too wide) in paragraph at lines 144--145
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 		\\\\
+            
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158 		B
+         andwidth/link data
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.163 		\\\\
+            
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.164 		C
+         lient data
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[18] <./graphics/Detailedclientarchitecture.png, id=690, 939.51pt x 638.385pt>
+File: ./graphics/Detailedclientarchitecture.png Graphic file (type png)
+
+<use ./graphics/Detailedclientarchitecture.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--204
+
+ []
+
+[19pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.204 
+       <./graphics/ClientCredentialsDataFlowDiagram.png>] [20pdfTeX warning (ex
+t4): destination with the same identifier (name{figure.9}) has been already use
+d, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.204 
+       <./graphics/ClientDataFlowDiagram.png>]
+<./graphics/CliSeqDiaAcceptclientinfo.png, id=706, 954.56625pt x 362.35374pt>
+File: ./graphics/CliSeqDiaAcceptclientinfo.png Graphic file (type png)
+
+<use ./graphics/CliSeqDiaAcceptclientinfo.png>
+<./graphics/CliSeqDiaGettingnon-storedtoken.png, id=707, 1295.84125pt x 879.285
+pt>
+File: ./graphics/CliSeqDiaGettingnon-storedtoken.png Graphic file (type png)
+ <use ./graphics/CliSeqDiaGettingnon-storedtoken.png>
+Overfull \hbox (6.70778pt too wide) in paragraph at lines 214--215
+ [][] 
+ []
+
+<./graphics/CliSeqDiaGettingStoredToken.png, id=708, 963.6pt x 722.7pt>
+File: ./graphics/CliSeqDiaGettingStoredToken.png Graphic file (type png)
+
+<use ./graphics/CliSeqDiaGettingStoredToken.png> [21pdfTeX warning (ext4): dest
+ination with the same identifier (name{figure.10}) has been already used, dupli
+cate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.223 		\end{figure}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{figure.11}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.223 		\end{figure}
+                     <./graphics/Detailedclientarchitecture.png> <./graphics/Cl
+iSeqDiaAcceptclientinfo.png>]
+<./graphics/CliSeqDiaReceivereply.png, id=715, 959.585pt x 477.785pt>
+File: ./graphics/CliSeqDiaReceivereply.png Graphic file (type png)
+
+<use ./graphics/CliSeqDiaReceivereply.png> [22pdfTeX warning (ext4): destinatio
+n with the same identifier (name{figure.12}) has been already used, duplicate i
+gnored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.229 		\end{figure}
+                     <./graphics/CliSeqDiaGettingnon-storedtoken.png>]
+<./graphics/CliSeqDiaSendData.png, id=722, 1562.83875pt x 789.95125pt>
+File: ./graphics/CliSeqDiaSendData.png Graphic file (type png)
+
+<use ./graphics/CliSeqDiaSendData.png> [23pdfTeX warning (ext4): destination wi
+th the same identifier (name{figure.13}) has been already used, duplicate ignor
+ed
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.235 		\end{figure}
+                     <./graphics/CliSeqDiaGettingStoredToken.png>] [24pdfTeX wa
+rning (ext4): destination with the same identifier (name{figure.14}) has been a
+lready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.236 
+       <./graphics/CliSeqDiaReceivereply.png>]
+Overfull \vbox (47.01332pt too high) has occurred while \output is active []
+
+
+[25pdfTeX warning (ext4): destination with the same identifier (name{figure.15}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.236 
+       <./graphics/CliSeqDiaSendData.png>])
+(/home/kiro/repos/it2901/doc/final-report/Design-Server.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--15
+
+ []
+
+[26]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34     \textbf
+                {Title:} Request mediation\\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.54     \textbf
+                {Title:} Response mediation \\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.70     \textbf
+                {Title:} Monitoring Service communication\\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[27]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.88     \textbf
+                {Title:} Prioritize messages\\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103     \textbf
+                 {Title:} Authenticate SAML token\\
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[28] <./graphics/DataFlowDiagramServer.png, id=786, 989.6975pt x 728.7225pt>
+File: ./graphics/DataFlowDiagramServer.png Graphic file (type png)
+
+<use ./graphics/DataFlowDiagramServer.png>
+<./graphics/SAMLauthenticationflow.png, id=789, 616.3025pt x 376.40625pt>
+File: ./graphics/SAMLauthenticationflow.png Graphic file (type png)
+
+<use ./graphics/SAMLauthenticationflow.png>
+Underfull \hbox (badness 10000) in paragraph at lines 132--156
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--192
+
+ []
+
+[30pdfTeX warning (ext4): destination with the same identifier (name{figure.16}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.192 
+       <./graphics/DataFlowDiagramServer.png>] [31pdfTeX warning (ext4): destin
+ation with the same identifier (name{figure.17}) has been already used, duplica
+te ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.192 
+       <./graphics/SAMLauthenticationflow.png>]
+<./graphics/System-levelsequencediagram.png, id=812, 969.6225pt x 994.71625pt>
+File: ./graphics/System-levelsequencediagram.png Graphic file (type png)
+
+<use ./graphics/System-levelsequencediagram.png> [32]
+<./graphics/SAMLmediator.png, id=817, 700.6175pt x 865.2325pt>
+File: ./graphics/SAMLmediator.png Graphic file (type png)
+
+<use ./graphics/SAMLmediator.png> [33pdfTeX warning (ext4): destination with th
+e same identifier (name{figure.18}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.211 
+       <./graphics/System-levelsequencediagram.png>]
+<./graphics/Responsesequencediagram.png, id=823, 1793.70125pt x 954.56625pt>
+File: ./graphics/Responsesequencediagram.png Graphic file (type png)
+
+<use ./graphics/Responsesequencediagram.png> [34pdfTeX warning (ext4): destinat
+ion with the same identifier (name{figure.19}) has been already used, duplicate
+ ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.218 
+       <./graphics/SAMLmediator.png>]
+<./graphics/MSmediatorsequence.png, id=830, 728.7225pt x 522.95375pt>
+File: ./graphics/MSmediatorsequence.png Graphic file (type png)
+
+<use ./graphics/MSmediatorsequence.png> [35pdfTeX warning (ext4): destination w
+ith the same identifier (name{figure.20}) has been already used, duplicate igno
+red
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.226 
+       <./graphics/Responsesequencediagram.png>]
+<./graphics/Metadatamediatorsequencediagram.png, id=836, 903.375pt x 1133.23375
+pt>
+File: ./graphics/Metadatamediatorsequencediagram.png Graphic file (type png)
+ <use ./graphics/Metadatamediatorsequencediagram.png>
+Overfull \hbox (16.3436pt too wide) in paragraph at lines 229--230
+ [][] 
+ []
+
+[36pdfTeX warning (ext4): destination with the same identifier (name{figure.21}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.234 
+       <./graphics/MSmediatorsequence.png>] [37pdfTeX warning (ext4): destinati
+on with the same identifier (name{figure.22}) has been already used, duplicate 
+ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.240 
+       <./graphics/Metadatamediatorsequencediagram.png>]))
+(/home/kiro/repos/it2901/doc/final-report/Implementation.tex)
+(/home/kiro/repos/it2901/doc/final-report/Testing.tex [38]
+<./graphics/Simplemessagesending.png, id=856, 662.475pt x 99.37125pt>
+File: ./graphics/Simplemessagesending.png Graphic file (type png)
+
+<use ./graphics/Simplemessagesending.png>
+<./graphics/3Clientmessagesending.png, id=858, 659.46375pt x 217.81375pt>
+File: ./graphics/3Clientmessagesending.png Graphic file (type png)
+
+<use ./graphics/3Clientmessagesending.png>
+<./graphics/2Clientdifferentpathsmessagesending.png, id=862, 656.4525pt x 160.6
+pt>
+File: ./graphics/2Clientdifferentpathsmessagesending.png Graphic file (type png
+)
+ <use ./graphics/2Clientdifferentpathsmessagesending.png>
+<./graphics/3Clientswheretwoarecompeting.png, id=864, 663.47874pt x 253.94875pt
+>
+File: ./graphics/3Clientswheretwoarecompeting.png Graphic file (type png)
+ <use ./graphics/3Clientswheretwoarecompeting.png>)
+(/home/kiro/repos/it2901/doc/final-report/Results.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--1
+
+ []
+
+[39pdfTeX warning (ext4): destination with the same identifier (name{figure.23}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \section
+            {Results}\label{results} <./graphics/Simplemessagesending.png>]
+[40pdfTeX warning (ext4): destination with the same identifier (name{figure.24}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \section
+            {Results}\label{results} <./graphics/3Clientmessagesending.png>]
+[41pdfTeX warning (ext4): destination with the same identifier (name{figure.25}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \section
+            {Results}\label{results}pdfTeX warning (ext4): destination with the
+ same identifier (name{figure.26}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \section
+            {Results}\label{results} <./graphics/2Clientdifferentpathsmessagese
+nding.png> <./graphics/3Clientswheretwoarecompeting.png>])
+(/home/kiro/repos/it2901/doc/final-report/Conclusion.tex)
+(/home/kiro/repos/it2901/doc/final-report/ProjectEvaluation.tex)
+(/home/kiro/repos/it2901/doc/final-report/WorkBreakdownStructure.tex
+<./graphics/WorkbreakdownstructureClient.png, id=889, 1246.6575pt x 476.78125pt
+>
+File: ./graphics/WorkbreakdownstructureClient.png Graphic file (type png)
+ <use ./graphics/WorkbreakdownstructureClient.png> [42]
+<./graphics/WorkbreakdownstructureServer.png, id=894, 1450.41875pt x 628.3475pt
+>
+File: ./graphics/WorkbreakdownstructureServer.png Graphic file (type png)
+ <use ./graphics/WorkbreakdownstructureServer.png>)
+(/home/kiro/repos/it2901/doc/final-report/FileAttachments.tex<<graphics/risklis
+t.pdf>><<graphics/gantt.html>>
+Underfull \hbox (badness 10000) in paragraph at lines 2--6
+
+ []
+
+) (/home/kiro/repos/it2901/doc/final-report/report.gls [43pdfTeX warning (ext4)
+: destination with the same identifier (name{figure.27}) has been already used,
+ duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.10 ...etentrycounter{page}\glsnumberformat{29}}}
+                                                  \glsgroupskippdfTeX warning (
+ext4): destination with the same identifier (name{figure.28}) has been already 
+used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.10 ...etentrycounter{page}\glsnumberformat{29}}}
+                                                  \glsgroupskip <./graphics/Wor
+kbreakdownstructureClient.png> <./graphics/WorkbreakdownstructureServer.png>]
+Overfull \hbox (6.84917pt too wide) in paragraph at lines 13--13
+\OT1/cmtt/m/n/10 secure . wikimedia . org / wikipedia / en / wiki / Bandwidth _
+ (computing)$[][]\OT1/cmr/m/n/10 . [][]3[][] 
+ []
+
+
+Overfull \hbox (46.7142pt too wide) in paragraph at lines 19--19
+[]\OT1/cmr/m/n/10 Differentiated ser-vices, a field in the IPv4 header [][]$\OT
+1/cmtt/m/n/10 http : / / www . networksorcery .
+ []
+
+
+Overfull \hbox (21.49812pt too wide) in paragraph at lines 31--33
+\OT1/cmr/m/n/10 on the World Wide Web [][]$\OT1/cmtt/m/n/10 http : / / www . w3
+ . org / History / 19921103-[]hypertext /
+ []
+
+
+Overfull \hbox (76.8037pt too wide) in paragraph at lines 43--45
+[][][]$\OT1/cmtt/m/n/10 http : / / www . oracle . com / technetwork / java / co
+deconv-[]138413 .
+ []
+
+
+Overfull \hbox (15.53409pt too wide) in paragraph at lines 50--52
+[]\OT1/cmr/m/n/10 SOAP mes-sage [][]$\OT1/cmtt/m/n/10 https : / / secure . wiki
+media . org / wikipedia / en / wiki /
+ []
+
+[44]
+! Misplaced alignment tab character &.
+<argument> A set of open source C++ &
+                                      Java libraries to support developers w...
+l.60 ...etentrycounter{page}\glsnumberformat{12}}}
+                                                  \glsgroupskip
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+Overfull \hbox (5.19243pt too wide) in paragraph at lines 72--72
+\OT1/cmr/m/n/10 cial re-quire-ments [][]$\OT1/cmtt/m/n/10 http : / / en . wikip
+edia . org / wiki / Quality _ of _ service$[][]\OT1/cmr/m/n/10 .
+ []
+
+
+Overfull \hbox (6.8877pt too wide) in paragraph at lines 75--77
+[]\OT1/cmr/m/n/10 Security As-ser-tion Markup Lan-guage [][]$\OT1/cmtt/m/n/10 h
+ttps : / / secure . wikimedia . org /
+ []
+
+[45]
+Overfull \hbox (102.72026pt too wide) in paragraph at lines 95--97
+\OT1/cmr/m/n/10 to-machine in-ter-ac-tion over a net-work [][]$\OT1/cmtt/m/n/10
+ http : / / www . w3 . org / TR / 2004 / NOTE-[]ws-[]gloss-[]20040211 /
+ []
+
+
+Overfull \hbox (28.98505pt too wide) in paragraph at lines 102--104
+[]\OT1/cmr/m/n/10 eXtensible Ac-cess Con-trol Markup Lan-guage [][]$\OT1/cmtt/m
+/n/10 https : / / secure . wikimedia .
+ []
+
+) (/home/kiro/repos/it2901/doc/final-report/report.bbl) [46]
+(/home/kiro/repos/it2901/doc/final-report/report.aux) ) 
+Here is how much of TeX's memory you used:
+ 8448 strings out of 495061
+ 131503 string characters out of 1182622
+ 238875 words of memory out of 3000000
+ 11108 multiletter control sequences out of 15000+50000
+ 8541 words of font info for 31 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 39i,9n,38p,2001b,519s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+mr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on report.pdf (49 pages, 1481791 bytes).
+PDF statistics:
+ 1130 PDF objects out of 1200 (max. 8388607)
+ 274 named destinations out of 1000 (max. 500000)
+ 553 words of extra memory for PDF output out of 10000 (max. 10000000)
+

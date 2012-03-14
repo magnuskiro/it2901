@@ -1,0 +1,29 @@
+\select@language {english}
+\contentsline {figure}{\numberline {1}{\ignorespaces Team Organization chart}}{5}{figure.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Example Activity plan}}{6}{figure.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Status report example}}{7}{figure.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Part of our Gantt diagram}}{8}{figure.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Birds eye view of the overall architecture.}}{11}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces The Server side Architecture}}{12}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces The Client side Architecture}}{13}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Client Data Flow}}{19}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces Client Credentials Flow}}{20}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Detailed Client Architecture}}{21}{figure.10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Accept client info}}{21}{figure.11}
+\contentsline {figure}{\numberline {12}{\ignorespaces Getting non-stored token}}{22}{figure.12}
+\contentsline {figure}{\numberline {13}{\ignorespaces Getting stored token}}{23}{figure.13}
+\contentsline {figure}{\numberline {14}{\ignorespaces Receive reply}}{24}{figure.14}
+\contentsline {figure}{\numberline {15}{\ignorespaces Send data}}{25}{figure.15}
+\contentsline {figure}{\numberline {16}{\ignorespaces Server Data Flow}}{30}{figure.16}
+\contentsline {figure}{\numberline {17}{\ignorespaces SAML Authentication Flow}}{31}{figure.17}
+\contentsline {figure}{\numberline {18}{\ignorespaces System-level sequence diagram}}{33}{figure.18}
+\contentsline {figure}{\numberline {19}{\ignorespaces SAML mediator sequence diagram}}{34}{figure.19}
+\contentsline {figure}{\numberline {20}{\ignorespaces Response sequence sequence diagram}}{35}{figure.20}
+\contentsline {figure}{\numberline {21}{\ignorespaces Metadata mediator sequence}}{36}{figure.21}
+\contentsline {figure}{\numberline {22}{\ignorespaces MS mediator sequence diagram}}{37}{figure.22}
+\contentsline {figure}{\numberline {23}{\ignorespaces Simple message sending}}{39}{figure.23}
+\contentsline {figure}{\numberline {24}{\ignorespaces 3 Client message sending}}{40}{figure.24}
+\contentsline {figure}{\numberline {25}{\ignorespaces 2 Clients different paths message sending}}{41}{figure.25}
+\contentsline {figure}{\numberline {26}{\ignorespaces 3 Clients where two are competing}}{41}{figure.26}
+\contentsline {figure}{\numberline {27}{\ignorespaces WBS-Client}}{43}{figure.27}
+\contentsline {figure}{\numberline {28}{\ignorespaces WBS-Server}}{43}{figure.28}
