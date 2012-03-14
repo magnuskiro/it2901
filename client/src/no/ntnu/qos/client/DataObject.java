@@ -16,8 +16,8 @@ public class DataObject {
 	private RoutingInfo	routingInfo;
 	
 	
-	/*TODO: needs something to store the message in, as well as a
-	 *way to add it, posibly by constructor*/ 
+	/* TODO: needs something to store the message in, as well as a
+	 * way to add it, possibly by constructor*/ 
 	
 	
 	

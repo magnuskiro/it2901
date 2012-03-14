@@ -6,6 +6,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import no.ntnu.qos.client.credentials.*;
+import no.ntnu.qos.client.credentials.impl.TokenImpl;
+import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
