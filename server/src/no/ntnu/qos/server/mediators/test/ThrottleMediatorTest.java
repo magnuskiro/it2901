@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-import no.ntnu.qos.server.mediators.MSMediator;
+import no.ntnu.qos.server.mediators.impl.MSMediator;
+import no.ntnu.qos.server.mediators.impl.ThrottleMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
-import no.ntnu.qos.server.mediators.MetadataMediator;
-import no.ntnu.qos.server.mediators.ThrottleMediator;
+import no.ntnu.qos.server.mediators.impl.MetadataMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.soap.SOAPProcessingException;

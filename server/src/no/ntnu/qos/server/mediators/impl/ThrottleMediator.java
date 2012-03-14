@@ -1,4 +1,4 @@
-package no.ntnu.qos.server.mediators;
+package no.ntnu.qos.server.mediators.impl;
 
 import java.io.IOException;
 

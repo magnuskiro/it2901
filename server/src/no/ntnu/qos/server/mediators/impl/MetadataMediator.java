@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import javax.xml.namespace.QName;
 
+import org.apache.axiom.om.OMAbstractFactory;
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
 import no.ntnu.qos.server.mediators.QosLogType;
@@ -71,7 +72,10 @@ public class MetadataMediator extends AbstractQosMediator {
 
 	private void addOrUpdateSOAPHeaders(int pri, int dif, MessageContext synCtx){
 		OMElement header = synCtx.getEnvelope().getHeader();
-
+		if(header==null){
+			synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
+			header = synCtx.getEnvelope().getHeader();
+		}
 		/*
 		 * Sets the Priority value in the SOAP header.
 		 */
