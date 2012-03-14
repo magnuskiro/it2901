@@ -10,7 +10,8 @@ public class TokenImpl implements Token{
 	long validUntil;
 	URI destination;
 	
-	public TokenImpl(String token, long validUntil, URI destination) {
+	
+	public TokenImpl(String token, long validUntil, URI destination, int diff, int prio) {
 		this.token = token;
 		this.destination = destination;
 		this.validUntil = validUntil;

@@ -22,11 +22,6 @@ public class DataObject {
 	private URI			destination;
 	
 	
-
-	
-	
-	
-	
 	/**
 	 * main constructor
 	 * @param seq	- the sequencer creating the object
