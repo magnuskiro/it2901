@@ -32,8 +32,8 @@ public class CredentialsTest {
 		uri2 = new URI("127.0.0.26");
 		validUntil1 = System.currentTimeMillis()+3600000;
 		validUntil2 = System.currentTimeMillis()-1;
-		testToken1 = new TokenImpl(token, validUntil1, uri1);
-		testToken2 = new TokenImpl(token, validUntil2, uri2);
+		testToken1 = new TokenImpl(token, validUntil1, uri1, 1, 2);
+		testToken2 = new TokenImpl(token, validUntil2, uri2, 3, 4);
 
 		tM = new TokenManagerImpl(user, role, pass);
 		cS = ((TokenManagerImpl)tM).getCredentialStorage();

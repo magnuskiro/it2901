@@ -23,4 +23,14 @@ public interface Token {
 	 * @return URI of the server/service
 	 */
 	public URI getDestination();
+	/**
+	 * Returns the value of the DiffServ field
+	 * @return int of the DiffServ
+	 */
+	public int getDiffServ();
+	/**
+	 * Returns the priority of the connection
+	 * @return int priority
+	 */
+	public int getPriority();
 }
