@@ -6,7 +6,11 @@ import java.util.NoSuchElementException;
 
 import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
-
+/**
+ * 
+ * @author Stig Tore
+ *
+ */
 public class CredentialStorageImpl implements CredentialStorage {
 	private String[] credentials;
 	private HashMap<String, Token> tokens;

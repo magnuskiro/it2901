@@ -12,7 +12,11 @@ import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+/**
+ * 
+ * @author Stig Tore
+ *	Testing classes for the credentials system
+ */
 public class CredentialsTest {
 	static TokenManager tM;
 	static CredentialStorage cS;;

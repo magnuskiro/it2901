@@ -4,6 +4,11 @@ import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.TokenManager;
 
+/**
+ * 
+ * @author Stig Tore
+ *
+ */
 public class TokenManagerImpl implements TokenManager{
 	CredentialStorage cS;
 	
