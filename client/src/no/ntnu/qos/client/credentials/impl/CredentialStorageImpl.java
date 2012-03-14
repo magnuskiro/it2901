@@ -7,11 +7,13 @@ import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
 
 public class CredentialStorageImpl implements CredentialStorage {
+	private String[] credentials;
+	private HashMap<URI, Token> tokens;
 	
-	String[] credentials;
-	HashMap<URI, Token> tokens;
-	
-	public CredentialStorageImpl() {
+	public CredentialStorageImpl(String user, String role, String pass) {
+		credentials[USERNAME] = user;
+		credentials[ROLE] = role;
+		credentials[PASSWORD] = pass;
 		credentials = new String[3];
 		tokens = new HashMap<URI, Token>();
 	}

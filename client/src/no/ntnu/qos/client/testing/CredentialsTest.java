@@ -19,10 +19,14 @@ public class CredentialsTest {
 	static URI uri1, uri2;
 	static long validUntil1, validUntil2;
 	static Token testToken1, testToken2;
+	static String user, role, pass;
 
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		user = "testUser";
+		role = "testRole";
+		pass = "testPas";
 		token = "blah";
 		uri1 = new URI("127.0.0.25");
 		uri2 = new URI("127.0.0.26");
@@ -31,7 +35,7 @@ public class CredentialsTest {
 		testToken1 = new TokenImpl(token, validUntil1, uri1);
 		testToken2 = new TokenImpl(token, validUntil2, uri2);
 
-		tM = new TokenManagerImpl();
+		tM = new TokenManagerImpl(user, role, pass);
 		cS = ((TokenManagerImpl)tM).getCredentialStorage();
 		cS.storeToken(testToken1);
 		cS.storeToken(testToken2);
@@ -55,6 +59,15 @@ public class CredentialsTest {
 		assertEquals(cS.getToken(uri1), testToken1);
 		Token tester = cS.getToken(uri1);
 		assertEquals(tester.getXML(), token);
+	}
+	
+	@SuppressWarnings("static-access")
+	@Test
+	public void testCredentials() {
+		String[] creds = cS.getCredentials();
+		assertTrue(creds[cS.USERNAME].equals(user));
+		assertTrue(creds[cS.ROLE].equals(role));
+		assertTrue(creds[cS.PASSWORD].equals(pass));
 	}
 
 }

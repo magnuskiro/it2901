@@ -8,6 +8,9 @@ import java.net.URI;
  *
  */
 public interface CredentialStorage {
+	public final int USERNAME = 0;
+	public final int ROLE = 1;
+	public final int PASSWORD = 2;
 	
 	/**
 	 * Takes a URI and checks if it has a valid token for it 
