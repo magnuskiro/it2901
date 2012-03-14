@@ -1,5 +1,7 @@
 package no.ntnu.qos.client;
 
+import java.net.URI;
+
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.ms.RoutingInfo;
 
@@ -11,25 +13,31 @@ import no.ntnu.qos.ms.RoutingInfo;
 public class DataObject {
 	
 	private boolean		sane;
+	private int			diffServ;
+	private int			priority;
 	private Sequencer	sequencer;
 	private Token		samlTok;
 	private RoutingInfo	routingInfo;
+	private String		soapFromClient;
+	private URI			destination;
 	
 	
-	/* TODO: needs something to store the message in, as well as a
-	 * way to add it, possibly by constructor*/ 
+
 	
 	
 	
 	
-	
-	
-	public DataObject(){
-		//TODO
-	}
-	
-	public DataObject(Sequencer s){
-		sequencer = s;
+	/**
+	 * main constructor
+	 * @param seq	- the sequencer creating the object
+	 * @param sfc	- SOAP message from client
+	 * @param dest	- destination of the message
+	 */
+	public DataObject(Sequencer seq, String sfc, URI dest){
+		sequencer = seq;
+		soapFromClient = sfc;
+		destination = dest;
+		
 	}
 	
 	/**
@@ -54,8 +62,9 @@ public class DataObject {
 	 */
 	public void setToken(Token t){
 		samlTok = t;
+		//TODO: set diff and prio
 	}
-	
+		
 	/**
 	 * 
 	 * @return	- a SOAP message
@@ -64,5 +73,21 @@ public class DataObject {
 		//TODO
 		return "";
 	}
+	
+	public URI getDestination(){
+		return destination;
+	}
+	
+	public RoutingInfo getRoutingInfo(){
+		return routingInfo;
+	}
 
+	public int getDiffServ(){
+		return diffServ;
+	}
+	
+	public int getPriority(){
+		return priority;
+	}
+	
 }
