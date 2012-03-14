@@ -7,8 +7,8 @@ import no.ntnu.qos.client.credentials.TokenManager;
 public class TokenManagerImpl implements TokenManager{
 	CredentialStorage cS;
 	
-	public TokenManagerImpl() {
-		cS = new CredentialStorageImpl();
+	public TokenManagerImpl(String user, String role, String pass) {
+		cS = new CredentialStorageImpl(user, role, pass);
 	}
 	
 	public CredentialStorage getCredentialStorage() {
