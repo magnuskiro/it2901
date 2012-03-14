@@ -33,5 +33,15 @@ public class TokenImpl implements Token{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public int getDiffServ() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getPriority() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

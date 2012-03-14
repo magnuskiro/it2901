@@ -56,8 +56,9 @@ public class DataObject {
 	 * @param t	- the Token
 	 */
 	public void setToken(Token t){
-		samlTok = t;
-		//TODO: set diff and prio
+		samlTok		= t;
+		diffServ	= samlTok.getDiffServ();
+		priority	= samlTok.getPriority();
 	}
 		
 	/**
@@ -69,18 +70,34 @@ public class DataObject {
 		return "";
 	}
 	
+	/**
+	 * gets the message destination
+	 * @return
+	 */
 	public URI getDestination(){
 		return destination;
 	}
 	
+	/**
+	 * gets the routingInfo this object is aware of
+	 * @return
+	 */
 	public RoutingInfo getRoutingInfo(){
 		return routingInfo;
 	}
 
+	/**
+	 * gets the diffServ value this message will have
+	 * @return
+	 */
 	public int getDiffServ(){
 		return diffServ;
 	}
 	
+	/**
+	 * gets the priority value of the message
+	 * @return
+	 */
 	public int getPriority(){
 		return priority;
 	}
