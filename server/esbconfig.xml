@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="EchoService" transports="http" startOnLoad="true" trace="enable" statistics="enable">
+        <target endpoint="echoservice" outSequence="main">
+            <inSequence>
+                <property name="qosClientRole" value="testRole" scope="default"/>
+                <property name="qosService" value="testService" scope="default"/>
+                <property name="QOS_FROM_ADDR" value="127.0.0.1" scope="default"/>
+                <log/>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:8080/EchoService/Echo"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+    </proxy>
+    <proxy name="echoservice" transports="https http" startOnLoad="true" trace="disable">
+        <target endpoint="echoservice" outSequence="main" faultSequence="fault">
+            <inSequence>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:8080/EchoService/Echo"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+        <publishWSDL uri="http://localhost:8080/EchoService/Echo?wsdl"/>
+        <policy key="conf:/repository/axis2/service-groups/echoservice/services/echoservice/policies/SgnEncrUsername"/>
+        <enableSec/>
+    </proxy>
+    <endpoint name="echoservice">
+        <address uri="http://localhost:8080/EchoService/Echo" statistics="enable"/>
+    </endpoint>
+    <sequence name="qos" trace="enable" statistics="enable">
+        <log level="full" separator="\n"/>
+        <class name="no.ntnu.qos.server.mediators.impl.MSMediator"/>
+        <send/>
+    </sequence>
+    <sequence name="fault" trace="enable" statistics="enable">
+        <log level="full">
+            <property name="MESSAGE" value="Executing default &quot;fault&quot; sequence"/>
+            <property name="ERROR_CODE" expression="get-property('ERROR_CODE')"/>
+            <property name="ERROR_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+        </log>
+        <drop/>
+    </sequence>
+    <sequence name="main" trace="enable" statistics="enable">
+        <in>
+            <log/>
+            <send/>
+        </in>
+        <out>
+            <log/>
+            <class name="no.ntnu.qos.server.mediators.impl.MetadataMediator">
+                <property name="ppdFilename" value="ppd.xml"/>
+            </class>
+            <store messageStore="PrioritizedStore"/>
+        </out>
+    </sequence>
+    <messageStore class="no.ntnu.qos.server.store.PrioritizedMessageStore" name="PrioritizedStore"/>
+    <messageProcessor class="org.apache.synapse.message.processors.sampler.SamplingProcessor" name="MessageProcessor" messageStore="PrioritizedStore">
+        <parameter name="sequence">qos</parameter>
+        <parameter name="concurrency">10</parameter>
+    </messageProcessor>
+</definitions>

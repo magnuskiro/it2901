@@ -30,7 +30,7 @@ public class MSMediator extends AbstractQosMediator {
 		SynapseLog synLog = getLog(synCtx);
 
 		try {
-			String endpoint = new URI(synCtx.getTo().getAddress()).getHost();
+			String endpoint = (String) synCtx.getProperty(MediatorConstants.QOS_FROM_ADDR);
 			this.logMessage(synLog, synCtx.getMessageID(), "Endpoint address: " 
 					+ endpoint, QosLogType.INFO);
 			RoutingInfo ri = msc.getRoutingInfo(new URI(endpoint));
