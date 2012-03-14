@@ -16,7 +16,8 @@ import org.apache.synapse.SynapseLog;
 
 /**
  * This mediator adds priority metadata to Message Context based on client role and service.
- * @author Ola Martin & Jørgen
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class MetadataMediator extends AbstractQosMediator {

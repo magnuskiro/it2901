@@ -6,11 +6,12 @@ import java.net.URISyntaxException;
 import no.ntnu.qos.ms.MSCommunicator;
 import no.ntnu.qos.ms.RoutingInfo;
 import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
+import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.QosLogType;
 
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
-import org.apache.synapse.mediators.AbstractMediator;
 
 /**
  * This mediator contacts a Monitoring Service to get routing information.
@@ -20,39 +21,33 @@ import org.apache.synapse.mediators.AbstractMediator;
  * @author Ola Martin
  *
  */
-public class MSMediator extends AbstractMediator {
+public class MSMediator extends AbstractQosMediator {
 
 	private static final MSCommunicator msc = new MSCommunicatorImpl("ms.xml");
 	@Override
-	public boolean mediate(MessageContext synCtx) {
-		
+	public boolean mediateImpl(MessageContext synCtx) {
+
 		SynapseLog synLog = getLog(synCtx);
 
-		if (synLog.isTraceOrDebugEnabled()) {
-			synLog.traceOrDebug("Start : MS mediator");
-
-			if (synLog.isTraceTraceEnabled()) {
-				synLog.traceTrace("Message : " + synCtx.getEnvelope());
-			}
-		}
-		
 		try {
 			String endpoint = new URI(synCtx.getTo().getAddress()).getHost();
 			RoutingInfo ri = msc.getRoutingInfo(new URI(endpoint));
 			synCtx.setProperty(MediatorConstants.QOS_BANDWIDTH, ri.getBandwidth());
 			synCtx.setProperty(MediatorConstants.QOS_LAST_TR, ri.getLastTR());
-			if(synLog.isTraceOrDebugEnabled()){
-				synLog.traceOrDebug("Successfully set Routing Info: bandwidth="+ri.getBandwidth()+
-						", lastTR="+ri.getLastTR());
-			}
+			this.logMessage(synLog, synCtx.getMessageID(), "Successfully set " +
+					"Routing Info: bandwidth="+ri.getBandwidth()+
+					", lastTR="+ri.getLastTR(), QosLogType.INFO);
 		} catch (URISyntaxException e) {
-			if(synLog.isTraceOrDebugEnabled()){
-				synLog.traceOrDebugWarn("Could not set set Routing Info, Illegal endpoint syntax.");
-				e.printStackTrace();				
-			}
+			this.logMessage(synLog, synCtx.getMessageID(), "Could not set set " +
+					"Routing Info, Illegal endpoint syntax.\n" + e.getMessage(), 
+					QosLogType.WARN);
 		}
-		
+
 		return true;
+	}
+	@Override
+	protected String getName() {
+		return "MSMediator";
 	}
 
 }

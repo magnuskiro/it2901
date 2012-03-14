@@ -4,13 +4,14 @@ import java.util.Iterator;
 
 import javax.xml.namespace.QName;
 
+import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.QosLogType;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.soap.SOAPEnvelope;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
-import org.apache.synapse.mediators.AbstractMediator;
 
 /**
  * This mediator is meant to parse the message as it is coming in through
@@ -19,44 +20,34 @@ import org.apache.synapse.mediators.AbstractMediator;
  * and add both to the properties of the {@link MessageContext} so we can
  * retrieve in the outsequence. 
  * 
- * @author Jørgen & Ola Martin
+ * @author Jørgen
+ * @author Ola Martin
  *
  */
-public class SAMLMediator extends AbstractMediator {
+public class SAMLMediator extends AbstractQosMediator {
 
 	private SynapseLog synLog;
 	private static final QName friendlyName = new QName("FriendlyName"); 
 
 	@Override
-	public boolean mediate(MessageContext synCtx) {
+	public boolean mediateImpl(MessageContext synCtx) {
 		synLog = this.getLog(synCtx);
-
-		if(synLog.isTraceOrDebugEnabled()){
-			synLog.traceOrDebug(MediatorConstants.DEBUG_START + "SAML Mediator");
-			if (synLog.isTraceTraceEnabled()) {
-				synLog.traceTrace("Message : " + synCtx.getEnvelope());
-			}
-		}
 
 		final String service = synCtx.getTo().getAddress();
 		final String clientRole = this.getClientRole(synCtx);
 
 		if(clientRole.isEmpty() || clientRole.trim().isEmpty()){
-			if(synLog.isTraceOrDebugEnabled()){
-				synLog.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR + "Could not " +
+			this.logMessage(synLog, synCtx.getMessageID(), "Could not " +
 						"find a valid client role in SAML assertion.\n" +
-						"Envelope was:\n" + synCtx.getEnvelope());
-			}
+						"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
 			return false;
 		}
 
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, service);
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, clientRole);
-
-		if(synLog.isTraceOrDebugEnabled()){
-			synLog.traceOrDebug(MediatorConstants.DEBUG_END + "Set client role to: " + 
-					clientRole + ", set service to: " + service);
-		}
+		
+		this.logMessage(synLog, synCtx.getMessageID(), "Set client role to: " + 
+					clientRole + ", set service to: " + service, QosLogType.INFO);
 		return true;
 	}
 
@@ -96,6 +87,11 @@ public class SAMLMediator extends AbstractMediator {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	protected String getName() {
+		return "SAMLMediator";
 	}
 
 }
