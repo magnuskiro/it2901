@@ -37,7 +37,7 @@ public class SAMLMediator extends AbstractQosMediator {
 		final String clientRole = this.getClientRole(synCtx);
 
 		if(clientRole.isEmpty() || clientRole.trim().isEmpty()){
-			this.logMessage(synLog, synCtx.getMessageID(), "Could not " +
+			this.logMessage(synLog, "Could not " +
 						"find a valid client role in SAML assertion.\n" +
 						"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
 			return false;
@@ -46,7 +46,7 @@ public class SAMLMediator extends AbstractQosMediator {
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, service);
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, clientRole);
 		
-		this.logMessage(synLog, synCtx.getMessageID(), "Set client role to: " + 
+		this.logMessage(synLog, "Set client role to: " + 
 					clientRole + ", set service to: " + service, QosLogType.INFO);
 		return true;
 	}
