@@ -28,19 +28,18 @@ public class MSMediator extends AbstractQosMediator {
 	public boolean mediateImpl(MessageContext synCtx) {
 
 		SynapseLog synLog = getLog(synCtx);
-
 		try {
 			String endpoint = (String) synCtx.getProperty(MediatorConstants.QOS_FROM_ADDR);
-			this.logMessage(synLog, synCtx.getMessageID(), "Endpoint address: " 
+			this.logMessage(synLog, "Endpoint address: " 
 					+ endpoint, QosLogType.INFO);
 			RoutingInfo ri = msc.getRoutingInfo(new URI(endpoint));
 			synCtx.setProperty(MediatorConstants.QOS_BANDWIDTH, ri.getBandwidth());
 			synCtx.setProperty(MediatorConstants.QOS_LAST_TR, ri.getLastTR());
-			this.logMessage(synLog, synCtx.getMessageID(), "Successfully set " +
+			this.logMessage(synLog, "Successfully set " +
 					"Routing Info: bandwidth="+ri.getBandwidth()+
 					", lastTR="+ri.getLastTR(), QosLogType.INFO);
 		} catch (URISyntaxException e) {
-			this.logMessage(synLog, synCtx.getMessageID(), "Could not set set " +
+			this.logMessage(synLog, "Could not set set " +
 					"Routing Info, Illegal endpoint syntax.\n" + e.getMessage(), 
 					QosLogType.WARN);
 		}

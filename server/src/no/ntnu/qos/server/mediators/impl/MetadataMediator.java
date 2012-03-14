@@ -36,18 +36,18 @@ public class MetadataMediator extends AbstractQosMediator {
 		if(!ppd.isDataAvailable()){
 			if(ppdFilename!=null){
 				ppd.setFilename(ppdFilename);
-				this.logMessage(synLog, synCtx.getMessageID(), "Set Filename " +
+				this.logMessage(synLog, "Set Filename " +
 						"in Persistent Data Store, filename=" + ppd.getFilename(), 
 						QosLogType.INFO);
 				try {
 					ppd.readData();
 				} catch (FileNotFoundException e) {
 					//This means that the supplied file could not be found.
-					this.logMessage(synLog, synCtx.getMessageID(), 
+					this.logMessage(synLog, 
 							e.getLocalizedMessage(), QosLogType.WARN);
 					return false;
 				}
-				this.logMessage(synLog, synCtx.getMessageID(), "Successfully " +
+				this.logMessage(synLog, "Successfully " +
 						"read file into persistent storage", QosLogType.INFO);
 			}        	
 		}
@@ -63,7 +63,7 @@ public class MetadataMediator extends AbstractQosMediator {
 
 		addOrUpdateSOAPHeaders(pri, dif, synCtx);
 		
-		this.logMessage(synLog, synCtx.getMessageID(), "Successfully " +
+		this.logMessage(synLog, "Successfully " +
 					"added metadata to message context. " +
 					"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
 		

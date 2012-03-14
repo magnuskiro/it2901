@@ -17,14 +17,14 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 	@Override
 	public boolean mediate(MessageContext synCtx) {
 		SynapseLog log = this.getLog(synCtx);
-		this.logMessage(log, synCtx.getMessageID(), MediatorConstants.DEBUG_START + 
+		this.logMessage(log, MediatorConstants.DEBUG_START + 
 				this.getName(), QosLogType.INFO);
 		boolean res = this.mediateImpl(synCtx);
 		if(res){
-			this.logMessage(log, synCtx.getMessageID(), MediatorConstants.DEBUG_END + 
+			this.logMessage(log, MediatorConstants.DEBUG_END + 
 					this.getName(), QosLogType.INFO);
 		}else{
-			this.logMessage(log, synCtx.getMessageID(), "Mediator '" + 
+			this.logMessage(log, "Mediator '" + 
 					this.getName() + "' returned false", QosLogType.WARN);
 		}
 		return res;
@@ -53,13 +53,13 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 	 * one would want to log
 	 * @param type - The type of message, {@link QosLogType.INFO} or {@link QosLogType.WARN}
 	 */
-	protected void logMessage(SynapseLog log, String messageID, String message, QosLogType type){
+	protected void logMessage(SynapseLog log, String message, QosLogType type){
 		if(log.isTraceOrDebugEnabled()){
 			switch(type){
 			case INFO:
-				log.traceOrDebug(messageID + ", " + message); break;
+				log.traceOrDebug(message); break;
 			case WARN:
-				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR + messageID + ", " + message); break;
+				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR + ", " + message); break;
 			}
 		}
 	}
