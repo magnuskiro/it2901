@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Scanner;
-
 import javax.xml.namespace.QName;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
@@ -17,21 +15,14 @@ import org.apache.axis2.AxisFault;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MetadataMediatorTest {
 	
-	private static String FILENAME;// = "/home/mahou/Documents/it2901/server/src/no/ntnu/qos/server/mediators/test/ppdtest.xml";
-	@BeforeClass
-	public static void setUp(){
-		Scanner in = new Scanner(System.in);
-		System.out.println("Path to ppdtest.xml:");
-		FILENAME = in.nextLine();
-	}
+	private static final String FILENAME = "ppdtest.xml";
 	
 	@Test
-	public void testEmptyFileNameMediat(){
+	public void testEmptyFileNameMediate(){
 		MessageContext synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), new SynapseConfiguration(),null);
 		MetadataMediator mm = new MetadataMediator();
 //		MediatorProperty mp = new MediatorProperty();

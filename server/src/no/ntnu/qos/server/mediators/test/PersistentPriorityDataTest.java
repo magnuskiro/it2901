@@ -1,34 +1,21 @@
 package no.ntnu.qos.server.mediators.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import no.ntnu.qos.server.mediators.impl.PersistentPriorityData;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
 public class PersistentPriorityDataTest {
 
-	private static String FILENAME;
-	private static String FILENAME2;
-	private static String FILENAME3;
-
-	@BeforeClass
-	public static void setUp(){
-		if(FILENAME == null || FILENAME2 == null || FILENAME3 == null){
-			Scanner in = new Scanner(System.in);
-			System.out.println("Where is ppdtest.xml:");
-			FILENAME = in.nextLine();
-			System.out.println("Where is ppdtest2.xml:");
-			FILENAME2 = in.nextLine();
-			System.out.println("Where is ppdtest3.xml:");
-			FILENAME3 = in.nextLine();
-		}
-	}
+	private static final String FILENAME = "ppdtest.xml";
+	private static final String FILENAME2 = "ppdtest2.xml";
+	private static final String FILENAME3 = "ppdtest3.xml";
 
 	@Test
 	public void testSetFilename() {

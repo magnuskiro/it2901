@@ -15,7 +15,7 @@ import org.junit.Test;
 public class MSMediatorTest {
 
 	private static MessageContext synCtx;
-	private static MSMediator msm = new MSMediator();
+	private static final MSMediator msm = new MSMediator();
 
 	@BeforeClass
 	public static void setupMessageContext(){

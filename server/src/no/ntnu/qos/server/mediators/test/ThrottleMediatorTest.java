@@ -1,15 +1,13 @@
 package no.ntnu.qos.server.mediators.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.Scanner;
 
-
-import no.ntnu.qos.server.mediators.impl.MSMediator;
-import no.ntnu.qos.server.mediators.impl.ThrottleMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.impl.MSMediator;
 import no.ntnu.qos.server.mediators.impl.MetadataMediator;
+import no.ntnu.qos.server.mediators.impl.ThrottleMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.soap.SOAPProcessingException;
@@ -24,24 +22,18 @@ import org.junit.Test;
 public class ThrottleMediatorTest {
 
 	private static MessageContext synCtx;
-	private static MSMediator msm = new MSMediator();
-	private static MetadataMediator mm = new MetadataMediator();
-	private static ThrottleMediator tm = new ThrottleMediator();
-	private static String FILENAME;
-	private static String ADDRESS = "http://125.50.50.73:8280/services/EchoService";
+	private static final MSMediator msm = new MSMediator();
+	private static final MetadataMediator mm = new MetadataMediator();
+	private static final ThrottleMediator tm = new ThrottleMediator();
+	private static final String FILENAME = "ppdtest.xml";
+	private static final String ADDRESS = "http://125.50.50.73:8280/services/EchoService";
 	
 	@BeforeClass
 	public static void setupMessageContext() throws AxisFault, SOAPProcessingException{
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
 				new SynapseConfiguration(), null);
 		synCtx.setTo(new EndpointReference(ADDRESS));
-		Scanner in = new Scanner(System.in);
-		System.out.println("Path to ppdtest.xml:");
-		FILENAME = in.nextLine();
-//		MediatorProperty mp = new MediatorProperty();
-//		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
-//		mp.setValue(FILENAME);
-//		mm.addProperty(mp);
+
 		mm.setPpdFilename(FILENAME);
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, "testRole");
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, "testService");
