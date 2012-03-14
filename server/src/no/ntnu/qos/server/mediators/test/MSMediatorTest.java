@@ -2,8 +2,8 @@ package no.ntnu.qos.server.mediators.test;
 
 import static org.junit.Assert.*;
 
-import no.ntnu.qos.server.mediators.MSMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.impl.MSMediator;
 
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;

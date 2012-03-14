@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import no.ntnu.qos.server.mediators.PersistentPriorityData;
+import no.ntnu.qos.server.mediators.impl.PersistentPriorityData;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

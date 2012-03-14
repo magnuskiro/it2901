@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
-import no.ntnu.qos.server.mediators.SAMLMediator;
+import no.ntnu.qos.server.mediators.impl.SAMLMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;

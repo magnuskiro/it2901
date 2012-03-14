@@ -9,7 +9,7 @@ import java.util.Scanner;
 import javax.xml.namespace.QName;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
-import no.ntnu.qos.server.mediators.MetadataMediator;
+import no.ntnu.qos.server.mediators.impl.MetadataMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.soap.SOAPProcessingException;
