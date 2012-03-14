@@ -27,7 +27,7 @@ public class TokenImpl implements Token{
 
 	@Override
 	public boolean isValid() {
-		if(validUntil > System.currentTimeMillis()) {
+		if(validUntil > (System.currentTimeMillis()-30000)) {
 			return true;
 		}
 		return false;

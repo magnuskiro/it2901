@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.NoSuchElementException;
 
 import no.ntnu.qos.client.credentials.*;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
@@ -28,10 +29,10 @@ public class CredentialsTest {
 		role = "testRole";
 		pass = "testPas";
 		token = "blah";
-		uri1 = new URI("127.0.0.25");
-		uri2 = new URI("127.0.0.26");
+		uri1 = new URI("http://127.0.0.25/");
+		uri2 = new URI("http://127.0.0.26/");
 		validUntil1 = System.currentTimeMillis()+3600000;
-		validUntil2 = System.currentTimeMillis()-1;
+		validUntil2 = System.currentTimeMillis()-35000;
 		testToken1 = new TokenImpl(token, validUntil1, uri1, 1, 2);
 		testToken2 = new TokenImpl(token, validUntil2, uri2, 3, 4);
 
@@ -51,7 +52,7 @@ public class CredentialsTest {
 	public void testStorageHasTokens() throws URISyntaxException {
 		assertTrue(cS.hasToken(uri1));
 		assertFalse(cS.hasToken(uri2)); //Should be invalid because it's expired!
-		assertFalse(cS.hasToken(new URI("127.0.0.1")));
+		assertFalse(cS.hasToken(new URI("http://127.0.0.1/")));
 	}
 	
 	@Test
@@ -59,6 +60,11 @@ public class CredentialsTest {
 		assertEquals(cS.getToken(uri1), testToken1);
 		Token tester = cS.getToken(uri1);
 		assertEquals(tester.getXML(), token);
+	}
+	
+	@Test (expected=NoSuchElementException.class)
+	public void testCorrectError() {
+		cS.getToken(uri2);
 	}
 	
 	@SuppressWarnings("static-access")
