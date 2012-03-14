@@ -1,8 +1,10 @@
-package no.ntnu.qos.server.mediators;
+package no.ntnu.qos.server.mediators.impl;
 
 import java.util.Iterator;
 
 import javax.xml.namespace.QName;
+
+import no.ntnu.qos.server.mediators.MediatorConstants;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.soap.SOAPEnvelope;

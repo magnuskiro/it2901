@@ -1,59 +1,52 @@
-package no.ntnu.qos.server.mediators;
+package no.ntnu.qos.server.mediators.impl;
 
 import java.io.FileNotFoundException;
 
 import javax.xml.namespace.QName;
+
+import no.ntnu.qos.server.mediators.AbstractQosMediator;
+import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.QosLogType;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.llom.OMElementImpl;
 import org.apache.axiom.soap.impl.llom.soap12.SOAP12Factory;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
-import org.apache.synapse.mediators.AbstractMediator;
 
 /**
  * This mediator adds priority metadata to Message Context based on client role and service.
  * @author Ola Martin & Jørgen
  *
  */
-public class MetadataMediator extends AbstractMediator {
+public class MetadataMediator extends AbstractQosMediator {
 
 
 	private final static PersistentPriorityData ppd = new PersistentPriorityData();
 	//private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
 	private static String ppdFilename;
 	@Override
-	public boolean mediate(MessageContext synCtx) {
+	public boolean mediateImpl(MessageContext synCtx) {
 
 		SynapseLog synLog = getLog(synCtx);
-
-		if (synLog.isTraceOrDebugEnabled()) {
-			synLog.traceOrDebug(MediatorConstants.DEBUG_START + "Metadata mediator");
-
-			if (synLog.isTraceTraceEnabled()) {
-				synLog.traceTrace("Message : " + synCtx.getEnvelope());
-			}
-		}
 
 		//Check if data is available, if not, try reading it, if it fails return false
 		if(!ppd.isDataAvailable()){
 			if(ppdFilename!=null){
 				ppd.setFilename(ppdFilename);
-				if (synLog.isTraceOrDebugEnabled()) {
-					synLog.traceOrDebug("Set Filename in Persistent Data Store, filename="+ppd.getFilename());
-				}
+				this.logMessage(synLog, synCtx.getMessageID(), "Set Filename " +
+						"in Persistent Data Store, filename=" + ppd.getFilename(), 
+						QosLogType.INFO);
 				try {
 					ppd.readData();
 				} catch (FileNotFoundException e) {
 					//This means that the supplied file could not be found.
-					if (synLog.isTraceOrDebugEnabled()) {
-						e.printStackTrace();
-					}
+					this.logMessage(synLog, synCtx.getMessageID(), 
+							e.getLocalizedMessage(), QosLogType.WARN);
 					return false;
 				}
-				if (synLog.isTraceOrDebugEnabled()) {
-					synLog.traceOrDebug("Successfully read file into persistent storage");
-				}
+				this.logMessage(synLog, synCtx.getMessageID(), "Successfully " +
+						"read file into persistent storage", QosLogType.INFO);
 			}        	
 		}
 
@@ -67,12 +60,11 @@ public class MetadataMediator extends AbstractMediator {
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
 
 		addOrUpdateSOAPHeaders(pri, dif, synCtx);
-
-		if (synLog.isTraceOrDebugEnabled()) {
-			synLog.traceOrDebug(MediatorConstants.DEBUG_END + "Successfully " +
+		
+		this.logMessage(synLog, synCtx.getMessageID(), "Successfully " +
 					"added metadata to message context. " +
-					"Added priority="+pri+", diffserv="+dif);
-		}
+					"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
+		
 		return true;
 	}
 
@@ -106,24 +98,29 @@ public class MetadataMediator extends AbstractMediator {
 
 
 
-//	public void addProperty(MediatorProperty mp){
-//		properties.add(mp);
-//	}
-//
-//	public void addAllProperties(List<MediatorProperty> lmp){
-//		properties.addAll(lmp);
-//	}
-//
-//	public List<MediatorProperty> getProperties(){
-//		return properties;
-//	}
-	
+	//	public void addProperty(MediatorProperty mp){
+	//		properties.add(mp);
+	//	}
+	//
+	//	public void addAllProperties(List<MediatorProperty> lmp){
+	//		properties.addAll(lmp);
+	//	}
+	//
+	//	public List<MediatorProperty> getProperties(){
+	//		return properties;
+	//	}
+
 	public void setPpdFilename(String ppdFilename) {
 		MetadataMediator.ppdFilename = ppdFilename;
 	}
-	
+
 	public String getPpdFilename() {
 		return ppdFilename;
+	}
+
+	@Override
+	protected String getName() {
+		return "MetadataMediator";
 	}
 
 }

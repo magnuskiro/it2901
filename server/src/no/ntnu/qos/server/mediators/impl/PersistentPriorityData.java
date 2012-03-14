@@ -1,4 +1,4 @@
-package no.ntnu.qos.server.mediators;
+package no.ntnu.qos.server.mediators.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.namespace.QName;
+
+import no.ntnu.qos.server.mediators.MediatorConstants;
 
 import org.apache.axiom.om.OMContainer;
 import org.apache.axiom.om.OMElement;

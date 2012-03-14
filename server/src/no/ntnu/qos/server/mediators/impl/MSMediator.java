@@ -1,4 +1,4 @@
-package no.ntnu.qos.server.mediators;
+package no.ntnu.qos.server.mediators.impl;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import no.ntnu.qos.ms.MSCommunicator;
 import no.ntnu.qos.ms.RoutingInfo;
 import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
+import no.ntnu.qos.server.mediators.MediatorConstants;
 
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
