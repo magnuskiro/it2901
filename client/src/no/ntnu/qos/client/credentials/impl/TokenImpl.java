@@ -6,32 +6,44 @@ import no.ntnu.qos.client.credentials.Token;
 
 public class TokenImpl implements Token{
 	//TODO: Change to accomodate an actual OpenSAML object?
-	String token;
-	long validUntil;
-	URI destination;
+	private String token;
+	private long validUntil;
+	private URI destination;
+	private int diffServ;
+	private int priority;
 	
 	
-	public TokenImpl(String token, long validUntil, URI destination, int diff, int prio) {
+	public TokenImpl(String token, long validUntil, URI destination, int diffServ, int prio) {
 		this.token = token;
 		this.destination = destination;
 		this.validUntil = validUntil;
+		this.diffServ = diffServ;
+		this.priority = prio;
 	}
 	@Override
 	public String getXML() {
-		// TODO Auto-generated method stub
-		return null;
+		return token;
 	}
 
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
+		if(validUntil > System.currentTimeMillis()) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public URI getDestination() {
-		// TODO Auto-generated method stub
-		return null;
+		return destination;
+	}
+	@Override
+	public int getDiffServ() {
+		return diffServ;
+	}
+	@Override
+	public int getPriority() {
+		return priority;
 	}
 
 }
