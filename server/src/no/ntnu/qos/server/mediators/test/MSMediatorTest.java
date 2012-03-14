@@ -1,11 +1,11 @@
 package no.ntnu.qos.server.mediators.test;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import no.ntnu.qos.server.mediators.MediatorConstants;
 import no.ntnu.qos.server.mediators.impl.MSMediator;
 
-import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
@@ -16,12 +16,14 @@ public class MSMediatorTest {
 
 	private static MessageContext synCtx;
 	private static final MSMediator msm = new MSMediator();
+	private static final String ADDRESS = "125.50.50.73";
+	private static final String ADDRESS_LOCAL = "127.0.0.1";
 
 	@BeforeClass
 	public static void setupMessageContext(){
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
 				new SynapseConfiguration(), null);
-		synCtx.setTo(new EndpointReference("http://125.50.50.73:8280/services/EchoService"));
+		synCtx.setProperty(MediatorConstants.QOS_FROM_ADDR, ADDRESS);
 	}
 	
 	@Test
@@ -32,7 +34,7 @@ public class MSMediatorTest {
 		assertEquals(123.5, (Double)synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH), 0);
 		assertEquals("bob", (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
 		
-		synCtx.setTo(new EndpointReference("https://127.0.0.1:8080/service/kake"));
+		synCtx.setProperty(MediatorConstants.QOS_FROM_ADDR, ADDRESS_LOCAL);
 		assertTrue(msm.mediate(synCtx));
 		assertEquals(-1, (Double)synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH),0);
 		assertEquals("", (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));

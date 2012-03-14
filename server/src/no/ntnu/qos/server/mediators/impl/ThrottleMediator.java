@@ -2,18 +2,19 @@ package no.ntnu.qos.server.mediators.impl;
 
 import java.io.IOException;
 
+import no.ntnu.qos.server.mediators.AbstractQosMediator;
+
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
-import org.apache.synapse.mediators.AbstractMediator;
 /**
  * This mediator does throttle related things.
  * @author Ola Martin
  *
  */
-public class ThrottleMediator extends AbstractMediator{
-	
+public class ThrottleMediator extends AbstractQosMediator{
+
 	@Override
-	public boolean mediate(MessageContext synCtx) {
+	protected boolean mediateImpl(MessageContext synCtx) {
 		// TODO Throttling
 		try {
 			System.out.println(((Axis2MessageContext)synCtx).getAxis2MessageContext()
@@ -22,6 +23,11 @@ public class ThrottleMediator extends AbstractMediator{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return false;
+	}
+
+	@Override
+	protected String getName() {
+		return "Throttle Mediator";
 	}
 }
