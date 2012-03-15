@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 
 import no.ntnu.qos.server.mediators.impl.PersistentPriorityData;
 
@@ -16,6 +17,7 @@ public class PersistentPriorityDataTest {
 	private static final String FILENAME = "ppdtest.xml";
 	private static final String FILENAME2 = "ppdtest2.xml";
 	private static final String FILENAME3 = "ppdtest3.xml";
+	private static final String FILENAME4 = "ppdtest4.xml";
 
 	@Test
 	public void testSetFilename() {
@@ -44,12 +46,21 @@ public class PersistentPriorityDataTest {
 		ppd.readData();
 	}
 	
-	@Test (expected=IllegalArgumentException.class)
+	@Test (expected=NoSuchElementException.class)
 	public void testReadDataMallformedXML() throws FileNotFoundException{
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename(FILENAME3);
 		ppd.readData();
+	}
+	
+	@Test
+	public void testReadDataMallformedXML2() throws FileNotFoundException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		assertFalse("Data should not be available", ppd.isDataAvailable());
+		ppd.setFilename(FILENAME4);
+		ppd.readData();
+		assertTrue("Data should be available now", ppd.isDataAvailable());
 	}
 
 	@Test

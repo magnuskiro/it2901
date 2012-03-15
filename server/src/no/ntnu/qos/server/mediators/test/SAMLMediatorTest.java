@@ -1,6 +1,8 @@
 package no.ntnu.qos.server.mediators.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -16,6 +18,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMXMLBuilderFactory;
 import org.apache.axiom.om.OMXMLParserWrapper;
 import org.apache.axiom.soap.SOAPBody;
+import org.apache.axiom.soap.SOAPProcessingException;
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;
@@ -66,6 +69,21 @@ public class SAMLMediatorTest {
 		assertTrue("Mediate synapse context", sm.mediate(synCtx));
 		assertEquals("Service", SERVICE, synCtx.getProperty(MediatorConstants.QOS_SERVICE));
 		assertEquals("Client role", CLIENT_ROLE, synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE));
+	}
+	
+	@Test
+	public void testEmptySAMLMediate() throws AxisFault, SOAPProcessingException{
+		//Configuration:
+		MessageContext synCtx1 = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
+				new SynapseConfiguration(), null);
+		synCtx1.setEnvelope(OMAbstractFactory.getSOAP12Factory().getDefaultEnvelope());
+		synCtx1.setTo(new EndpointReference(SERVICE));
+		
+		//Testing:
+		SAMLMediator sm = new SAMLMediator();
+		assertFalse("Mediate without SAML in SOAP body", sm.mediate(synCtx1));
+		assertNull("Client is not set in property", synCtx1.getProperty(MediatorConstants.QOS_CLIENT_ROLE));
+		assertNull("Service is not set in property", synCtx1.getProperty(MediatorConstants.QOS_SERVICE));
 	}
 
 }
