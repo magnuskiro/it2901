@@ -1,14 +1,15 @@
 package no.ntnu.qos.server.mediators.impl;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.xml.namespace.QName;
 
-import org.apache.axiom.om.OMAbstractFactory;
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
 import no.ntnu.qos.server.mediators.QosLogType;
 
+import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.llom.OMElementImpl;
 import org.apache.axiom.soap.impl.llom.soap12.SOAP12Factory;
@@ -46,6 +47,10 @@ public class MetadataMediator extends AbstractQosMediator {
 					this.logMessage(synLog, 
 							e.getLocalizedMessage(), QosLogType.WARN);
 					return false;
+				} catch (IOException e) {
+					//This means the file could not be closed.
+					this.logMessage(synLog, 
+							e.getLocalizedMessage(), QosLogType.WARN);
 				}
 				this.logMessage(synLog, "Successfully " +
 						"read file into persistent storage", QosLogType.INFO);

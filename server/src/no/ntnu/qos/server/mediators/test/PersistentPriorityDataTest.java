@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import no.ntnu.qos.server.mediators.impl.PersistentPriorityData;
 
@@ -28,7 +29,7 @@ public class PersistentPriorityDataTest {
 	}
 
 	@Test
-	public void testIsDataAvailable() throws FileNotFoundException {
+	public void testIsDataAvailable() throws IOException {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename(FILENAME);
@@ -37,7 +38,7 @@ public class PersistentPriorityDataTest {
 	}
 
 	@Test (expected=FileNotFoundException.class)
-	public void testIsDataAvailableFileNotFound() throws FileNotFoundException{
+	public void testIsDataAvailableFileNotFound() throws IOException{
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename("ppdtestfail.xml");
@@ -45,7 +46,7 @@ public class PersistentPriorityDataTest {
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
-	public void testReadDataMallformedXML() throws FileNotFoundException{
+	public void testReadDataMallformedXML() throws IOException{
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		assertFalse(ppd.isDataAvailable());
 		ppd.setFilename(FILENAME3);
@@ -53,7 +54,7 @@ public class PersistentPriorityDataTest {
 	}
 
 	@Test
-	public void testGetPriority() throws FileNotFoundException {
+	public void testGetPriority() throws IOException {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME);
 		ppd.readData();
@@ -72,7 +73,7 @@ public class PersistentPriorityDataTest {
 	}
 
 	@Test
-	public void testGetDiffserv() throws FileNotFoundException {
+	public void testGetDiffserv() throws IOException {
 		PersistentPriorityData ppd = new PersistentPriorityData();
 		ppd.setFilename(FILENAME);
 		ppd.readData();

@@ -2,7 +2,6 @@ package no.ntnu.qos.server.mediators.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import javax.xml.namespace.QName;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
 
-import org.apache.axiom.om.OMContainer;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMXMLBuilderFactory;
 import org.apache.axiom.om.OMXMLParserWrapper;
@@ -62,11 +60,10 @@ public class PersistentPriorityData {
 	}
 	/**
 	 * Reads priority data from XML-file filename.
-	 * 
-	 * @throws FileNotFoundException
+	 * @throws IOException 
 	 */
 	@SuppressWarnings("unchecked")
-	public  void readData() throws FileNotFoundException{
+	public  void readData() throws IOException{
 		lock.lock();
 		try{
 			//Check if someone else has already read the data
@@ -82,13 +79,13 @@ public class PersistentPriorityData {
 				OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
 				servicesElement = builder.getDocumentElement();
 
-				Iterator<OMContainer> serviceIterator = 
+				Iterator<OMElement> serviceIterator = 
 						servicesElement.getChildrenWithLocalName("service");
 				QName name = new QName("name");
 				QName role = new QName("role");
 				QName useDefault = new QName("useDefault");
 				while(serviceIterator.hasNext()){
-					OMElement service = (OMElement)serviceIterator.next();
+					OMElement service = serviceIterator.next();
 					Map<String, Integer> pri = new HashMap<String, Integer>();
 					Map<String, Integer> dif = new HashMap<String, Integer>();
 					priorities.put(service.getAttributeValue(name), pri);
@@ -96,16 +93,14 @@ public class PersistentPriorityData {
 					useDefaults.put(service.getAttributeValue(name), 
 							Boolean.parseBoolean(service.getAttributeValue(useDefault)));
 
-					Iterator<OMContainer> clientIterator = service.getChildrenWithLocalName("client");
+					Iterator<OMElement> clientIterator = service.getChildrenWithLocalName("client");
 					while(clientIterator.hasNext()){
-						OMElement client = (OMElement)clientIterator.next();
+						OMElement client = clientIterator.next();
 						String clientRole = client.getAttributeValue(role);
 
-						Iterator<OMElement> clientpriIterator = client.getChildrenWithLocalName("priority");
-						OMElement priority = (OMElement)clientpriIterator.next();
+						OMElement priority = (OMElement)client.getChildrenWithLocalName("priority").next();
 
-						Iterator<OMElement> clientdifIterator = client.getChildrenWithLocalName("diffserv");
-						OMElement diffserv = (OMElement)clientdifIterator.next();
+						OMElement diffserv = (OMElement)client.getChildrenWithLocalName("diffserv").next();
 
 						if(clientRole.equalsIgnoreCase("default")){
 							pri.put(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE, 
@@ -120,27 +115,10 @@ public class PersistentPriorityData {
 					if(!pri.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE) 
 							|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE)){
 						throw new IllegalArgumentException("No Default client for service: " + 
-							service.getAttributeValue(name) + ", in file: " + this.getFilename());
+								service.getAttributeValue(name) + ", in file: " + this.getFilename());
 					}
 				}
-				try {
-					in.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//
-				//				OMElement defaultPriority = (OMElement) servicesElement.getChildrenWithLocalName("defaultPriority").next();
-				//
-				//				Iterator clientpriIterator = defaultPriority.getChildrenWithLocalName("priority");
-				//				OMElement priority = (OMElement)clientpriIterator.next();
-				//				defaultPri = Integer.parseInt(priority.getText());
-				//
-				//				Iterator clientdifIterator = defaultPriority.getChildrenWithLocalName("diffserv");
-				//				OMElement diffserv = (OMElement)clientdifIterator.next();
-				//				defaultDif = Integer.parseInt(diffserv.getText());
-				//
-				//				useDefault = defaultPriority.getAttributeValue(new QName("usedefault")).trim().equals("true");
+				in.close();
 			}
 		}finally{
 			lock.unlock();
@@ -164,8 +142,8 @@ public class PersistentPriorityData {
 	 * Get the priority for messages between client and service.
 	 * @param clientRole - the role of the client
 	 * @param service - the service
-	 * @return {@link Integer} the priority if client-service pair exists, otherwise, 
-	 * if useDefault is true, return default priority, else -1.
+	 * @return {@link Integer} the priority if client-service pair exists, 
+	 * otherwise, if useDefault is true, return default priority, else -1.
 	 */
 	public int getPriority(String clientRole, String service){
 		lock.lock();
