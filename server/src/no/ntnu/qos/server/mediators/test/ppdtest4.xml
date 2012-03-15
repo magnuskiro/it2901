@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<services>
+	<service name="testService" useDefault="false">
+		<client role="testRole">
+			<priority>123</priority>
+			<diffserv>16</diffserv>
+		</client>
+	</service>
+</services>

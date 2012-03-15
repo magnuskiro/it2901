@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -112,10 +113,12 @@ public class PersistentPriorityData {
 							dif.put(clientRole, Integer.parseInt(diffserv.getText()));
 						}
 					}
-					if(!pri.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE) 
-							|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE)){
-						throw new IllegalArgumentException("No Default client for service: " + 
-								service.getAttributeValue(name) + ", in file: " + this.getFilename());
+					
+					if(useDefaults.get(service.getAttributeValue(name)) 
+							&& (!pri.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE) 
+							|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE))){
+						throw new NoSuchElementException("No Default client for service: " + 
+							service.getAttributeValue(name) + ", in file: " + this.getFilename());
 					}
 				}
 				in.close();

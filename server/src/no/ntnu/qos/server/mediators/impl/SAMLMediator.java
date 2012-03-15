@@ -38,16 +38,16 @@ public class SAMLMediator extends AbstractQosMediator {
 
 		if(clientRole.isEmpty() || clientRole.trim().isEmpty()){
 			this.logMessage(synLog, "Could not " +
-						"find a valid client role in SAML assertion.\n" +
-						"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
+					"find a valid client role in SAML assertion.\n" +
+					"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
 			return false;
 		}
 
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, service);
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, clientRole);
-		
+
 		this.logMessage(synLog, "Set client role to: " + 
-					clientRole + ", set service to: " + service, QosLogType.INFO);
+				clientRole + ", set service to: " + service, QosLogType.INFO);
 		return true;
 	}
 
@@ -56,7 +56,7 @@ public class SAMLMediator extends AbstractQosMediator {
 		Iterator<OMElement> iter = soapEnvl.getBody().getChildElements();
 		return getOMElement(iter, "Assertion");
 	}
-	
+
 	private OMElement getOMElement(final Iterator<OMElement> iter, final String localName){
 		OMElement result = null;
 		while(iter.hasNext()){
@@ -68,22 +68,29 @@ public class SAMLMediator extends AbstractQosMediator {
 		}
 		return result;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private OMElement getSAMLAttributeStatement(OMElement samlAssertion){
-		Iterator<OMElement> iter = samlAssertion.getChildElements();
-		return getOMElement(iter, "AttributeStatement");
+		if(samlAssertion != null){
+			Iterator<OMElement> iter = samlAssertion.getChildElements();
+			return getOMElement(iter, "AttributeStatement");
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	private String getClientRole(MessageContext ctx){
 		String result = "";
 		OMElement as = getSAMLAttributeStatement(getSAMLAssertion(ctx.getEnvelope()));
-		Iterator<OMElement> iter = as.getChildElements();
-		while(iter.hasNext()){
-			OMElement attribute = iter.next();
-			if(attribute.getAttributeValue(friendlyName).equalsIgnoreCase(MediatorConstants.QOS_CLIENT_ROLE)){
-				result = attribute.getFirstElement().getText();
+		if(as != null){
+			//This is ugly, but there is no way to create an empty OMElement
+			//use null instead
+			Iterator<OMElement> iter = as.getChildElements();
+			while(iter.hasNext()){
+				OMElement attribute = iter.next();
+				if(attribute.getAttributeValue(friendlyName).equalsIgnoreCase(MediatorConstants.QOS_CLIENT_ROLE)){
+					result = attribute.getFirstElement().getText();
+				}
 			}
 		}
 		return result;
