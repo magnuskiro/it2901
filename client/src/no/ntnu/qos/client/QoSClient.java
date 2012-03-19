@@ -25,7 +25,7 @@ public interface QoSClient {
 	 * @return Returns a ReceiveObject where the specific reply will be made available.
 	 */
 	public ReceiveObject sendData(String data, URI destination);
-	
+
 	/**
 	 * Add a listener for any reply data the client library receives
 	 * @param listener a class implementing the DataListener interface
