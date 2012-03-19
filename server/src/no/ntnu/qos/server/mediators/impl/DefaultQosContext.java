@@ -1,15 +1,21 @@
 package no.ntnu.qos.server.mediators.impl;
 
 import java.io.IOException;
-
-import org.apache.synapse.MessageContext;
+import java.net.Socket;
 
 import no.ntnu.qos.server.mediators.AbstractQosContext;
 import no.ntnu.qos.server.mediators.MediatorConstants;
 
+import org.apache.axis2.Constants;
+import org.apache.http.nio.NHttpServerConnection;
+import org.apache.http.nio.reactor.SocketAccessor;
+import org.apache.synapse.MessageContext;
+import org.apache.synapse.core.axis2.Axis2MessageContext;
+import org.apache.synapse.transport.nhttp.ServerWorker;
+
 public class DefaultQosContext extends AbstractQosContext {
 	
-	private final long estTimeSend;
+	private final double estTimeSend;
 	private final long startedMediate;
 	private final long ttl;
 
@@ -17,7 +23,9 @@ public class DefaultQosContext extends AbstractQosContext {
 		super(synCtx);
 		
 		long pBandwidth = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH);
-		long bandwidth = pBandwidth != -1 ? pBandwidth : 0;
+		//We have to make sure that if we are on a local network we don't use
+		//-1 for bandwidth
+		long bandwidth = pBandwidth != -1 ? pBandwidth : Integer.MAX_VALUE;
 		this.estTimeSend = this.size() / bandwidth;
 		
 		this.startedMediate = (Long) synCtx.getProperty(MediatorConstants.QOS_TIME_ADDED);
@@ -25,25 +33,39 @@ public class DefaultQosContext extends AbstractQosContext {
 	}
 
 	@Override
-	public long estimatedSendingTime() {
+	public double getEstimatedSendingTime() {
 		return estTimeSend;
 	}
 
 	@Override
-	public long timeToLive() {
+	public long getTimeToLive() {
 		return this.startedMediate - System.currentTimeMillis() + this.ttl;
 	}
 
 	@Override
 	public void preempt() {
-		// TODO Auto-generated method stub
+		org.apache.axis2.context.MessageContext msgContext = 
+				((Axis2MessageContext)this.getMessageContext()).getAxis2MessageContext();
+		ServerWorker worker = (ServerWorker) msgContext.getProperty(Constants.OUT_TRANSPORT_INFO);
 
+		// DIFFSERV CHANGES
+		NHttpServerConnection conn = worker.getConn();
+		if(conn instanceof SocketAccessor){
+			try{
+				Socket soc = ((SocketAccessor)conn).getSocket();
+				if(soc != null){
+					soc.close();
+				}
+			}catch(Exception e){
+				//Catch all exceptions
+				//for now silently discard
+			}
+		}
 	}
 
 	@Override
 	protected void sendImpl() {
-		// TODO Auto-generated method stub
-
+		//Do nothing at the moment
 	}
 
 }
