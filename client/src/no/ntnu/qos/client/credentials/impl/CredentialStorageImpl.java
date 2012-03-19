@@ -18,14 +18,15 @@ public class CredentialStorageImpl implements CredentialStorage {
 
 	@Override
 	public boolean hasToken(URI destination) {
-		// TODO Auto-generated method stub
+		if(tokens.containsKey(destination)){
+            return true;
+        }
 		return false;
 	}
 
 	@Override
 	public Token getToken(URI destination) {
-		// TODO Auto-generated method stub
-		return null;
+		return tokens.get(destination);
 	}
 
 	@Override

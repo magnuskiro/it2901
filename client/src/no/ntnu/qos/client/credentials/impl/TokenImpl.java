@@ -30,8 +30,7 @@ public class TokenImpl implements Token {
 
 	@Override
 	public URI getDestination() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.destination;
 	}
 
 }

@@ -17,9 +17,10 @@ public class TokenManagerImpl implements TokenManager {
     }
 
     @Override
-	public void getToken(DataObject dataObj) {
-		// TODO Auto-generated method stub
-		
+	public void getToken(DataObject dataObject) {
+
+        // the variables have to be changed and used to create a token.
+        dataObject.setToken(new TokenImpl(tokenString, LongValiduntil, URIdestination));
 	}
 
     @Override
