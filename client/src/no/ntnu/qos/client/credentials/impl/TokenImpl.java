@@ -33,4 +33,14 @@ public class TokenImpl implements Token {
 		return this.destination;
 	}
 
+    @Override
+    public int getDiffServ() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int getPriority() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }
