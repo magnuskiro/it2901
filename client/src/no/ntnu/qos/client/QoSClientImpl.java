@@ -26,7 +26,7 @@ public class QoSClientImpl implements QoSClient{
     @Override
     public ReceiveObject sendData(String data, URI destination) {
         sequencer.sendData(data, destination);
-        return null;
+        return new ReceiveObjectImpl();
     }
 
     @Override
