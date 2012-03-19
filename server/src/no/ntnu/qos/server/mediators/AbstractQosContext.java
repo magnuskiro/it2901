@@ -10,22 +10,24 @@ public abstract class AbstractQosContext implements QosContext {
 	private final MessageContext synContext;
 	private final long size;
 	private final boolean useTTL;
+	private final int priority;
 	private long startTime;
 	
 	public AbstractQosContext(MessageContext synCtx) throws IOException{
 		this.synContext = synCtx;
 		this.size = ((Axis2MessageContext)synContext).getAxis2MessageContext().getInboundContentLength();
 		this.useTTL = (Boolean) synCtx.getProperty(MediatorConstants.QOS_USE_TTL);
+		this.priority = (Integer) synCtx.getProperty(MediatorConstants.QOS_PRIORITY);
 	}
 
 	@Override
-	public long sendingStartTime() {
+	public long getSendingStartTime() {
 		return startTime;
 	}
 
 	@Override
-	public int priority() {
-		return (Integer) this.synContext.getProperty(MediatorConstants.QOS_PRIORITY);
+	public int getPriority() {
+		return priority;
 	}
 
 	@Override
@@ -33,6 +35,9 @@ public abstract class AbstractQosContext implements QosContext {
 		return this.size;
 	}
 
+	/**
+	 * This method should do anything necessary to prepare this message for sending
+	 */
 	protected abstract void sendImpl();
 	
 	@Override

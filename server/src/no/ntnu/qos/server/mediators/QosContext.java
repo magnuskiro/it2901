@@ -8,20 +8,20 @@ public interface QosContext {
 	 * This method should return the time when the message started sending
 	 * @return - long time when message started sending
 	 */
-	public long sendingStartTime();
+	public long getSendingStartTime();
 
 	/**
 	 * This method should return a conservative estimate of how long time this message
 	 * will need in order for it to be sent over the network
 	 * @return - long estimated time
 	 */
-	public long estimatedSendingTime();
+	public double getEstimatedSendingTime();
 
 	/**
 	 * This method should return the priority of the {@link MessageContext}
 	 * @return - the priority
 	 */
-	public int priority();
+	public int getPriority();
 
 	/**
 	 * The estimated size of the message
@@ -45,7 +45,7 @@ public interface QosContext {
 	 * Return the time remaining for this message to live
 	 * @return - time to live
 	 */
-	public long timeToLive();
+	public long getTimeToLive();
 
 	/**
 	 * This method should stop this message from sending and catch any exceptions
