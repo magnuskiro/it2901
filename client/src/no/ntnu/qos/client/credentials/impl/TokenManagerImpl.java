@@ -2,20 +2,21 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.credentials.CredentialStorage;
+import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 
 public class TokenManagerImpl implements TokenManager {
-	CredentialStorage cS;
+	CredentialStorage credentialStorage;
 	
 	public TokenManagerImpl() {
-		cS = new CredentialStorageImpl();
+		credentialStorage = new CredentialStorageImpl();
 	}
-	
-	public CredentialStorage getCredentialStorage() {
-		return cS;
-	}
-	
-	@Override
+
+    public CredentialStorage getCredentialStorage() {
+        return credentialStorage;
+    }
+
+    @Override
 	public void getToken(DataObject dataObj) {
 		// TODO Auto-generated method stub
 		
@@ -23,8 +24,7 @@ public class TokenManagerImpl implements TokenManager {
 
     @Override
     public void setCredentials(String username, String role, String password) {
-        //To change body of implemented methods use File | Settings | File Templates.
-        // getToken() in the SamlCommunicator usig all the parameters.
+        credentialStorage.setCredentials(username,role,password);
     }
 
 }

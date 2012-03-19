@@ -15,7 +15,8 @@ public class TokenImpl implements Token {
 		this.destination = destination;
 		this.validUntil = validUntil;
 	}
-	@Override
+
+    @Override
 	public String getXML() {
 		// TODO Auto-generated method stub
 		return null;
