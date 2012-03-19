@@ -1,8 +1,10 @@
-package no.ntnu.qos.client.credentials;
+package no.ntnu.qos.client.credentials.Impl;
 
 import no.ntnu.qos.client.DataObject;
+import no.ntnu.qos.client.credentials.CredentialStorage;
+import no.ntnu.qos.client.credentials.TokenManager;
 
-public class TokenManagerImpl implements TokenManager{
+public class TokenManagerImpl implements TokenManager {
 	CredentialStorage cS;
 	
 	public TokenManagerImpl() {

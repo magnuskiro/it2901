@@ -1,4 +1,7 @@
-package no.ntnu.qos.client.credentials;
+package no.ntnu.qos.client.credentials.Impl;
+
+import no.ntnu.qos.client.credentials.CredentialStorage;
+import no.ntnu.qos.client.credentials.Token;
 
 import java.net.URI;
 import java.util.HashMap;

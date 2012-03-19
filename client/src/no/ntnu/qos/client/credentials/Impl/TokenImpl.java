@@ -1,8 +1,10 @@
-package no.ntnu.qos.client.credentials;
+package no.ntnu.qos.client.credentials.Impl;
+
+import no.ntnu.qos.client.credentials.Token;
 
 import java.net.URI;
 
-public class TokenImpl implements Token{
+public class TokenImpl implements Token {
 	//TODO: Change to accomodate an actual OpenSAML object?
 	String token;
 	long validUntil;
