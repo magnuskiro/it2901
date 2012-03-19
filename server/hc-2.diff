@@ -1,0 +1,155 @@
+Index: httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java	(revision 1298343)
++++ httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java	(working copy)
+@@ -29,6 +29,7 @@
+ 
+ import java.io.IOException;
+ import java.net.InetSocketAddress;
++import java.net.Socket;
+ import java.net.SocketAddress;
+ import java.nio.channels.ByteChannel;
+ import java.nio.channels.Channel;
+@@ -41,6 +42,7 @@
+ import org.apache.http.annotation.ThreadSafe;
+ import org.apache.http.nio.reactor.IOSession;
+ import org.apache.http.nio.reactor.SessionBufferStatus;
++import org.apache.http.nio.reactor.SocketAccessor;
+ 
+ /**
+  * Default implementation of {@link IOSession}.
+@@ -48,7 +50,7 @@
+  * @since 4.0
+  */
+ @ThreadSafe
+-public class IOSessionImpl implements IOSession {
++public class IOSessionImpl implements IOSession, SocketAccessor {
+ 
+     private final SelectionKey key;
+     private final ByteChannel channel;
+@@ -352,5 +354,14 @@
+         buffer.append("]");
+         return buffer.toString();
+     }
++    
++    public Socket getSocket(){
++    	Channel channel = this.channel;
++        if (channel instanceof SocketChannel) {
++            return ((SocketChannel)channel).socket();
++        } else {
++            return null;
++        }
++    }
+ 
+ }
+Index: httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java	(revision 1298343)
++++ httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java	(working copy)
+@@ -30,7 +30,9 @@
+ import java.io.IOException;
+ import java.net.InetAddress;
+ import java.net.InetSocketAddress;
++import java.net.Socket;
+ import java.net.SocketAddress;
++import java.net.SocketException;
+ import java.nio.channels.ReadableByteChannel;
+ import java.nio.channels.WritableByteChannel;
+ 
+@@ -59,6 +61,7 @@
+ import org.apache.http.impl.nio.codecs.IdentityEncoder;
+ import org.apache.http.impl.nio.codecs.LengthDelimitedDecoder;
+ import org.apache.http.impl.nio.codecs.LengthDelimitedEncoder;
++import org.apache.http.impl.nio.reactor.IOSessionImpl;
+ import org.apache.http.impl.nio.reactor.SessionInputBufferImpl;
+ import org.apache.http.impl.nio.reactor.SessionOutputBufferImpl;
+ import org.apache.http.io.HttpTransportMetrics;
+@@ -466,5 +469,41 @@
+         buffer.append("]");
+         return buffer.toString();
+     }
++    
++    /**
++     * Sets the traffic class in the session if it is an {@link IOSessionImpl}
++     * 
++     * As the underlying implementation may return null we return a boolean to signal this.
++     * @param tc the new Traffic Class. Must be 0 <= tc <= 255. 0 is default.
++     * @return return true if setting the traffic class was successful else return false
++     * @throws SocketException if there is an error setting the traffic class or type-of-service.
++     * @throws IllegalArgumentException if tc is not a valid traffic class value.
++     */
++    public boolean setTrafficClass(int tc) throws SocketException {
++        if(session instanceof IOSessionImpl){
++            Socket soc = ((IOSessionImpl)session).getSocket();
++            if(soc != null){
++            	soc.setTrafficClass(tc);
++            	return true;
++            }
++        }
++        return false;
++    }
+ 
++    /**
++     * Gets the traffic class from the session if it is an {@link IOSessionImpl}
++     *  
++     * @return int socket.getTrafficClass() if the session is a {@link IOSessionImpl} and socket not null, otherwise -1.
++     * @throws SocketException if there is an error setting the traffic class or type-of-service.
++     */
++    public int getTrafficClass() throws SocketException {
++        if(session instanceof IOSessionImpl){
++            Socket soc = ((IOSessionImpl)session).getSocket();
++            if(soc != null){
++            	soc.getTrafficClass();
++            }
++        }
++        return -1;
++    }
++
+ }
+Index: httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java	(revision 0)
++++ httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java	(working copy)
+@@ -0,0 +1,42 @@
++/*
++ * ====================================================================
++ * Licensed to the Apache Software Foundation (ASF) under one
++ * or more contributor license agreements.  See the NOTICE file
++ * distributed with this work for additional information
++ * regarding copyright ownership.  The ASF licenses this file
++ * to you under the Apache License, Version 2.0 (the
++ * "License"); you may not use this file except in compliance
++ * with the License.  You may obtain a copy of the License at
++ *
++ *   http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing,
++ * software distributed under the License is distributed on an
++ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++ * KIND, either express or implied.  See the License for the
++ * specific language governing permissions and limitations
++ * under the License.
++ * ====================================================================
++ *
++ * This software consists of voluntary contributions made by many
++ * individuals on behalf of the Apache Software Foundation.  For more
++ * information on the Apache Software Foundation, please see
++ * <http://www.apache.org/>.
++ *
++ */
++
++ package org.apache.http.nio.reactor; 
++
++ import java.net.Socket;
++ 
++ /**
++  * Interface intended to support retreival of the underlying Socket in 
++  * classes implementing this interface
++  */
++ public interface SocketAccessor{
++ 	/**
++ 	 * Return the underlying socket
++ 	 * @return - the underlying Socket, may be null.
++ 	 */
++ 	public Socket getSocket();
++ }
