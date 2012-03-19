@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.credentials.Impl;
+package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
