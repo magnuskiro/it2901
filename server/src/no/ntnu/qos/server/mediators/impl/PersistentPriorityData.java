@@ -71,10 +71,6 @@ public class PersistentPriorityData {
 			if(this.priorities.isEmpty() 
 					&& this.diffservs.isEmpty() 
 					&& this.useDefaults.isEmpty()){
-				//Clear data in case of multiple simultaneous calls
-				this.priorities.clear();
-				this.diffservs.clear();
-				this.useDefaults.clear();
 
 				InputStream in = new FileInputStream(new File(filename));
 				OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);

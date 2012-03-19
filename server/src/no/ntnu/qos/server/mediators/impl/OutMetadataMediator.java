@@ -66,59 +66,12 @@ public class OutMetadataMediator extends AbstractQosMediator {
 		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
 
-		addOrUpdateSOAPHeaders(pri, dif, synCtx);
-		
 		this.logMessage(synLog, "Successfully " +
 					"added metadata to message context. " +
 					"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
 		
 		return true;
 	}
-
-	private void addOrUpdateSOAPHeaders(int pri, int dif, MessageContext synCtx){
-		OMElement header = synCtx.getEnvelope().getHeader();
-		if(header==null){
-			synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
-			header = synCtx.getEnvelope().getHeader();
-		}
-		/*
-		 * Sets the Priority value in the SOAP header.
-		 */
-		QName priName = new QName(MediatorConstants.QOS_PRIORITY);
-		OMElement priHeader = header.getFirstChildWithName(priName);
-		if(priHeader==null){
-			priHeader = new OMElementImpl(new QName(MediatorConstants.QOS_PRIORITY), 
-					synCtx.getEnvelope().getHeader(), new SOAP12Factory());			
-			synCtx.getEnvelope().getHeader().addChild(priHeader);	
-		}
-		priHeader.setText(pri+"");
-
-		/*
-		 * Sets the Diffserv value in the SOAP header.
-		 */
-		QName difName = new QName(MediatorConstants.QOS_DIFFSERV);
-		OMElement difHeader = header.getFirstChildWithName(difName);
-		if(difHeader==null){
-			difHeader = new OMElementImpl(new QName(MediatorConstants.QOS_DIFFSERV), 
-					synCtx.getEnvelope().getHeader(), new SOAP12Factory());			
-			synCtx.getEnvelope().getHeader().addChild(difHeader);
-		}
-		difHeader.setText(dif+"");
-	}
-
-
-
-	//	public void addProperty(MediatorProperty mp){
-	//		properties.add(mp);
-	//	}
-	//
-	//	public void addAllProperties(List<MediatorProperty> lmp){
-	//		properties.addAll(lmp);
-	//	}
-	//
-	//	public List<MediatorProperty> getProperties(){
-	//		return properties;
-	//	}
 
 	public void setPpdFilename(String ppdFilename) {
 		OutMetadataMediator.ppdFilename = ppdFilename;
