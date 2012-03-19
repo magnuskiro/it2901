@@ -1,11 +1,13 @@
 package no.ntnu.qos.server.mediators.impl;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
+import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.TRContext;
 
 import org.apache.synapse.MessageContext;
-import org.apache.synapse.core.axis2.Axis2MessageContext;
 /**
  * This mediator does throttle related things.
  * @author Ola Martin
@@ -13,15 +15,15 @@ import org.apache.synapse.core.axis2.Axis2MessageContext;
  */
 public class ThrottleMediator extends AbstractQosMediator{
 
+	private static long minBandwidthPerMessage;
+	private static final Map<String, TRContext> trCtxs = new HashMap<String, TRContext>();
+	
 	@Override
 	protected boolean mediateImpl(MessageContext synCtx) {
-		// TODO Throttling
-		try {
-			System.out.println(((Axis2MessageContext)synCtx).getAxis2MessageContext()
-					.getInboundContentLength());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
+		if(!trCtxs.containsKey(lastTR)){
+			TRContext trCtx;
+			trCtxs.put(lastTR, trCtx);
 		}
 		return false;
 	}
@@ -30,4 +32,14 @@ public class ThrottleMediator extends AbstractQosMediator{
 	protected String getName() {
 		return "Throttle Mediator";
 	}
+	
+	
+	public static void setMinBandwidthPerMessage(long minBandwidthPerMessage) {
+		ThrottleMediator.minBandwidthPerMessage = minBandwidthPerMessage;
+	}
+	
+	public static long getMinBandwidthPerMessage() {
+		return minBandwidthPerMessage;
+	}
+
 }
