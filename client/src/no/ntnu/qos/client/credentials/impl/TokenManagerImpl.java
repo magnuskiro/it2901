@@ -2,7 +2,6 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.credentials.CredentialStorage;
-import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 
 public class TokenManagerImpl implements TokenManager {
@@ -20,7 +19,7 @@ public class TokenManagerImpl implements TokenManager {
 	public void getToken(DataObject dataObject) {
 
         // the variables have to be changed and used to create a token.
-        dataObject.setToken(new TokenImpl(tokenString, LongValiduntil, URIdestination));
+        // dataObject.setToken(new TokenImpl(tokenString, LongValidUntil, URI-destination));
 	}
 
     @Override
