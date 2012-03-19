@@ -36,4 +36,7 @@ public interface QoSClient {
 	 * @param listener a class implementing the DataListener interface
 	 */
 	public void removeListener(DataListener listener);
+
+    // should this interface contain send() and receive()?
+
 }
