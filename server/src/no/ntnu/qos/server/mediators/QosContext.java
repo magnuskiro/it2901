@@ -58,5 +58,11 @@ public interface QosContext extends Comparable<QosContext> {
 	 * @return - the internal message context
 	 */
 	public MessageContext getMessageContext();
+	
+	/**
+	 * Return whether or not this message is done sending
+	 * @return - True if done sending, else false
+	 */
+	public boolean isFinishedSending();
 
 }

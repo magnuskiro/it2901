@@ -29,6 +29,7 @@ public class TRContextTest {
 	private static final long BANDWIDTH = 100;
 	private static final long AVAILABLE_BANDWIDTH = 10000;
 	private static final long TTL = 1000;
+	private static final long ERROR_MARGIN = 5;
 	private static final int NUMBER_OF_ADDS = 10;
 	private static final int PRIORITY = 10;
 
@@ -47,7 +48,7 @@ public class TRContextTest {
 				new SynapseConfiguration(), null);
 		synCtx2.setProperty(MediatorConstants.QOS_TIME_ADDED, START_TIME);
 		synCtx2.setEnvelope(OMAbstractFactory.getSOAP12Factory().getDefaultEnvelope());
-		synCtx2.setProperty(MediatorConstants.QOS_BANDWIDTH, BANDWIDTH);
+		synCtx2.setProperty(MediatorConstants.QOS_BANDWIDTH, BANDWIDTH + 100);
 		synCtx2.setProperty(MediatorConstants.QOS_USE_TTL, true);
 		synCtx2.setProperty(MediatorConstants.QOS_TTL, TTL + 10);
 		synCtx2.setProperty(MediatorConstants.QOS_PRIORITY, PRIORITY + 10);
@@ -99,19 +100,42 @@ public class TRContextTest {
 			trc.add(list.get(i));
 		}
 		trc.setAvailableBandwidth(1);
-		assertEquals("Test preempt", list, trc.preemptContexts(new DefaultQosContext(synCtx2)));
-		assertEquals("Since all are preempted and no new additions the size " +
-				"should be empty", 0, ((TRContextImpl)trc).size());
+		assertTrue("Test preempt", trc.preemptContexts(new DefaultQosContext(synCtx2)).containsAll(list));
+		assertTrue("Since all are preempted and no new additions the size " +
+				"should be empty", ((TRContextImpl)trc).size() == 0);
 	}
 
 	@Test
-	public void testClearFinished() {
-		fail("Not yet implemented");
+	public void testClearFinished() throws IOException {
+		assertEquals("Empty context", 0, ((TRContextImpl)trc).size());
+		QosContext qc = null;
+		for(int i = 0; i < NUMBER_OF_ADDS; i++){
+			qc = new DefaultQosContext(synCtx);
+			trc.add(qc);
+		}
+		assertEquals("Filled context", NUMBER_OF_ADDS, ((TRContextImpl)trc).size());
+		trc.clearFinished();
+		assertEquals("Empty context again", 0, ((TRContextImpl)trc).size());
 	}
 
 	@Test
-	public void testNextEvent() {
-		fail("Not yet implemented");
+	public void testNextEvent() throws IOException {
+		assertEquals("Next event should be Long.MAX_VALUE when no contexts " +
+				"are added", Long.MAX_VALUE - System.currentTimeMillis(), 
+				trc.nextEvent(), ERROR_MARGIN);
+		QosContext qc = null;
+		for(int i = 0; i < NUMBER_OF_ADDS; i++){
+			qc = new DefaultQosContext(synCtx);
+			trc.add(qc);
+		}
+		assertEquals("Next event",  
+				qc.getEstimatedSendingTime(), trc.nextEvent(), ERROR_MARGIN);
+		
+		qc = new DefaultQosContext(synCtx2);
+		trc.add(qc);
+		
+		assertEquals("Next event", 
+				qc.getEstimatedSendingTime(), trc.nextEvent(), ERROR_MARGIN);
 	}
 
 }

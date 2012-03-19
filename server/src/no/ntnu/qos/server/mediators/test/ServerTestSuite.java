@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ MetadataMediatorTest.class, MSMediatorTest.class,
 		PersistentPriorityDataTest.class, SAMLMediatorTest.class,
 		ThrottleMediatorTest.class, PrioritizedMessageStoreTest.class,
-		QosContextTest.class})
+		QosContextTest.class, TRContextTest.class, 
+		InMetadataMediatorTest.class})
 public class ServerTestSuite {
 
 }

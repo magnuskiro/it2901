@@ -61,7 +61,7 @@ public class QosContextTest {
 	@Test
 	public void testTimeToLive(){
 		assertEquals("Time to live", START_TIME - System.currentTimeMillis() + TTL, 
-				qc.getTimeToLive());
+				qc.getTimeToLive(), 5);
 	}
 
 	@Test
