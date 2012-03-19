@@ -18,6 +18,10 @@ public class QoSClientImpl implements QoSClient{
         setSequencer(sequencer);
     }
 
+    public QoSClientImpl(String userName, String role, String password, ExceptionHandler exceptionHandler){
+        // why do we need the credentials here? and why not the sequencer?
+    }
+
     @Override
     public void setCredentials(String username, String role, String password) {
         this.sequencer.setCredentials(username, role, password);

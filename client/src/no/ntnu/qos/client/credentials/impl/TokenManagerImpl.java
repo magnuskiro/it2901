@@ -17,9 +17,11 @@ public class TokenManagerImpl implements TokenManager {
 
     @Override
 	public void getToken(DataObject dataObject) {
+        // if(dataObject.getToken()) return;
 
-        // the variables have to be changed and used to create a token.
-        // dataObject.setToken(new TokenImpl(tokenString, LongValidUntil, URI-destination));
+        // token = samlCommunicator.getToken(params);
+        // dataObject.setToken(token);
+        // credentialStorage.storeToken(token);
 	}
 
     @Override
