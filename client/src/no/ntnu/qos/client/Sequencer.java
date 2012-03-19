@@ -25,8 +25,8 @@ public interface Sequencer {
 	public void sendData(String data, URI destination);
 	
 	/**
-	 * Send a completed dataobject
-	 * @param dataObj the dataobject to send
+	 * Send a completed DataObject
+	 * @param dataObj the DataObject to send
 	 */
 	public void sendData(DataObject dataObj);
 	

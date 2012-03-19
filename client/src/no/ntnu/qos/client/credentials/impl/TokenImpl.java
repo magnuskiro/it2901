@@ -1,32 +1,25 @@
 package no.ntnu.qos.client.credentials.impl;
 
+import no.ntnu.qos.client.credentials.Token;
+
 import java.net.URI;
 
-import no.ntnu.qos.client.credentials.Token;
-/**
- * 
- * @author Stig Tore
- *
- */
-public class TokenImpl implements Token{
+public class TokenImpl implements Token {
 	//TODO: Change to accomodate an actual OpenSAML object?
-	private String token;
-	private long validUntil;
-	private URI destination;
-	private int diffServ;
-	private int priority;
+	String token;
+	long validUntil;
+	URI destination;
 	
-	
-	public TokenImpl(String token, long validUntil, URI destination, int diffServ, int prio) {
+	public TokenImpl(String token, long validUntil, URI destination) {
 		this.token = token;
 		this.destination = destination;
 		this.validUntil = validUntil;
-		this.diffServ = diffServ;
-		this.priority = prio;
 	}
-	@Override
+
+    @Override
 	public String getXML() {
-		return token;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -37,21 +30,23 @@ public class TokenImpl implements Token{
 		if(validUntil > (System.currentTimeMillis()-30000)) {
 			return true;
 		}
+
 		return false;
 	}
 
 	@Override
 	public URI getDestination() {
-		return destination;
+		return this.destination;
 	}
-	@Override
-	public int getDiffServ() {
-		return diffServ;
-	}
-	@Override
-	public int getPriority() {
-		return priority;
-	}
-	
+
+    @Override
+    public int getDiffServ() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int getPriority() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 }

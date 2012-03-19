@@ -10,6 +10,8 @@ import no.ntnu.qos.client.credentials.*;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 
+import no.ntnu.qos.client.credentials.impl.TokenImpl;
+import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 /**
