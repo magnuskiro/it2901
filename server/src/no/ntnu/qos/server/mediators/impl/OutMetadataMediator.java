@@ -22,7 +22,7 @@ import org.apache.synapse.SynapseLog;
  * @author Jørgen
  *
  */
-public class MetadataMediator extends AbstractQosMediator {
+public class OutMetadataMediator extends AbstractQosMediator {
 
 
 	private final static PersistentPriorityData ppd = new PersistentPriorityData();
@@ -121,7 +121,7 @@ public class MetadataMediator extends AbstractQosMediator {
 	//	}
 
 	public void setPpdFilename(String ppdFilename) {
-		MetadataMediator.ppdFilename = ppdFilename;
+		OutMetadataMediator.ppdFilename = ppdFilename;
 	}
 
 	public String getPpdFilename() {

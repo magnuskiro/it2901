@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import javax.xml.namespace.QName;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
-import no.ntnu.qos.server.mediators.impl.MetadataMediator;
+import no.ntnu.qos.server.mediators.impl.OutMetadataMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.soap.SOAPProcessingException;
@@ -24,7 +24,7 @@ public class MetadataMediatorTest {
 	@Test
 	public void testEmptyFileNameMediate(){
 		MessageContext synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), new SynapseConfiguration(),null);
-		MetadataMediator mm = new MetadataMediator();
+		OutMetadataMediator mm = new OutMetadataMediator();
 //		MediatorProperty mp = new MediatorProperty();
 //		mp.setName(MediatorConstants.PRIORITY_DATA_FILENAME);
 //		mp.setValue("");
@@ -40,7 +40,7 @@ public class MetadataMediatorTest {
 				new SynapseConfiguration(),null);
 		synCtx.setEnvelope(OMAbstractFactory.getSOAP12Factory().createSOAPEnvelope());
 		synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
-		MetadataMediator mm = new MetadataMediator();
+		OutMetadataMediator mm = new OutMetadataMediator();
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, "testRole");
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, "testService");
 		assertEquals(synCtx.getProperty(MediatorConstants.QOS_PRIORITY), null);

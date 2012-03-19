@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
 import no.ntnu.qos.server.mediators.impl.MSMediator;
-import no.ntnu.qos.server.mediators.impl.MetadataMediator;
+import no.ntnu.qos.server.mediators.impl.OutMetadataMediator;
 import no.ntnu.qos.server.mediators.impl.ThrottleMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
@@ -23,7 +23,7 @@ public class ThrottleMediatorTest {
 
 	private static MessageContext synCtx;
 	private static final MSMediator msm = new MSMediator();
-	private static final MetadataMediator mm = new MetadataMediator();
+	private static final OutMetadataMediator mm = new OutMetadataMediator();
 	private static final ThrottleMediator tm = new ThrottleMediator();
 	private static final String FILENAME = "ppdtest.xml";
 	private static final String ADDRESS = "http://125.50.50.73:8280/services/EchoService";
