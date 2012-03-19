@@ -3,7 +3,8 @@ package no.ntnu.qos.client;
 import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.ms.RoutingInfo;
+import no.ntnu.qos.client.net.RouteInfo;
+
 
 /**
  * Object containing the data clients wish to send
@@ -17,46 +18,46 @@ public class DataObject {
     private int			priority;
     private Sequencer	sequencer;
     private Token		samlTok;
-    private RoutingInfo	routingInfo;
+    private RouteInfo routeInfo;
     private String		soapFromClient;
     private URI			destination;
 
 
     /**
      * main constructor
-     * @param seq	- the sequencer creating the object
-     * @param sfc	- SOAP message from client
-     * @param dest	- destination of the message
+     * @param sequencer	- the sequencer creating the object
+     * @param soapFromClient	- SOAP message from client
+     * @param destination	- destination of the message
      */
-    public DataObject(Sequencer seq, String sfc, URI dest){
-        sequencer = seq;
-        soapFromClient = sfc;
-        destination = dest;
+    public DataObject(Sequencer sequencer, String soapFromClient, URI destination){
+        this.sequencer = sequencer;
+        this.soapFromClient = soapFromClient;
+        this.destination = destination;
 
     }
 
     /**
      * marks the data the object contains as sane
-     * @param s	- true if data is sane
+     * @param sane	- true if data is sane
      */
-    public void setSane(boolean s){
-        sane = s;
+    public void setSane(boolean sane){
+        this.sane = sane;
     }
 
     /**
      * sets the information on bandwidth and TR
-     * @param r	- routingINfo object obtained from an msCommunicator
+     * @param routeInfo	- routingINfo object obtained from an msCommunicator
      */
-    public void setRoutingInfo(RoutingInfo r){
-        routingInfo = r;
+    public void setRoutingInfo(RouteInfo routeInfo){
+        this.routeInfo = routeInfo;
     }
 
     /**
      * sets the clients SAML-token
-     * @param t	- the Token
+     * @param token	- the Token
      */
-    public void setToken(Token t){
-        samlTok		= t;
+    public void setToken(Token token){
+        samlTok		= token;
         diffServ	= samlTok.getDiffServ();
         priority	= samlTok.getPriority();
     }
@@ -82,8 +83,8 @@ public class DataObject {
      * gets the routingInfo this object is aware of
      * @return
      */
-    public RoutingInfo getRoutingInfo(){
-        return routingInfo;
+    public RouteInfo getRoutingInfo(){
+        return routeInfo;
     }
 
     /**
