@@ -78,7 +78,8 @@ public class PersistentPriorityData {
 
 				InputStream in = new FileInputStream(new File(filename));
 				OMXMLParserWrapper builder = OMXMLBuilderFactory.createOMBuilder(in);
-				servicesElement = builder.getDocumentElement();
+				OMElement config = builder.getDocumentElement();
+				servicesElement = config.getFirstChildWithName(new QName("services"));
 
 				Iterator<OMElement> serviceIterator = 
 						servicesElement.getChildrenWithLocalName("service");
