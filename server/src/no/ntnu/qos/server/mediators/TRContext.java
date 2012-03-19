@@ -1,5 +1,7 @@
 package no.ntnu.qos.server.mediators;
 
+import java.util.List;
+
 /**
  * Contains a priority queue of QosContexts
  * @author Ola Martin
@@ -36,5 +38,11 @@ public interface TRContext {
 	 * @return time until next message is sent.
 	 */
 	public long nextEvent();
+	
+	/**
+	 * Set the available bandwidth which is available
+	 * @param bandwidth
+	 */
+	public void setAvailableBandwidth(long bandwidth);
 	
 }
