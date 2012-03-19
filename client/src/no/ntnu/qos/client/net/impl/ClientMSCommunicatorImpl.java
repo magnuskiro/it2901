@@ -3,22 +3,27 @@ package no.ntnu.qos.client.net.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.net.ClientMSCommunicator;
+import no.ntnu.qos.ms.MSCommunicator;
+import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
 
 
 /**
  * Implementation of the no.ntnu.qos.client.net.MSCommunicator interface
+ * This implementation uses a dummy xml file, as we have no access to an actual ms
  * @author Håvard
  *
  */
 public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 
-	private String ms;
+	
+	private String msXML;
 	
 	/**
 	 * main constructor
+	 * @param newMS - path of the xml file containing the routing info
 	 */
 	public ClientMSCommunicatorImpl(String newMS){
-		ms	= newMS;
+		msXML	= newMS;
 	}
 	
 	@Override
@@ -39,11 +44,11 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 			dataObj = data;
 		}
 		
+		
 		@Override
 		public void run() {
-			// TODO fetch the routing info and insert it into the DataObject
-			//MSCommunicator meh = new MSCommunicatorImlp(ms);
-			//dataObj.setRouteInfo(meh.getblah());
+			MSCommunicator msComm = new MSCommunicatorImpl(msXML);
+			dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
 		}
 		
 	}

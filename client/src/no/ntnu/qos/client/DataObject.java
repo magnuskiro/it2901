@@ -1,51 +1,105 @@
 package no.ntnu.qos.client;
 
-import no.ntnu.qos.client.credentials.Token;
+import java.net.URI;
 
+import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.ms.RoutingInfo;
+
+/**
+ * Object containing the data clients wish to send
+ * @author Håvard
+ *
+ */
 public class DataObject {
 
-    private Sequencer sequencer;
-    private Boolean sane;
-    private int bandwidth;
-    private Token token;
+    private boolean		sane;
+    private int			diffServ;
+    private int			priority;
+    private Sequencer	sequencer;
+    private Token		samlTok;
+    private RoutingInfo	routingInfo;
+    private String		soapFromClient;
+    private URI			destination;
 
-    public DataObject(Sequencer sequencer) {
-        this.sequencer = sequencer;
+
+    /**
+     * main constructor
+     * @param seq	- the sequencer creating the object
+     * @param sfc	- SOAP message from client
+     * @param dest	- destination of the message
+     */
+    public DataObject(Sequencer seq, String sfc, URI dest){
+        sequencer = seq;
+        soapFromClient = sfc;
+        destination = dest;
+
     }
 
+    /**
+     * marks the data the object contains as sane
+     * @param s	- true if data is sane
+     */
+    public void setSane(boolean s){
+        sane = s;
+    }
+
+    /**
+     * sets the information on bandwidth and TR
+     * @param r	- routingINfo object obtained from an msCommunicator
+     */
+    public void setRoutingInfo(RoutingInfo r){
+        routingInfo = r;
+    }
+
+    /**
+     * sets the clients SAML-token
+     * @param t	- the Token
+     */
+    public void setToken(Token t){
+        samlTok		= t;
+        diffServ	= samlTok.getDiffServ();
+        priority	= samlTok.getPriority();
+    }
+
+    /**
+     *
+     * @return	- a SOAP message
+     */
     public String getSoap(){
+        //TODO
         return "";
     }
 
-    public Sequencer getSequencer() {
-        return sequencer;
+    /**
+     * gets the message destination
+     * @return
+     */
+    public URI getDestination(){
+        return destination;
     }
 
-    public void setSequencer(Sequencer sequencer) {
-        this.sequencer = sequencer;
+    /**
+     * gets the routingInfo this object is aware of
+     * @return
+     */
+    public RoutingInfo getRoutingInfo(){
+        return routingInfo;
     }
 
-    public Boolean getSane() {
-        return sane;
+    /**
+     * gets the diffServ value this message will have
+     * @return
+     */
+    public int getDiffServ(){
+        return diffServ;
     }
 
-    public void setSane(Boolean sane) {
-        this.sane = sane;
+    /**
+     * gets the priority value of the message
+     * @return
+     */
+    public int getPriority(){
+        return priority;
     }
 
-    public int getBandwidth() {
-        return bandwidth;
-    }
-
-    public void setBandwidth(int bandwidth) {
-        this.bandwidth = bandwidth;
-    }
-
-    public Token getToken() {
-        return token;
-    }
-
-    public void setToken(Token token) {
-        this.token = token;
-    }
 }

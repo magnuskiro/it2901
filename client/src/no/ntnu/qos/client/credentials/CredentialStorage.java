@@ -1,6 +1,7 @@
 package no.ntnu.qos.client.credentials;
 
 import java.net.URI;
+import java.util.NoSuchElementException;
 
 /**
  * The interface for the main storage for credentials and token objects
@@ -8,6 +9,9 @@ import java.net.URI;
  *
  */
 public interface CredentialStorage {
+	public final int USERNAME = 0;
+	public final int ROLE = 1;
+	public final int PASSWORD = 2;
 	
 	/**
 	 * Takes a URI and checks if it has a valid token for it 
@@ -17,11 +21,12 @@ public interface CredentialStorage {
 	public boolean hasToken(URI destination);
 	
 	/**
-	 * Gets a token from storage
-	 * @param destination the URI of the service
-	 * @return a valid Token object
+	 * Gets a valid token from storage
+	 * @param destination the URI of the service to get a token for
+	 * @return a valid token
+	 * @throws NoSuchElementException If token does not exist in storage.
 	 */
-	public Token getToken(URI destination);
+	public Token getToken(URI destination) throws NoSuchElementException;
 	
 	/**
 	 * Gets the client credentials stored
