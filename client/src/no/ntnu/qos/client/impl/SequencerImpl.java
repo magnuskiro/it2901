@@ -38,4 +38,10 @@ public class SequencerImpl implements Sequencer {
     public void returnData(String data) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+	@Override
+	public void setTokenManager(TokenManager tM) {
+		// TODO Auto-generated method stub
+		
+	}
 }
