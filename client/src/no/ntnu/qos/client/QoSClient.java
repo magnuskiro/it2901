@@ -9,6 +9,7 @@ import java.net.URI;
  * Main interface towards the client using the QoSClient library.
  */
 public interface QoSClient {
+
 	/**
 	 * Set the credentials the client wishes to use towards services
 	 * @param username client username
@@ -21,12 +22,12 @@ public interface QoSClient {
 	 * Send data to a service
 	 * @param data the XML data to send (Valid SOAP only)
 	 * @param destination the URI to the service
-	 * @return Returns a RecieveObject where the specific reply will be made available.
+	 * @return Returns a ReceiveObject where the specific reply will be made available.
 	 */
-	public RecieveObject sendData(String data, URI destination);
+	public ReceiveObject sendData(String data, URI destination);
 	
 	/**
-	 * Add a listener for any reply data the client library recieves
+	 * Add a listener for any reply data the client library receives
 	 * @param listener a class implementing the DataListener interface
 	 */
 	public void addListener(DataListener listener);
