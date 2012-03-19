@@ -1,5 +1,7 @@
 package no.ntnu.qos.client;
 
+import no.ntnu.qos.client.credentials.TokenManager;
+
 import java.net.URI;
 
 /**
@@ -8,6 +10,7 @@ import java.net.URI;
 public class SequencerImpl implements Sequencer{
 
     QoSClient qoSClient;
+    TokenManager tokenManager;
 
     public SequencerImpl(QoSClient qoSClient) {
         this.qoSClient = qoSClient;
@@ -15,7 +18,7 @@ public class SequencerImpl implements Sequencer{
 
     @Override
     public void setCredentials(String username, String role, String password) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        tokenManager.setCredentials(username, role, password);
     }
 
     @Override

@@ -21,4 +21,10 @@ public class TokenManagerImpl implements TokenManager {
 		
 	}
 
+    @Override
+    public void setCredentials(String username, String role, String password) {
+        //To change body of implemented methods use File | Settings | File Templates.
+        // getToken() in the SamlCommunicator usig all the parameters.
+    }
+
 }
