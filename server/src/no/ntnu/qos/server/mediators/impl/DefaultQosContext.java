@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import no.ntnu.qos.server.mediators.AbstractQosContext;
 import no.ntnu.qos.server.mediators.MediatorConstants;
+import no.ntnu.qos.server.mediators.QosContext;
 
 import org.apache.axis2.Constants;
 import org.apache.http.nio.NHttpServerConnection;
@@ -66,6 +67,12 @@ public class DefaultQosContext extends AbstractQosContext {
 	@Override
 	protected void sendImpl() {
 		//Do nothing at the moment
+	}
+
+	@Override
+	public int compareTo(QosContext o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

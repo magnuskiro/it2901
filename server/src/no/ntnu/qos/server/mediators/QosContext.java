@@ -2,7 +2,7 @@ package no.ntnu.qos.server.mediators;
 
 import org.apache.synapse.MessageContext;
 
-public interface QosContext {
+public interface QosContext extends Comparable<QosContext> {
 
 	/**
 	 * This method should return the time when the message started sending
