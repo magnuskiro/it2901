@@ -4,6 +4,7 @@ import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.net.RouteInfo;
+import no.ntnu.qos.ms.RoutingInfo;
 
 
 /**
@@ -20,7 +21,7 @@ public class DataObject {
 	private int			priority;
 	private Sequencer	sequencer;
 	private Token		samlTok;
-	private RouteInfo routeInfo;
+	private RoutingInfo routeInfo;
 	private String		soapFromClient;
 	private URI			destination;
 
@@ -56,7 +57,7 @@ public class DataObject {
 	 * criteria are met
 	 * @param routeInfo	- routingINfo object obtained from an msCommunicator
 	 */
-	public void setRoutingInfo(RouteInfo routeInfo){
+	public void setRoutingInfo(RoutingInfo routeInfo){
 		this.routeInfo = routeInfo;
 
 		if (isReadyToSend()){
@@ -99,7 +100,7 @@ public class DataObject {
 	 * gets the routingInfo this object is aware of
 	 * @return
 	 */
-	public RouteInfo getRoutingInfo(){
+	public RoutingInfo getRoutingInfo(){
 		return routeInfo;
 	}
 
