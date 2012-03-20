@@ -4,7 +4,7 @@ import java.net.URI;
 
 /**
  * Interface for handling the communication with an identity server
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public interface SAMLCommunicator {

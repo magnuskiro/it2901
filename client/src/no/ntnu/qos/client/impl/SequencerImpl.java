@@ -53,9 +53,11 @@ public class SequencerImpl implements Sequencer {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-	@Override
-	public void setTokenManager(TokenManager tM) {
-		// TODO Auto-generated method stub
-		
-	}
+    public TokenManager getTokenManager() {
+        return tokenManager;
+    }
+
+    public void setTokenManager(TokenManager tokenManager) {
+        this.tokenManager = tokenManager;
+    }
 }

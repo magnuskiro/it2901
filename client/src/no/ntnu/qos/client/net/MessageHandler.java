@@ -4,7 +4,7 @@ import no.ntnu.qos.client.DataObject;
 
 /**
  * Interface for classes that handle messages and sends them over the network.
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public interface MessageHandler {

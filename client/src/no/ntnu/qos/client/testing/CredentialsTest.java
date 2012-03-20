@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
 
 import no.ntnu.qos.client.QoSClient;
-import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.*;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
@@ -25,7 +24,7 @@ import org.junit.Test;
 public class CredentialsTest {
 	static TokenManager tM;
 	static CredentialStorage cS;
-	static Sequencer sQ;
+	static SequencerImpl sQ;
 	static QoSClient client;
 	static String token;
 	static URI uri1, uri2;

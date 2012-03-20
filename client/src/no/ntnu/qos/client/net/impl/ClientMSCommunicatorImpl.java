@@ -3,14 +3,12 @@ package no.ntnu.qos.client.net.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.net.ClientMSCommunicator;
-import no.ntnu.qos.ms.MSCommunicator;
-import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
-
+import no.ntnu.qos.client.net.RouteInfo;
 
 /**
  * Implementation of the no.ntnu.qos.client.net.MSCommunicator interface
  * This implementation uses a dummy xml file, as we have no access to an actual ms
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
@@ -33,7 +31,7 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 
 	/**
 	 * private runnable that will be returned by the getRouteInfo method
-	 * @author Håvard
+	 * @author HÃ¥vard
 	 *
 	 */
 	private class RouteFetcher implements Runnable{
@@ -47,8 +45,10 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 		
 		@Override
 		public void run() {
-			MSCommunicator msComm = new MSCommunicatorImpl(msXML);
-			dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
+            ClientMSCommunicator clientMSCommunicator = new ClientMSCommunicatorImpl(msXML);
+            dataObj.setRoutingInfo((RouteInfo) clientMSCommunicator.getRouteInfo(dataObj));
+			//MSCommunicator msComm = new MSCommunicatorImpl(msXML);
+			//dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
 		}
 		
 	}

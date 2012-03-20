@@ -3,7 +3,7 @@ package no.ntnu.qos.client;
 /**
  * interface for checking whether or not a data set is obviously
  * invalid, e.g. not xml ++
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public interface SanityChecker {
