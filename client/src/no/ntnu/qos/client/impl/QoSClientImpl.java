@@ -16,12 +16,8 @@ public class QoSClientImpl implements QoSClient {
     private Sequencer sequencer;
     List<DataListener> dataListenerList = new ArrayList<DataListener>();
 
-    public QoSClientImpl(Sequencer sequencer){
-        setSequencer(sequencer);
-    }
-
     public QoSClientImpl(String userName, String role, String password, ExceptionHandler exceptionHandler){
-        // why do we need the credentials here? and why not the sequencer?
+        sequencer = new SequencerImpl(this);
     }
 
     @Override
@@ -46,7 +42,7 @@ public class QoSClientImpl implements QoSClient {
         this.dataListenerList.remove(listener);
     }
 
-    public void setSequencer(Sequencer sequencer) {
-        this.sequencer = sequencer;
+    public Sequencer getSequencer() {
+        return sequencer;
     }
 }

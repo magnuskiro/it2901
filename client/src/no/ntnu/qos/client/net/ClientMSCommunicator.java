@@ -6,7 +6,7 @@ import no.ntnu.qos.client.DataObject;
 /**
  * Interface for communicating with the Monitoring Service on a tactical router
  * in order to fetch link and bandwidth-data for the client.
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public interface ClientMSCommunicator {

@@ -18,8 +18,7 @@ public class TokenImpl implements Token {
 
     @Override
 	public String getXML() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.token;
 	}
 
 	@Override
