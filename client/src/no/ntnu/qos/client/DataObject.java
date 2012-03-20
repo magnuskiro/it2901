@@ -3,7 +3,6 @@ package no.ntnu.qos.client;
 import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.client.net.RouteInfo;
 import no.ntnu.qos.ms.RoutingInfo;
 
 
