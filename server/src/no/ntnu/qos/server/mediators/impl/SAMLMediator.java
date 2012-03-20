@@ -25,13 +25,10 @@ import org.apache.synapse.SynapseLog;
  *
  */
 public class SAMLMediator extends AbstractQosMediator {
-
-	private SynapseLog synLog;
 	private static final QName friendlyName = new QName("FriendlyName"); 
 
 	@Override
-	public boolean mediateImpl(MessageContext synCtx) {
-		synLog = this.getLog(synCtx);
+	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 
 		final String service = synCtx.getTo().getAddress();
 		final String clientRole = this.getClientRole(synCtx);

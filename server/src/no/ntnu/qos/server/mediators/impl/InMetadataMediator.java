@@ -23,8 +23,7 @@ public class InMetadataMediator extends AbstractQosMediator {
 	private static final QName QOSTTL = new QName(MediatorConstants.QOS_TTL);
 
 	@Override
-	protected boolean mediateImpl(MessageContext synCtx) {
-		SynapseLog synLog = getLog(synCtx);
+	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		Object from = ((Axis2MessageContext)synCtx).getAxis2MessageContext().getProperty(
 				org.apache.axis2.context.MessageContext.REMOTE_ADDR);
 		

@@ -16,11 +16,11 @@ import no.ntnu.qos.server.mediators.QosLogType;
 public class SoapPriorityMediator extends AbstractQosMediator {
 
 	@Override
-	protected boolean mediateImpl(MessageContext synCtx) {
-		SynapseLog synLog = getLog(synCtx);
+	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
+
 		int pri = (Integer) synCtx.getProperty(MediatorConstants.QOS_PRIORITY);
 		int dif = (Integer) synCtx.getProperty(MediatorConstants.QOS_DIFFSERV);
-		
+
 		OMElement header = synCtx.getEnvelope().getHeader();
 		if(header==null){
 			synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
@@ -49,7 +49,7 @@ public class SoapPriorityMediator extends AbstractQosMediator {
 			synCtx.getEnvelope().getHeader().addChild(difHeader);
 		}
 		difHeader.setText(dif+"");
-		
+
 		this.logMessage(synLog, "Successfully " +
 				"added metadata to soap header. " +
 				"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
