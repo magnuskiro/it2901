@@ -5,9 +5,10 @@ import no.ntnu.qos.client.net.MessageHandler;
 
 public class MessageHandlerImpl implements MessageHandler{
 
+	//need an http-thingamajig and possibly other stuff
 	
 	public MessageHandlerImpl(){
-		
+		//TODO: build me
 	}
 	
 	@Override
@@ -17,5 +18,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		 */
 		
 	}
+	
+	//how should this receive replies from httpComponents?
 
 }

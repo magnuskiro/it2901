@@ -5,8 +5,11 @@ import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.SanityChecker;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
+import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 import no.ntnu.qos.client.net.ClientMSCommunicator;
 import no.ntnu.qos.client.net.MessageHandler;
+import no.ntnu.qos.client.net.impl.ClientMSCommunicatorImpl;
+import no.ntnu.qos.client.net.impl.MessageHandlerImpl;
 
 import java.net.URI;
 
@@ -17,14 +20,21 @@ public class SequencerImpl implements Sequencer {
 
     QoSClient		qoSClient;
     TokenManager	tokenManager;
-    MessageHandler	msgHandle;
+    MessageHandler	msgHandler;
     SanityChecker	sanityChecker;
     ClientMSCommunicator msComm;
     
 
-    public SequencerImpl(QoSClient qoSClient) {
+    public SequencerImpl(QoSClient qoSClient, String username, String role, String password) {
         this.qoSClient = qoSClient;
         
+        tokenManager	= new TokenManagerImpl(username, role, password);
+        msgHandler		= new MessageHandlerImpl();
+        sanityChecker	= new SanitycheckerImpl();
+        
+        /* TODO: need a way to do this properly, how do we know where the MS is?
+         * this implementation only reads an xml-file, but still... */
+        msComm			= new ClientMSCommunicatorImpl(null);
     }
 
     @Override
@@ -45,7 +55,7 @@ public class SequencerImpl implements Sequencer {
 
     @Override
     public void sendData(DataObject dataObj) {
-    	msgHandle.sendData(dataObj);
+    	msgHandler.sendData(dataObj);
     }
 
     @Override
