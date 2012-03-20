@@ -5,14 +5,11 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 
 import no.ntnu.qos.server.mediators.MediatorConstants;
-import no.ntnu.qos.server.mediators.impl.MSMediator;
-import no.ntnu.qos.server.mediators.impl.OutMetadataMediator;
 import no.ntnu.qos.server.mediators.impl.ThrottleMediator;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.soap.SOAPProcessingException;
 import org.apache.axis2.AxisFault;
-import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
@@ -28,6 +25,7 @@ public class ThrottleMediatorTest {
 	private static final long TTL = 1000;
 	private static final int PRIORITY = 10;
 	
+	@SuppressWarnings("static-access")
 	@BeforeClass
 	public static void setupMessageContext() throws AxisFault, SOAPProcessingException{
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 

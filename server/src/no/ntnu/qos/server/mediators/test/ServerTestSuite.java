@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		PersistentPriorityDataTest.class, SAMLMediatorTest.class,
 		ThrottleMediatorTest.class, PrioritizedMessageStoreTest.class,
 		QosContextTest.class, TRContextTest.class, 
-		InMetadataMediatorTest.class})
+		InMetadataMediatorTest.class, SoapPriorityMediatorTest.class})
 public class ServerTestSuite {
 
 }
