@@ -101,5 +101,22 @@ public class PersistentPriorityDataTest {
 		assertEquals(16, ppd.getDiffserv("testRole", "testService"));
 		assertEquals(-1, ppd.getDiffserv("nonexistentrole", "testService"));
 	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testIllegalArguementExceptionOnPriority() throws IOException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		ppd.setFilename(FILENAME);
+		ppd.readData();
+		ppd.getPriority(null, "");
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testIllegalArguementExceptionOnDiffServ() throws IOException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		ppd.setFilename(FILENAME);
+		ppd.readData();
+		
+		ppd.getDiffserv("", null);
+	}
 
 }

@@ -110,12 +110,12 @@ public class PersistentPriorityData {
 							dif.put(clientRole, Integer.parseInt(diffserv.getText()));
 						}
 					}
-					
+
 					if(useDefaults.get(service.getAttributeValue(name)) 
 							&& (!pri.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE) 
-							|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE))){
+									|| !dif.containsKey(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE))){
 						throw new NoSuchElementException("No Default client for service: " + 
-							service.getAttributeValue(name) + ", in file: " + this.getFilename());
+								service.getAttributeValue(name) + ", in file: " + this.getFilename());
 					}
 				}
 				in.close();
@@ -148,6 +148,11 @@ public class PersistentPriorityData {
 	public int getPriority(String clientRole, String service){
 		lock.lock();
 		try{
+			if(clientRole == null || service == null){
+				throw new IllegalArgumentException("Neither Client role " +
+						"nor service can be null. Client role: " + clientRole + 
+						", Service: " + service);
+			}
 			if(priorities.containsKey(service)){
 				if(priorities.get(service).containsKey(clientRole)){
 					return priorities.get(service).get(clientRole);
@@ -171,6 +176,11 @@ public class PersistentPriorityData {
 	public int getDiffserv(String clientRole, String service){
 		lock.lock();
 		try{
+			if(clientRole == null || service == null){
+				throw new IllegalArgumentException("Neither Client role " +
+						"nor service can be null. Client role: " + clientRole + 
+						", Service: " + service);
+			}
 			if(diffservs.containsKey(service)){
 				if(diffservs.get(service).containsKey(clientRole)){
 					return diffservs.get(service).get(clientRole);
