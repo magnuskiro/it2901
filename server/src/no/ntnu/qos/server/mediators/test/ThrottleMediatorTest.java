@@ -22,25 +22,24 @@ import org.junit.Test;
 public class ThrottleMediatorTest {
 
 	private static MessageContext synCtx;
-	private static final MSMediator msm = new MSMediator();
-	private static final OutMetadataMediator mm = new OutMetadataMediator();
 	private static final ThrottleMediator tm = new ThrottleMediator();
-	private static final String FILENAME = "ppdtest.xml";
-	private static final String ADDRESS = "http://125.50.50.73:8280/services/EchoService";
+	private static final long START_TIME = System.currentTimeMillis();
+	private static final long BANDWIDTH = 100;
+	private static final long TTL = 1000;
+	private static final int PRIORITY = 10;
 	
 	@BeforeClass
 	public static void setupMessageContext() throws AxisFault, SOAPProcessingException{
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
 				new SynapseConfiguration(), null);
-		synCtx.setTo(new EndpointReference(ADDRESS));
-
-		mm.setPpdFilename(FILENAME);
-		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, "testRole");
-		synCtx.setProperty(MediatorConstants.QOS_SERVICE, "testService");
-		synCtx.setEnvelope(OMAbstractFactory.getSOAP12Factory().createSOAPEnvelope());
-		synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
-		mm.mediate(synCtx);
-		msm.mediate(synCtx);
+		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, START_TIME);
+		synCtx.setEnvelope(OMAbstractFactory.getSOAP12Factory().getDefaultEnvelope());
+		synCtx.setProperty(MediatorConstants.QOS_BANDWIDTH, BANDWIDTH);
+		synCtx.setProperty(MediatorConstants.QOS_USE_TTL, true);
+		synCtx.setProperty(MediatorConstants.QOS_TTL, TTL);
+		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, PRIORITY);
+		tm.setTimeout(100);
+		tm.setMinBandwidthPerMessage(1000);
 	}
 	
 	@Test
