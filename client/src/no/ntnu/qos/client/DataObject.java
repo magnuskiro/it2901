@@ -134,4 +134,8 @@ public class DataObject {
 		}
 		return false;
 	}
+
+    public Token getSamlTok() {
+        return samlTok;
+    }
 }
