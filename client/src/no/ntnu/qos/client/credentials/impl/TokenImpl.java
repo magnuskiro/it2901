@@ -5,7 +5,7 @@ import no.ntnu.qos.client.credentials.Token;
 import java.net.URI;
 
 public class TokenImpl implements Token {
-	//TODO: Change to accomodate an actual OpenSAML object?
+	//TODO: Change to use an actual OpenSAML object?
 	String token;
 	long validUntil;
 	URI destination;
@@ -26,12 +26,9 @@ public class TokenImpl implements Token {
 		/* assumes that if the token became invalid less than 30 seconds ago, it is in practice OK to consider
 		 * it still valid, as requesting a new token might take longer than that, depending on the network
 		 * TODO: make it configurable*/
-		if(validUntil > (System.currentTimeMillis()-30000)) {
-			return true;
-		}
+        return validUntil > (System.currentTimeMillis() - 30000);
 
-		return false;
-	}
+    }
 
 	@Override
 	public URI getDestination() {

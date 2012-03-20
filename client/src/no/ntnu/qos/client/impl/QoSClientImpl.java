@@ -29,6 +29,7 @@ public class QoSClientImpl implements QoSClient {
     public ReceiveObject sendData(String data, URI destination) {
         sequencer.sendData(data, destination);
         // this is probably not correct.
+        // where does the ReceiveObject come from?
         return new ReceiveObjectImpl();
     }
 

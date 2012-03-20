@@ -10,9 +10,11 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 	@Override
 	public Token getToken(URI destination, String userName, String password,
 			String role) {
-		// TODO Auto-generated method stub
-        Token token = new TokenImpl();
-		return token;
+        // TODO write the rest of the method. which probably includes the network communication with the identity server.
+
+        // TODO: has to be changed to the correct variables
+        // takes "token" - valid Long, destination URI
+        return new TokenImpl("token", 1L, destination);
 	}
 
 }

@@ -33,4 +33,9 @@ public class TokenManagerImpl implements TokenManager {
         credentialStorage.setCredentials(username,role,password);
     }
 
+    @Override
+    public Token getToken(DataObject dataObject) {
+        return credentialStorage.getToken(dataObject.getDestination());
+    }
+
 }
