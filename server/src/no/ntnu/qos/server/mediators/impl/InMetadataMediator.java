@@ -21,8 +21,7 @@ import org.apache.synapse.SynapseLog;
 public class InMetadataMediator extends AbstractQosMediator {
 
 	@Override
-	protected boolean mediateImpl(MessageContext synCtx) {
-		SynapseLog synLog = getLog(synCtx);
+	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		EndpointReference from = synCtx.getFrom();
 		if(from!=null){
 			synCtx.setProperty(MediatorConstants.QOS_FROM_ADDR, from.getAddress());

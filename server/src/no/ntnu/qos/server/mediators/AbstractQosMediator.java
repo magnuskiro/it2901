@@ -19,7 +19,7 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 		SynapseLog log = this.getLog(synCtx);
 		this.logMessage(log, MediatorConstants.DEBUG_START + 
 				this.getName(), QosLogType.INFO);
-		boolean res = this.mediateImpl(synCtx);
+		boolean res = this.mediateImpl(synCtx, log);
 		if(res){
 			this.logMessage(log, MediatorConstants.DEBUG_END + 
 					this.getName(), QosLogType.INFO);
@@ -35,7 +35,7 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 	 * @param synCtx - The message context the mediator will work on
 	 * @return - True if the mediator was successful and false otherwise.
 	 */
-	protected abstract boolean mediateImpl(MessageContext synCtx);
+	protected abstract boolean mediateImpl(MessageContext synCtx, SynapseLog synLog);
 
 	/**
 	 * Get the name of the mediator, this is used as a human readable way to tell

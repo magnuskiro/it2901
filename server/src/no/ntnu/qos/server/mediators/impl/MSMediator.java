@@ -25,9 +25,7 @@ public class MSMediator extends AbstractQosMediator {
 
 	private static final MSCommunicator msc = new MSCommunicatorImpl("ms.xml");
 	@Override
-	public boolean mediateImpl(MessageContext synCtx) {
-
-		SynapseLog synLog = getLog(synCtx);
+	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		try {
 			String endpoint = (String) synCtx.getProperty(MediatorConstants.QOS_FROM_ADDR);
 			this.logMessage(synLog, "Endpoint address: " 

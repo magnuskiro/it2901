@@ -23,8 +23,7 @@ import org.apache.synapse.transport.nhttp.ServerWorker;
 public class DiffservMediator extends AbstractQosMediator {
 
 	@Override
-	protected boolean mediateImpl(MessageContext synCtx) {
-		SynapseLog synLog = this.getLog(synCtx);
+	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		org.apache.axis2.context.MessageContext msgContext = 
 				((Axis2MessageContext)synCtx).getAxis2MessageContext();
 		ServerWorker worker = (ServerWorker) msgContext.getProperty(Constants.OUT_TRANSPORT_INFO);

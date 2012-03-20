@@ -23,9 +23,7 @@ public class OutMetadataMediator extends AbstractQosMediator {
 	//private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
 	private static String ppdFilename;
 	@Override
-	public boolean mediateImpl(MessageContext synCtx) {
-
-		SynapseLog synLog = getLog(synCtx);
+	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 
 		//Check if data is available, if not, try reading it, if it fails return false
 		if(!ppd.isDataAvailable()){
@@ -61,9 +59,9 @@ public class OutMetadataMediator extends AbstractQosMediator {
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
 
 		this.logMessage(synLog, "Successfully " +
-					"added metadata to message context. " +
-					"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
-		
+				"added metadata to message context. " +
+				"Added priority="+pri+", diffserv="+dif, QosLogType.INFO);
+
 		return true;
 	}
 

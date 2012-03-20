@@ -29,8 +29,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 	private static final Map<String, TRContext> trCtxs = new HashMap<String, TRContext>();
 
 	@Override
-	protected boolean mediateImpl(MessageContext synCtx) {
-		SynapseLog synLog = getLog(synCtx);
+	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 
 		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
 		long initialCapacity = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH)
