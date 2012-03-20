@@ -15,7 +15,6 @@ import org.apache.axiom.om.impl.llom.OMElementImpl;
 import org.apache.axiom.soap.SOAPProcessingException;
 import org.apache.axiom.soap.impl.llom.soap12.SOAP12Factory;
 import org.apache.axis2.AxisFault;
-import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
@@ -36,7 +35,8 @@ public class InMetadataMediatorTest {
 				new SynapseConfiguration(),null);
 		synCtx.setEnvelope(OMAbstractFactory.getSOAP12Factory().createSOAPEnvelope());
 		synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
-		synCtx.setFrom(new EndpointReference(from));
+		((Axis2MessageContext)synCtx).getAxis2MessageContext().setProperty(
+				org.apache.axis2.context.MessageContext.REMOTE_ADDR, from);
 		imm = new InMetadataMediator();
 	}
 	
