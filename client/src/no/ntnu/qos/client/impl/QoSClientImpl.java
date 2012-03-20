@@ -42,6 +42,10 @@ public class QoSClientImpl implements QoSClient {
         this.dataListenerList.remove(listener);
     }
 
+    public List<DataListener> getDataListenerList() {
+        return dataListenerList;
+    }
+
     public Sequencer getSequencer() {
         return sequencer;
     }

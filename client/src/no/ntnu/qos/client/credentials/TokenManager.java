@@ -13,7 +13,7 @@ public interface TokenManager {
 	 * Should take a data object and give it the token it needs
 	 * @param dataObj the data object that needs a token
 	 */
-	public void getToken(DataObject dataObj);
+	public void setTokenInDataObject(DataObject dataObj);
 
     /**
      * Set the credentials of the client
