@@ -19,6 +19,7 @@ import org.apache.synapse.SynapseLog;
  * if not, it will wait until a message finishes sending. 
  * If the message is timed out this mediator will return false, otherwise true.
  * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class ThrottleMediator extends AbstractQosMediator{
@@ -32,18 +33,21 @@ public class ThrottleMediator extends AbstractQosMediator{
 		SynapseLog synLog = getLog(synCtx);
 
 		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
-		TRContext trCtx = trCtxs.get(lastTR);
 		long initialCapacity = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH)
 				/minBandwidthPerMessage;
 		QosContext qCtx;
 		long timeStarted = System.currentTimeMillis();
 		try {
 			qCtx = new DefaultQosContext(synCtx);
-			if(trCtx==null){
-				trCtx = new TRContextImpl(initialCapacity>1 ? initialCapacity:1);
-				trCtxs.put(lastTR, trCtx);
-			}else{
-				trCtx.setAvailableBandwidth(initialCapacity>1 ? initialCapacity:1);
+			TRContext trCtx = null;
+			synchronized (trCtxs) {
+				trCtx = trCtxs.get(lastTR);
+				if(trCtx==null){
+					trCtx = new TRContextImpl(initialCapacity>1 ? initialCapacity:1);
+					trCtxs.put(lastTR, trCtx);
+				}else{
+					trCtx.setAvailableBandwidth(initialCapacity>1 ? initialCapacity:1);
+				}
 			}
 			while(System.currentTimeMillis()-timeStarted<timeout && 
 					(!qCtx.useTTL() || qCtx.getTimeToLive()>0)){
