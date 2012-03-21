@@ -10,6 +10,7 @@ public interface ReceiveObject {
 	 * Receive method for a specific request.
 	 * NOTE: Should be implemented as a blocking method.
 	 * @return XML message from the service
+	 * @throws InterruptedException 
 	 */
-	public String receive();
+	public String receive() throws InterruptedException;
 }
