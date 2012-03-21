@@ -16,8 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com - 21/03/12
  */
 public class TokenImplTest {
-    static TokenImpl tokenImpl;
-    static String token;
+    static String token, token2;
     static URI destination, destination2;
     static long validUntil, validUntil2;
     static Token testToken, testToken2;
@@ -26,6 +25,7 @@ public class TokenImplTest {
     public static void setup() throws URISyntaxException {
 
         token = "token - blah blah";
+        token2 = "This is the 2. token";
         destination = new URI("http://127.0.0.25/");
         destination2 = new URI("http://127.0.0.26/");
         validUntil = System.currentTimeMillis()+3600000;
@@ -33,7 +33,6 @@ public class TokenImplTest {
         testToken = new TokenImpl(token, validUntil, destination);
         testToken2 = new TokenImpl(token, validUntil2, destination2);
 
-        tokenImpl = new TokenImpl(token, validUntil, destination);
     }
 
     @Test
@@ -44,12 +43,14 @@ public class TokenImplTest {
 
     @Test
     public void getDestinationTest(){
-         assertEquals("Destinations Match", destination, tokenImpl.getDestination());
+        assertEquals("Destinations Match", destination, testToken.getDestination());
+        assertEquals("Destinations Match", destination2, testToken2.getDestination());
     }
 
     @Test
     public void getXMLTest(){
-         assertEquals("Tokens comparison", token, tokenImpl.getXML());
+        assertEquals("Tokens comparison", token, testToken.getXML());
+        assertEquals("Tokens comparison", token2, testToken2.getXML());
     }
 
     @Test

@@ -27,7 +27,7 @@ public class CredentialStorageImplTest {
 	static String user2, role2, pass2;
 
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public static void setup() throws Exception {
 		user = "testUser";
 		role = "testRole";
 		pass = "testPas";
@@ -48,14 +48,14 @@ public class CredentialStorageImplTest {
 	}
 
 	@Test
-	public void testStorageHasTokens() throws URISyntaxException {
+	public void storageHasTokenTest() throws URISyntaxException {
 		assertTrue(cS.hasToken(uri1));
 		assertFalse(cS.hasToken(uri2)); //Should be invalid because it's expired!
 		assertFalse(cS.hasToken(new URI("http://127.0.0.1/")));
 	}
 
 	@Test
-	public void testStorageGivesCorrectTokens() {
+	public void storageGivesCorrectTokensTest() {
 		assertEquals(cS.getToken(uri1), testToken1);
 		Token tester = cS.getToken(uri1);
 		assertEquals(tester.getXML(), token);
@@ -68,7 +68,7 @@ public class CredentialStorageImplTest {
 
 	@SuppressWarnings("static-access")
 	@Test
-	public void testCredentials() {
+	public void storedCredentialsTest() {
 		String[] creds = cS.getCredentials();
 		assertTrue(creds[cS.USERNAME].equals(user));
 		assertTrue(creds[cS.ROLE].equals(role));
