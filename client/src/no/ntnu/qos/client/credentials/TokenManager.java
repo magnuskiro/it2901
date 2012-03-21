@@ -30,4 +30,9 @@ public interface TokenManager {
      */
     public Token getToken(DataObject dataObject);
 
+    /**
+     *
+     * @return String[] - the credentials array that is stored in the CredentialStorage
+     */
+    public String[] getCredentials();
 }

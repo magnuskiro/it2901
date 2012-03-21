@@ -3,7 +3,8 @@ package no.ntnu.qos.client.net.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.net.ClientMSCommunicator;
-import no.ntnu.qos.client.net.RouteInfo;
+import no.ntnu.qos.ms.MSCommunicator;
+import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
 
 /**
  * Implementation of the no.ntnu.qos.client.net.MSCommunicator interface
@@ -45,10 +46,8 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 		
 		@Override
 		public void run() {
-            ClientMSCommunicator clientMSCommunicator = new ClientMSCommunicatorImpl(msXML);
-            dataObj.setRoutingInfo((RouteInfo) clientMSCommunicator.getRouteInfo(dataObj));
-			//MSCommunicator msComm = new MSCommunicatorImpl(msXML);
-			//dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
+			MSCommunicator msComm = new MSCommunicatorImpl(msXML);
+			dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
 		}
 		
 	}
