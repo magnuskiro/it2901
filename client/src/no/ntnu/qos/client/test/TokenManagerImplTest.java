@@ -38,12 +38,22 @@ public class TokenManagerImplTest {
         destination2 = new URI("http://127.0.0.24/");
 
         client = new QoSClientImpl(user, role, password, null);
+        sequencer = client.getSequencer();
         tokenManager = new TokenManagerImpl(user, role, password);
-        sequencer = new SequencerImpl(client, user, role, password);
         dataObject = new DataObject(sequencer, soapFromUser, destination);
         dataObject2 = new DataObject(sequencer, soapFromUser, destination2);
         tokenManager.setTokenInDataObject(dataObject);
         tokenManager.setTokenInDataObject(dataObject2);
+    }
+
+    @Test
+    public void getTokenTest(){
+        tokenManager.setTokenInDataObject(dataObject);
+        tokenManager.setTokenInDataObject(dataObject2);
+        assertNotNull(tokenManager.getToken(dataObject));
+        assertNotNull(tokenManager.getToken(dataObject2));
+        assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
+
     }
 
     @Test
@@ -53,14 +63,6 @@ public class TokenManagerImplTest {
         assertEquals("Username is correct?", "user", credentials[0]); // [0] is the username
         assertEquals("Role is correct?", "role", credentials[1]); // [1] is the role
         assertEquals("Password is correct?", "password", credentials[2]); // [2] is the password
-    }
-
-    @Test
-    public void getTokenTest(){
-        assertNotNull(tokenManager.getToken(dataObject));
-        assertNotNull(tokenManager.getToken(dataObject2));
-        assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
-
     }
 
     @Test

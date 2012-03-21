@@ -28,9 +28,6 @@ public class QoSClientImpl implements QoSClient {
     @Override
     public ReceiveObject sendData(String data, URI destination) {
        return sequencer.sendData(data, destination);
-        // this is probably not correct.
-        // where does the ReceiveObject come from?
-      
     }
 
     @Override
@@ -47,7 +44,8 @@ public class QoSClientImpl implements QoSClient {
         return dataListenerList;
     }
 
+    @Override
     public Sequencer getSequencer() {
-        return sequencer;
+        return this.sequencer;
     }
 }

@@ -37,6 +37,12 @@ public interface QoSClient {
 	 */
 	public void removeListener(DataListener listener);
 
+    /**
+     *
+     * @return Sequencer - the sequencer for this instance of client library.
+     */
+    public Sequencer getSequencer();
+
     // should this interface contain send() and receive()?
 
 }
