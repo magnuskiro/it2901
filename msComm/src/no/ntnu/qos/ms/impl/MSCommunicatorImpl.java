@@ -31,6 +31,7 @@ public class MSCommunicatorImpl implements MSCommunicator {
 	 * reads an xml file and stores RoutingInfo in a Map<URI, RoutingInfo>.
 	 * @param msXML the path to and file name of the file to read.
 	 */
+	@SuppressWarnings("unchecked")
 	public MSCommunicatorImpl(String msXML) {
 		InputStream in;
 		try {
