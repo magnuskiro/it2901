@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.testing;
+package no.ntnu.qos.client.test;
 
 import static org.junit.Assert.*;
 
@@ -43,13 +43,11 @@ public class ReplyObjectImplTest {
 					this.wait(3000);
 				}
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
 				recieve.setReply(result);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

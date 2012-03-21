@@ -14,7 +14,7 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 
         // TODO: has to be changed to the correct variables
         // takes "token" - valid Long, destination URI
-        return new TokenImpl("token", 1L, destination);
+        return new TokenImpl("token", 1000000L, destination);
 	}
 
 }

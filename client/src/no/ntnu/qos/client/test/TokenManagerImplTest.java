@@ -13,7 +13,6 @@ import no.ntnu.qos.client.impl.SequencerImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 
@@ -22,10 +21,12 @@ import java.net.URISyntaxException;
  */
 public class TokenManagerImplTest {
     static String user, role, password, soapFromUser;
-    static URI destination;
+    static URI destination, destination2;
     static TokenManager tokenManager;
     static Sequencer sequencer;
     static QoSClient client;
+    static DataObject dataObject;
+    static DataObject dataObject2;
 
     @BeforeClass
     public static void setup() throws URISyntaxException {
@@ -34,9 +35,15 @@ public class TokenManagerImplTest {
         password = "password";
         soapFromUser = "Soap test data";
         destination = new URI("http://127.0.0.25/");
+        destination2 = new URI("http://127.0.0.24/");
+
         client = new QoSClientImpl(user, role, password, null);
         tokenManager = new TokenManagerImpl(user, role, password);
         sequencer = new SequencerImpl(client, user, role, password);
+        dataObject = new DataObject(sequencer, soapFromUser, destination);
+        dataObject2 = new DataObject(sequencer, soapFromUser, destination2);
+        tokenManager.setTokenInDataObject(dataObject);
+        tokenManager.setTokenInDataObject(dataObject2);
     }
 
     @Test
@@ -58,14 +65,16 @@ public class TokenManagerImplTest {
 
     @Test
     public void getTokenTest(){
-
+        assertNotNull(tokenManager.getToken(dataObject));
+        assertNotNull(tokenManager.getToken(dataObject2));
+        assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
     }
 
     @Test
     public void setTokenInDataObjectTest(){
-        DataObject dataObject = new DataObject(sequencer, soapFromUser, destination);
-        tokenManager.setTokenInDataObject(dataObject);
-
+        // Todo change the checked object when the samlCommunicatorImpl is complete so we know that the Tokens are created correctly.
+        assertEquals("Set token in DataObject", "token", dataObject.getSamlToken().getXML());
+        assertEquals("Set token in DataObject", destination, dataObject.getSamlToken().getDestination());
     }
 
 
