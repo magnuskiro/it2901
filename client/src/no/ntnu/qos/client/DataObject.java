@@ -135,7 +135,7 @@ public class DataObject {
 		return false;
 	}
 
-    public Token getSamlTok() {
+    public Token getSamlToken() {
         return samlTok;
     }
 }
