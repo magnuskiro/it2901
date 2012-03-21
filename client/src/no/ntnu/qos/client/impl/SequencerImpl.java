@@ -2,6 +2,7 @@ package no.ntnu.qos.client.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.QoSClient;
+import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.SanityChecker;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
@@ -43,7 +44,7 @@ public class SequencerImpl implements Sequencer {
     }
 
     @Override
-    public void sendData(String data, URI destination) {
+    public ReceiveObject sendData(String data, URI destination) {
     	DataObject dataObj = new DataObject(this, data, destination);
 
     	//fetches various data the DataObject needs 
@@ -51,6 +52,8 @@ public class SequencerImpl implements Sequencer {
     	msComm.getRouteInfo(dataObj);
     	sanityChecker.isSane(dataObj);
     	
+    	//not there yet...
+    	return new ReceiveObjectImpl();
     }
 
     @Override

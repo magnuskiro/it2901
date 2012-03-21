@@ -27,10 +27,10 @@ public class QoSClientImpl implements QoSClient {
 
     @Override
     public ReceiveObject sendData(String data, URI destination) {
-        sequencer.sendData(data, destination);
+       return sequencer.sendData(data, destination);
         // this is probably not correct.
         // where does the ReceiveObject come from?
-        return new ReceiveObjectImpl();
+      
     }
 
     @Override

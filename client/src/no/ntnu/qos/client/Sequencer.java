@@ -24,7 +24,7 @@ public interface Sequencer {
 	 * @param data SOAP message to send
 	 * @param destination The URI of the service to send it to
 	 */
-	public void sendData(String data, URI destination);
+	public ReceiveObject sendData(String data, URI destination);
 	
 	/**
 	 * Send a completed DataObject
