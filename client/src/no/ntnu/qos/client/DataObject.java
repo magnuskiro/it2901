@@ -19,7 +19,7 @@ public class DataObject {
 	private int			diffServ;
 	private int			priority;
 	private Sequencer	sequencer;
-	private Token		samlTok;
+	private Token samlToken;
 	private RoutingInfo routeInfo;
 	private String		soapFromClient;
 	private URI			destination;
@@ -69,9 +69,9 @@ public class DataObject {
 	 * @param token	- the Token
 	 */
 	public void setToken(Token token){
-		samlTok		= token;
-		diffServ	= samlTok.getDiffServ();
-		priority	= samlTok.getPriority();
+		samlToken = token;
+		diffServ	= samlToken.getDiffServ();
+		priority	= samlToken.getPriority();
 
 		if (isReadyToSend()){
 			sequencer.sendData(this);
@@ -124,18 +124,18 @@ public class DataObject {
 	 * @return - true if ready to send, false if not 
 	 */
 	private boolean isReadyToSend(){
-		if(sane && routeInfo != null && samlTok != null){
+		if(sane && routeInfo != null && samlToken != null){
 			/* token may become invalid before other criteria are met
 			 * TODO: trigger a token refresh if token is invalid?
 			 */
-			if(samlTok.isValid()){
+			if(samlToken.isValid()){
 				return true;
 			}
 		}
 		return false;
 	}
 
-    public Token getSamlTok() {
-        return samlTok;
+    public Token getSamlToken() {
+        return samlToken;
     }
 }

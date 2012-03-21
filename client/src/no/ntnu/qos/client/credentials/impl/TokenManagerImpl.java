@@ -5,18 +5,17 @@ import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 
+/**
+ * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com
+ */
 public class TokenManagerImpl implements TokenManager {
-	CredentialStorage credentialStorage;
+	private CredentialStorage credentialStorage;
     SAMLCommunicatorImpl samlCommunicator;
 
     public TokenManagerImpl(String user, String role, String password) {
 		credentialStorage = new CredentialStorageImpl(user, role, password);
         samlCommunicator = new SAMLCommunicatorImpl();
 	}
-
-    public CredentialStorage getCredentialStorage() {
-        return credentialStorage;
-    }
 
     @Override
 	public void setTokenInDataObject(DataObject dataObject) {
@@ -37,5 +36,7 @@ public class TokenManagerImpl implements TokenManager {
     public Token getToken(DataObject dataObject) {
         return credentialStorage.getToken(dataObject.getDestination());
     }
+
+
 
 }

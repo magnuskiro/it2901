@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.testing;
+package no.ntnu.qos.client.test;
 
 import static org.junit.Assert.*;
 
@@ -6,33 +6,25 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
 
-import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.credentials.*;
+import no.ntnu.qos.client.credentials.impl.CredentialStorageImpl;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
-import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
-
-import no.ntnu.qos.client.impl.QoSClientImpl;
-import no.ntnu.qos.client.impl.SequencerImpl;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 /**
  * 
  * @author Stig Tore
- *	Testing classes for the credentials system
+ *	Testing the CredentialStorageImpl class.
  */
-public class CredentialsTest {
-	static TokenManager tM;
+public class CredentialStorageImplTest {
 	static CredentialStorage cS;
-	static SequencerImpl sQ;
-	static QoSClient client;
 	static String token;
 	static URI uri1, uri2;
 	static long validUntil1, validUntil2;
 	static Token testToken1, testToken2;
 	static String user, role, pass;
 	static String user2, role2, pass2;
-
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -50,14 +42,9 @@ public class CredentialsTest {
 		testToken1 = new TokenImpl(token, validUntil1, uri1);
 		testToken2 = new TokenImpl(token, validUntil2, uri2);
 
-		tM = new TokenManagerImpl(user, role, pass);
-		cS = ((TokenManagerImpl)tM).getCredentialStorage();
+		cS = new CredentialStorageImpl(user, role, pass);
 		cS.storeToken(testToken1);
 		cS.storeToken(testToken2);
-
-		client = new QoSClientImpl(user, role, pass, null);
-		sQ = new SequencerImpl(client);
-		sQ.setTokenManager(tM);
 	}
 
 	@Test
@@ -96,10 +83,11 @@ public class CredentialsTest {
 
 	@SuppressWarnings("static-access")
 	@Test
-	public void testClientSetCreds(){
-		client.setCredentials(user2, role2, pass2);
+	public void setClientCredentialsInStorageTest(){
+		cS.setCredentials(user2, role2, pass2);
 
 		String[] creds = cS.getCredentials();
+        System.out.print(creds[2]);
 		assertTrue(creds[cS.USERNAME].equals(user2));
 		assertTrue(creds[cS.ROLE].equals(role2));
 		assertTrue(creds[cS.PASSWORD].equals(pass2));
