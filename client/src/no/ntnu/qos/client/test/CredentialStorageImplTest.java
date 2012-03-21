@@ -48,12 +48,6 @@ public class CredentialStorageImplTest {
 	}
 
 	@Test
-	public void testTokensForValidity() {
-		assertTrue(testToken1.isValid());
-		assertFalse(testToken2.isValid());
-	}
-
-	@Test
 	public void testStorageHasTokens() throws URISyntaxException {
 		assertTrue(cS.hasToken(uri1));
 		assertFalse(cS.hasToken(uri2)); //Should be invalid because it's expired!
