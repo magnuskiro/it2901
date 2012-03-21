@@ -31,7 +31,7 @@ public class TokenImplTest {
         validUntil = System.currentTimeMillis()+3600000;
         validUntil2 = System.currentTimeMillis()-35000;
         testToken = new TokenImpl(token, validUntil, destination);
-        testToken2 = new TokenImpl(token, validUntil2, destination2);
+        testToken2 = new TokenImpl(token2, validUntil2, destination2);
 
     }
 
@@ -49,8 +49,8 @@ public class TokenImplTest {
 
     @Test
     public void getXMLTest(){
-        assertEquals("Tokens comparison", token, testToken.getXML());
-        assertEquals("Tokens comparison", token2, testToken2.getXML());
+        assertEquals("Token comparison", token, testToken.getXML());
+        assertEquals("Token2 comparison", token2, testToken2.getXML());
     }
 
     @Test

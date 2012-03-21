@@ -48,10 +48,19 @@ public class TokenManagerImplTest {
 
     @Test
     public void constructorCredentialsTest(){
-        String[] credentials = tokenManager.getCredentials();
+        TokenManager tokenManager1 = new TokenManagerImpl(user, role, password);
+        String[] credentials = tokenManager1.getCredentials();
         assertEquals("Username is correct?", "user", credentials[0]); // [0] is the username
         assertEquals("Role is correct?", "role", credentials[1]); // [1] is the role
         assertEquals("Password is correct?", "password", credentials[2]); // [2] is the password
+    }
+
+    @Test
+    public void getTokenTest(){
+        assertNotNull(tokenManager.getToken(dataObject));
+        assertNotNull(tokenManager.getToken(dataObject2));
+        assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
+
     }
 
     @Test
@@ -61,13 +70,6 @@ public class TokenManagerImplTest {
         assertEquals("Changed the username", "newUser", credentials[0]); // [0] is the username
         assertEquals("Changed the role", "newRole", credentials[1]); // [1] is the role
         assertEquals("changed the password", "newPassword", credentials[2]); // [2] is the password
-    }
-
-    @Test
-    public void getTokenTest(){
-        assertNotNull(tokenManager.getToken(dataObject));
-        assertNotNull(tokenManager.getToken(dataObject2));
-        assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
     }
 
     @Test

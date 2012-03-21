@@ -10,7 +10,7 @@ public class SequencerTest {
 
 
     @BeforeClass
-    public void setup(){
+    public static void setup(){
 
     }
 
