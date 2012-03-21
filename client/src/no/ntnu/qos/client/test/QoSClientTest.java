@@ -11,7 +11,7 @@ import org.junit.Test;
 public class QoSClientTest {
 
     @BeforeClass
-    public void setup(){
+    public static void setup(){
 
     }
 
