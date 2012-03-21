@@ -31,7 +31,8 @@ public class MSMediator extends AbstractQosMediator {
 			this.logMessage(synLog, "Endpoint address: " 
 					+ endpoint, QosLogType.INFO);
 			RoutingInfo ri = msc.getRoutingInfo(new URI(endpoint));
-			synCtx.setProperty(MediatorConstants.QOS_BANDWIDTH, (long)ri.getBandwidth());
+			synCtx.setProperty(MediatorConstants.QOS_BANDWIDTH, 
+					(long)(ri.getBandwidth()>=0 ? ri.getBandwidth()*1024:-1));
 			synCtx.setProperty(MediatorConstants.QOS_LAST_TR, ri.getLastTR());
 			this.logMessage(synLog, "Successfully set " +
 					"Routing Info: bandwidth="+ri.getBandwidth()+

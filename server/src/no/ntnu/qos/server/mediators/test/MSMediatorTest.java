@@ -18,6 +18,13 @@ public class MSMediatorTest {
 	private static final MSMediator msm = new MSMediator();
 	private static final String ADDRESS = "125.50.50.73";
 	private static final String ADDRESS_LOCAL = "127.0.0.1";
+	private static final long BAN1 = (long)(123.5*1024);
+	private static final long BAN2 = -1;
+	private static final String LASTTR1 = "bob";
+	private static final String LASTTR2 = "";
+
+
+
 
 	@BeforeClass
 	public static void setupMessageContext(){
@@ -31,13 +38,13 @@ public class MSMediatorTest {
 		assertNull(synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH));
 		assertNull(synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
 		assertTrue(msm.mediate(synCtx));
-		assertEquals(123.5, (Double)synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH), 0);
-		assertEquals("bob", (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
+		assertEquals(BAN1, synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH));
+		assertEquals(LASTTR1, (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
 		
 		synCtx.setProperty(MediatorConstants.QOS_FROM_ADDR, ADDRESS_LOCAL);
 		assertTrue(msm.mediate(synCtx));
-		assertEquals(-1, (Double)synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH),0);
-		assertEquals("", (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
+		assertEquals(BAN2, synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH));
+		assertEquals(LASTTR2, (String)synCtx.getProperty(MediatorConstants.QOS_LAST_TR));
 
 	}
 
