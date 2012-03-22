@@ -19,10 +19,11 @@ public class DataObject {
 	private int			diffServ;
 	private int			priority;
 	private Sequencer	sequencer;
-	private Token samlToken;
+	private Token		samlToken;
 	private RoutingInfo routeInfo;
 	private String		soapFromClient;
 	private URI			destination;
+	private ReceiveObject receiveObj;//added here to let the messageHandler get access to it 
 
 
 	/**
@@ -135,7 +136,27 @@ public class DataObject {
 		return false;
 	}
 
+	/**
+	 * returns the SAML token in this object
+	 * @return
+	 */
     public Token getSamlToken() {
         return samlToken;
     }
+
+    /**
+     * sets the receiveObject that the reply to this message will be returned in
+     * @param receiveObj
+     */
+	public void setReceiveObject(ReceiveObject receiveObj) {
+		this.receiveObj = receiveObj;		
+	}
+	
+	/**
+	 * gets the receiveObject to return the reply in
+	 * @return
+	 */
+	public ReceiveObject getReceiveObject(){
+		return receiveObj;
+	}
 }

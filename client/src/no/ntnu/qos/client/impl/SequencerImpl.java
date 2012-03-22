@@ -52,8 +52,10 @@ public class SequencerImpl implements Sequencer {
     	msComm.getRouteInfo(dataObj);
     	sanityChecker.isSane(dataObj);
     	
-    	//not there yet...
-    	return new ReceiveObjectImpl();
+    	ReceiveObject receiveObj = new ReceiveObjectImpl();
+    	dataObj.setReceiveObject(receiveObj);
+    	
+    	return receiveObj;
     }
 
     @Override
