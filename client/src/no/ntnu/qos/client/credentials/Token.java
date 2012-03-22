@@ -33,4 +33,18 @@ public interface Token {
 	 * @return int priority
 	 */
 	public int getPriority();
+
+    /**
+     * Allows the configuration of the time a token is valid.
+     * expirationTimeBuffer is the long value which is used in (currentTimeMillis() + expirationTimeBuffer) to decide when a token has to be renewed.
+     * @param expirationTimeBuffer - the buffer time a token is alive and needs to be renewed.
+     */
+    public void setExpirationTimeBuffer(long expirationTimeBuffer);
+
+    /**
+     * Allows the configuration of the time a token is valid.
+     * expirationTimeBuffer is the long value which is used in (currentTimeMillis() + expirationTimeBuffer) to decide when a token has to be renewed.
+     * @return expirationTimeBuffer - the buffer time a token is alive and needs to be renewed.
+     */
+    public long getExpirationTimeBuffer();
 }
