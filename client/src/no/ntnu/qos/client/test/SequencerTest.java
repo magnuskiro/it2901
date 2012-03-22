@@ -24,7 +24,8 @@ public class SequencerTest {
     }
 
     @Test
-    public void setCredentials(String username, String role, String password) {
+    public void setCredentials() {
+        // String username, String role, String password
         //todo - test this method.
     }
 
@@ -41,7 +42,8 @@ public class SequencerTest {
     }
 
     @Test
-    public void sendData(DataObject dataObj) {
+    public void sendData() {
+        // DataObject dataObj
         //todo - test this method.
     }
 

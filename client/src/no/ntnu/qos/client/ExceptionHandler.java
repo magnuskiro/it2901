@@ -7,5 +7,6 @@ package no.ntnu.qos.client;
  *
  */
 public interface ExceptionHandler {
+    // no such element exception
 
 }

@@ -21,21 +21,22 @@ public class SequencerImpl implements Sequencer {
 
     QoSClient		qoSClient;
     TokenManager	tokenManager;
-    MessageHandler	msgHandler;
+    MessageHandler messageHandler;
     SanityChecker	sanityChecker;
-    ClientMSCommunicator msComm;
+    ClientMSCommunicator msCommunicator;
     
 
     public SequencerImpl(QoSClient qoSClient, String username, String role, String password) {
         this.qoSClient = qoSClient;
         
         tokenManager	= new TokenManagerImpl(username, role, password);
-        msgHandler		= new MessageHandlerImpl();
+        messageHandler = new MessageHandlerImpl();
         sanityChecker	= new SanitycheckerImpl();
         
         /* TODO: need a way to do this properly, how do we know where the MS is?
          * this implementation only reads an xml-file, but still... */
-        msComm			= new ClientMSCommunicatorImpl(null);
+        // takes the path to the XML file containing the routing info as the argument.
+        msCommunicator = new ClientMSCommunicatorImpl("routingXMLInfoPath");
     }
 
     @Override
@@ -50,9 +51,9 @@ public class SequencerImpl implements Sequencer {
     	ReceiveObject receiveObj = new ReceiveObjectImpl();
     	dataObj.setReceiveObject(receiveObj);
 
-    	//fetches various data the DataObject needs 
+    	//fetches various data the DataObject needs
     	tokenManager.getToken(dataObj);
-    	msComm.getRouteInfo(dataObj);
+    	msCommunicator.getRouteInfo(dataObj);
     	sanityChecker.isSane(dataObj);
     	
     	
@@ -61,19 +62,16 @@ public class SequencerImpl implements Sequencer {
 
     @Override
     public void sendData(DataObject dataObj) {
-    	msgHandler.sendData(dataObj);
+        messageHandler.sendData(dataObj);
     }
 
     @Override
     public void returnData(String data) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // what is this method meant to do? set the return data in some useless place? Describe it in the javadoc properly.
     }
 
     public TokenManager getTokenManager() {
         return tokenManager;
     }
 
-    public void setTokenManager(TokenManager tokenManager) {
-        this.tokenManager = tokenManager;
-    }
 }

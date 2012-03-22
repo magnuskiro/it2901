@@ -14,13 +14,16 @@ public class ReceiveObjectImpl implements ReceiveObject {
 	boolean buffered;
 	BlockingQueue<String> reply;
 	String bufferedReply;
+
 	public ReceiveObjectImpl() {
 		buffered = false;
 		reply = new LinkedBlockingQueue<String>();
 	}
+
 	public void setReply(String rep) throws InterruptedException {
 		reply.put(rep);
 	}
+
     @Override
     public String receive() throws InterruptedException {
     	if(buffered) {

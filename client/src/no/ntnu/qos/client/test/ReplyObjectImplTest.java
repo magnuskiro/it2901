@@ -20,22 +20,23 @@ public class ReplyObjectImplTest {
 
 	@Test
 	public void test() throws InterruptedException {
-		String result = "dumdee";
-		ReceiveObjectImpl rec = new ReceiveObjectImpl();
-		RunningBugger runner = new RunningBugger(rec, result);
+		String result = "This is a string";
+		ReceiveObjectImpl receiveObject = new ReceiveObjectImpl();
+		RunningBugger runner = new RunningBugger(receiveObject, result);
 		new Thread(runner).start();
-		String test = rec.receive();
+		String test = receiveObject.receive();
 		assertTrue(test.equals(result));
 	}
-	
-	
+
 	private class RunningBugger implements Runnable {
-		ReceiveObjectImpl recieve;
+		ReceiveObjectImpl receive;
 		String result;
+
 		public RunningBugger(ReceiveObjectImpl rec, String result) {
-			this.recieve = rec;
+			this.receive = rec;
 			this.result = result;
 		}
+
 		@Override
 		public void run() {
 			try {
@@ -46,7 +47,7 @@ public class ReplyObjectImplTest {
 				e.printStackTrace();
 			}
 			try {
-				recieve.setReply(result);
+                receive.setReply(result);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

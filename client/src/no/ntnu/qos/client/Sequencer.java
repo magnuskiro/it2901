@@ -33,10 +33,9 @@ public interface Sequencer {
 	public void sendData(DataObject dataObj);
 	
 	/**
-	 * Return data from the service
+	 * Return data from the service - to where?
 	 * @param data The SOAP message the service returns
 	 */
 	public void returnData(String data);
 
-	public void setTokenManager(TokenManager tM);
 }

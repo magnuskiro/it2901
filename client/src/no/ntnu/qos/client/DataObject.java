@@ -84,8 +84,7 @@ public class DataObject {
 	 * @return	- a SOAP message
 	 */
 	public String getSoap(){
-		//TODO
-		return "";
+		return this.soapFromClient;
 	}
 
 	/**
@@ -125,13 +124,13 @@ public class DataObject {
 	 * @return - true if ready to send, false if not 
 	 */
 	private boolean isReadyToSend(){
-		if(sane && routeInfo != null && samlToken != null){
+		if(sane && routeInfo != null && samlToken != null && samlToken.isValid()
+                && priority!=0 && diffServ!=0 && destination!=null
+                ){
 			/* token may become invalid before other criteria are met
 			 * TODO: trigger a token refresh if token is invalid?
 			 */
-			if(samlToken.isValid()){
-				return true;
-			}
+            return true;
 		}
 		return false;
 	}

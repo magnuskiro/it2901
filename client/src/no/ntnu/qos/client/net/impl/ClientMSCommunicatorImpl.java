@@ -15,14 +15,14 @@ import no.ntnu.qos.ms.impl.MSCommunicatorImpl;
 public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 
 	
-	private String msXML;
+	private String routingXMLInfoPath;
 	
 	/**
 	 * main constructor
-	 * @param newMS - path of the xml file containing the routing info
+	 * @param routingXMLInfoPath - path of the xml file containing the routing info
 	 */
-	public ClientMSCommunicatorImpl(String newMS){
-		msXML	= newMS;
+	public ClientMSCommunicatorImpl(String routingXMLInfoPath){
+		this.routingXMLInfoPath = routingXMLInfoPath;
 	}
 	
 	@Override
@@ -32,8 +32,6 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 
 	/**
 	 * private runnable that will be returned by the getRouteInfo method
-	 * @author Håvard
-	 *
 	 */
 	private class RouteFetcher implements Runnable{
 
@@ -46,7 +44,7 @@ public class ClientMSCommunicatorImpl implements ClientMSCommunicator{
 		
 		@Override
 		public void run() {
-			MSCommunicator msComm = new MSCommunicatorImpl(msXML);
+			MSCommunicator msComm = new MSCommunicatorImpl(routingXMLInfoPath);
 			dataObj.setRoutingInfo(msComm.getRoutingInfo(dataObj.getDestination()));
 		}
 		
