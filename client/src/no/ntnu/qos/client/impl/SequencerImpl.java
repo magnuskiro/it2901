@@ -46,14 +46,15 @@ public class SequencerImpl implements Sequencer {
     @Override
     public ReceiveObject sendData(String data, URI destination) {
     	DataObject dataObj = new DataObject(this, data, destination);
+    	
+    	ReceiveObject receiveObj = new ReceiveObjectImpl();
+    	dataObj.setReceiveObject(receiveObj);
 
     	//fetches various data the DataObject needs 
     	tokenManager.getToken(dataObj);
     	msComm.getRouteInfo(dataObj);
     	sanityChecker.isSane(dataObj);
     	
-    	ReceiveObject receiveObj = new ReceiveObjectImpl();
-    	dataObj.setReceiveObject(receiveObj);
     	
     	return receiveObj;
     }
