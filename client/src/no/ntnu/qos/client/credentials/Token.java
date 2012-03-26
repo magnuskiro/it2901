@@ -8,26 +8,31 @@ import java.net.URI;
  *
  */
 public interface Token {
+	
 	/**
 	 * Method to get the XML representation of the token
 	 * @return XML data
 	 */
 	public String getXML();
+	
 	/**
 	 * Should check to see if a token is valid
 	 * @return true if valid, false if not.
 	 */
 	public boolean isValid();
+	
 	/**
 	 * Returns the server this token is valid for
 	 * @return URI of the server/service
 	 */
 	public URI getDestination();
+	
 	/**
 	 * Returns the value of the DiffServ field
 	 * @return int of the DiffServ
 	 */
 	public int getDiffServ();
+	
 	/**
 	 * Returns the priority of the connection
 	 * @return int priority
@@ -47,4 +52,16 @@ public interface Token {
      * @return expirationTimeBuffer - the buffer time a token is alive and needs to be renewed.
      */
     public long getExpirationTimeBuffer();
+    
+    /**
+     * Sets the priority of the connection
+     * @param priority
+     */
+    public void setPriority(int priority);
+    
+    /**
+     * Sets the DiffServ field value
+     * @param diffServ
+     */
+    public void setDiffServ(int diffServ);
 }

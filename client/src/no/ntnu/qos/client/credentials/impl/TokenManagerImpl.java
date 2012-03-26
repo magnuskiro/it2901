@@ -6,8 +6,6 @@ import no.ntnu.qos.client.credentials.SAMLCommunicator;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 
-import java.util.NoSuchElementException;
-
 /**
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com
  */

@@ -9,7 +9,6 @@ import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 import no.ntnu.qos.client.impl.QoSClientImpl;
-import no.ntnu.qos.client.impl.SequencerImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

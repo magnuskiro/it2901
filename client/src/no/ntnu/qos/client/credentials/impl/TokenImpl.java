@@ -10,6 +10,8 @@ public class TokenImpl implements Token {
 	long validUntil;
     long expirationTimeBuffer = 30000; // 30000 is default as it resembles 30seconds when used.
 	URI destination;
+	int priority;
+	int diffServ;
 	
 	public TokenImpl(String token, long validUntil, URI destination) {
         // todo - has to be expanded to set the diffserv and priority variables also.
@@ -55,14 +57,22 @@ public class TokenImpl implements Token {
 
     @Override
     public int getDiffServ() {
-        // todo - needs to return a variable containing the diffserv value of this token.
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return diffServ;
     }
 
     @Override
     public int getPriority() {
-        // todo - needs to return a variable containing the priority of this token.
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return priority;
     }
+
+	@Override
+	public void setPriority(int priority) {
+		this.priority = priority;		
+	}
+
+	@Override
+	public void setDiffServ(int diffServ) {
+		this.diffServ = diffServ;
+	}
 
 }

@@ -10,7 +10,6 @@ import no.ntnu.qos.client.credentials.*;
 import no.ntnu.qos.client.credentials.impl.CredentialStorageImpl;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
