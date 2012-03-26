@@ -1,6 +1,5 @@
 package no.ntnu.qos.client.test;
 
-import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;

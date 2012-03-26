@@ -2,8 +2,6 @@ package no.ntnu.qos.client;
 
 import java.net.URI;
 
-import no.ntnu.qos.client.credentials.TokenManager;
-
 /**
  * Interface for the main sequencer of the client library
  * @author Stig Tore
