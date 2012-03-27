@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.NoSuchElementException;
+
 import no.ntnu.qos.server.mediators.impl.PersistentPriorityData;
 
 import org.junit.Test;
@@ -99,6 +100,23 @@ public class PersistentPriorityDataTest {
 		assertFalse(ppd.isUseDefault("testService"));
 		assertEquals(16, ppd.getDiffserv("testRole", "testService"));
 		assertEquals(-1, ppd.getDiffserv("nonexistentrole", "testService"));
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testIllegalArguementExceptionOnPriority() throws IOException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		ppd.setFilename(FILENAME);
+		ppd.readData();
+		ppd.getPriority(null, "");
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testIllegalArguementExceptionOnDiffServ() throws IOException{
+		PersistentPriorityData ppd = new PersistentPriorityData();
+		ppd.setFilename(FILENAME);
+		ppd.readData();
+		
+		ppd.getDiffserv("", null);
 	}
 
 }

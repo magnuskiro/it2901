@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://ws.apache.org/ns/synapse">
     <proxy name="EchoService" transports="http" startOnLoad="true" trace="enable" statistics="enable">
-        <target endpoint="echoservice" outSequence="main">
-            <inSequence>
-                <property name="qosClientRole" value="testRole" scope="default"/>
-                <property name="qosService" value="testService" scope="default"/>
-                <property name="QOS_FROM_ADDR" value="127.0.0.1" scope="default"/>
-                <log/>
-                <send>
-                    <endpoint>
-                        <address uri="http://localhost:8080/EchoService/Echo"/>
-                    </endpoint>
-                </send>
-            </inSequence>
-        </target>
+        <target endpoint="echoservice" inSequence="main" outSequence="main"/>
     </proxy>
     <proxy name="echoservice" transports="https http" startOnLoad="true" trace="disable">
         <target endpoint="echoservice" outSequence="main" faultSequence="fault">
@@ -34,7 +22,13 @@
     </endpoint>
     <sequence name="qos" trace="enable" statistics="enable">
         <log level="full" separator="\n"/>
+        <class name="no.ntnu.qos.server.mediators.impl.SoapPriorityMediator"/>
         <class name="no.ntnu.qos.server.mediators.impl.MSMediator"/>
+        <class name="no.ntnu.qos.server.mediators.impl.DiffservMediator"/>
+        <class name="no.ntnu.qos.server.mediators.impl.ThrottleMediator">
+            <property name="minBandwidthPerMessage" value="512"/>
+            <property name="timeout" value="100"/>
+        </class>
         <send/>
     </sequence>
     <sequence name="fault" trace="enable" statistics="enable">
@@ -48,11 +42,13 @@
     <sequence name="main" trace="enable" statistics="enable">
         <in>
             <log/>
-            <send/>
+            <class name="no.ntnu.qos.server.mediators.impl.InMetadataMediator"/>
+            <property name="qosClientRole" value="testRole" scope="default"/>
+            <property name="qosService" value="testService" scope="default"/>
         </in>
         <out>
             <log/>
-            <class name="no.ntnu.qos.server.mediators.impl.MetadataMediator">
+            <class name="no.ntnu.qos.server.mediators.impl.OutMetadataMediator">
                 <property name="ppdFilename" value="ppd.xml"/>
             </class>
             <store messageStore="PrioritizedStore"/>

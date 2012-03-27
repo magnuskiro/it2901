@@ -1,10 +1,9 @@
 package no.ntnu.qos.ms.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 
 import no.ntnu.qos.ms.MSCommunicator;
 import no.ntnu.qos.ms.RoutingInfo;
@@ -14,15 +13,7 @@ import org.junit.Test;
 
 public class MSCommunicatorImplTest {
 
-	private static String FILENAME;
-
-	public MSCommunicatorImplTest() {
-		if(FILENAME == null){
-			Scanner in = new Scanner(System.in);
-			System.out.println("Where is ppdtest.xml:");
-			FILENAME = in.nextLine();
-		}
-	}
+	private final static String FILENAME = "ppdtest.xml";
 	@Test
 	public void test() throws URISyntaxException {
 		MSCommunicator mscomm = new MSCommunicatorImpl(FILENAME);

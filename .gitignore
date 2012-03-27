@@ -1,5 +1,12 @@
-.aux
-.log
-.out
-.class
-.toc
+*.aux
+*.log
+*.out
+*.class
+*.toc
+*.iml
+*.lof
+
+.idea/*
+out/*
+*/.idea/*
+*/out/*

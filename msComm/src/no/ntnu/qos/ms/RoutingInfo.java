@@ -10,7 +10,7 @@ package no.ntnu.qos.ms;
 public interface RoutingInfo {
 	/**
 	 * 
-	 * @return {@link double} the limiting bandwidth on the path, -1 if no TR on path.
+	 * @return {@link double} the limiting bandwidth on the path as KiB/s, -1 if no TR on path.
 	 */
 	public double getBandwidth();
 	/**

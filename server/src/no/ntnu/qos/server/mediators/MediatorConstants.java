@@ -11,6 +11,8 @@ public final class MediatorConstants {
 	public static final String QOS_BANDWIDTH = "qosBandwidth";
 	public static final String QOS_LAST_TR = "qosLastTR";
 	public static final String QOS_FROM_ADDR = "QOS_FROM_ADDR";
+	public static final String QOS_USE_TTL = "qosUseTTL";
+	public static final String QOS_TTL = "qosTTL";
 	
 	public static final String DEBUG_START = "Start : ";
 	public static final String DEBUG_END = "End : ";

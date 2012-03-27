@@ -12,13 +12,13 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
+import no.ntnu.qos.ms.MSCommunicator;
+import no.ntnu.qos.ms.RoutingInfo;
+
 import org.apache.axiom.om.OMContainer;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMXMLBuilderFactory;
 import org.apache.axiom.om.OMXMLParserWrapper;
-
-import no.ntnu.qos.ms.MSCommunicator;
-import no.ntnu.qos.ms.RoutingInfo;
 
 /**
  * This class reads an xml file and stores RoutingInfo objects in a Map
@@ -31,6 +31,7 @@ public class MSCommunicatorImpl implements MSCommunicator {
 	 * reads an xml file and stores RoutingInfo in a Map<URI, RoutingInfo>.
 	 * @param msXML the path to and file name of the file to read.
 	 */
+	@SuppressWarnings("unchecked")
 	public MSCommunicatorImpl(String msXML) {
 		InputStream in;
 		try {
