@@ -7,5 +7,6 @@
 *.lof
 
 .idea/*
+out/*
 */.idea/*
 */out/*
