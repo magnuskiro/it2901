@@ -42,6 +42,12 @@ public interface QoSClient {
      * @return Sequencer - the sequencer for this instance of client library.
      */
     public Sequencer getSequencer();
+    
+    /**
+     * Informs the interface that the replyObject now contains a reply.
+     * Should trigger a listener at the client
+     */
+    public void Receive();
 
     // should this interface contain send() and receive()?
 

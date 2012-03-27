@@ -1,5 +1,6 @@
 package no.ntnu.qos.client.test;
 
+import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
@@ -16,10 +17,13 @@ import java.net.URISyntaxException;
  */
 public class SequencerTest {
     static Sequencer sequencer;
+    static ExceptionHandler exceptionHandler;
 
     @BeforeClass
     public static void setup(){
-        sequencer = new SequencerImpl(new QoSClientImpl("", "", "", null), "user", "role", "passwd");
+    	//TODO: use a proper ExceptionHandler, test will probably break until it is done
+    	
+        sequencer = new SequencerImpl(new QoSClientImpl("", "", "", null), "user", "role", "passwd", exceptionHandler);
     }
 
     @Test

@@ -1,9 +1,10 @@
 package no.ntnu.qos.client;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import org.apache.http.HttpException;
 
 /**
  * The client to use the client library HAS to implement this interface.
@@ -12,8 +13,32 @@ import org.apache.http.HttpException;
  *
  */
 public interface ExceptionHandler {
-    // no such element exception
-	//TODO: UnknownHostException, IOException, HttpException, NoSuchAlgorithmException, KeyManagementException, InterruptedException
-	//TODO ParseException, SocketException, UnsupportedEncodingException
+	
+	/**
+	 * URI is malformed/invalid
+	 * @param e UnknownHostException
+	 */
+	public void fireUnknownHostException(UnknownHostException e);
+	/**
+	 * Problem reading variables, input, streams or strings
+	 * @param e IOException
+	 */
+	public void fireIOException(IOException e);
+	/**
+	 * Problem with the HTTP connection in the form of timeouts, too many retries, etc.
+	 * @param e org.apache.httpcomponent.HttpException, cast to generic Exception for convenience.
+	 */
+	public void fireHttpException(Exception e);
+	/**
+	 * Problems with the socket, invalid SSL port or socket closed from service due to capacity problems.
+	 * @param e SocketException
+	 */
+	public void fireSocketException(SocketException e);
+	/**
+	 * Input message is invalid or malformed.
+	 * @param e UnsupportedEncodingException
+	 */
+	public void fireUnsupportedEncodingException(UnsupportedEncodingException e);
+	
 
 }
