@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.net.URI;
 import no.ntnu.qos.client.DataObject;
+import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
@@ -26,6 +27,8 @@ public class TokenManagerImplTest {
     static QoSClient client;
     static DataObject dataObject;
     static DataObject dataObject2;
+    static ExceptionHandler exceptionHandler;
+
 
     @BeforeClass
     public static void setup() throws URISyntaxException {
@@ -39,8 +42,9 @@ public class TokenManagerImplTest {
         client = new QoSClientImpl(user, role, password, null);
         sequencer = client.getSequencer();
         tokenManager = new TokenManagerImpl(user, role, password);
-        dataObject = new DataObject(sequencer, soapFromUser, destination);
-        dataObject2 = new DataObject(sequencer, soapFromUser, destination2);
+    	//TODO: use a proper ExceptionHandler, test will probably break until it is done
+        dataObject = new DataObject(sequencer, soapFromUser, destination, exceptionHandler);
+        dataObject2 = new DataObject(sequencer, soapFromUser, destination2, exceptionHandler);
         tokenManager.setTokenInDataObject(dataObject);
         tokenManager.setTokenInDataObject(dataObject2);
     }

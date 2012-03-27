@@ -17,7 +17,7 @@ public class QoSClientImpl implements QoSClient {
     List<DataListener> dataListenerList = new ArrayList<DataListener>();
 
     public QoSClientImpl(String userName, String role, String password, ExceptionHandler exceptionHandler){
-        sequencer = new SequencerImpl(this, userName, role, password);
+        sequencer = new SequencerImpl(this, userName, role, password, exceptionHandler);
     }
 
     @Override
