@@ -46,13 +46,7 @@ public class DefaultQosContext extends AbstractQosContext {
 		if(worker != null){
 			NHttpServerConnection conn = worker.getConn();
 			if(conn instanceof SocketAccessor){
-				try{
-					result = ((SocketAccessor)conn).getSocket();
-					
-				}catch(Exception e){
-					//Catch all exceptions
-					//for now silently discard
-				}
+                result = ((SocketAccessor)conn).getSocket();
 			}
 		}
 		return result;

@@ -20,7 +20,6 @@ public class OutMetadataMediator extends AbstractQosMediator {
 
 
 	private final static PersistentPriorityData ppd = new PersistentPriorityData();
-	//private final List<MediatorProperty> properties = new ArrayList<MediatorProperty>();
 	private static String ppdFilename;
 	@Override
 	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {

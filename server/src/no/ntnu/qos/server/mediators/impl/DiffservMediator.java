@@ -29,14 +29,14 @@ public class DiffservMediator extends AbstractQosMediator {
 		ServerWorker worker = (ServerWorker) msgContext.getProperty(Constants.OUT_TRANSPORT_INFO);
 
 		// DIFFSERV CHANGES
-		NHttpServerConnection conn = worker.getConn();
-		if(conn instanceof SocketAccessor){
+		NHttpServerConnection connection = worker.getConn();
+		if(connection instanceof SocketAccessor){
 			try{
 				Object tc = synCtx.getProperty(MediatorConstants.QOS_DIFFSERV);
 				if(tc != null && tc instanceof Integer){
-					Socket soc = ((SocketAccessor)conn).getSocket();
-					if(soc!=null){
-						soc.setTrafficClass((Integer)tc);
+					Socket socket = ((SocketAccessor)connection).getSocket();
+					if(socket!=null){
+						socket.setTrafficClass((Integer)tc);
 						this.logMessage(synLog, "Successfully set diffserv to: " + tc, QosLogType.INFO);
 					}else{
 						this.logMessage(synLog, "Could not set Diffserv: Socket was null", QosLogType.WARN);
