@@ -13,6 +13,7 @@ import org.apache.http.HttpException;
  */
 public interface ExceptionHandler {
     // no such element exception
-	//TODO: UnknownHostException, IOException, HttpException
+	//TODO: UnknownHostException, IOException, HttpException, NoSuchAlgorithmException, KeyManagementException, InterruptedException
+	//TODO ParseException, SocketException, UnsupportedEncodingException
 
 }
