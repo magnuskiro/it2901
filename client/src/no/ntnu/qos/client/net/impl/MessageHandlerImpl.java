@@ -33,6 +33,7 @@ import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
+import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
 
@@ -53,9 +54,11 @@ import javax.net.ssl.X509TrustManager;
 public class MessageHandlerImpl implements MessageHandler{
 
 	//need an http-thingamajig and possibly other stuff
-
-	public MessageHandlerImpl(){
+	private Sequencer sequencer;
+	
+	public MessageHandlerImpl(Sequencer sequencer){
 		//I is built!
+		this.sequencer = sequencer;
 	}
 
 	@Override

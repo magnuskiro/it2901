@@ -33,7 +33,7 @@ public class SequencerImpl implements Sequencer {
         this.qoSClient = qoSClient;
         
         tokenManager	= new TokenManagerImpl(username, role, password);
-        messageHandler = new MessageHandlerImpl();
+        messageHandler = new MessageHandlerImpl(this);
         sanityChecker	= new SanitycheckerImpl();
         this.exceptionHandler = exceptionHandler;
         
