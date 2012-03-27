@@ -4,6 +4,8 @@
 *.class
 *.toc
 *.iml
-.idea/*
 *.lof
-out/*
+
+.idea/*
+*/.idea/*
+*/out/*
