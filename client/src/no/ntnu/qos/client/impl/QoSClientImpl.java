@@ -48,4 +48,10 @@ public class QoSClientImpl implements QoSClient {
     public Sequencer getSequencer() {
         return this.sequencer;
     }
+
+	@Override
+	public void Receive() {
+		// TODO Auto-generated method stub
+		
+	}
 }
