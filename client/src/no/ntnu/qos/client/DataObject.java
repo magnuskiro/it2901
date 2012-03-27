@@ -24,6 +24,7 @@ public class DataObject {
 	private String		soapFromClient;
 	private URI			destination;
 	private ReceiveObject receiveObj;//added here to let the messageHandler get access to it 
+	private ExceptionHandler exceptionHandler;
 
 
 	/**
@@ -32,10 +33,11 @@ public class DataObject {
 	 * @param soapFromClient	- SOAP message from client
 	 * @param destination	- destination of the message
 	 */
-	public DataObject(Sequencer sequencer, String soapFromClient, URI destination){
+	public DataObject(Sequencer sequencer, String soapFromClient, URI destination, ExceptionHandler exceptionHandler){
 		this.sequencer = sequencer;
 		this.soapFromClient = soapFromClient;
 		this.destination = destination;
+		this.exceptionHandler = exceptionHandler;
 
 	}
 
@@ -157,5 +159,12 @@ public class DataObject {
 	 */
 	public ReceiveObject getReceiveObject(){
 		return receiveObj;
+	}
+	/**
+	 * gets the exception handler defined by the client
+	 * @return ExceptionHandler
+	 */
+	public ExceptionHandler getExceptionHandler() {
+		return exceptionHandler;
 	}
 }

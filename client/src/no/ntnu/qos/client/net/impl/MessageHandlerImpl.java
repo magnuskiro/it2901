@@ -32,6 +32,7 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 import no.ntnu.qos.client.DataObject;
+import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
 
@@ -69,6 +70,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		private int diffServ;
 		private URI destination;
 		private ReceiveObjectImpl recObj;
+		private ExceptionHandler exceptionHandler;
 
 		//HttpCore-related variables
 		private HttpParams params;
@@ -83,6 +85,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			diffServ = data.getDiffServ();
 			destination = data.getDestination();
 			recObj = (ReceiveObjectImpl)(data.getReceiveObject());
+			exceptionHandler = data.getExceptionHandler();
 		}
 
 		@Override
@@ -106,8 +109,8 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				body = new StringEntity(message);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireUnsupportedEncodingException(e);
+				//TODO: Log it
 			}
 			//TODO Fix this to actual propper content type!!
 			((AbstractHttpEntity)body).setContentType("application/x-www-form-urlencoded");
@@ -115,32 +118,34 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				setupSSLSocket();
 			} catch (KeyManagementException e1) {
-				// TODO Auto-generated catch block
+				// This should never happen!
 				e1.printStackTrace();
+				//TODO: Log it
 			} catch (NoSuchAlgorithmException e1) {
-				// TODO Auto-generated catch block
+				// This is near impossible
 				e1.printStackTrace();
+				//TODO: Log it!
 			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				exceptionHandler.fireUnknownHostException(e1);
+				//TODO: Log it
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				exceptionHandler.fireIOException(e1);
+				//TODO: Log it
 			}
 			//Set Traffic class and get certificate
 			try {
 				socket.setTrafficClass(diffServ);
 			} catch (SocketException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireSocketException(e);
+				//TODO: Log it
 			}
 			try {
 				socket.startHandshake();
 				//Bind the shiny socket to be used in the connection
 				conn.bind(socket, params);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			}
 			//Create the request, set parameters and insert message into body.
 			BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST", destination.getPath());
@@ -151,32 +156,32 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				httpexecutor.preProcess(request, httpproc, context);
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireHttpException(e);
+				//TODO: Log it
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			}
 			//Execute request!
 			HttpResponse response = null;
 			try {
 				response = httpexecutor.execute(request, conn, context);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireHttpException(e);
+				//TODO: Log it
 			}
 			//Process the response
 			try {
 				httpexecutor.postProcess(response, httpproc, context);
 			} catch (HttpException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireHttpException(e);
+				//TODO: Log it
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			}
 
 			//Unknown if the reply code is needed by the client
@@ -186,26 +191,29 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				replyBody = EntityUtils.toString(response.getEntity());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				// Service messed up!
 				e.printStackTrace();
+				//TODO: Log it
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			}
 			//Close connection
 			try {
 				conn.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exceptionHandler.fireIOException(e);
+				//TODO: Log it
 			}
 			//Set reply in receiveObject
 			try {
 				recObj.setReply(replyBody);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// Should only happen if either client or client lib halted!
 				e.printStackTrace();
+				//TODO: Log it
 			}
+			//TODO: Add sequencer and tell it about a reply!
 
 		}
 
