@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -209,5 +212,39 @@ public class TestClient implements ExceptionHandler{
 		}else{
 			new TestClient();
 		}
+	}
+
+	@Override
+	public void fireUnknownHostException(UnknownHostException e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fireIOException(IOException e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fireHttpException(Exception e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fireSocketException(SocketException e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fireUnsupportedEncodingException(UnsupportedEncodingException e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void logException(Exception e){
+		logLine("Got exception: "+e.toString()+", "+e.getMessage(), LogType.WARN);
 	}
 }
