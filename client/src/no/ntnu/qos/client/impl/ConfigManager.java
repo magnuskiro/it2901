@@ -24,7 +24,9 @@ public class ConfigManager {
 	public static void setLogging(boolean on) {
 		if(on) {
 			LOGGER.setLevel(Level.FINEST);
+			LOGGER.config("Set Logging to on");
 		} else {
+			LOGGER.config("Set Logging to off");
 			LOGGER.setLevel(Level.SEVERE);
 		}
 	}
@@ -45,8 +47,10 @@ public class ConfigManager {
 				}
 			}
 			LOGGER.addHandler(file);
+			LOGGER.config("Setting Logging to file on");
 		} else {
 			if(file!=null) {
+				LOGGER.config("Setting Logging to file off");
 				LOGGER.removeHandler(file);
 			}
 		}
@@ -56,6 +60,11 @@ public class ConfigManager {
 	 * @param on boolean
 	 */
 	public static void setLogToConsole(boolean on) {
+		if(on) {
+			LOGGER.config("Setting Logging to console on");
+		} else {
+			LOGGER.config("Setting Logging to console off");
+		}
 		LOGGER.setUseParentHandlers(on);
 	}
 	/**
