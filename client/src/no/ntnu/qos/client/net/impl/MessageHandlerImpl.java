@@ -225,6 +225,8 @@ public class MessageHandlerImpl implements MessageHandler{
 			HttpProtocolParams.setContentCharset(params, "UTF-8");
 			HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
 			HttpProtocolParams.setUseExpectContinue(params, false);
+			params.setParameter(RequestSOAPAction.SOAP_Action, 
+					(destination!=null && destination.getPath()!=null) ? "\""+destination.getPath()+"\"":"");
 		}
 
 		private void createProcessor() {
@@ -235,7 +237,8 @@ public class MessageHandlerImpl implements MessageHandler{
 					// Recommended protocol interceptors
 					new RequestConnControl(),
 					new RequestUserAgent(),
-					new RequestExpectContinue()
+					new RequestExpectContinue(),
+					new RequestSOAPAction()
 			});
 		}
 
