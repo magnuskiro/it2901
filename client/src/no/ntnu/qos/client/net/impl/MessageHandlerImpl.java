@@ -35,7 +35,6 @@ import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
@@ -113,7 +112,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				//TODO: Log it
 			}
 			//TODO Fix this to actual propper content type!!
-			((AbstractHttpEntity)body).setContentType("application/x-www-form-urlencoded");
+			((AbstractHttpEntity)body).setContentType("text/xml");
 
 			try {
 				setupSSLSocket();
