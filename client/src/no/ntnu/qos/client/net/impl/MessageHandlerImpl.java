@@ -115,7 +115,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				exceptionHandler.fireUnsupportedEncodingException(e);
 				//TODO: Log it
 			}
-			//TODO Fix this to actual propper content type!!
+			//TODO Fix this to actual proper content type!!
 			((AbstractHttpEntity)body).setContentType("application/x-www-form-urlencoded");
 
 			try {
@@ -216,7 +216,8 @@ public class MessageHandlerImpl implements MessageHandler{
 				e.printStackTrace();
 				//TODO: Log it
 			}
-			//TODO: Add sequencer and tell it about a reply!
+			//informs the sequencer of a reply
+			sequencer.returnData(recObj);
 
 		}
 

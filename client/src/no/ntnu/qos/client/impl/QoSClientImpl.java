@@ -50,8 +50,17 @@ public class QoSClientImpl implements QoSClient {
     }
 
 	@Override
-	public void Receive() {
-		// TODO Auto-generated method stub
-		
+	public void Receive(ReceiveObject recObj) {
+		fireNewData(recObj);		
+	}
+
+	/**
+	 * Informs the listeners of a new reply 
+	 * @param recObj
+	 */
+	private void fireNewData(ReceiveObject recObj) {
+		for(DataListener i : dataListenerList){
+			i.newData(recObj);
+		}
 	}
 }

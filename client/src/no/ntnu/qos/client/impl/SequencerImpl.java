@@ -20,62 +20,62 @@ import java.net.URI;
  */
 public class SequencerImpl implements Sequencer {
 
-    QoSClient			qoSClient;
-    TokenManager		tokenManager;
-    MessageHandler		messageHandler;
-    SanityChecker		sanityChecker;
-    ClientMSCommunicator msCommunicator;
-    ExceptionHandler	exceptionHandler;
-    
+	QoSClient			qoSClient;
+	TokenManager		tokenManager;
+	MessageHandler		messageHandler;
+	SanityChecker		sanityChecker;
+	ClientMSCommunicator msCommunicator;
+	ExceptionHandler	exceptionHandler;
 
-    public SequencerImpl(QoSClient qoSClient, String username, String role, String password,
-    		ExceptionHandler exceptionHandler) {
-        this.qoSClient = qoSClient;
-        
-        tokenManager	= new TokenManagerImpl(username, role, password);
-        messageHandler = new MessageHandlerImpl(this);
-        sanityChecker	= new SanitycheckerImpl();
-        this.exceptionHandler = exceptionHandler;
-        
-        /* TODO: need a way to do this properly, how do we know where the MS is?
-         * this implementation only reads an xml-file, but still... */
-        // takes the path to the XML file containing the routing info as the argument.
-        msCommunicator = new ClientMSCommunicatorImpl("routingXMLInfoPath");
-    }
 
-    @Override
-    public void setCredentials(String username, String role, String password) {
-        tokenManager.setCredentials(username, role, password);
-    }
+	public SequencerImpl(QoSClient qoSClient, String username, String role, String password,
+			ExceptionHandler exceptionHandler) {
+		this.qoSClient = qoSClient;
 
-    @Override
-    public ReceiveObject sendData(String data, URI destination) {
-    	DataObject dataObj = new DataObject(this, data, destination, exceptionHandler);
-    	
-    	ReceiveObject receiveObj = new ReceiveObjectImpl();
-    	dataObj.setReceiveObject(receiveObj);
+		tokenManager	= new TokenManagerImpl(username, role, password);
+		messageHandler = new MessageHandlerImpl(this);
+		sanityChecker	= new SanitycheckerImpl();
+		this.exceptionHandler = exceptionHandler;
 
-    	//fetches various data the DataObject needs
-    	tokenManager.getToken(dataObj);
-    	msCommunicator.getRouteInfo(dataObj);
-    	sanityChecker.isSane(dataObj);
-    	
-    	
-    	return receiveObj;
-    }
+		/* TODO: need a way to do this properly, how do we know where the MS is?
+		 * this implementation only reads an xml-file, but still... */
+		// takes the path to the XML file containing the routing info as the argument.
+		msCommunicator = new ClientMSCommunicatorImpl("routingXMLInfoPath");
+	}
 
-    @Override
-    public void sendData(DataObject dataObj) {
-        messageHandler.sendData(dataObj);
-    }
+	@Override
+	public void setCredentials(String username, String role, String password) {
+		tokenManager.setCredentials(username, role, password);
+	}
 
-    @Override
-    public void returnData(String data) {
-        // what is this method meant to do? set the return data in some useless place? Describe it in the javadoc properly.
-    }
+	@Override
+	public ReceiveObject sendData(String data, URI destination) {
+		DataObject dataObj = new DataObject(this, data, destination, exceptionHandler);
 
-    public TokenManager getTokenManager() {
-        return tokenManager;
-    }
+		ReceiveObject receiveObj = new ReceiveObjectImpl();
+		dataObj.setReceiveObject(receiveObj);
+
+		//fetches various data the DataObject needs
+		tokenManager.getToken(dataObj);
+		msCommunicator.getRouteInfo(dataObj);
+		sanityChecker.isSane(dataObj);
+
+
+		return receiveObj;
+	}
+
+	@Override
+	public void sendData(DataObject dataObj) {
+		messageHandler.sendData(dataObj);
+	}
+
+	@Override
+	public void returnData(ReceiveObject recObj) {
+		qoSClient.Receive(recObj);
+	}
+
+	public TokenManager getTokenManager() {
+		return tokenManager;
+	}
 
 }
