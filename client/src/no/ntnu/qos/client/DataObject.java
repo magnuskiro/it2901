@@ -46,7 +46,7 @@ public class DataObject {
 	 * criteria are met
 	 * @param sane	- true if data is sane
 	 */
-	public void setSane(boolean sane){
+	public synchronized void setSane(boolean sane){
 		this.sane = sane;
 
 		if (isReadyToSend()){
@@ -59,7 +59,7 @@ public class DataObject {
 	 * criteria are met
 	 * @param routeInfo	- routingINfo object obtained from an msCommunicator
 	 */
-	public void setRoutingInfo(RoutingInfo routeInfo){
+	public synchronized void setRoutingInfo(RoutingInfo routeInfo){
 		this.routeInfo = routeInfo;
 
 		if (isReadyToSend()){
@@ -71,7 +71,7 @@ public class DataObject {
 	 * sets the clients SAML-token, sends itself if other criteria are met
 	 * @param token	- the Token
 	 */
-	public void setToken(Token token){
+	public synchronized void setToken(Token token){
 		samlToken = token;
 		diffServ	= samlToken.getDiffServ();
 		priority	= samlToken.getPriority();
@@ -125,7 +125,7 @@ public class DataObject {
 	 * checks if all necessary data/criteria for sending are present/met
 	 * @return - true if ready to send, false if not 
 	 */
-	private boolean isReadyToSend(){
+	private synchronized boolean isReadyToSend(){
 		if(sane && routeInfo != null && samlToken != null && samlToken.isValid()
                 && priority!=0 && diffServ!=0 && destination!=null
                 ){
