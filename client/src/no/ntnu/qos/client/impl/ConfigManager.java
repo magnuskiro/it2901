@@ -6,11 +6,21 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class for managing configuration options 
+ * @author Stig Tore
+ *
+ */
 public class ConfigManager {
+	//Logger variables
 	public static final Logger LOGGER = Logger.getLogger("no.ntnu.qos.client");
 	private static FileHandler file;
 
 
+	/**
+	 * Whether to log anything more important than severe.
+	 * @param on boolean
+	 */
 	public static void setLogging(boolean on) {
 		if(on) {
 			LOGGER.setLevel(Level.FINEST);
@@ -18,6 +28,10 @@ public class ConfigManager {
 			LOGGER.setLevel(Level.SEVERE);
 		}
 	}
+	/**
+	 * Whether to log to file
+	 * @param on boolean
+	 */
 	public static void setLogToFile(boolean on) {
 		if (on) {
 			if (file==null) {
@@ -37,11 +51,16 @@ public class ConfigManager {
 			}
 		}
 	}
+	/**
+	 * Whether to log to console
+	 * @param on boolean
+	 */
 	public static void setLogToConsole(boolean on) {
 		LOGGER.setUseParentHandlers(on);
 	}
 	/**
 	 * Initiate a log
+	 * Defaults to logging off, log to console on and log to file to off.
 	 */
 	public static void initLog() {
 		LOGGER.setLevel(Level.SEVERE);
