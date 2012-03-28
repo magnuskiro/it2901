@@ -10,5 +10,5 @@ public interface DataListener {
 	 * Default receive method
 	 * @param data SOAP data
 	 */
-	public void fireNewData(String data);
+	public void newData(ReceiveObject recObj);
 }

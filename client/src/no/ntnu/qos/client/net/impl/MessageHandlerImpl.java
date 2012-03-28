@@ -36,7 +36,6 @@ import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
@@ -112,12 +111,11 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				body = new StringEntity(message);
 			} catch (UnsupportedEncodingException e) {
-				exceptionHandler.fireUnsupportedEncodingException(e);
+				exceptionHandler.unsupportedEncodingExceptionThrown(e);
 				//TODO: Log it
 			}
 			//TODO Fix this to actual propper content type!!
-			((AbstractHttpEntity)body).setContentType("application/x-www-form-urlencoded");
-
+			((AbstractHttpEntity)body).setContentType("text/xml");
 			try {
 				setupSSLSocket();
 			} catch (KeyManagementException e1) {
@@ -129,17 +127,17 @@ public class MessageHandlerImpl implements MessageHandler{
 				e1.printStackTrace();
 				//TODO: Log it!
 			} catch (UnknownHostException e1) {
-				exceptionHandler.fireUnknownHostException(e1);
+				exceptionHandler.unknownHostExceptionThrown(e1);
 				//TODO: Log it
 			} catch (IOException e1) {
-				exceptionHandler.fireIOException(e1);
+				exceptionHandler.ioExceptionThrown(e1);
 				//TODO: Log it
 			}
 			//Set Traffic class and get certificate
 			try {
 				socket.setTrafficClass(diffServ);
 			} catch (SocketException e) {
-				exceptionHandler.fireSocketException(e);
+				exceptionHandler.socketExceptionThrown(e);
 				//TODO: Log it
 			}
 			try {
@@ -147,7 +145,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				//Bind the shiny socket to be used in the connection
 				conn.bind(socket, params);
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Create the request, set parameters and insert message into body.
@@ -159,10 +157,10 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				httpexecutor.preProcess(request, httpproc, context);
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Execute request!
@@ -170,20 +168,20 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				response = httpexecutor.execute(request, conn, context);
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Process the response
 			try {
 				httpexecutor.postProcess(response, httpproc, context);
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 
@@ -198,14 +196,14 @@ public class MessageHandlerImpl implements MessageHandler{
 				e.printStackTrace();
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Close connection
 			try {
 				conn.close();
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Set reply in receiveObject
@@ -216,7 +214,8 @@ public class MessageHandlerImpl implements MessageHandler{
 				e.printStackTrace();
 				//TODO: Log it
 			}
-			//TODO: Add sequencer and tell it about a reply!
+			//informs the sequencer of a reply
+			sequencer.returnData(recObj);
 
 		}
 
@@ -226,6 +225,8 @@ public class MessageHandlerImpl implements MessageHandler{
 			HttpProtocolParams.setContentCharset(params, "UTF-8");
 			HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
 			HttpProtocolParams.setUseExpectContinue(params, false);
+			params.setParameter(RequestSOAPAction.SOAP_Action, 
+					(destination!=null && destination.getPath()!=null) ? "\""+destination.getPath()+"\"":"");
 		}
 
 		private void createProcessor() {
@@ -236,7 +237,8 @@ public class MessageHandlerImpl implements MessageHandler{
 					// Recommended protocol interceptors
 					new RequestConnControl(),
 					new RequestUserAgent(),
-					new RequestExpectContinue()
+					new RequestExpectContinue(),
+					new RequestSOAPAction()
 			});
 		}
 
