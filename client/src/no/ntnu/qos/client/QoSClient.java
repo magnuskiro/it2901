@@ -49,6 +49,24 @@ public interface QoSClient {
      * @param dataObj	- the ReceiveObject that has received a reply
      */
     public void Receive(ReceiveObject recObj);
+    
+    /**
+     * Inform the ConfigManager whether to log or not.
+     * @param on
+     */
+    public void setLogging(boolean on);
+    
+    /**
+     * Inform the ConfigManager whether to log to file or not.
+     * @param on
+     */
+    public void setLogToFile(boolean on);
+    
+    /**
+     * Inform the ConfigManager whether to log to console or not.
+     * @param on
+     */
+    public void setLogToConsole(boolean on);
 
 
 }

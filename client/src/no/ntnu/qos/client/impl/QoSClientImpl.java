@@ -17,6 +17,7 @@ public class QoSClientImpl implements QoSClient {
     List<DataListener> dataListenerList = new ArrayList<DataListener>();
 
     public QoSClientImpl(String userName, String role, String password, ExceptionHandler exceptionHandler){
+    	ConfigManager.initLog();
         sequencer = new SequencerImpl(this, userName, role, password, exceptionHandler);
     }
 
@@ -62,5 +63,20 @@ public class QoSClientImpl implements QoSClient {
 		for(DataListener i : dataListenerList){
 			i.newData(recObj);
 		}
+	}
+
+	@Override
+	public void setLogging(boolean on) {
+		ConfigManager.setLogging(on);
+	}
+
+	@Override
+	public void setLogToFile(boolean on) {
+		ConfigManager.setLogToFile(on);
+	}
+
+	@Override
+	public void setLogToConsole(boolean on) {
+		ConfigManager.setLogToConsole(on);
 	}
 }
