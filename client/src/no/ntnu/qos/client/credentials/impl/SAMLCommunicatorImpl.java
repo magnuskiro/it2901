@@ -8,8 +8,8 @@ import no.ntnu.qos.client.credentials.Token;
 public class SAMLCommunicatorImpl implements SAMLCommunicator {
 
 	@Override
-	public Token getToken(URI destination, String userName, String password,
-			String role) {
+	public Token getToken(URI destination, String userName, String role,
+			String password) {
         // TODO write the rest of the method. which probably includes the network communication with the identity server.
 
         // Todo -  this method has to set the diffserv and priority in the token before it is returned.
