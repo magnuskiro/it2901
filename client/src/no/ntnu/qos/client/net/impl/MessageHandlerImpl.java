@@ -66,7 +66,11 @@ public class MessageHandlerImpl implements MessageHandler{
 		return new MessageSender(data);
 	}
 
-	//how should this receive replies from httpComponents?
+	/**
+	 * Runnable class for sending and processing messages to a service
+	 * @author Stig Tore
+	 *
+	 */
 	private class MessageSender implements Runnable {
 		//Message-related variables
 		private String message;
@@ -89,10 +93,12 @@ public class MessageHandlerImpl implements MessageHandler{
 			destination = data.getDestination();
 			recObj = (ReceiveObjectImpl)(data.getReceiveObject());
 			exceptionHandler = data.getExceptionHandler();
+			ConfigManager.LOGGER.info("Constructing a runnable MessageSender for dataobject to: "+destination.getHost()+destination.getPath());
 		}
 
 		@Override
 		public void run() {
+			ConfigManager.LOGGER.info("Running message sender to: "+destination.getHost()+destination.getPath());
 			setParams();
 			createProcessor();
 			//Create executor;
@@ -115,7 +121,6 @@ public class MessageHandlerImpl implements MessageHandler{
 				exceptionHandler.unsupportedEncodingExceptionThrown(e);
 				ConfigManager.LOGGER.warning("Illegal message syntax");
 			}
-			//TODO Fix this to actual propper content type!!
 			((AbstractHttpEntity)body).setContentType("text/xml");
 			try {
 				setupSSLSocket();
@@ -164,6 +169,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException proprocessing request");
 			}
+			ConfigManager.LOGGER.info("Ready to send to: "+destination.getHost()+destination.getPath());
 			//Execute request!
 			HttpResponse response = null;
 			try {
@@ -176,6 +182,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				ConfigManager.LOGGER.warning("HttpException while executing request, connection closed?");
 			}
 			//Process the response
+			ConfigManager.LOGGER.info("Response received from: "+destination.getHost()+destination.getPath()+" Processing.");
 			try {
 				httpexecutor.postProcess(response, httpproc, context);
 			} catch (HttpException e) {
@@ -201,6 +208,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				ConfigManager.LOGGER.warning("IOException while parsing reply!");
 			}
 			//Close connection
+			ConfigManager.LOGGER.info("Processing completed, closing connection");
 			try {
 				conn.close();
 			} catch (IOException e) {
@@ -208,6 +216,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				ConfigManager.LOGGER.warning("IOException closing connection");
 			}
 			//Set reply in receiveObject
+			ConfigManager.LOGGER.info("Setting reply and forwarding it");
 			try {
 				recObj.setReply(replyBody);
 			} catch (InterruptedException e) {
@@ -217,7 +226,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			}
 			//informs the sequencer of a reply
 			sequencer.returnData(recObj);
-
 		}
 
 		private void setParams() {
