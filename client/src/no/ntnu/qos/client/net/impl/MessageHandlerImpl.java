@@ -111,7 +111,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				body = new StringEntity(message);
 			} catch (UnsupportedEncodingException e) {
-				exceptionHandler.fireUnsupportedEncodingException(e);
+				exceptionHandler.unsupportedEncodingExceptionThrown(e);
 				//TODO: Log it
 			}
 			//TODO Fix this to actual propper content type!!
@@ -127,17 +127,17 @@ public class MessageHandlerImpl implements MessageHandler{
 				e1.printStackTrace();
 				//TODO: Log it!
 			} catch (UnknownHostException e1) {
-				exceptionHandler.fireUnknownHostException(e1);
+				exceptionHandler.unknownHostExceptionThrown(e1);
 				//TODO: Log it
 			} catch (IOException e1) {
-				exceptionHandler.fireIOException(e1);
+				exceptionHandler.ioExceptionThrown(e1);
 				//TODO: Log it
 			}
 			//Set Traffic class and get certificate
 			try {
 				socket.setTrafficClass(diffServ);
 			} catch (SocketException e) {
-				exceptionHandler.fireSocketException(e);
+				exceptionHandler.socketExceptionThrown(e);
 				//TODO: Log it
 			}
 			try {
@@ -145,7 +145,7 @@ public class MessageHandlerImpl implements MessageHandler{
 				//Bind the shiny socket to be used in the connection
 				conn.bind(socket, params);
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Create the request, set parameters and insert message into body.
@@ -157,10 +157,10 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				httpexecutor.preProcess(request, httpproc, context);
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Execute request!
@@ -168,20 +168,20 @@ public class MessageHandlerImpl implements MessageHandler{
 			try {
 				response = httpexecutor.execute(request, conn, context);
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Process the response
 			try {
 				httpexecutor.postProcess(response, httpproc, context);
 			} catch (HttpException e) {
-				exceptionHandler.fireHttpException(e);
+				exceptionHandler.httpExceptionThrown(e);
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 
@@ -196,14 +196,14 @@ public class MessageHandlerImpl implements MessageHandler{
 				e.printStackTrace();
 				//TODO: Log it
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Close connection
 			try {
 				conn.close();
 			} catch (IOException e) {
-				exceptionHandler.fireIOException(e);
+				exceptionHandler.ioExceptionThrown(e);
 				//TODO: Log it
 			}
 			//Set reply in receiveObject
