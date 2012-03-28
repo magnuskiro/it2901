@@ -33,6 +33,7 @@ import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
+import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
 import java.io.IOException;
@@ -52,9 +53,11 @@ import javax.net.ssl.X509TrustManager;
 public class MessageHandlerImpl implements MessageHandler{
 
 	//need an http-thingamajig and possibly other stuff
-
-	public MessageHandlerImpl(){
+	private Sequencer sequencer;
+	
+	public MessageHandlerImpl(Sequencer sequencer){
 		//I is built!
+		this.sequencer = sequencer;
 	}
 
 	@Override
@@ -113,7 +116,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			}
 			//TODO Fix this to actual propper content type!!
 			((AbstractHttpEntity)body).setContentType("text/xml");
-
 			try {
 				setupSSLSocket();
 			} catch (KeyManagementException e1) {
@@ -212,7 +214,8 @@ public class MessageHandlerImpl implements MessageHandler{
 				e.printStackTrace();
 				//TODO: Log it
 			}
-			//TODO: Add sequencer and tell it about a reply!
+			//informs the sequencer of a reply
+			sequencer.returnData(recObj);
 
 		}
 

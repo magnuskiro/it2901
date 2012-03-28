@@ -31,9 +31,11 @@ public interface Sequencer {
 	public void sendData(DataObject dataObj);
 	
 	/**
-	 * Return data from the service - to where?
-	 * @param data The SOAP message the service returns
+	 * Return data from the service to the client.
+	 * passes it on to the QoSClient
+	 * @param dataObj	- the ReceiveObject that has received a reply
 	 */
-	public void returnData(String data);
+	public void returnData(ReceiveObject recObj);
+
 
 }
