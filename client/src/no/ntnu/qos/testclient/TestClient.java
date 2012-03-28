@@ -26,7 +26,9 @@ public class TestClient implements ExceptionHandler{
 		INFO, WARN, SEVERE;
 	}
 	private final String DO_LOG = "doLog";
+	private final String LOG_TO_FILE = "logToFile";
 	private final String FALSE = "false";
+	private final String TRUE = "true";
 	private final String USERNAME = "username";
 	private final String PASSWORD = "password";
 	private final String ROLE = "role";
@@ -91,6 +93,9 @@ public class TestClient implements ExceptionHandler{
 		connection = new QoSClientImpl(config.get(USERNAME),
 				config.get(ROLE), config.get(PASSWORD), this);
 
+		connection.setLogging(config.containsKey(DO_LOG)&&config.get(DO_LOG).equals(TRUE));
+		connection.setLogToFile(config.containsKey(LOG_TO_FILE)&&config.get(LOG_TO_FILE).equals(TRUE));
+		
 		long delay = DEFAULT_DELAY;
 		if(config.containsKey(DELAY)){
 			try{
