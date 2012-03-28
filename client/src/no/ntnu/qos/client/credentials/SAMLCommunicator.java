@@ -17,5 +17,5 @@ public interface SAMLCommunicator {
 	 * @param role			- client role
 	 * @return a valid Token object
 	 */
-	public  Token getToken(URI destination, String userName, String pasword, String role);
+	public  Token getToken(URI destination, String userName, String password, String role);
 }

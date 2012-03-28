@@ -39,7 +39,15 @@ public class TokenManagerImpl implements TokenManager {
 
     @Override
     public Token getToken(DataObject dataObject) {
-        return credentialStorage.getToken(dataObject.getDestination());
+    	if(credentialStorage.hasToken(dataObject.getDestination())){
+    		return credentialStorage.getToken(dataObject.getDestination());
+    	}else{
+    		String[] credentials = credentialStorage.getCredentials();
+    		Token newToken = samlCommunicator.getToken(dataObject.getDestination(),
+    				credentials[0], credentials[1], credentials[2]);
+    		credentialStorage.storeToken(newToken);
+    		return newToken; 
+    	}
     }
 
 
