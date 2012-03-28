@@ -213,38 +213,34 @@ public class TestClient implements ExceptionHandler{
 			new TestClient();
 		}
 	}
-
-	@Override
-	public void fireUnknownHostException(UnknownHostException e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void fireIOException(IOException e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void fireHttpException(Exception e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void fireSocketException(SocketException e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void fireUnsupportedEncodingException(UnsupportedEncodingException e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void logException(Exception e){
 		logLine("Got exception: "+e.toString()+", "+e.getMessage(), LogType.WARN);
+	}
+
+	@Override
+	public void unknownHostExceptionThrown(UnknownHostException e) {
+		logException(e);
+	}
+
+	@Override
+	public void ioExceptionThrown(IOException e) {
+		logException(e);		
+	}
+
+	@Override
+	public void httpExceptionThrown(Exception e) {
+		logException(e);		
+	}
+
+	@Override
+	public void socketExceptionThrown(SocketException e) {
+		logException(e);		
+	}
+
+	@Override
+	public void unsupportedEncodingExceptionThrown(
+			UnsupportedEncodingException e) {
+		logException(e);		
 	}
 }
