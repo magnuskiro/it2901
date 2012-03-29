@@ -3,6 +3,7 @@ package no.ntnu.qos.client.impl;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.SanityChecker;
 
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,28 +12,34 @@ public class SanityCheckerImpl implements SanityChecker{
     private Pattern pattern;
     private Matcher matcher;
 
-    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
-    private static final String PASSWORD_PATTERN = "^[a-z0-9_-]{3,15}$";
-    private static final String ROLE_PATTERN = "^[a-z0-9]{3,15}$";
+    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9_-]{3,15}$";
+    private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9_-]{3,15}$";
+    private static final String ROLE_PATTERN = "^[a-zA-Z0-9_]{3,15}$";
 
 	@Override
 	public void isSane(DataObject data) {
-		// TODO Auto-generated method stub
-		
+        if(isSane(data.getSoap())) {
+            data.setSane(true);
+        } else {
+            try {
+                ((ReceiveObjectImpl)data.getReceiveObject()).setReply("UnsupportedEncodingException");
+            } catch (InterruptedException e) {
+                //Should never happen
+                e.printStackTrace();
+            }
+            UnsupportedEncodingException e = new UnsupportedEncodingException("Sanity Check of message failed");
+            data.getExceptionHandler().unsupportedEncodingExceptionThrown(e);
+        }
 	}
+    public boolean isSane(String data) {
+        return data.trim().startsWith("<?") && (data.toLowerCase().contains("s:envelope") || data.toLowerCase().contains("soap:envelope"));
+    }
 
 	@Override
 	public boolean isSane(String userName, String password, String role) {
 		//userName
-        if(!validUser(userName)) return false;
+       return (validUser(userName) && validPassword(password) && validRole(role));
 
-        //password
-        if(!validPassword(password)) return false;
-
-        //role
-        if(!validRole(role)) return false;
-
-		return true;
 	}
     
     public boolean validUser(String userName){

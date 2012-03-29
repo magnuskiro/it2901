@@ -1,6 +1,5 @@
 package no.ntnu.qos.client.test;
 
-import no.ntnu.qos.client.SanityChecker;
 import no.ntnu.qos.client.impl.SanityCheckerImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -24,11 +23,11 @@ public class SanityCheckerImplTest {
 
     @Before
     public void setUp(){
-        validUserNames = new String[] {"mkyong34", "mkyong_2002", "mkyong-2002" ,"mk3-4_yong"};
+        validUserNames = new String[] {"username", "mkyong34", "mkyong_2002", "mkyong-2002" ,"mk3-4_yong"};
         invalidUserNames = new String[] {"mk", "mk@yong", "mkyong123456789_-"};
-        validPasswords = new String[] {"password1", "abcdefg_-","kake_moms" ,"-keke_ke-"};
-        invalidPasswords = new String[] {"mk", "mk@yong", "123456", "passwordHasIllegalLengthNow"};
-        validRoles = new String[] {"mkyong34", "mkyong_2002", "mkyong-2002" ,"mk3-4_yong"};
+        validPasswords = new String[] {"password", "password1", "abcdefg_-","kake_moms" ,"-keke_ke-"};
+        invalidPasswords = new String[] {"mk", "mk@yong", "passwordHasIllegalLengthNow"};
+        validRoles = new String[] {"Role", "mkyong34", "mkyong_2002", "mkyong2002" ,"mk34_yong"};
         invalidRoles = new String[] {"mk", "mk@yong", "mkyong123456789_-", "mkyong123456789822"};
 
         sanityChecker = new SanityCheckerImpl();
@@ -58,7 +57,7 @@ public class SanityCheckerImplTest {
             assertTrue(sanityChecker.validUser(s));
         }
         for(String s:invalidUserNames){
-            assertFalse(sanityChecker.validRole(s));
+            assertFalse(sanityChecker.validUser(s));
         }
     }
 
@@ -68,7 +67,7 @@ public class SanityCheckerImplTest {
             assertTrue(sanityChecker.validPassword(s));
         }
         for(String s:invalidPasswords){
-            assertFalse(sanityChecker.validRole(s));
+            assertFalse(sanityChecker.validPassword(s));
         }
     }
 

@@ -140,7 +140,7 @@ public class MessageHandlerImpl implements MessageHandler{
 
 			//Pre-process the request, making sure headers are there and are correct
 			try {
-				httpexecutor.preProcess(request, httpproc, context);
+				httpRequestExecutor.preProcess(request, httpProcessor, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException preprocessing request");
@@ -152,7 +152,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			//Execute request!
 			HttpResponse response = null;
 			try {
-				response = httpexecutor.execute(request, conn, context);
+				response = httpRequestExecutor.execute(request, conn, context);
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException while executing request, connection closed?");
@@ -163,7 +163,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			//Process the response
 			ConfigManager.LOGGER.info("Response received from: "+destination.getHost()+destination.getPath()+" Processing.");
 			try {
-				httpexecutor.postProcess(response, httpproc, context);
+				httpRequestExecutor.postProcess(response, httpProcessor, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException processing reply");
@@ -218,7 +218,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		}
 
 		private void createProcessor() {
-			httpproc = new ImmutableHttpProcessor(new HttpRequestInterceptor[] {
+			httpProcessor = new ImmutableHttpProcessor(new HttpRequestInterceptor[] {
 					// Required protocol interceptors
 					new RequestContent(),
 					new RequestTargetHost(),
