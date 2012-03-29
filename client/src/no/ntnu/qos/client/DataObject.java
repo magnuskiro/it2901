@@ -30,6 +30,7 @@ public class DataObject {
 	 * @param sequencer	- the sequencer creating the object
 	 * @param soapFromClient	- SOAP message from client
 	 * @param destination	- destination of the message
+     * @param exceptionHandler
 	 */
 	public DataObject(Sequencer sequencer, String soapFromClient, URI destination, ExceptionHandler exceptionHandler){
 		this.sequencer = sequencer;

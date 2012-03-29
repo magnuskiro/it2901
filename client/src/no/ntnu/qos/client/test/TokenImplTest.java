@@ -79,7 +79,7 @@ public class TokenImplTest {
     }
 
     @Test
-    public void getDiffservTest(){
+    public void getDiffServTest(){
         // Todo write the test
     }
 

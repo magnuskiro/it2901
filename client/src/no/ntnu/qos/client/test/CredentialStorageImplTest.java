@@ -76,10 +76,10 @@ public class CredentialStorageImplTest {
 	@SuppressWarnings("static-access")
 	@Test
 	public void storedCredentialsTest() {
-		String[] creds = credentialStorage.getCredentials();
-		assertTrue(creds[credentialStorage.USERNAME].equals(user));
-		assertTrue(creds[credentialStorage.ROLE].equals(role));
-		assertTrue(creds[credentialStorage.PASSWORD].equals(pass));
+		String[] credentials = credentialStorage.getCredentials();
+		assertTrue(credentials[CredentialStorage.USERNAME].equals(user));
+		assertTrue(credentials[CredentialStorage.ROLE].equals(role));
+		assertTrue(credentials[CredentialStorage.PASSWORD].equals(pass));
 	}
 
 	@SuppressWarnings("static-access")
@@ -87,11 +87,11 @@ public class CredentialStorageImplTest {
 	public void setClientCredentialsInStorageTest() {
         credentialStorage.setCredentials(user2, role2, pass2);
 
-        String[] creds = credentialStorage.getCredentials();
-        System.out.print(creds[2]);
-        assertTrue(creds[credentialStorage.USERNAME].equals(user2));
-		assertTrue(creds[credentialStorage.ROLE].equals(role2));
-		assertTrue(creds[credentialStorage.PASSWORD].equals(pass2));
+        String[] credentials = credentialStorage.getCredentials();
+        System.out.print(credentials[2]);
+        assertTrue(credentials[CredentialStorage.USERNAME].equals(user2));
+		assertTrue(credentials[CredentialStorage.ROLE].equals(role2));
+		assertTrue(credentials[CredentialStorage.PASSWORD].equals(pass2));
 	}
 
 }

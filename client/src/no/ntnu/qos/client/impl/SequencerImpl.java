@@ -34,7 +34,7 @@ public class SequencerImpl implements Sequencer {
 
 		tokenManager	= new TokenManagerImpl(username, role, password);
 		messageHandler	= new MessageHandlerImpl(this);
-		sanityChecker	= new SanitycheckerImpl();
+		sanityChecker	= new SanityCheckerImpl();
 		this.exceptionHandler = exceptionHandler;
 		threadPool		= Executors.newFixedThreadPool(20); //add number of threads to config-thingy
 
