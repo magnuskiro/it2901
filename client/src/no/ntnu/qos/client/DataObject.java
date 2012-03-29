@@ -8,7 +8,7 @@ import no.ntnu.qos.client.credentials.Token;
 /**
  * Object containing the data clients wish to send
  * It will send itself when it detects that the criteria are met
- * (is sane, has a token, has routing info)
+ * (is sane, has a token)
  * @author Håvard
  *
  */
