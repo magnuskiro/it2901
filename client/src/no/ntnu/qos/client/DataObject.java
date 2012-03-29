@@ -3,13 +3,12 @@ package no.ntnu.qos.client;
 import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.ms.RoutingInfo;
 
 
 /**
  * Object containing the data clients wish to send
  * It will send itself when it detects that the criteria are met
- * (is sane, has a token, has routing info)
+ * (is sane, has a token)
  * @author Håvard
  *
  */
