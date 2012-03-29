@@ -61,7 +61,6 @@ public class SequencerImpl implements Sequencer {
 
 		//fetches various data the DataObject needs
 		tokenManager.getToken(dataObj);
-		msCommunicator.getRouteInfo(dataObj);
 		sanityChecker.isSane(dataObj);
 
 

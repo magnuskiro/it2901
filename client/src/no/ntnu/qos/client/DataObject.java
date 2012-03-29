@@ -3,7 +3,6 @@ package no.ntnu.qos.client;
 import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.ms.RoutingInfo;
 
 
 /**
@@ -20,7 +19,6 @@ public class DataObject {
 	private int			priority;
 	private Sequencer	sequencer;
 	private Token		samlToken;
-	private RoutingInfo routeInfo;
 	private String		soapFromClient;
 	private URI			destination;
 	private ReceiveObject receiveObj;//added here to let the messageHandler get access to it 
@@ -54,18 +52,7 @@ public class DataObject {
 		}
 	}
 
-	/**
-	 * sets the information on bandwidth and TR, send itself if other
-	 * criteria are met
-	 * @param routeInfo	- routingINfo object obtained from an msCommunicator
-	 */
-	public synchronized void setRoutingInfo(RoutingInfo routeInfo){
-		this.routeInfo = routeInfo;
 
-		if (isReadyToSend()){
-			sequencer.sendData(this);
-		}
-	}
 
 	/**
 	 * sets the clients SAML-token, sends itself if other criteria are met
@@ -97,14 +84,7 @@ public class DataObject {
 		return destination;
 	}
 
-	/**
-	 * gets the routingInfo this object is aware of
-	 * @return
-	 */
-	public RoutingInfo getRoutingInfo(){
-		return routeInfo;
-	}
-
+	
 	/**
 	 * gets the diffServ value this message will have
 	 * @return
@@ -126,7 +106,7 @@ public class DataObject {
 	 * @return - true if ready to send, false if not 
 	 */
 	private synchronized boolean isReadyToSend(){
-		if(sane && routeInfo != null && samlToken != null && samlToken.isValid()
+		if(sane && samlToken != null && samlToken.isValid()
                 && priority!=0 && diffServ!=0 && destination!=null
                 ){
 			/* token may become invalid before other criteria are met
