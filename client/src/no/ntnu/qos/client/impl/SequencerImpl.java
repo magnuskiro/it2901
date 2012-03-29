@@ -8,12 +8,12 @@ import no.ntnu.qos.client.SanityChecker;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
-import no.ntnu.qos.client.net.ClientMSCommunicator;
 import no.ntnu.qos.client.net.MessageHandler;
-import no.ntnu.qos.client.net.impl.ClientMSCommunicatorImpl;
 import no.ntnu.qos.client.net.impl.MessageHandlerImpl;
 
 import java.net.URI;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Magnus Kirø
@@ -24,8 +24,8 @@ public class SequencerImpl implements Sequencer {
 	TokenManager		tokenManager;
 	MessageHandler		messageHandler;
 	SanityChecker		sanityChecker;
-	ClientMSCommunicator msCommunicator;
 	ExceptionHandler	exceptionHandler;
+	ExecutorService		threadPool;
 
 
 	public SequencerImpl(QoSClient qoSClient, String username, String role, String password,
@@ -33,14 +33,11 @@ public class SequencerImpl implements Sequencer {
 		this.qoSClient = qoSClient;
 
 		tokenManager	= new TokenManagerImpl(username, role, password);
-		messageHandler = new MessageHandlerImpl(this);
+		messageHandler	= new MessageHandlerImpl(this);
 		sanityChecker	= new SanitycheckerImpl();
 		this.exceptionHandler = exceptionHandler;
+		threadPool		= Executors.newFixedThreadPool(20); //add number of threads to config-thingy
 
-		/* TODO: need a way to do this properly, how do we know where the MS is?
-		 * this implementation only reads an xml-file, but still... */
-		// takes the path to the XML file containing the routing info as the argument.
-		msCommunicator = new ClientMSCommunicatorImpl("routingXMLInfoPath");
 	}
 
 	@Override
@@ -57,7 +54,6 @@ public class SequencerImpl implements Sequencer {
 
 		//fetches various data the DataObject needs
 		tokenManager.getToken(dataObj);
-		msCommunicator.getRouteInfo(dataObj);
 		sanityChecker.isSane(dataObj);
 
 
@@ -66,7 +62,7 @@ public class SequencerImpl implements Sequencer {
 
 	@Override
 	public void sendData(DataObject dataObj) {
-		messageHandler.sendData(dataObj);
+		threadPool.execute(messageHandler.sendData(dataObj));
 	}
 
 	@Override

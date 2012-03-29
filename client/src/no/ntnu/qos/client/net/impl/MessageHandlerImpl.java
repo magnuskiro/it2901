@@ -34,6 +34,7 @@ import org.apache.http.util.EntityUtils;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.Sequencer;
+import no.ntnu.qos.client.impl.ConfigManager;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
 import java.io.IOException;
@@ -65,7 +66,11 @@ public class MessageHandlerImpl implements MessageHandler{
 		return new MessageSender(data);
 	}
 
-	//how should this receive replies from httpComponents?
+	/**
+	 * Runnable class for sending and processing messages to a service
+	 * @author Stig Tore
+	 *
+	 */
 	private class MessageSender implements Runnable {
 		//Message-related variables
 		private String message;
@@ -88,10 +93,12 @@ public class MessageHandlerImpl implements MessageHandler{
 			destination = data.getDestination();
 			recObj = (ReceiveObjectImpl)(data.getReceiveObject());
 			exceptionHandler = data.getExceptionHandler();
+			ConfigManager.LOGGER.info("Constructing a runnable MessageSender for dataobject to: "+destination.getHost()+destination.getPath());
 		}
 
 		@Override
 		public void run() {
+			ConfigManager.LOGGER.info("Running message sender to: "+destination.getHost()+destination.getPath());
 			setParams();
 			createProcessor();
 			//Create executor;
@@ -112,33 +119,44 @@ public class MessageHandlerImpl implements MessageHandler{
 				body = new StringEntity(message);
 			} catch (UnsupportedEncodingException e) {
 				exceptionHandler.unsupportedEncodingExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("Illegal message syntax");
+				setExceptionInstance("UnsupportedEncodingException");
+				return;
 			}
-			//TODO Fix this to actual propper content type!!
 			((AbstractHttpEntity)body).setContentType("text/xml");
 			try {
 				setupSSLSocket();
 			} catch (KeyManagementException e1) {
-				// This should never happen!
+				//This should never happen
+				ConfigManager.LOGGER.severe("KEY MANAGER BROKEN!");
 				e1.printStackTrace();
-				//TODO: Log it
+				setExceptionInstance("KeyManagementException");
+				return;
 			} catch (NoSuchAlgorithmException e1) {
 				// This is near impossible
+				ConfigManager.LOGGER.severe("TLS algorithm non-existant!");
 				e1.printStackTrace();
-				//TODO: Log it!
+				setExceptionInstance("NoSuchAlgorithmException");
+				return;
 			} catch (UnknownHostException e1) {
 				exceptionHandler.unknownHostExceptionThrown(e1);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("Invalid host");
+				setExceptionInstance("UnknownHostException");
+				return;
 			} catch (IOException e1) {
 				exceptionHandler.ioExceptionThrown(e1);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IO Exception on making SSL socket");
+				setExceptionInstance("IOException");
+				return;
 			}
 			//Set Traffic class and get certificate
 			try {
 				socket.setTrafficClass(diffServ);
 			} catch (SocketException e) {
 				exceptionHandler.socketExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("Socket Exception while setting traffic class");
+				setExceptionInstance("SocketException");
+				return;
 			}
 			try {
 				socket.startHandshake();
@@ -146,7 +164,9 @@ public class MessageHandlerImpl implements MessageHandler{
 				conn.bind(socket, params);
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IO exception handshaking or binding socket to connection");
+				setExceptionInstance("IOException");
+				return;
 			}
 			//Create the request, set parameters and insert message into body.
 			BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST", destination.getPath());
@@ -158,31 +178,45 @@ public class MessageHandlerImpl implements MessageHandler{
 				httpexecutor.preProcess(request, httpproc, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("HttpException preprocessing request");
+				setExceptionInstance("HttpException");
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IOException proprocessing request");
+				setExceptionInstance("IOException");
+				return;
 			}
+			ConfigManager.LOGGER.info("Ready to send to: "+destination.getHost()+destination.getPath());
 			//Execute request!
 			HttpResponse response = null;
 			try {
 				response = httpexecutor.execute(request, conn, context);
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IOException while executing request, connection closed?");
+				setExceptionInstance("IOException");
+				return;
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("HttpException while executing request, connection closed?");
+				setExceptionInstance("HttpException");
+				return;
 			}
 			//Process the response
+			ConfigManager.LOGGER.info("Response received from: "+destination.getHost()+destination.getPath()+" Processing.");
 			try {
 				httpexecutor.postProcess(response, httpproc, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("HttpException processing reply");
+				setExceptionInstance("HttpException");
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IOException processing reply");
+				setExceptionInstance("IOException");
+				return;
 			}
 
 			//Unknown if the reply code is needed by the client
@@ -194,29 +228,46 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (ParseException e) {
 				// Service messed up!
 				e.printStackTrace();
-				//TODO: Log it
+				ConfigManager.LOGGER.severe("Reply not parseable!");
+				setExceptionInstance("ParseException");
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IOException while parsing reply!");
+				setExceptionInstance("IOException");
+				return;
 			}
 			//Close connection
+			ConfigManager.LOGGER.info("Processing completed, closing connection");
 			try {
 				conn.close();
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
-				//TODO: Log it
+				ConfigManager.LOGGER.warning("IOException closing connection");
+				setExceptionInstance("IOException");
+				return;
 			}
 			//Set reply in receiveObject
+			ConfigManager.LOGGER.info("Setting reply and forwarding it");
 			try {
 				recObj.setReply(replyBody);
 			} catch (InterruptedException e) {
 				// Should only happen if either client or client lib halted!
 				e.printStackTrace();
-				//TODO: Log it
+				ConfigManager.LOGGER.severe("Interrupted while setting reply!!");
+				setExceptionInstance("InterruptedException");
+				return;
 			}
 			//informs the sequencer of a reply
 			sequencer.returnData(recObj);
-
+		}
+		
+		private void setExceptionInstance(String ret) {
+			try {
+				recObj.setReply(ret);
+			} catch (InterruptedException e) {
+				ConfigManager.LOGGER.warning("Interrupted while failing!");
+			}
 		}
 
 		private void setParams() {

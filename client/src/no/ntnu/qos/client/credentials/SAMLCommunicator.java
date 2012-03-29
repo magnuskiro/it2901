@@ -13,9 +13,9 @@ public interface SAMLCommunicator {
 	 * fetches a SAML token from the given identity server
 	 * @param destination	- destination of the server
 	 * @param userName		- client username
-	 * @param pasword		- client password
 	 * @param role			- client role
+	 * @param password		- client password
 	 * @return a valid Token object
 	 */
-	public  Token getToken(URI destination, String userName, String pasword, String role);
+	public  Token getToken(URI destination, String userName, String role, String password);
 }

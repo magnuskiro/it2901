@@ -3,13 +3,12 @@ package no.ntnu.qos.client;
 import java.net.URI;
 
 import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.ms.RoutingInfo;
 
 
 /**
  * Object containing the data clients wish to send
  * It will send itself when it detects that the criteria are met
- * (is sane, has a token, has routing info)
+ * (is sane, has a token)
  * @author Håvard
  *
  */
@@ -20,7 +19,6 @@ public class DataObject {
 	private int			priority;
 	private Sequencer	sequencer;
 	private Token		samlToken;
-	private RoutingInfo routeInfo;
 	private String		soapFromClient;
 	private URI			destination;
 	private ReceiveObject receiveObj;//added here to let the messageHandler get access to it 
@@ -46,21 +44,8 @@ public class DataObject {
 	 * criteria are met
 	 * @param sane	- true if data is sane
 	 */
-	public void setSane(boolean sane){
+	public synchronized void setSane(boolean sane){
 		this.sane = sane;
-
-		if (isReadyToSend()){
-			sequencer.sendData(this);
-		}
-	}
-
-	/**
-	 * sets the information on bandwidth and TR, send itself if other
-	 * criteria are met
-	 * @param routeInfo	- routingINfo object obtained from an msCommunicator
-	 */
-	public void setRoutingInfo(RoutingInfo routeInfo){
-		this.routeInfo = routeInfo;
 
 		if (isReadyToSend()){
 			sequencer.sendData(this);
@@ -71,7 +56,7 @@ public class DataObject {
 	 * sets the clients SAML-token, sends itself if other criteria are met
 	 * @param token	- the Token
 	 */
-	public void setToken(Token token){
+	public synchronized void setToken(Token token){
 		samlToken = token;
 		diffServ	= samlToken.getDiffServ();
 		priority	= samlToken.getPriority();
@@ -98,14 +83,6 @@ public class DataObject {
 	}
 
 	/**
-	 * gets the routingInfo this object is aware of
-	 * @return
-	 */
-	public RoutingInfo getRoutingInfo(){
-		return routeInfo;
-	}
-
-	/**
 	 * gets the diffServ value this message will have
 	 * @return
 	 */
@@ -125,13 +102,8 @@ public class DataObject {
 	 * checks if all necessary data/criteria for sending are present/met
 	 * @return - true if ready to send, false if not 
 	 */
-	private boolean isReadyToSend(){
-		if(sane && routeInfo != null && samlToken != null && samlToken.isValid()
-                && priority!=0 && diffServ!=0 && destination!=null
-                ){
-			/* token may become invalid before other criteria are met
-			 * TODO: trigger a token refresh if token is invalid?
-			 */
+	private synchronized boolean isReadyToSend(){
+		if(sane && samlToken != null && priority!=0 && diffServ!=0 && destination!=null){
             return true;
 		}
 		return false;
