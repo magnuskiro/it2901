@@ -8,9 +8,7 @@ import no.ntnu.qos.client.SanityChecker;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
-import no.ntnu.qos.client.net.ClientMSCommunicator;
 import no.ntnu.qos.client.net.MessageHandler;
-import no.ntnu.qos.client.net.impl.ClientMSCommunicatorImpl;
 import no.ntnu.qos.client.net.impl.MessageHandlerImpl;
 
 import java.net.URI;
@@ -26,7 +24,6 @@ public class SequencerImpl implements Sequencer {
 	TokenManager		tokenManager;
 	MessageHandler		messageHandler;
 	SanityChecker		sanityChecker;
-	ClientMSCommunicator msCommunicator;
 	ExceptionHandler	exceptionHandler;
 	ExecutorService		threadPool;
 
@@ -41,10 +38,6 @@ public class SequencerImpl implements Sequencer {
 		this.exceptionHandler = exceptionHandler;
 		threadPool		= Executors.newFixedThreadPool(20); //add number of threads to config-thingy
 
-		/* TODO: need a way to do this properly, how do we know where the MS is?
-		 * this implementation only reads an xml-file, but still... */
-		// takes the path to the XML file containing the routing info as the argument.
-		msCommunicator = new ClientMSCommunicatorImpl("routingXMLInfoPath");
 	}
 
 	@Override
