@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.test;
+package no.ntnu.qos.client.credentials.test;
 
 import static org.junit.Assert.*;
 

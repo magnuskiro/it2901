@@ -3,6 +3,9 @@ package no.ntnu.qos.client.test;
 import no.ntnu.qos.client.impl.SanityCheckerImpl;
 
 public class ManualSanityCheckTest {
+
+    // todo automate the test.
+
 	public static void main(String[] args) {
 		SanityCheckerImpl checker = new SanityCheckerImpl();
 		String xml = "<?xml version=\"1.0\" ?>"+

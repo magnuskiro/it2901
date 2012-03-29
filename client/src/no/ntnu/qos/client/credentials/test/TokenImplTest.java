@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.test;
+package no.ntnu.qos.client.credentials.test;
 
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;

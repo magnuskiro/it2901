@@ -23,7 +23,7 @@ public class SequencerTest {
     public static void setup(){
     	//TODO: use a proper ExceptionHandler, test will probably break until it is done
     	
-        sequencer = new SequencerImpl(new QoSClientImpl("", "", "", null), "user", "role", "passwd", exceptionHandler);
+        sequencer = new SequencerImpl(new QoSClientImpl("", "", "", null), "user", "role", "password", exceptionHandler);
     }
 
     @Test

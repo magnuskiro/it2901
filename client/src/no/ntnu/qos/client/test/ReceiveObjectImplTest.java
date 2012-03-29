@@ -1,14 +1,13 @@
 package no.ntnu.qos.client.test;
 
-import static org.junit.Assert.*;
-
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReplyObjectImplTest {
+import static org.junit.Assert.assertTrue;
+
+public class ReceiveObjectImplTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
