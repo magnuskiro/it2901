@@ -72,6 +72,7 @@ public class DataObject {
 	 * @return	- a SOAP message
 	 */
 	public String getSoap(){
+		//TODO: parse soap, insert token.
 		return this.soapFromClient;
 	}
 

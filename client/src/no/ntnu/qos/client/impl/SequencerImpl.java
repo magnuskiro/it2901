@@ -53,10 +53,12 @@ public class SequencerImpl implements Sequencer {
 		dataObj.setReceiveObject(receiveObj);
 
 		//fetches various data the DataObject needs
-		tokenManager.getToken(dataObj);
-		sanityChecker.isSane(dataObj);
+		Runnable getToken = tokenManager.getToken(dataObj);
+		Runnable getSane = sanityChecker.isSane(dataObj);
 
-
+		threadPool.execute(getToken);
+		threadPool.execute(getSane);
+		
 		return receiveObj;
 	}
 
@@ -67,7 +69,7 @@ public class SequencerImpl implements Sequencer {
 
 	@Override
 	public void returnData(ReceiveObject recObj) {
-		qoSClient.Receive(recObj);
+		qoSClient.receive(recObj);
 	}
 
 	public TokenManager getTokenManager() {

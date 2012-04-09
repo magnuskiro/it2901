@@ -51,7 +51,7 @@ public class QoSClientImpl implements QoSClient {
     }
 
 	@Override
-	public void Receive(ReceiveObject recObj) {
+	public void receive(ReceiveObject recObj) {
 		fireNewData(recObj);		
 	}
 

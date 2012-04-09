@@ -28,7 +28,7 @@ public interface TokenManager {
       * @param dataObject the dataObject that should contain the destination you need to get a token.
      *  @return token - the token of the dataObject
      */
-    public Token getToken(DataObject dataObject);
+    public Runnable getToken(DataObject dataObject);
 
     /**
      *
