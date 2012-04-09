@@ -1,11 +1,11 @@
 package no.ntnu.qos.client.credentials.impl;
 
+import no.ntnu.qos.client.credentials.CredentialStorage;
+import no.ntnu.qos.client.credentials.Token;
+
 import java.net.URI;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-
-import no.ntnu.qos.client.credentials.CredentialStorage;
-import no.ntnu.qos.client.credentials.Token;
 /**
  *
  * @author Stig Tore
@@ -42,12 +42,13 @@ public class CredentialStorageImpl implements CredentialStorage {
 	 */
 	@Override
 	public Token getToken(URI destination) throws NoSuchElementException {
-		Token token = tokens.get(getKeystring(destination));
-		if (token != null) {
-			return token;
-		}
-		NoSuchElementException exception = new NoSuchElementException();
-		throw exception;
+        if(hasToken(destination)){
+            Token token = tokens.get(getKeystring(destination));
+            if (token != null) {
+                return token;
+            }
+        }
+        throw new NoSuchElementException();
 	}
 
 	@Override
@@ -87,10 +88,9 @@ public class CredentialStorageImpl implements CredentialStorage {
 				StringBuilder sb = new StringBuilder();
 				int range = split.length-1;
 				for(int i=0; i<range; i++) {
-					sb.append("/"+split[i]);
+					sb.append("/").append(split[i]);
 				}
-				String ret = destination.getPath()+sb;
-				return ret;
+                return destination.getPath()+sb;
 			}
 		}
 		return destination.getHost();
