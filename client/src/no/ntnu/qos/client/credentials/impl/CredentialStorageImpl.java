@@ -12,65 +12,88 @@ import no.ntnu.qos.client.credentials.Token;
  *
  */
 public class CredentialStorageImpl implements CredentialStorage {
-    private String[] credentials;
-    private HashMap<String, Token> tokens;
+	private String[] credentials;
+	private HashMap<String, Token> tokens;
 
-    public CredentialStorageImpl(String user, String role, String pass) {
-        credentials = new String[3];
-        credentials[USERNAME] = user;
-        credentials[ROLE] = role;
-        credentials[PASSWORD] = pass;
-        tokens = new HashMap<String, Token>();
-    }
+	public CredentialStorageImpl(String user, String role, String pass) {
+		credentials = new String[3];
+		credentials[USERNAME] = user;
+		credentials[ROLE] = role;
+		credentials[PASSWORD] = pass;
+		tokens = new HashMap<String, Token>();
+	}
 
-    @Override
-    public boolean hasToken(URI destination) {
-        if(tokens.containsKey(destination.getHost()) ) {
-            if (tokens.get(destination.getHost()).isValid()) {
-                return true;
-            }
-            tokens.remove(destination.getHost());
-        }
-        return false;
-    }
+	@Override
+	public boolean hasToken(URI destination) {
+		if(tokens.containsKey(getKeystring(destination)) ) {
+			if (tokens.get(getKeystring(destination)).isValid()) {
+				return true;
+			}
+			tokens.remove(getKeystring(destination));
+		}
+		return false;
+	}
 
-    /**
-     * Gets a token from the token storage. NOTE: Check to see if element exists with hasToken() before fetching it!
-     * @param destination The URI of the service to get a token for.
-     * @return a valid token for the service.
-     * @throws NoSuchElementException Thrown if token does not exist in storage.
-     */
-    @Override
-    public Token getToken(URI destination) throws NoSuchElementException {
-        Token token = tokens.get(destination.getHost());
-        if (token != null) {
-            return token;
-        }
-        NoSuchElementException exception = new NoSuchElementException();
-        throw exception;
-    }
+	/**
+	 * Gets a token from the token storage. NOTE: Check to see if element exists with hasToken() before fetching it!
+	 * @param destination The URI of the service to get a token for.
+	 * @return a valid token for the service.
+	 * @throws NoSuchElementException Thrown if token does not exist in storage.
+	 */
+	@Override
+	public Token getToken(URI destination) throws NoSuchElementException {
+		Token token = tokens.get(getKeystring(destination));
+		if (token != null) {
+			return token;
+		}
+		NoSuchElementException exception = new NoSuchElementException();
+		throw exception;
+	}
 
-    @Override
-    public String[] getCredentials() {
-        return credentials;
-    }
+	@Override
+	public String[] getCredentials() {
+		return credentials;
+	}
 
-    @Override
-    public void storeToken(Token token) {
-        tokens.put(token.getDestination().getHost(), token);
-    }
+	@Override
+	public void storeToken(Token token) {
+		tokens.put(getKeystring(token.getDestination()), token);
+	}
 
-    @Override
-    public void setCredentials(String username, String role, String password) {
-        credentials[USERNAME] = username;
-        credentials[ROLE] = role;
-        credentials[PASSWORD] = password;
-        flushTokens();
-    }
+	@Override
+	public void setCredentials(String username, String role, String password) {
+		credentials[USERNAME] = username;
+		credentials[ROLE] = role;
+		credentials[PASSWORD] = password;
+		flushTokens();
+	}
 
-    @Override
-    public void flushTokens() {
-        tokens.clear();
-    }
+	@Override
+	public void flushTokens() {
+		tokens.clear();
+	}
+
+	/**
+	 * Will return a key for the given URI, the key will be in the form of host/path except the last link in the path
+	 * EXAMPLE: "http://someplace.com/services/myservice/page" will return "someplace.com/services/myservice"
+	 * @param destination an URI for the given destination
+	 * @return the key to use for storing it
+	 */
+	private String getKeystring(URI destination) {
+		String init = destination.getPath();
+		if (!init.equals("")) {
+			String[] split = init.split("/");
+			if(split.length>1) {
+				StringBuilder sb = new StringBuilder();
+				int range = split.length-1;
+				for(int i=0; i<range; i++) {
+					sb.append("/"+split[i]);
+				}
+				String ret = destination.getPath()+sb;
+				return ret;
+			}
+		}
+		return destination.getHost();
+	}
 
 }
