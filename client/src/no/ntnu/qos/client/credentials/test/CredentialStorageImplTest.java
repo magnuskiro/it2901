@@ -36,8 +36,8 @@ public class CredentialStorageImplTest {
 		role2 = "testRole2";
 		pass2 = "testPas2";
 		token = "blah";
-		destination = new URI("http://127.0.0.25/");
-		destination2 = new URI("http://127.0.0.26/");
+		destination = new URI("http://127.0.0.25/services/myservice/service");
+		destination2 = new URI("http://127.0.0.26/myservice/service");
 		validUntil1 = System.currentTimeMillis()+3600000;
 		validUntil2 = System.currentTimeMillis()-35000;
 		testToken1 = new TokenImpl(token, validUntil1, destination);
@@ -88,7 +88,7 @@ public class CredentialStorageImplTest {
         credentialStorage.setCredentials(user2, role2, pass2);
 
         String[] credentials = credentialStorage.getCredentials();
-        System.out.print(credentials[2]);
+//        System.out.print(credentials[2]);
         assertTrue(credentials[CredentialStorage.USERNAME].equals(user2));
 		assertTrue(credentials[CredentialStorage.ROLE].equals(role2));
 		assertTrue(credentials[CredentialStorage.PASSWORD].equals(pass2));
