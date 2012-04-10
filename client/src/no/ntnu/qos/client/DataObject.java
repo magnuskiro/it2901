@@ -14,6 +14,7 @@ import org.apache.axiom.om.impl.OMNamespaceImpl;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 
 import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.client.credentials.TokenAxiom;
 
 
 /**
@@ -164,30 +165,31 @@ public class DataObject {
 	 */
 	private void buildSoap() {
 		ByteArrayInputStream stream = new ByteArrayInputStream(soapFromClient.getBytes());
-		ByteArrayInputStream tokenStream = new ByteArrayInputStream(samlToken.getXML().getBytes());
 		OMFactory factory = OMAbstractFactory.getOMFactory();
 		StAXOMBuilder builder = null;
-		StAXOMBuilder tokenBuilder = null;
 		try {
 			builder = new StAXOMBuilder(stream);
-			tokenBuilder = new StAXOMBuilder(tokenStream);
 		} catch (XMLStreamException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		OMElement root = builder.getDocumentElement();
-		OMElement parsedToken = tokenBuilder.getDocumentElement();
-		//TODO: Change to correct version and namespace implementation
-		OMNamespace ns = new OMNamespaceImpl("http://www.w3.org/2003/05/soap-envelope", "saml");
-		OMElement insert = factory.createOMElement("Assertion", ns);
-		OMAttribute majorV = factory.createOMAttribute("MajorVersion", null, "1");
-		OMAttribute minorV = factory.createOMAttribute("MinorVersion", null, "2");
-		insert.addAttribute(majorV);
-		insert.addAttribute(minorV);
-		
-		insert.addChild(parsedToken);
+		OMElement parsedToken = null;
+		if(samlToken instanceof TokenAxiom) {
+			parsedToken = ((TokenAxiom) samlToken).getOMElement();
+		} else {
+			ByteArrayInputStream tokenStream = new ByteArrayInputStream(samlToken.getXML().getBytes());
+			StAXOMBuilder tokenBuilder = null;
+			try {
+				tokenBuilder = new StAXOMBuilder(tokenStream);
+			} catch (XMLStreamException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			parsedToken = tokenBuilder.getDocumentElement();
+		}
 		OMElement body = (OMElement) root.getChildrenWithLocalName("Body").next();
-		body.addChild(insert);
+		body.addChild(parsedToken);
 		soapToSend = root.toString();
 	}
 }

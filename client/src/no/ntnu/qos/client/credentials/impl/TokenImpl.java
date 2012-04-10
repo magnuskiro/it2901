@@ -1,19 +1,22 @@
 package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.client.credentials.TokenAxiom;
 
 import java.net.URI;
 
-public class TokenImpl implements Token {
+import org.apache.axiom.om.OMElement;
+
+public class TokenImpl implements Token, TokenAxiom {
 	//TODO: Change to use an actual OpenSAML object?
-	String token;
+	OMElement token;
 	long validUntil;
     long expirationTimeBuffer = 30000; // 30000 is default as it resembles 30seconds when used.
 	URI destination;
 	int priority;
 	int diffServ;
 	
-	public TokenImpl(String token, long validUntil, URI destination) {
+	public TokenImpl(OMElement token, long validUntil, URI destination) {
         // todo - has to be expanded to set the diffserv and priority variables also.
 		this.token = token;
 		this.destination = destination;
@@ -22,7 +25,7 @@ public class TokenImpl implements Token {
 
     @Override
 	public String getXML() {
-		return this.token;
+		return this.token.toString();
 	}
 
 	@Override
@@ -73,6 +76,11 @@ public class TokenImpl implements Token {
 	@Override
 	public void setDiffServ(int diffServ) {
 		this.diffServ = diffServ;
+	}
+
+	@Override
+	public OMElement getOMElement() {
+		return token;
 	}
 
 }
