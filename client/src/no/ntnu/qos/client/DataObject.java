@@ -2,14 +2,10 @@ package no.ntnu.qos.client;
 
 import java.io.ByteArrayInputStream;
 import java.net.URI;
-
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMFactory;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
-
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenAxiom;
 
@@ -162,7 +158,6 @@ public class DataObject {
 	 */
 	private void buildSoap() {
 		ByteArrayInputStream stream = new ByteArrayInputStream(soapFromClient.getBytes());
-		OMFactory factory = OMAbstractFactory.getOMFactory();
 		StAXOMBuilder builder = null;
 		try {
 			builder = new StAXOMBuilder(stream);
