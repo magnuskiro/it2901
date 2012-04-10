@@ -55,7 +55,7 @@ public class SequencerImpl implements Sequencer {
 		//fetches various data the DataObject needs
 		Runnable getToken = tokenManager.getToken(dataObj);
 		Runnable getSane = sanityChecker.isSane(dataObj);
-
+		//Executes the runnables
 		threadPool.execute(getToken);
 		threadPool.execute(getSane);
 		
