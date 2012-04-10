@@ -42,33 +42,41 @@ public class SequencerImpl implements Sequencer {
 
 	@Override
 	public void setCredentials(String username, String role, String password) {
+		ConfigManager.LOGGER.info("Setting Credentials");
 		tokenManager.setCredentials(username, role, password);
 	}
 
 	@Override
 	public ReceiveObject sendData(String data, URI destination) {
+		ConfigManager.LOGGER.info("Received request to send data to: "+destination.getHost());
 		DataObject dataObj = new DataObject(this, data, destination, exceptionHandler);
+		ConfigManager.LOGGER.info("DataObject created");
 
 		ReceiveObject receiveObj = new ReceiveObjectImpl();
+		ConfigManager.LOGGER.info("ReceiveObject created");
 		dataObj.setReceiveObject(receiveObj);
 
 		//fetches various data the DataObject needs
+		ConfigManager.LOGGER.info("Getting runnables to get token and check sanity");
 		Runnable getToken = tokenManager.getToken(dataObj);
 		Runnable getSane = sanityChecker.isSane(dataObj);
 		//Executes the runnables
+		ConfigManager.LOGGER.info("Runnables received, executing");
 		threadPool.execute(getToken);
 		threadPool.execute(getSane);
-		
+		ConfigManager.LOGGER.info("Returning receiveObject to Qosclient");
 		return receiveObj;
 	}
 
 	@Override
 	public void sendData(DataObject dataObj) {
+		ConfigManager.LOGGER.info("Sending data to message handler");
 		threadPool.execute(messageHandler.sendData(dataObj));
 	}
 
 	@Override
 	public void returnData(ReceiveObject recObj) {
+		ConfigManager.LOGGER.info("Returning reply to QosClient");
 		qoSClient.receive(recObj);
 	}
 
