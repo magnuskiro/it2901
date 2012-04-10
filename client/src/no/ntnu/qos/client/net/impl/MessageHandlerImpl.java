@@ -9,7 +9,6 @@ import no.ntnu.qos.client.net.MessageHandler;
 import org.apache.http.*;
 import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.http.impl.DefaultHttpClientConnection;
 import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.apache.http.params.HttpParams;
@@ -86,7 +85,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			HttpHost host = new HttpHost(destination.getHost(), destination.getPort());
 			//set up connection;
 			DefaultHttpClientConnection conn = new DefaultHttpClientConnection();
-			ConnectionReuseStrategy connStrategy = new DefaultConnectionReuseStrategy();
 			//Set up Context
 			HttpContext context = new BasicHttpContext(null);
 			context.setAttribute(ExecutionContext.HTTP_CONNECTION, conn);
