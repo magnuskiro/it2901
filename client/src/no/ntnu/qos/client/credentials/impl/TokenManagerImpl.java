@@ -5,6 +5,7 @@ import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.SAMLCommunicator;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
+import no.ntnu.qos.client.impl.ConfigManager;
 
 /**
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com
@@ -39,6 +40,7 @@ public class TokenManagerImpl implements TokenManager {
 
 	@Override
 	public Runnable getToken(DataObject dataObject) {
+		ConfigManager.LOGGER.info("Received request for Token, creating runnable");
 		return new RunningTokenFetcher(dataObject);
 	}
 	class RunningTokenFetcher implements Runnable {
@@ -48,13 +50,17 @@ public class TokenManagerImpl implements TokenManager {
 		}
 		@Override
 		public void run() {
+			ConfigManager.LOGGER.info("Getting token");
 			if(credentialStorage.hasToken(dataObj.getDestination())){
+				ConfigManager.LOGGER.info("Token found in credential storage, putting it into data object");
 				dataObj.setToken(credentialStorage.getToken(dataObj.getDestination()));
 			}else{
+				ConfigManager.LOGGER.info("Token not found in credential storage, fetching from identity server");
 				String[] credentials = credentialStorage.getCredentials();
 				Token newToken = samlCommunicator.getToken(dataObj.getDestination(),
 						credentials[0], credentials[1], credentials[2]);
 				credentialStorage.storeToken(newToken);
+				ConfigManager.LOGGER.info("Setting token in dataobject");
 				dataObj.setToken(newToken); 
 			}
 		}
