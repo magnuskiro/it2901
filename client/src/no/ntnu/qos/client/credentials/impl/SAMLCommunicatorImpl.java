@@ -47,7 +47,7 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 						"NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:uri\" " +
 						"Name=\"urn:oid:1.3.6.1.4.1.5923.1.1.1.1\" " +
 						"FriendlyName=\"qosClientRole\">" +
-						"<saml2:AttributeValue>clientRole1</saml2:AttributeValue>" +
+						"<saml2:AttributeValue>"+role+"</saml2:AttributeValue>" +
 					"</saml2:Attribute>" +
 				"</saml2:AttributeStatement>" +
 				"</saml2:Assertion>", System.currentTimeMillis()+3600000, destination);
