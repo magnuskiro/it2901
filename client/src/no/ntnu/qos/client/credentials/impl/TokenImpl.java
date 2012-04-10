@@ -19,6 +19,7 @@ public class TokenImpl implements Token, TokenAxiom {
 	int priority;
 	int diffServ;
 	
+	@Deprecated
 	public TokenImpl(String tokenString, long validUntil, URI destination) {
 		this.destination = destination;
 		this.validUntil = validUntil;
