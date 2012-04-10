@@ -1,54 +1,33 @@
 package no.ntnu.qos.client.net.impl;
 
-import java.net.SocketException;
-import java.net.URI;
-import java.net.UnknownHostException;
-import org.apache.http.HttpVersion;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
-import org.apache.http.params.SyncBasicHttpParams;
-import org.apache.http.ConnectionReuseStrategy;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequestInterceptor;
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.entity.AbstractHttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.DefaultConnectionReuseStrategy;
-import org.apache.http.impl.DefaultHttpClientConnection;
-import org.apache.http.message.BasicHttpEntityEnclosingRequest;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HttpProcessor;
-import org.apache.http.protocol.HttpRequestExecutor;
-import org.apache.http.protocol.ImmutableHttpProcessor;
-import org.apache.http.protocol.RequestConnControl;
-import org.apache.http.protocol.RequestContent;
-import org.apache.http.protocol.RequestExpectContinue;
-import org.apache.http.protocol.RequestTargetHost;
-import org.apache.http.protocol.RequestUserAgent;
-import org.apache.http.util.EntityUtils;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.impl.ConfigManager;
 import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.MessageHandler;
+import org.apache.http.*;
+import org.apache.http.entity.AbstractHttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.DefaultConnectionReuseStrategy;
+import org.apache.http.impl.DefaultHttpClientConnection;
+import org.apache.http.message.BasicHttpEntityEnclosingRequest;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.params.SyncBasicHttpParams;
+import org.apache.http.protocol.*;
+import org.apache.http.util.EntityUtils;
+
+import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.SocketException;
+import java.net.URI;
+import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 
 public class MessageHandlerImpl implements MessageHandler{
@@ -81,7 +60,7 @@ public class MessageHandlerImpl implements MessageHandler{
 
 		//HttpCore-related variables
 		private HttpParams params;
-		private HttpProcessor httpproc;
+		private HttpProcessor httpProcessor;
 		
 		//Socket
 		private SSLSocket socket;
@@ -93,7 +72,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			destination = data.getDestination();
 			recObj = (ReceiveObjectImpl)(data.getReceiveObject());
 			exceptionHandler = data.getExceptionHandler();
-			ConfigManager.LOGGER.info("Constructing a runnable MessageSender for dataobject to: "+destination.getHost()+destination.getPath());
+			ConfigManager.LOGGER.info("Constructing a runnable MessageSender for dataObject to: "+destination.getHost()+destination.getPath());
 		}
 
 		@Override
@@ -102,7 +81,7 @@ public class MessageHandlerImpl implements MessageHandler{
 			setParams();
 			createProcessor();
 			//Create executor;
-			HttpRequestExecutor httpexecutor = new HttpRequestExecutor();
+			HttpRequestExecutor httpRequestExecutor = new HttpRequestExecutor();
 			//Set up host
 			HttpHost host = new HttpHost(destination.getHost(), destination.getPort());
 			//set up connection;
@@ -120,8 +99,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (UnsupportedEncodingException e) {
 				exceptionHandler.unsupportedEncodingExceptionThrown(e);
 				ConfigManager.LOGGER.warning("Illegal message syntax");
-				setExceptionInstance("UnsupportedEncodingException");
-				return;
 			}
 			((AbstractHttpEntity)body).setContentType("text/xml");
 			try {
@@ -130,24 +107,16 @@ public class MessageHandlerImpl implements MessageHandler{
 				//This should never happen
 				ConfigManager.LOGGER.severe("KEY MANAGER BROKEN!");
 				e1.printStackTrace();
-				setExceptionInstance("KeyManagementException");
-				return;
 			} catch (NoSuchAlgorithmException e1) {
 				// This is near impossible
 				ConfigManager.LOGGER.severe("TLS algorithm non-existant!");
 				e1.printStackTrace();
-				setExceptionInstance("NoSuchAlgorithmException");
-				return;
 			} catch (UnknownHostException e1) {
 				exceptionHandler.unknownHostExceptionThrown(e1);
 				ConfigManager.LOGGER.warning("Invalid host");
-				setExceptionInstance("UnknownHostException");
-				return;
 			} catch (IOException e1) {
 				exceptionHandler.ioExceptionThrown(e1);
 				ConfigManager.LOGGER.warning("IO Exception on making SSL socket");
-				setExceptionInstance("IOException");
-				return;
 			}
 			//Set Traffic class and get certificate
 			try {
@@ -155,8 +124,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (SocketException e) {
 				exceptionHandler.socketExceptionThrown(e);
 				ConfigManager.LOGGER.warning("Socket Exception while setting traffic class");
-				setExceptionInstance("SocketException");
-				return;
 			}
 			try {
 				socket.startHandshake();
@@ -165,8 +132,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IO exception handshaking or binding socket to connection");
-				setExceptionInstance("IOException");
-				return;
 			}
 			//Create the request, set parameters and insert message into body.
 			BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST", destination.getPath());
@@ -175,48 +140,36 @@ public class MessageHandlerImpl implements MessageHandler{
 
 			//Pre-process the request, making sure headers are there and are correct
 			try {
-				httpexecutor.preProcess(request, httpproc, context);
+				httpRequestExecutor.preProcess(request, httpProcessor, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException preprocessing request");
-				setExceptionInstance("HttpException");
-				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException proprocessing request");
-				setExceptionInstance("IOException");
-				return;
 			}
 			ConfigManager.LOGGER.info("Ready to send to: "+destination.getHost()+destination.getPath());
 			//Execute request!
 			HttpResponse response = null;
 			try {
-				response = httpexecutor.execute(request, conn, context);
+				response = httpRequestExecutor.execute(request, conn, context);
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException while executing request, connection closed?");
-				setExceptionInstance("IOException");
-				return;
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException while executing request, connection closed?");
-				setExceptionInstance("HttpException");
-				return;
 			}
 			//Process the response
 			ConfigManager.LOGGER.info("Response received from: "+destination.getHost()+destination.getPath()+" Processing.");
 			try {
-				httpexecutor.postProcess(response, httpproc, context);
+				httpRequestExecutor.postProcess(response, httpProcessor, context);
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException processing reply");
-				setExceptionInstance("HttpException");
-				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException processing reply");
-				setExceptionInstance("IOException");
-				return;
 			}
 
 			//Unknown if the reply code is needed by the client
@@ -229,13 +182,9 @@ public class MessageHandlerImpl implements MessageHandler{
 				// Service messed up!
 				e.printStackTrace();
 				ConfigManager.LOGGER.severe("Reply not parseable!");
-				setExceptionInstance("ParseException");
-				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException while parsing reply!");
-				setExceptionInstance("IOException");
-				return;
 			}
 			//Close connection
 			ConfigManager.LOGGER.info("Processing completed, closing connection");
@@ -244,8 +193,6 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException closing connection");
-				setExceptionInstance("IOException");
-				return;
 			}
 			//Set reply in receiveObject
 			ConfigManager.LOGGER.info("Setting reply and forwarding it");
@@ -255,19 +202,9 @@ public class MessageHandlerImpl implements MessageHandler{
 				// Should only happen if either client or client lib halted!
 				e.printStackTrace();
 				ConfigManager.LOGGER.severe("Interrupted while setting reply!!");
-				setExceptionInstance("InterruptedException");
-				return;
 			}
 			//informs the sequencer of a reply
 			sequencer.returnData(recObj);
-		}
-		
-		private void setExceptionInstance(String ret) {
-			try {
-				recObj.setReply(ret);
-			} catch (InterruptedException e) {
-				ConfigManager.LOGGER.warning("Interrupted while failing!");
-			}
 		}
 
 		private void setParams() {
@@ -281,7 +218,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		}
 
 		private void createProcessor() {
-			httpproc = new ImmutableHttpProcessor(new HttpRequestInterceptor[] {
+			httpProcessor = new ImmutableHttpProcessor(new HttpRequestInterceptor[] {
 					// Required protocol interceptors
 					new RequestContent(),
 					new RequestTargetHost(),

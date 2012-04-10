@@ -1,10 +1,13 @@
 package no.ntnu.qos.client.test;
 
-import no.ntnu.qos.client.impl.SanitycheckerImpl;
+import no.ntnu.qos.client.impl.SanityCheckerImpl;
 
 public class ManualSanityCheckTest {
+
+    // todo automate the test.
+
 	public static void main(String[] args) {
-		SanitycheckerImpl checker = new SanitycheckerImpl();
+		SanityCheckerImpl checker = new SanityCheckerImpl();
 		String xml = "<?xml version=\"1.0\" ?>"+
 		"<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
 		"<S:Body><ns2:hello xmlns:ns2=\"http://me.test.org/\">"+

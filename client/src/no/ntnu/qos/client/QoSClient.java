@@ -48,7 +48,7 @@ public interface QoSClient {
      * Should trigger a listener at the client
      * @param dataObj	- the ReceiveObject that has received a reply
      */
-    public void Receive(ReceiveObject recObj);
+    public void receive(ReceiveObject recObj);
     
     /**
      * Inform the ConfigManager whether to log or not.

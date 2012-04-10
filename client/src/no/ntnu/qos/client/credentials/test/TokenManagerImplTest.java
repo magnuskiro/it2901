@@ -1,4 +1,4 @@
-package no.ntnu.qos.client.test;
+package no.ntnu.qos.client.credentials.test;
 
 import static org.junit.Assert.*;
 
@@ -36,8 +36,8 @@ public class TokenManagerImplTest {
         role = "role";
         password = "password";
         soapFromUser = "Soap test data";
-        destination = new URI("http://127.0.0.25/");
-        destination2 = new URI("http://127.0.0.24/");
+        destination = new URI("http://127.0.0.25/services/myservice/service");
+        destination2 = new URI("http://127.0.0.24/myservice/service");
 
         client = new QoSClientImpl(user, role, password, null);
         sequencer = client.getSequencer();

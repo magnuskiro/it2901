@@ -34,7 +34,7 @@ public class SequencerImpl implements Sequencer {
 
 		tokenManager	= new TokenManagerImpl(username, role, password);
 		messageHandler	= new MessageHandlerImpl(this);
-		sanityChecker	= new SanitycheckerImpl();
+		sanityChecker	= new SanityCheckerImpl();
 		this.exceptionHandler = exceptionHandler;
 		threadPool		= Executors.newFixedThreadPool(20); //add number of threads to config-thingy
 
@@ -53,10 +53,12 @@ public class SequencerImpl implements Sequencer {
 		dataObj.setReceiveObject(receiveObj);
 
 		//fetches various data the DataObject needs
-		tokenManager.getToken(dataObj);
-		sanityChecker.isSane(dataObj);
-
-
+		Runnable getToken = tokenManager.getToken(dataObj);
+		Runnable getSane = sanityChecker.isSane(dataObj);
+		//Executes the runnables
+		threadPool.execute(getToken);
+		threadPool.execute(getSane);
+		
 		return receiveObj;
 	}
 
@@ -67,7 +69,7 @@ public class SequencerImpl implements Sequencer {
 
 	@Override
 	public void returnData(ReceiveObject recObj) {
-		qoSClient.Receive(recObj);
+		qoSClient.receive(recObj);
 	}
 
 	public TokenManager getTokenManager() {

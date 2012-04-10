@@ -12,9 +12,9 @@ public interface SanityChecker {
 	 * checks the given DataObject for correctness and calls setSane with the result
 	 * @param data	- the DataObject to check
 	 */
-	public void isSane(DataObject data);
+	public Runnable isSane(DataObject data);
 	
-	/**
+	/**mk3-4_yong
 	 * checks the given credential triplet for obvious faults
 	 * @param userName	- client username
 	 * @param password	- client password
@@ -22,4 +22,5 @@ public interface SanityChecker {
 	 * @return	true if sane, else: false
 	 */
 	public boolean isSane(String userName, String password, String role);
+
 }
