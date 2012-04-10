@@ -21,7 +21,8 @@ public class SanityCheckerImpl implements SanityChecker{
 		return new RunningSanityChecker(data);
 	}
 	public boolean isSane(String data) {
-		return data.trim().startsWith("<?") && (data.toLowerCase().contains("s:envelope") || data.toLowerCase().contains("soap:envelope"));
+		return true;
+//		return data.trim().startsWith("<?") && (data.toLowerCase().contains("s:envelope") || data.toLowerCase().contains("soap:envelope"));
 	}
 
 	@Override
