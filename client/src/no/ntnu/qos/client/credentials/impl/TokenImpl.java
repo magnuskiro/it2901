@@ -3,18 +3,35 @@ package no.ntnu.qos.client.credentials.impl;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenAxiom;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 
+import javax.xml.stream.XMLStreamException;
+
 import org.apache.axiom.om.OMElement;
+import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 
 public class TokenImpl implements Token, TokenAxiom {
-	//TODO: Change to use an actual OpenSAML object?
 	OMElement token;
 	long validUntil;
     long expirationTimeBuffer = 30000; // 30000 is default as it resembles 30seconds when used.
 	URI destination;
 	int priority;
 	int diffServ;
+	
+	public TokenImpl(String tokenString, long validUntil, URI destination) {
+		this.destination = destination;
+		this.validUntil = validUntil;
+		ByteArrayInputStream tokenStream = new ByteArrayInputStream(tokenString.getBytes());
+		StAXOMBuilder tokenBuilder = null;
+		try {
+			tokenBuilder = new StAXOMBuilder(tokenStream);
+		} catch (XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		token = tokenBuilder.getDocumentElement();
+	}
 	
 	public TokenImpl(OMElement token, long validUntil, URI destination) {
         // todo - has to be expanded to set the diffserv and priority variables also.
