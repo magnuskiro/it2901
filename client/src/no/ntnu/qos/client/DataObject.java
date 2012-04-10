@@ -116,7 +116,7 @@ public class DataObject {
 	 * @return - true if ready to send, false if not 
 	 */
 	private synchronized boolean isReadyToSend(){
-		if(sane && samlToken != null && priority!=0 && diffServ!=0 && destination!=null){
+		if(sane && samlToken != null && destination!=null){
 			return true;
 		}
 		return false;
