@@ -1,5 +1,6 @@
 package no.ntnu.qos.client.test;
 
+import static org.junit.Assert.assertFalse;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.Sequencer;
@@ -29,7 +30,9 @@ public class SequencerTest {
     @Test
     public void setCredentials() {
         // String username, String role, String password
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
@@ -41,22 +44,30 @@ public class SequencerTest {
         // returned
         ReceiveObject receiveObject;
 
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void sendData() {
         // DataObject dataObj
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void returnData(String data) {
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void setTokenManager(TokenManager tM) {
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 }
