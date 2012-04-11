@@ -36,6 +36,7 @@ public class TestClient implements ExceptionHandler{
 	private final String INTERVAL = "interval";
 	private final String DELAY = "delay";
 	private final String DATA = "request";
+	private final String NOFREQUESTS = "nofreqs";
 	private final long DEFAULT_DELAY = 0;
 
 
@@ -45,6 +46,8 @@ public class TestClient implements ExceptionHandler{
 	private QoSClient connection;
 	private URI destination;
 	private static String prevResponse = "";
+	private static Timer timer;
+	private int nofRequests = -1;
 
 
 	public TestClient() {
@@ -119,8 +122,19 @@ public class TestClient implements ExceptionHandler{
 		}else{
 			logLine(INTERVAL+" not specified, send only one request");
 		}
+		
+		if(config.containsKey(NOFREQUESTS)){
+			try{
+				nofRequests = Integer.parseInt(config.get(NOFREQUESTS));
+				logLine(NOFREQUESTS+" set to: "+nofRequests);
+			}catch(NumberFormatException nfe){
+				logLine(NOFREQUESTS+" not int, send forever unless no interval", LogType.WARN);
+			}
+		}else{
+			logLine(NOFREQUESTS+" not specified, send forever unless no interval");
+		}
 
-		Timer timer = new Timer();
+		timer = new Timer();
 		TimerTask requestTask = new TimerTask() {
 
 			@Override
@@ -140,6 +154,9 @@ public class TestClient implements ExceptionHandler{
 
 	private void sendRequest(){
 		int reqID = requestID.getAndIncrement();
+		if(reqID==nofRequests){
+			timer.cancel();
+		}
 		logLine("Sending "+DATA+" "+reqID+" to "+config.get(SERVICE));
 		ReceiveObject ro = connection.sendData(config.get(DATA), destination);
 		try {
@@ -150,6 +167,11 @@ public class TestClient implements ExceptionHandler{
 		} catch (InterruptedException e) {
 			logLine("Could not receive response "+reqID+": interuptedException", LogType.WARN);
 		}
+		if(reqID==nofRequests){
+			logLine("Test Client Complete, terminating");
+			System.exit(0);
+		}
+		
 	}
 
 	private synchronized void checkResponse(String response, int reqID){
