@@ -1,19 +1,21 @@
 package no.ntnu.qos.client.credentials.test;
 
-import static org.junit.Assert.*;
-
-import java.net.URI;
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.Sequencer;
+import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
+import no.ntnu.qos.client.credentials.impl.TokenImpl;
 import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 import no.ntnu.qos.client.impl.QoSClientImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.net.URI;
 import java.net.URISyntaxException;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -28,7 +30,7 @@ public class TokenManagerImplTest {
     static DataObject dataObject;
     static DataObject dataObject2;
     static ExceptionHandler exceptionHandler;
-
+    static Token token;
 
     @BeforeClass
     public static void setup() throws URISyntaxException {
@@ -47,6 +49,42 @@ public class TokenManagerImplTest {
         dataObject2 = new DataObject(sequencer, soapFromUser, destination2, exceptionHandler);
         tokenManager.setTokenInDataObject(dataObject);
         tokenManager.setTokenInDataObject(dataObject2);
+
+        token = new TokenImpl(
+                "<saml2:Assertion IssueInstant=\"2012-03-12T13:50:20.021Z\" " +
+                        "Version=\"2.0\" xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" +
+                        "<saml2:Issuer>http://allbowtotheawesomenessofjan.com</saml2:Issuer>" +
+                        "<saml2:Subject>" +
+                        "<saml2:NameID " +
+                        "Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\" NameQualifier=\"My website\">Alles Menschen</saml2:NameID>" +
+                        "<saml2:SubjectConfirmation>" +
+                        "<saml2:SubjectConfirmationData " +
+                        "NotBefore=\"2012-03-12T13:50:20.021Z\" NotOnOrAfter=\"2012-03-12T13:52:20.021Z\"/>" +
+                        "</saml2:SubjectConfirmation>" +
+                        "</saml2:Subject>" +
+                        "<saml2:Conditions>" +
+                        "<saml2:OneTimeUse/>" +
+                        "</saml2:Conditions>" +
+                        "<saml2:AuthnStatement " +
+                        "AuthnInstant=\"2012-03-12T13:50:20.301Z\" " +
+                        "SessionIndex=\"abcdef123456\" SessionNotOnOrAfter=\"2012-03-12T13:50:20.316Z\">" +
+                        "<saml2:AuthnContext>" +
+                        "<saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml2:AuthnContextClassRef>" +
+                        "</saml2:AuthnContext>" +
+                        "</saml2:AuthnStatement>" +
+                        "<saml2:AttributeStatement>" +
+                        "<saml2:Attribute " +
+                        "xmlns:x500=\"urn:oasis:names:tc:SAML:2.0:profiles:attribute:X500\" " +
+                        "x500:Encoding=\"LDAP\" " +
+                        "NameFormat=\"urn:oasis:names:tc:SAML:2.0:attrname-format:uri\" " +
+                        "Name=\"urn:oid:1.3.6.1.4.1.5923.1.1.1.1\" " +
+                        "FriendlyName=\"qosClientRole\">" +
+                        "<saml2:AttributeValue>"+role+"</saml2:AttributeValue>" +
+                        "</saml2:Attribute>" +
+                        "</saml2:AttributeStatement>" +
+                        "</saml2:Assertion>", System.currentTimeMillis()+3600000, destination);
+        token.setDiffServ(10);
+        token.setPriority(100);
     }
 
     @Test
@@ -79,8 +117,9 @@ public class TokenManagerImplTest {
 
     @Test
     public void setTokenInDataObjectTest(){
-        // Todo change the checked object when the samlCommunicatorImpl is complete so we know that the Tokens are created correctly.
-        assertEquals("Set token in DataObject", "token", dataObject.getSamlToken().getXML());
+        // Todo check the test when the samlCommunicatorImpl is complete so we know that the Tokens are created correctly.
+        System.out.println(dataObject.getSamlToken().getXML());
+        assertEquals("Set token in DataObject", token.getXML(), dataObject.getSamlToken().getXML());
         assertEquals("Set token in DataObject", destination, dataObject.getSamlToken().getDestination());
     }
 
