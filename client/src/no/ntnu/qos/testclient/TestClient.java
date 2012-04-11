@@ -96,8 +96,9 @@ public class TestClient implements ExceptionHandler{
 		connection = new QoSClientImpl(config.get(USERNAME),
 				config.get(ROLE), config.get(PASSWORD), this);
 
-		connection.setLogging(config.containsKey(DO_LOG)&&config.get(DO_LOG).equals(TRUE));
+		connection.setLogging(true);
 		connection.setLogToFile(config.containsKey(LOG_TO_FILE)&&config.get(LOG_TO_FILE).equals(TRUE));
+		connection.setLogToConsole(false);
 		
 		long delay = DEFAULT_DELAY;
 		if(config.containsKey(DELAY)){
