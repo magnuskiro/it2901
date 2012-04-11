@@ -2,7 +2,6 @@ package no.ntnu.qos.client.credentials.test;
 
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.impl.SAMLParserImpl;
-import no.ntnu.qos.client.credentials.impl.TokenImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com - 21/03/12
  */
 public class TokenImplTest {
-    static String token1a, token1b, token2a, token2b, role, time1, time2, time3, time4, time5;
+    static String token1a, token1b, token2a, token2b, role, time1, time2, time3, time4, time5, pre, post;
     static URI destination1, destination2;
     static long validUntil1, validUntil2, validUntil3, validUntil4, validUntil5, TimeZoneOffset;
     static Token testToken1, testToken2, testToken3, testToken4, testToken5;
@@ -107,12 +106,12 @@ public class TokenImplTest {
 				"</saml2:AttributeStatement>" +
 			"</saml2:Assertion>";
         
-        String pre = "<soap11:Envelope xmlns:soap11=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+        pre = "<soap11:Envelope xmlns:soap11=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
 				"<soapenv:Header xmlns:soapenv=\"http://www.w3.org/2003/05/soap-envelope\">" +
 					"<qosPriority>123</qosPriority><qosDiffserv>16</qosDiffserv>" +
 				"</soapenv:Header>" +
 			"<soap11:Body>";
-        String post = "</soap11:Body></soap11:Envelope>";
+        post = "</soap11:Body></soap11:Envelope>";
         
         
         dateFormatter	= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
@@ -144,10 +143,10 @@ public class TokenImplTest {
         
         try {
 			testToken1 = SAMLParser.tokenize(pre + token1a + time1 + token1b + post, destination1);
-			testToken2 = SAMLParser.tokenize(pre + token2a + time2 + token2b  + post, destination2);
-			testToken3 = SAMLParser.tokenize(pre + token1a + time3 + token1b  + post, destination1);
-			testToken4 = SAMLParser.tokenize(pre + token1a + time4 + token1b  + post, destination1);
-			testToken5 = SAMLParser.tokenize(pre + token1a + time5 + token1b  + post, destination1);
+			testToken2 = SAMLParser.tokenize(pre + token2a + time2 + token2b + post, destination2);
+			testToken3 = SAMLParser.tokenize(pre + token1a + time3 + token1b + post, destination1);
+			testToken4 = SAMLParser.tokenize(pre + token1a + time4 + token1b + post, destination1);
+			testToken5 = SAMLParser.tokenize(pre + token1a + time5 + token1b + post, destination1);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,16 +164,20 @@ public class TokenImplTest {
     }
 
     @Test
-    public void setExpirationTest(){
+    public void setExpirationTest() throws UnsupportedEncodingException{
         // tests if a token becomes invalid after the change of the expirationTimeBuffer.
-        Token testExpirationToken = new TokenImpl(token1a, System.currentTimeMillis()+31000, destination1);
+    	calendar.setTimeInMillis(System.currentTimeMillis()+31000 - TimeZoneOffset);
+        time1 = dateFormatter.format(calendar.getTime()) + "Z";
+        Token testExpirationToken = SAMLParser.tokenize(pre + token1a + time1 + token1b + post, destination1);
         assertTrue(testExpirationToken.isValid());
         testExpirationToken.setExpirationTimeBuffer(32000L);
         assertEquals(testExpirationToken.getExpirationTimeBuffer(), 32000L);
         assertFalse(testExpirationToken.isValid());
 
         // tests if a token becomes valid after changing the expirationTimeBuffer.
-        Token testExpirationToken2 = new TokenImpl(token1a, System.currentTimeMillis()+29000, destination1);
+        calendar.setTimeInMillis(System.currentTimeMillis()+29000 - TimeZoneOffset);
+        time1 = dateFormatter.format(calendar.getTime()) + "Z";
+        Token testExpirationToken2 = SAMLParser.tokenize(pre + token1a + time1 + token1b + post, destination1);
         assertFalse(testExpirationToken2.isValid());
         testExpirationToken2.setExpirationTimeBuffer(28000L);
         assertEquals(testExpirationToken2.getExpirationTimeBuffer(), 28000L);
