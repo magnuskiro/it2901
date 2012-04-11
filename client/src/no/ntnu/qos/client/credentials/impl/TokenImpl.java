@@ -2,14 +2,12 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenAxiom;
-
-import java.io.ByteArrayInputStream;
-import java.net.URI;
-
-import javax.xml.stream.XMLStreamException;
-
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+
+import javax.xml.stream.XMLStreamException;
+import java.io.ByteArrayInputStream;
+import java.net.URI;
 
 public class TokenImpl implements Token, TokenAxiom {
 	OMElement token;
@@ -28,7 +26,6 @@ public class TokenImpl implements Token, TokenAxiom {
 		try {
 			tokenBuilder = new StAXOMBuilder(tokenStream);
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		token = tokenBuilder.getDocumentElement();
