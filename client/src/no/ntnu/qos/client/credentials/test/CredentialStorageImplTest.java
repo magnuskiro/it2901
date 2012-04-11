@@ -4,6 +4,8 @@ import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.impl.CredentialStorageImpl;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
+
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,8 +29,8 @@ public class CredentialStorageImplTest {
 	static String user, role, pass;
 	static String user2, role2, pass2;
 
-	@BeforeClass
-	public static void setup() throws Exception {
+	@Before
+	public void setup() throws Exception {
 		user = "testUser";
 		role = "testRole";
 		pass = "testPas";
@@ -88,7 +90,7 @@ public class CredentialStorageImplTest {
 
     @Test
     public void getToken(){
-        assertNotNull(credentialStorage.getToken(destination));
+    	assertNotNull(credentialStorage.getToken(destination));
         assertNotNull(credentialStorage.getToken(destination3));
     }
 
@@ -111,7 +113,6 @@ public class CredentialStorageImplTest {
         credentialStorage.getToken(destination2);
 	}
 
-	@SuppressWarnings("static-access")
 	@Test
 	public void storedCredentialsTest() {
 		String[] credentials = credentialStorage.getCredentials();
@@ -120,7 +121,6 @@ public class CredentialStorageImplTest {
 		assertTrue(credentials[CredentialStorage.PASSWORD].equals(pass));
 	}
 
-	@SuppressWarnings("static-access")
 	@Test
 	public void setClientCredentialsInStorageTest() {
         credentialStorage.setCredentials(user2, role2, pass2);
