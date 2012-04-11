@@ -45,7 +45,16 @@ public class SAMLMediator extends AbstractQosMediator {
 
 		this.logMessage(synLog, "Set client role to: " + 
 				clientRole + ", set service to: " + service, QosLogType.INFO);
+		this.stripSAML(synCtx, synLog);
 		return true;
+	}
+
+	private void stripSAML(MessageContext synCtx, SynapseLog synLog) {
+		OMElement sa = getSAMLAssertion(synCtx.getEnvelope());
+		if(sa!=null){
+			sa.detach();
+			this.logMessage(synLog, "Stripped SAMLAssertion from message", QosLogType.INFO);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
