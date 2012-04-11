@@ -38,6 +38,7 @@ public class ConfigManager {
 		if (on) {
 			if (file==null) {
 				try {
+					@SuppressWarnings("deprecation")
 					String logname = "Client"+new Date().toGMTString().replaceAll(" ", "_")+".log";
 					file = new FileHandler(logname, true);
 				} catch (SecurityException e) {
