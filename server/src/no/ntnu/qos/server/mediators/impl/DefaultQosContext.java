@@ -80,7 +80,19 @@ public class DefaultQosContext extends AbstractQosContext {
 
 	@Override
 	public int compareTo(QosContext o) {
-		// TODO Auto-generated method stub
+		long mc1time = (Long)this.getMessageContext().getProperty(MediatorConstants.QOS_TIME_ADDED);
+		long mc2time = (Long)o.getMessageContext().getProperty(MediatorConstants.QOS_TIME_ADDED);
+		int mc1pri = (Integer)this.getMessageContext().getProperty(MediatorConstants.QOS_PRIORITY);
+		int mc2pri = (Integer)o.getMessageContext().getProperty(MediatorConstants.QOS_PRIORITY);
+		if(mc1pri>mc2pri){
+			return 1;
+		}else if(mc2pri>mc1pri){
+			return -1;
+		}else if(mc1time>mc2time){
+			return -1;
+		}else if(mc2time>mc1time){
+			return 1;
+		}
 		return 0;
 	}
 

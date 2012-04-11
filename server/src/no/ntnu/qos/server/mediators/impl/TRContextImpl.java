@@ -63,6 +63,8 @@ public class TRContextImpl implements TRContext {
 							next.preempt();
 							result.add(this.queue.poll());
 							usedCapacity--;
+						}else{
+							break;
 						}
 					}else{
 						break;

@@ -36,9 +36,12 @@ public class ThrottleMediator extends AbstractQosMediator{
 				/minBandwidthPerMessage;
 		QosContext qCtx;
 		long timeStarted = System.currentTimeMillis();
+		this.logMessage(synLog, this.getName() + " started at " + timeStarted, 
+				QosLogType.INFO);
 		try {
 			qCtx = new DefaultQosContext(synCtx);
 			TRContext trCtx = null;
+			this.logMessage(synLog, "Fetching TRContext from map", QosLogType.INFO);
 			synchronized (trCtxs) {
 				trCtx = trCtxs.get(lastTR);
 				if(trCtx==null){
@@ -48,16 +51,21 @@ public class ThrottleMediator extends AbstractQosMediator{
 					trCtx.setAvailableBandwidth(initialCapacity>1 ? initialCapacity:1);
 				}
 			}
-			while(System.currentTimeMillis()-timeStarted<timeout && 
+			this.logMessage(synLog, "Successfully got TRContext from map, " +
+					"trying to send message", QosLogType.INFO);
+			while((System.currentTimeMillis()-timeStarted) < timeout && 
 					(!qCtx.useTTL() || qCtx.getTimeToLive()>0)){
 				if(send(qCtx, trCtx, synLog)){
 					return true;
 				}else{
+					this.logMessage(synLog, "Could not send message right away, " +
+							"trying to preempt messages", QosLogType.INFO);
 					List<QosContext> preemptees = trCtx.preemptContexts(qCtx);
 					for(QosContext preempted:preemptees){
 						this.logMessage(synLog, "Preempted Message:" +
 								preempted.getMessageContext().getMessageID(), QosLogType.INFO);
 					}
+					this.logMessage(synLog, "Trying to send message again", QosLogType.INFO);
 					if(send(qCtx, trCtx, synLog)){
 						return true;
 					}
@@ -70,7 +78,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 					this.logMessage(synLog, "Could not sleep", QosLogType.WARN);
 				}
 			}
-			if(System.currentTimeMillis()-timeStarted>=timeout){
+			if(System.currentTimeMillis()-timeStarted >= timeout){
 				this.logMessage(synLog, "Message timed out: mediator timeout exceeded", QosLogType.INFO);
 			}else if(qCtx.useTTL() && qCtx.getTimeToLive()<=0){
 				this.logMessage(synLog, "Message timed out: message time to live exceeded", QosLogType.INFO);
