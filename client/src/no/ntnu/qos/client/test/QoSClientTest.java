@@ -1,5 +1,6 @@
 package no.ntnu.qos.client.test;
 
+import static org.junit.Assert.assertFalse;
 import no.ntnu.qos.client.DataListener;
 import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.ReceiveObject;
@@ -33,7 +34,9 @@ public class QoSClientTest{
         username = "user";
         role = "role";
         password = "password";
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
@@ -45,25 +48,33 @@ public class QoSClientTest{
         // returned
         ReceiveObject receiveObject;
 
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void addListenerTest() {
         DataListener dataListener;
 
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void removeListenerTest() {
         DataListener dataListener;
 
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 
     @Test
     public void getSequencerTest() {
-        //todo - test this method.
+        //TODO - test this method.
+        assertFalse(true); // fails to remind us that the test is not complete. 
+
     }
 }
