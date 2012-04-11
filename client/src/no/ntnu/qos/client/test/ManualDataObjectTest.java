@@ -1,5 +1,6 @@
 package no.ntnu.qos.client.test;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -46,6 +47,10 @@ public class ManualDataObjectTest {
 				"</saml2:Assertion>", System.currentTimeMillis()+60000, destination);
 		DataObject data = new DataObject(null, xml, destination, null);
 		data.setToken(samlToken);
-		System.out.println(data.getSoap());
+		try {
+			System.out.println(data.getSoap());
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Invalid soap");
+		}
 	}
 }

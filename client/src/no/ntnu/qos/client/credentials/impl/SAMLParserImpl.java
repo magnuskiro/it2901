@@ -77,6 +77,7 @@ public class SAMLParserImpl implements SAMLParser{
 			}
 		}
 		}
+		//If all the required elements were available
 		if(qosElem!=null && diffElem!=null && assertion!=null && date!=null) {
 			Token token = new TokenImpl(assertion, date.getTime(), destination);
 			token.setDiffServ(Integer.parseInt(diffElem.getText()));

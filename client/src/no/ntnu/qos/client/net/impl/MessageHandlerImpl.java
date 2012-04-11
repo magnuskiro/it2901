@@ -40,7 +40,7 @@ public class MessageHandlerImpl implements MessageHandler{
 	}
 
 	@Override
-	public Runnable sendData(DataObject data) {
+	public Runnable sendData(DataObject data) throws UnsupportedEncodingException {
 		return new MessageSender(data);
 	}
 
@@ -65,7 +65,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		private SSLSocket socket;
 
 
-		public MessageSender(DataObject data) {
+		public MessageSender(DataObject data) throws UnsupportedEncodingException {
 			message = data.getSoap();
 			diffServ = data.getDiffServ();
 			destination = data.getDestination();
@@ -97,6 +97,13 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (UnsupportedEncodingException e) {
 				exceptionHandler.unsupportedEncodingExceptionThrown(e);
 				ConfigManager.LOGGER.warning("Illegal message syntax");
+				try {
+					recObj.setReply("UnsupportedEncodingException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			((AbstractHttpEntity)body).setContentType("text/xml");
 			try {
@@ -112,9 +119,23 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (UnknownHostException e1) {
 				exceptionHandler.unknownHostExceptionThrown(e1);
 				ConfigManager.LOGGER.warning("Invalid host");
+				try {
+					recObj.setReply("UnknownHostException");
+				} catch (InterruptedException e2) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e2.printStackTrace();
+				}
+				return;
 			} catch (IOException e1) {
 				exceptionHandler.ioExceptionThrown(e1);
 				ConfigManager.LOGGER.warning("IO Exception on making SSL socket");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e2) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e2.printStackTrace();
+				}
+				return;
 			}
 			//Set Traffic class and get certificate
 			try {
@@ -122,6 +143,13 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (SocketException e) {
 				exceptionHandler.socketExceptionThrown(e);
 				ConfigManager.LOGGER.warning("Socket Exception while setting traffic class");
+				try {
+					recObj.setReply("SocketException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			try {
 				socket.startHandshake();
@@ -130,6 +158,13 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IO exception handshaking or binding socket to connection");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			//Create the request, set parameters and insert message into body.
 			BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST", destination.getPath());
@@ -142,9 +177,23 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException preprocessing request");
+				try {
+					recObj.setReply("HttpException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException proprocessing request");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			ConfigManager.LOGGER.info("Ready to send to: "+destination.getHost()+destination.getPath());
 			//Execute request!
@@ -154,9 +203,23 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException while executing request, connection closed?");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException while executing request, connection closed?");
+				try {
+					recObj.setReply("HttpException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			//Process the response
 			ConfigManager.LOGGER.info("Response received from: "+destination.getHost()+destination.getPath()+" Processing.");
@@ -165,9 +228,23 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (HttpException e) {
 				exceptionHandler.httpExceptionThrown(e);
 				ConfigManager.LOGGER.warning("HttpException processing reply");
+				try {
+					recObj.setReply("HttpException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException processing reply");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 
 			//Unknown if the reply code is needed by the client
@@ -180,9 +257,23 @@ public class MessageHandlerImpl implements MessageHandler{
 				// Service messed up!
 				e.printStackTrace();
 				ConfigManager.LOGGER.severe("Reply not parseable!");
+				try {
+					recObj.setReply("ParseException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException while parsing reply!");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			//Close connection
 			ConfigManager.LOGGER.info("Processing completed, closing connection");
@@ -191,6 +282,13 @@ public class MessageHandlerImpl implements MessageHandler{
 			} catch (IOException e) {
 				exceptionHandler.ioExceptionThrown(e);
 				ConfigManager.LOGGER.warning("IOException closing connection");
+				try {
+					recObj.setReply("IOException");
+				} catch (InterruptedException e1) {
+					ConfigManager.LOGGER.severe("Something went horribly wrong while setting reply in receiveObject");
+					e1.printStackTrace();
+				}
+				return;
 			}
 			//Set reply in receiveObject
 			ConfigManager.LOGGER.info("Setting reply and forwarding it");

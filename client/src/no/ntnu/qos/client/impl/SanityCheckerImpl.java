@@ -16,10 +16,10 @@ public class SanityCheckerImpl implements SanityChecker{
 	private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9_-]{3,15}$";
 	private static final String ROLE_PATTERN = "^[a-zA-Z0-9_]{3,15}$";
 
-	@Override
-	public Runnable isSane(DataObject data) {
-		return new RunningSanityChecker(data);
-	}
+//	@Override
+//	public Runnable isSane(DataObject data) {
+////		return new RunningSanityChecker(data);
+//	}
 	public boolean isSane(String data) {
 		return true;
 //		return data.trim().startsWith("<?") && (data.toLowerCase().contains("s:envelope") || data.toLowerCase().contains("soap:envelope"));
@@ -50,29 +50,34 @@ public class SanityCheckerImpl implements SanityChecker{
 		return matcher.matches();
 	}
 
-	class RunningSanityChecker implements Runnable {
-		DataObject data;
-		
-		public RunningSanityChecker(DataObject dataObj) {
-			data = dataObj;
-		}
-
-		@Override
-		public void run() {
-			if(isSane(data.getSoap())) {
-				data.setSane(true);
-			} else {
-				try {
-					((ReceiveObjectImpl)data.getReceiveObject()).setReply("UnsupportedEncodingException");
-				} catch (InterruptedException e) {
-					//Should never happen
-					e.printStackTrace();
-				}
-				UnsupportedEncodingException e = new UnsupportedEncodingException("Sanity Check of message failed");
-				data.getExceptionHandler().unsupportedEncodingExceptionThrown(e);
-			}
-		}
-
-	}
+//	class RunningSanityChecker implements Runnable {
+//		DataObject data;
+//		
+//		public RunningSanityChecker(DataObject dataObj) {
+//			data = dataObj;
+//		}
+//
+//		@Override
+//		public void run() {
+//			try {
+//				if(isSane(data.getSoap())) {
+//					data.setSane(true);
+//				} else {
+//					try {
+//						((ReceiveObjectImpl)data.getReceiveObject()).setReply("UnsupportedEncodingException");
+//					} catch (InterruptedException e) {
+//						//Should never happen
+//						e.printStackTrace();
+//					}
+//					UnsupportedEncodingException e = new UnsupportedEncodingException("Sanity Check of message failed");
+//					data.getExceptionHandler().unsupportedEncodingExceptionThrown(e);
+//				}
+//			} catch (UnsupportedEncodingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//
+//	}
 
 }

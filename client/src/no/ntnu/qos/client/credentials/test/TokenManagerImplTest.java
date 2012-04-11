@@ -117,7 +117,7 @@ public class TokenManagerImplTest {
 
     @Test
     public void setTokenInDataObjectTest(){
-        // Todo check the test when the samlCommunicatorImpl is complete so we know that the Tokens are created correctly.
+        // TODO check the test when the samlCommunicatorImpl is complete so we know that the Tokens are created correctly.
         System.out.println(dataObject.getSamlToken().getXML());
         assertEquals("Set token in DataObject", token.getXML(), dataObject.getSamlToken().getXML());
         assertEquals("Set token in DataObject", destination, dataObject.getSamlToken().getDestination());

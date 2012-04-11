@@ -11,6 +11,7 @@ import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
 import no.ntnu.qos.client.net.MessageHandler;
 import no.ntnu.qos.client.net.impl.MessageHandlerImpl;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,11 +60,11 @@ public class SequencerImpl implements Sequencer {
 		//fetches various data the DataObject needs
 		ConfigManager.LOGGER.info("Getting runnables to get token and check sanity");
 		Runnable getToken = tokenManager.getToken(dataObj);
-		Runnable getSane = sanityChecker.isSane(dataObj);
+//		Runnable getSane = sanityChecker.isSane(dataObj);  	//Sanity check integrated into dataobject when generating soap
 		//Executes the runnables
 		ConfigManager.LOGGER.info("Runnables received, executing");
 		threadPool.execute(getToken);
-		threadPool.execute(getSane);
+//		threadPool.execute(getSane); 						//Sanity check integrated into dataobject when generating soap
 		ConfigManager.LOGGER.info("Returning receiveObject to Qosclient");
 		return receiveObj;
 	}
@@ -71,7 +72,11 @@ public class SequencerImpl implements Sequencer {
 	@Override
 	public void sendData(DataObject dataObj) {
 		ConfigManager.LOGGER.info("Sending data to message handler");
-		threadPool.execute(messageHandler.sendData(dataObj));
+		try {
+			threadPool.execute(messageHandler.sendData(dataObj));
+		} catch (UnsupportedEncodingException e) {
+			ConfigManager.LOGGER.warning("Client Attempted to send invalid SOAP message");
+		}
 	}
 
 	@Override
