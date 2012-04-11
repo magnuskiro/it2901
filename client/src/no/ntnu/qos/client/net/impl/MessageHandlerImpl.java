@@ -40,7 +40,7 @@ public class MessageHandlerImpl implements MessageHandler{
 	}
 
 	@Override
-	public Runnable sendData(DataObject data) {
+	public Runnable sendData(DataObject data) throws UnsupportedEncodingException {
 		return new MessageSender(data);
 	}
 
@@ -65,7 +65,7 @@ public class MessageHandlerImpl implements MessageHandler{
 		private SSLSocket socket;
 
 
-		public MessageSender(DataObject data) {
+		public MessageSender(DataObject data) throws UnsupportedEncodingException {
 			message = data.getSoap();
 			diffServ = data.getDiffServ();
 			destination = data.getDestination();

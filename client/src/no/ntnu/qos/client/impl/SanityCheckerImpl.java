@@ -59,17 +59,22 @@ public class SanityCheckerImpl implements SanityChecker{
 
 		@Override
 		public void run() {
-			if(isSane(data.getSoap())) {
-				data.setSane(true);
-			} else {
-				try {
-					((ReceiveObjectImpl)data.getReceiveObject()).setReply("UnsupportedEncodingException");
-				} catch (InterruptedException e) {
-					//Should never happen
-					e.printStackTrace();
+			try {
+				if(isSane(data.getSoap())) {
+					data.setSane(true);
+				} else {
+					try {
+						((ReceiveObjectImpl)data.getReceiveObject()).setReply("UnsupportedEncodingException");
+					} catch (InterruptedException e) {
+						//Should never happen
+						e.printStackTrace();
+					}
+					UnsupportedEncodingException e = new UnsupportedEncodingException("Sanity Check of message failed");
+					data.getExceptionHandler().unsupportedEncodingExceptionThrown(e);
 				}
-				UnsupportedEncodingException e = new UnsupportedEncodingException("Sanity Check of message failed");
-				data.getExceptionHandler().unsupportedEncodingExceptionThrown(e);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 

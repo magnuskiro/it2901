@@ -1,5 +1,7 @@
 package no.ntnu.qos.client.net;
 
+import java.io.UnsupportedEncodingException;
+
 import no.ntnu.qos.client.DataObject;
 
 /**
@@ -12,6 +14,7 @@ public interface MessageHandler {
 	/**
 	 * sends the given DataObject
 	 * @param data - DataObject containing recipient info and other data
+	 * @throws UnsupportedEncodingException 
 	 */
-	public Runnable sendData(DataObject data);
+	public Runnable sendData(DataObject data) throws UnsupportedEncodingException;
 }
