@@ -37,17 +37,17 @@ public class TestClient implements ExceptionHandler{
 	private final String DELAY = "delay";
 	private final String DATA = "request";
 	private final String NOFREQUESTS = "nofreqs";
+	private final String REQID = "REQID";
 	private final long DEFAULT_DELAY = 0;
-
-
+	
+	private static final AtomicInteger responses = new AtomicInteger(0);
 	private static final AtomicInteger requestID = new AtomicInteger(0);
 	private String configFile = "client.config";
 	private Map<String, String> config = new HashMap<String, String>();
 	private QoSClient connection;
 	private URI destination;
-	private static String prevResponse = "";
 	private static Timer timer;
-	private int nofRequests = -1;
+	private int nofRequests = 0;
 
 
 	public TestClient() {
@@ -140,7 +140,7 @@ public class TestClient implements ExceptionHandler{
 
 			@Override
 			public void run() {
-				sendRequest();
+				new Thread(new RequestSender()).start();
 
 			}
 		};
@@ -153,34 +153,42 @@ public class TestClient implements ExceptionHandler{
 		}
 	}
 
-	private void sendRequest(){
-		int reqID = requestID.getAndIncrement();
-		if(reqID==nofRequests){
-			timer.cancel();
-		}
-		logLine("Sending "+DATA+" "+reqID+" to "+config.get(SERVICE));
-		ReceiveObject ro = connection.sendData(config.get(DATA), destination);
-		try {
-			logLine("Waiting for response "+reqID);
-			String response = ro.receive();
-			logLine("Got response "+reqID);
-			checkResponse(response, reqID);
-		} catch (InterruptedException e) {
-			logLine("Could not receive response "+reqID+": interuptedException", LogType.WARN);
-		}
-		if(reqID==nofRequests){
-			logLine("Test Client Complete, terminating");
-			System.exit(0);
+	private class RequestSender implements Runnable {
+		@Override
+		public void run() {
+			int reqID = requestID.incrementAndGet();
+			if(reqID==nofRequests){
+				timer.cancel();
+			}
+			logLine("Sending "+DATA+" "+reqID+" to "+config.get(SERVICE));
+			long sendTime = System.currentTimeMillis();
+			ReceiveObject ro = connection.sendData(
+					config.get(DATA).replace("{"+REQID+"}", "{"+REQID+"="+reqID+"}"), destination);
+			try {
+				logLine("Waiting for response "+reqID);
+				String response = ro.receive();
+				checkResponse(response, reqID, System.currentTimeMillis()-sendTime);
+			} catch (InterruptedException e) {
+				logLine("Could not receive response "+reqID+": interuptedException", LogType.WARN);
+			}
+			exitCheck();
 		}
 		
 	}
 
-	private synchronized void checkResponse(String response, int reqID){
-		if(!prevResponse.equals(response)){
-			prevResponse = response;
-			logLine("Response "+reqID+": "+response);
+	private synchronized void checkResponse(String response, int reqID, long time){
+		int start = response.indexOf("{"+REQID+"=")+("{"+REQID+"=").length();
+		int end = response.indexOf("}", start);
+		if(end>start && start>0){
+			int responseReqID = Integer.parseInt(response.substring(start, end));
+			if(reqID==responseReqID){
+				logLine(time+"ms: Got response for "+reqID+", size="+response.length());
+			}else{
+				logLine(time+"ms: Request "+reqID+" got response for "+responseReqID+
+						", size="+response.length(), LogType.SEVERE);
+			}			
 		}else{
-			logLine("Response "+reqID+": as previous");
+			logLine(time+"ms: Got faulty response for "+reqID+", "+response);
 		}
 	}
 
@@ -209,6 +217,13 @@ public class TestClient implements ExceptionHandler{
 			logLine("Could not read config: IOException, file "+configFile+
 					" might contain error?.",LogType.WARN);
 			e.printStackTrace();
+		}
+	}
+	
+	private void exitCheck(){
+		if(responses.incrementAndGet()==nofRequests){
+			logLine("Test Client Complete, terminating");
+			System.exit(0);
 		}
 	}
 
@@ -244,6 +259,7 @@ public class TestClient implements ExceptionHandler{
 	
 	public void logException(Exception e){
 		logLine("Got exception: "+e.toString()+", "+e.getMessage(), LogType.WARN);
+//		exitCheck();
 	}
 
 	@Override
