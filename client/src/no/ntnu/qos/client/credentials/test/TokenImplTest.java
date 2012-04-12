@@ -36,19 +36,20 @@ public class TokenImplTest {
     public void setup() throws URISyntaxException {
         role = "role";
 
-        token1a = "<saml2:Assertion IssueInstant=\"2012-03-12T13:50:20.021Z\" " +
-				"Version=\"2.0\" xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" +
+        token1a = "<saml2:Assertion xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\" " +
+				"IssueInstant=\"2012-03-12T13:50:20.021Z\" Version=\"2.0\">" +
 				"<saml2:Issuer>http://allbowtotheawesomenessofjan.com</saml2:Issuer>" +
 				"<saml2:Subject>" +
 					"<saml2:NameID " +
 						"Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\" NameQualifier=\"My website\">Alles Menschen</saml2:NameID>" +
 					"<saml2:SubjectConfirmation>" +
 						"<saml2:SubjectConfirmationData " +
-							"NotBefore=\"2012-03-12T13:50:20.021Z\" NotOnOrAfter=\"2012-03-12T13:52:20.021Z\"/>" +
-					"</saml2:SubjectConfirmation>" +
+							"NotBefore=\"2012-03-12T13:50:20.021Z\" NotOnOrAfter=\"2012-03-12T13:52:20.021Z\">" +
+					"</saml2:SubjectConfirmationData></saml2:SubjectConfirmation>" +
 				"</saml2:Subject>" +
 				"<saml2:Conditions>" +
-					"<saml2:OneTimeUse/>" +
+					"<saml2:OneTimeUse>" +
+					"</saml2:OneTimeUse>" +
 				"</saml2:Conditions>" +
 				"<saml2:AuthnStatement " +
 					"AuthnInstant=\"2012-03-12T13:50:20.301Z\" " +
@@ -71,19 +72,21 @@ public class TokenImplTest {
 				"</saml2:AttributeStatement>" +
 			"</saml2:Assertion>";
         
-        token2a = "<saml2:Assertion IssueInstant=\"2012-03-12T13:50:20.021Z\" " +
-				"Version=\"2.0\" xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" +
+        token2a = "<saml2:Assertion xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\" " +
+				"Version=\"2.0\" IssueInstant=\"2012-03-12T13:50:20.021Z\">" +
 				"<saml2:Issuer>http://allbowtotheawesomenessofjan.com</saml2:Issuer>" +
 				"<saml2:Subject>" +
 					"<saml2:NameID " +
 						"Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\" NameQualifier=\"My website\">Alles Menschen</saml2:NameID>" +
 					"<saml2:SubjectConfirmation>" +
-						"<saml2:SubjectConfirmationData " +
-							"NotBefore=\"2012-03-12T13:50:20.021Z\" NotOnOrAfter=\"2012-03-12T13:52:20.021Z\"/>" +
+						"<saml2:SubjectConfirmationData>" +
+							"NotBefore=\"2012-03-12T13:50:20.021Z\" NotOnOrAfter=\"2012-03-12T13:52:20.021Z\">" +
+						"</saml2:SubjectConfirmationData>" +
 					"</saml2:SubjectConfirmation>" +
 				"</saml2:Subject>" +
 				"<saml2:Conditions>" +
-					"<saml2:OneTimeUse/>" +
+					"<saml2:OneTimeUse>" +
+					"</saml2:OneTimeUse>" +
 				"</saml2:Conditions>" +
 				"<saml2:AuthnStatement " +
 					"AuthnInstant=\"2012-03-12T13:50:20.301Z\" " +
@@ -195,8 +198,8 @@ public class TokenImplTest {
 
         // what is the returned xml supposed to look like?
 
-        assertEquals("Token comparison", token1a, testToken1.getXML());
-        assertEquals("Token2 comparison", token2a, testToken2.getXML());
+        assertEquals("Token1 comparison", token1a + time1 + token1b, testToken1.getXML());
+        assertEquals("Token2 comparison", token2a + time2 + token2b, testToken2.getXML());
     }
 
     @Test
