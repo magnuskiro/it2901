@@ -161,12 +161,13 @@ public class TestClient implements ExceptionHandler{
 				timer.cancel();
 			}
 			logLine("Sending "+DATA+" "+reqID+" to "+config.get(SERVICE));
+			long sendTime = System.currentTimeMillis();
 			ReceiveObject ro = connection.sendData(
 					config.get(DATA).replace("{"+REQID+"}", "{"+REQID+"="+reqID+"}"), destination);
 			try {
 				logLine("Waiting for response "+reqID);
 				String response = ro.receive();
-				checkResponse(response, reqID);
+				checkResponse(response, reqID, System.currentTimeMillis()-sendTime);
 			} catch (InterruptedException e) {
 				logLine("Could not receive response "+reqID+": interuptedException", LogType.WARN);
 			}
@@ -175,19 +176,19 @@ public class TestClient implements ExceptionHandler{
 		
 	}
 
-	private synchronized void checkResponse(String response, int reqID){
+	private synchronized void checkResponse(String response, int reqID, long time){
 		int start = response.indexOf("{"+REQID+"=")+("{"+REQID+"=").length();
 		int end = response.indexOf("}", start);
 		if(end>start && start>0){
 			int responseReqID = Integer.parseInt(response.substring(start, end));
 			if(reqID==responseReqID){
-				logLine("Got response for "+reqID+", size="+response.length());
+				logLine(time+"ms: Got response for "+reqID+", size="+response.length());
 			}else{
-				logLine("Request "+reqID+" got response for "+responseReqID+
+				logLine(time+"ms: Request "+reqID+" got response for "+responseReqID+
 						", size="+response.length(), LogType.SEVERE);
 			}			
 		}else{
-			logLine("Got faulty response for "+reqID+", "+response);
+			logLine(time+"ms: Got faulty response for "+reqID+", "+response);
 		}
 	}
 
