@@ -13,6 +13,7 @@
 *.gls
 *.ist
 *.xdy
+*.dvi
 *.*~
 
 *.idea/*
