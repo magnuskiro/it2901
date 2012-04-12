@@ -1,9 +1,9 @@
 package no.ntnu.qos.client.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import no.ntnu.qos.client.ExceptionHandler;
 import no.ntnu.qos.client.ReceiveObject;
-import no.ntnu.qos.client.Sequencer;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.impl.QoSClientImpl;
 import no.ntnu.qos.client.impl.SequencerImpl;
@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com - 21/03/12
  */
 public class SequencerTest {
-    static Sequencer sequencer;
+    static SequencerImpl sequencer;
     static ExceptionHandler exceptionHandler;
 
     @BeforeClass
@@ -30,8 +30,14 @@ public class SequencerTest {
     @Test
     public void setCredentials() {
         // String username, String role, String password
-        //TODO - test this method.
-        assertFalse(true); // fails to remind us that the test is not complete. 
+    	TokenManager TM = sequencer.getTokenManager();
+    	sequencer.setCredentials("newuser", "newrole", "newpassword");
+    	
+    	String[] creds = TM.getCredentials();
+    	
+    	assertEquals("newuser", creds[0]);
+    	assertEquals("newrole", creds[1]);
+    	assertEquals("newpassword", creds[2]);
 
     }
 
@@ -58,16 +64,11 @@ public class SequencerTest {
     }
 
     @Test
-    public void returnData(String data) {
+    public void returnData() {
         //TODO - test this method.
         assertFalse(true); // fails to remind us that the test is not complete. 
 
     }
 
-    @Test
-    public void setTokenManager(TokenManager tM) {
-        //TODO - test this method.
-        assertFalse(true); // fails to remind us that the test is not complete. 
-
-    }
+    
 }
