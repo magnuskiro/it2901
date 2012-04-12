@@ -4,15 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Iterator;
-
 import javax.xml.stream.XMLStreamException;
-
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenAxiom;
 import no.ntnu.qos.client.impl.ConfigManager;
-import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 
 
 /**
@@ -173,11 +170,12 @@ public class DataObject {
 			try {
 				tokenBuilder = new StAXOMBuilder(tokenStream);
 			} catch (XMLStreamException e) {
-				// TODO Auto-generated catch block
+				ConfigManager.LOGGER.severe("Something went horribly wrong with the XML stream!");
 				e.printStackTrace();
 			}
 			parsedToken = tokenBuilder.getDocumentElement();
 		}
+		@SuppressWarnings("unchecked")
 		Iterator<OMElement> iter = root.getChildrenWithLocalName("Body");
 		if(iter.hasNext()) {
 			OMElement body = iter.next();
