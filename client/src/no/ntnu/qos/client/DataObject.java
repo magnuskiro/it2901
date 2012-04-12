@@ -3,8 +3,8 @@ package no.ntnu.qos.client;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.Iterator;
 import javax.xml.stream.XMLStreamException;
-
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 import no.ntnu.qos.client.credentials.Token;
@@ -148,8 +148,9 @@ public class DataObject {
 
 	/**
 	 * Build the SOAP message to be sent.
+	 * @throws UnsupportedEncodingException 
 	 */
-	private void buildSoap() {
+	private void buildSoap() throws UnsupportedEncodingException {
 		ByteArrayInputStream stream = new ByteArrayInputStream(soapFromClient.getBytes());
 		StAXOMBuilder builder = null;
 		try {
@@ -169,13 +170,19 @@ public class DataObject {
 			try {
 				tokenBuilder = new StAXOMBuilder(tokenStream);
 			} catch (XMLStreamException e) {
-				// TODO Auto-generated catch block
+				ConfigManager.LOGGER.severe("Something went horribly wrong with the XML stream!");
 				e.printStackTrace();
 			}
 			parsedToken = tokenBuilder.getDocumentElement();
 		}
-		OMElement body = (OMElement) root.getChildrenWithLocalName("Body").next();
-		body.addChild(parsedToken);
-		soapToSend = root.toString();
+		@SuppressWarnings("unchecked")
+		Iterator<OMElement> iter = root.getChildrenWithLocalName("Body");
+		if(iter.hasNext()) {
+			OMElement body = iter.next();
+			body.addChild(parsedToken);
+			soapToSend = root.toString();			
+		} else {
+			throw new UnsupportedEncodingException();
+		}
 	}
 }
