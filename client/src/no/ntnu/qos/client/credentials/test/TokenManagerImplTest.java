@@ -47,8 +47,7 @@ public class TokenManagerImplTest {
     	//TODO: use a proper ExceptionHandler, test will probably break until it is done
         dataObject = new DataObject(sequencer, soapFromUser, destination, exceptionHandler);
         dataObject2 = new DataObject(sequencer, soapFromUser, destination2, exceptionHandler);
-        tokenManager.setTokenInDataObject(dataObject);
-        tokenManager.setTokenInDataObject(dataObject2);
+
 
         token = new TokenImpl(
                 "<saml2:Assertion IssueInstant=\"2012-03-12T13:50:20.021Z\" " +
