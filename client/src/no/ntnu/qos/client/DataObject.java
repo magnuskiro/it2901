@@ -21,7 +21,6 @@ import no.ntnu.qos.client.impl.ConfigManager;
  */
 public class DataObject {
 
-	private boolean		sane;
 	private int			diffServ;
 	private int			priority;
 	private Sequencer	sequencer;
@@ -46,19 +45,6 @@ public class DataObject {
 		this.destination = destination;
 		this.exceptionHandler = exceptionHandler;
 
-	}
-
-	/**
-	 * marks the data the object contains as sane, sends itself if other
-	 * criteria are met
-	 * @param sane	- true if data is sane
-	 */
-	public synchronized void setSane(boolean sane){
-		this.sane = sane;
-
-		if (isReadyToSend()){
-			sequencer.sendData(this);
-		}
 	}
 
 	/**
@@ -123,7 +109,7 @@ public class DataObject {
 	 * @return - true if ready to send, false if not 
 	 */
 	private synchronized boolean isReadyToSend(){
-		if(sane && samlToken != null && destination!=null){
+		if(samlToken != null && destination!=null){
 			return true;
 		}
 		return false;
