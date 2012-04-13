@@ -8,9 +8,9 @@
     
     As the project progresses we’ll be switching to a more agile development method, so as to allow for iterative development and facilitate for any necessary changes that may turn up as code is produced. Agile also allows for the flat organisational structure we have chosen, which we believe will greatly help cooperation within the team.
 
-    \subsection{Project Organization}\label{Project Organization}[How we organize the project]
+    \subsection{Project Organization}\label{Project Organization}
     
-    We have devided the project tasks in to work packages. These packages are represented in a \gls{wbs}\footnote{\gls{wbs} - An oriented decomposition of a project into smaller components. [\url{http://en.wikipedia.org/wiki/Work_breakdown_structure}]} (\ref{Work Breakdown Structure}). The timeplan for the project is represented in a \gls{gantt}\footnote{\gls{gantt} - A type of bar chart that illustrates a project schedule. [\url{http://en.wikipedia.org/wiki/Gantt}]} (Fig.\ref{fig:gantt}). The figure is part of our full Gantt chart. As the full diagram cannot be included nicely in the report we have attached it as an HTML document (\ref{File Attachments}).
+    We have devided the project tasks in to work packages. These packages are represented in a \gls{wbs}\footnote{\gls{wbs} - An oriented decomposition of a project into smaller components. [\url{http://en.wikipedia.org/wiki/Work_breakdown_structure}]} (\ref{Work Breakdown Structure}). The schedule for the project is represented in a \gls{gantt}\footnote{\gls{gantt} - A type of bar chart that illustrates a project schedule. [\url{http://en.wikipedia.org/wiki/Gantt}]} (Fig.\ref{fig:gantt}). The figure is part of our full Gantt chart. As the full diagram cannot be included nicely in the report we have attached it as an HTML document (\ref{File Attachments}).
      
         \begin{figure}[h]
             \centering
@@ -19,6 +19,7 @@
             Meant as an example to show that the gantt diagram exists and what it looks like. Se full diagram in attachments: (\ref{File Attachments})
             \label{fig:gantt}
         \end{figure}
+    
     
     \subsection{Software project life cycle}\label{Software project life cycle}
     
@@ -34,22 +35,26 @@
 
     \subsection{System Technology}\label{System Technology}
     
-    We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use \gls{junit}\footnote{\gls{junit} - A testing framework for the Java programming language. [\url{http://junit.org/}]} as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer also can use to evaluate the product.
+    We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use \gls{junit}\footnote{\gls{junit} - A testing framework for the Java programming language. [\url{http://junit.org/}]} as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer can also use to evaluate the product.
 
-    We will use \gls{git}\footnote{\gls{git} - A free and open source, distributed version control system. [\url{http://www.git-scm.com}]} and \gls{github}\footnote{\gls{github} - A web-based hosting service for software development projects that use the Git version control system. [\url{http://www.github.com}]} to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use \gls{svn} (SVN)\footnote{\gls{svn} - A version control system}, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the code base before we decide to integrate it. To this extent we have decided that as much as possible we should take advantage of Git’s built in support for ‘branches’. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with \gls{latex}\footnote{\gls{latex} - A document preparation system for the \TeX -typesetting program}, which we prefer over standard word processors. Our GitHub repository is open to the public, and the software will be released as open source, most likely under the Apache License.\footnote{\url{http://www.apache.org/licenses/LICENSE-2.0.html}} In some places we are forced to use the ASF, like the changes we have done to Apache HTTPComponents and Apache Synapse, but as the licenses allows for derived works to be licensed under a different license we are free to chose a different one. The Apache License version 2.0 is also compatible with the GPLv3 so there is no problem for us in using either. As of now we have not taken a stance on the licensing issue and we will be in a dialog with the customer to accommodate their wishes.
+    We will use \gls{git}\footnote{\gls{git} - A free and open source, distributed version control system. [\url{http://www.git-scm.com}]} and \gls{github}\footnote{\gls{github} - A web-based hosting service for software development projects that use the Git version control system. [\url{http://www.github.com}]} to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use \gls{svn} (SVN)\footnote{\gls{svn} - A version control system}, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the code base before we decide to integrate it. To this extent we have decided that we should take advantage of Git’s built in support for ‘branches’ as much as possible. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with \gls{latex}\footnote{\gls{latex} - A document preparation system for the \TeX -typesetting program}, which we prefer over standard word processors. Our GitHub repository is open to the public, and the software will be released as open source, most likely under the Apache License.\footnote{\url{http://www.apache.org/licenses/LICENSE-2.0.html}} In some places we are forced to use the ASF, like the changes we have done to Apache HTTPComponents and Apache Synapse, but as the licenses allows for derived works to be licensed under a different license we are free to chose a different one. The Apache License version 2.0 is also compatible with the GPLv3 so there is no problem for us in using either. As of now, March 20. 2012, we have not taken a stance on the licensing issue and we will be in a dialog with the customer to accommodate their wishes.
 %make a decision about licenses and write why.
 
     Each of us is free to choose his own \gls{ide}\footnote{\gls{ide} - Integrated Development Environment} for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard \gls{java coding conventions}.
     
     Since we were so free to choose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
     \begin{itemize}
-    %we must have a full list of tested versions of technologies in the full version of this report, probably under testing.
+    % todo: we must have a full list of tested versions of technologies in the full version of this report, probably under testing.
         \item Git version 1.7.x
         \item Java version 1.6.x
         \item Free choice of IDE
         \item JUnit version 4.x
         \item NS3 unknown at present time
         \item WSO2 ESB 4.0.3
+        % todo: add axiom version. 
+        \item Axiom !!!!VERSION!!!!!
+        % todo: figure out if this is necessary. 
+        \item WSO2 IS?
     \end{itemize}
     
 
