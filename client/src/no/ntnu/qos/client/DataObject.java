@@ -68,13 +68,11 @@ public class DataObject {
 	 * @return	- a SOAP message
 	 * @throws UnsupportedEncodingException 
 	 */
-	public String getSoap() throws UnsupportedEncodingException{
+	public synchronized String getSoap() throws UnsupportedEncodingException{
 		if(samlToken != null) {
-			synchronized (this) {
-				if(!prepared) {
+			if(!prepared) {
 					buildSoap();
 					prepared = true;
-				}
 				return soapToSend;
 			} 
 		}
