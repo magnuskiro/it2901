@@ -16,11 +16,7 @@ The client architecture consists of the following components: The client applica
 \indent \textbf{Client library:}\\
 % needs to be rewritten and clearified. 
 This component will handle all communication with the service providers, as well as authenticating users and prioritizing their messages, based on who they are, and what their current role is. The authorization will involve a component from the server side of the project, the identity server, which returns a token if the client is authorized. Client applications connect through a simple interface to provide credentials and data.
-\\\\
-
-\indent \textbf{Monitoring service (MS):}\\
-%should also be rewritten for simplicity of the language. 
-An external service, most likely residing on a tactical router(TR), that exposes the bandwidth of the active links on the TR it resides on. This information can be used by the library to decide if there is enough free capacity on the link to send more data, or if something must be done in order to maintain more connections over that link. For our implementation we will most likely make extensive simplifying assumptions about this service since this is still in the research and development stage and therefore a proper implementation of it is unavailable. 
+\\\\ 
 
     \subsubsection{External libraries:}
 \indent \indent \textbf{Axiom:}\\
@@ -61,23 +57,6 @@ A lightweight component for easily setting up and using HTTP connections. While 
 		\end{enumerate}
 		\textbf{Precondition:} Client has established connection to the Library interface and authenticated it's credentials. \\
 		\textbf{See:} Accept client info
-		\\\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\textbf{Title:} Fetch Bandwidth info \\
-		\textbf{Actors:} client library, Monitoring Service(MS) \\
-		\textbf{Main:}
-		\begin{enumerate}
-			\item Establish connection to MS
-			\item Read MS’s bandwidth info for the route between it and the server.
-			\item Set bandwidth info for this connection in the DataObject.
-		\end{enumerate}
-		\textbf{Extension:}
-		\begin{itemize}
-			  \item[] 3a. Bandwidth info not in MS
-			  \item[] 4a. Connection is local, set bandwidth info to a default for local network.
-		\end{itemize}
-		\textbf{Precondition:} Client has delivered credentials and data to be sent(with a destination) to the client-library. \\
-		\textbf{See:} Accept client credentials and Accept data to be sent 
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Connect to server \\
@@ -162,12 +141,6 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item Stored in library until client App changes credentials
 		\end{enumerate}
 		\\\\
-		\textbf{Bandwidth/link data}
-		\begin{enumerate}
-			\item Available from the Monitoring Service
-			\item Delivered to clients and servers on request
-		\end{enumerate}
-		\\\\
 	% The numbering on the figure and in the text does not match. This should maybe be fixed. 
 		\textbf{Client Data} (Visualized in Fig.\ref{fig:ClientDataFlowDiagram})
 		\begin{enumerate}
@@ -195,6 +168,7 @@ Known in the class diagram as “QosClient”, responsible for providing a clean
 The central piece of the client library. Responsible for keeping a record of all other modules in the system and communicate between them as well as making sure everything happens in the right order.
 \\\\
 		\indent \textbf{Sanity checker} \\
+	% todo: rewrite this section!
 This module is simply there to do some easy verification of data that comes from the client, to make sure that it isn’t faulty in any obvious way (e.g: Data that isn’t xml, or credentials that are empty).
 \\\\
 		\indent \textbf{Token Manager} \\
@@ -208,9 +182,6 @@ This takes the reply from the identity server and parses it into a token object 
 \\\\
 		\indent \textbf{Credential Storage} \\
 Responsible for storing token objects as well as user supplied credentials. Also makes sure that no token objects are returned if they are invalid or expired.
-\\\\
-		\indent \textbf{MsCommunicator} \\
-Responsible for communicating with the monitoring service to get information about the bandwidth available to a given destination, as well as supplying some identifying information for the route used.
 
 	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}
 		\begin{figure}[H]
