@@ -70,7 +70,7 @@ public class DataObject {
 	 */
 	public String getSoap() throws UnsupportedEncodingException{
 		if(samlToken != null) {
-			synchronized (soapToSend) {
+			synchronized (this) {
 				if(!prepared) {
 					buildSoap();
 					prepared = true;
