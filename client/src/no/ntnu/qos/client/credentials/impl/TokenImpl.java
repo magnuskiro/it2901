@@ -39,7 +39,8 @@ public class TokenImpl implements Token, TokenAxiom {
 	}
 
     @Override
-	public String getXML() {
+	public synchronized String getXML() {
+    	this.token.build();
 		return this.token.toString();
 	}
 
@@ -64,7 +65,7 @@ public class TokenImpl implements Token, TokenAxiom {
     }
 
     @Override
-    public void setExpirationTimeBuffer(long expirationTimeBuffer) {
+    public synchronized void setExpirationTimeBuffer(long expirationTimeBuffer) {
         this.expirationTimeBuffer = expirationTimeBuffer;
     }
 
@@ -84,12 +85,12 @@ public class TokenImpl implements Token, TokenAxiom {
     }
 
 	@Override
-	public void setPriority(int priority) {
+	public synchronized void setPriority(int priority) {
 		this.priority = priority;		
 	}
 
 	@Override
-	public void setDiffServ(int diffServ) {
+	public synchronized void setDiffServ(int diffServ) {
 		this.diffServ = diffServ;
 	}
 
