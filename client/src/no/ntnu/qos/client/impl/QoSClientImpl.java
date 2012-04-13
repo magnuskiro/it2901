@@ -27,7 +27,7 @@ public class QoSClientImpl implements QoSClient {
     }
 
     @Override
-    public ReceiveObject sendData(String data, URI destination) {
+    public synchronized ReceiveObject sendData(String data, URI destination) {
        return sequencer.sendData(data, destination);
     }
 

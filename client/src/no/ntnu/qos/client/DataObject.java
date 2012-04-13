@@ -16,7 +16,7 @@ import no.ntnu.qos.client.impl.ConfigManager;
  * Object containing the data clients wish to send
  * It will send itself when it detects that the criteria are met
  * (is sane, has a token)
- * @author Håvard
+ * @author Håvard, Stig Tore
  *
  */
 public class DataObject {
