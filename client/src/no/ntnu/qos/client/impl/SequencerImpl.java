@@ -48,7 +48,7 @@ public class SequencerImpl implements Sequencer {
 	}
 
 	@Override
-	public synchronized ReceiveObject sendData(String data, URI destination) {
+	public ReceiveObject sendData(String data, URI destination) {
 		ConfigManager.LOGGER.info("Received request to send data to: "+destination.getHost());
 		DataObject dataObj = new DataObject(this, data, destination, exceptionHandler);
 		ConfigManager.LOGGER.info("DataObject created");

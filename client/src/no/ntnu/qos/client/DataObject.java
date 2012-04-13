@@ -53,7 +53,7 @@ public class DataObject {
 	 * sets the clients SAML-token, sends itself if other criteria are met
 	 * @param token	- the Token
 	 */
-	public synchronized void setToken(Token token){
+	public void setToken(Token token){
 		samlToken = token;
 		diffServ	= samlToken.getDiffServ();
 		priority	= samlToken.getPriority();
@@ -68,7 +68,7 @@ public class DataObject {
 	 * @return	- a SOAP message
 	 * @throws UnsupportedEncodingException 
 	 */
-	public synchronized String getSoap() throws UnsupportedEncodingException{
+	public String getSoap() throws UnsupportedEncodingException{
 		if(samlToken != null) {
 			if(!prepared) {
 					buildSoap();
@@ -107,7 +107,7 @@ public class DataObject {
 	 * checks if all necessary data/criteria for sending are present/met
 	 * @return - true if ready to send, false if not 
 	 */
-	private synchronized boolean isReadyToSend(){
+	private boolean isReadyToSend(){
 		if(samlToken != null && destination!=null){
 			return true;
 		}
@@ -179,7 +179,7 @@ public class DataObject {
 		if(iter.hasNext()) {
 			OMElement body = iter.next();
 			body.addChild(parsedToken);
-			root.build();
+//			root.build();
 			soapToSend = root.toString();			
 		} else {
 			throw new UnsupportedEncodingException();
