@@ -27,6 +27,7 @@ public class DataObject {
 	private Token		samlToken;
 	private String		soapFromClient;
 	private String		soapToSend;
+	private boolean		prepared;
 	private URI			destination;
 	private ReceiveObject receiveObj;//added here to let the messageHandler get access to it 
 	private ExceptionHandler exceptionHandler;
@@ -44,7 +45,8 @@ public class DataObject {
 		this.soapFromClient = soapFromClient;
 		this.destination = destination;
 		this.exceptionHandler = exceptionHandler;
-
+		this.prepared = false;
+		this.soapToSend = "";
 	}
 
 	/**
@@ -68,14 +70,13 @@ public class DataObject {
 	 */
 	public String getSoap() throws UnsupportedEncodingException{
 		if(samlToken != null) {
-			if(soapToSend == null || soapToSend.equals("")) {
-				buildSoap();
-			}
-			if(!soapToSend.equals("")) {
-				return soapToSend; 
-			} else {
-				throw new UnsupportedEncodingException();
-			}
+			synchronized (soapToSend) {
+				if(!prepared) {
+					buildSoap();
+					prepared = true;
+				}
+				return soapToSend;
+			} 
 		}
 		return "";
 	}
@@ -180,6 +181,7 @@ public class DataObject {
 		if(iter.hasNext()) {
 			OMElement body = iter.next();
 			body.addChild(parsedToken);
+			root.build();
 			soapToSend = root.toString();			
 		} else {
 			throw new UnsupportedEncodingException();
