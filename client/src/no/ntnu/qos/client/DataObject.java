@@ -73,8 +73,8 @@ public class DataObject {
 			if(!prepared) {
 					buildSoap();
 					prepared = true;
-				return soapToSend;
 			} 
+			return soapToSend;
 		}
 		return "";
 	}
