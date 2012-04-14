@@ -105,7 +105,8 @@ public class TRContextImpl implements TRContext {
 
 	@Override
 	public long nextEvent() {
-		return nextEvent - System.currentTimeMillis();
+		long n = nextEvent - System.currentTimeMillis();
+		return n >= 0 ? n : 0;
 	}
 
 	public int size(){
