@@ -180,7 +180,8 @@ public class DataObject {
 			OMElement body = iter.next();
 			body.addChild(parsedToken);
 //			root.build();
-			soapToSend = root.toString();			
+			soapToSend = root.toString();
+				
 		} else {
 			throw new UnsupportedEncodingException();
 		}

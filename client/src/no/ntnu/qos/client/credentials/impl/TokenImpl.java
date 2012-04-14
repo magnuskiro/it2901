@@ -95,8 +95,9 @@ public class TokenImpl implements Token, TokenAxiom {
 	}
 
 	@Override
-	public OMElement getOMElement() {
-		return token;
+	public synchronized OMElement getOMElement() {
+		
+		return token.cloneOMElement();
 	}
 
 }
