@@ -40,7 +40,6 @@ public class TokenImpl implements Token, TokenAxiom {
 
     @Override
 	public synchronized String getXML() {
-    	this.token.build();
 		return this.token.toString();
 	}
 
