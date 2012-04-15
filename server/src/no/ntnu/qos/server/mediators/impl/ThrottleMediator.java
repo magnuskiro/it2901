@@ -68,7 +68,9 @@ public class ThrottleMediator extends AbstractQosMediator{
 					List<QosContext> preemptees = trCtx.preemptContexts(qCtx);
 					for(QosContext preempted:preemptees){
 						this.logMessage(synLog, "Preempted Message:" +
-								preempted.getMessageContext().getMessageID(), QosLogType.INFO);
+								preempted.getMessageContext().getMessageID()+", from: "+
+								preempted.getMessageContext().getProperty(MediatorConstants.QOS_FROM_ADDR)
+								, QosLogType.INFO);
 					}
 					this.logMessage(synLog, "Trying to send message again", QosLogType.INFO);
 					if(send(qCtx, trCtx, synLog)){

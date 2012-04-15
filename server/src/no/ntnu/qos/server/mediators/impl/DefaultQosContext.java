@@ -98,7 +98,7 @@ public class DefaultQosContext extends AbstractQosContext {
 
 	@Override
 	public boolean isFinishedSending() {
-		return this.soc != null ? this.soc.isClosed() : true;
+		return this.soc != null ? !this.soc.isConnected() : true;
 	}
 
 }
