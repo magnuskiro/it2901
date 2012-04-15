@@ -35,6 +35,7 @@ public class TRContextImpl implements TRContext {
 	public void add(QosContext qCtx) {
 		synchronized (queue) {
 			queue.add(qCtx);
+			qCtx.send();
 			usedCapacity++;
 			long posNext = (long) (qCtx.getEstimatedSendingTime() + System.currentTimeMillis());
 			if(posNext < nextEvent){
@@ -105,8 +106,11 @@ public class TRContextImpl implements TRContext {
 
 	@Override
 	public long nextEvent() {
-		long n = nextEvent - System.currentTimeMillis();
-		return n >= 0 ? n : 0;
+		//Add a random amount (at most 10ms) to sleep so everyone doesn't
+		//wake up at once
+		int rand = (int)Math.random()*10 + 1;
+		long n = nextEvent - System.currentTimeMillis() + rand;
+		return n >= 0 ? n : rand;
 	}
 
 	public int size(){
