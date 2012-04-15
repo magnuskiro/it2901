@@ -91,16 +91,17 @@ public class TRContextImpl implements TRContext {
 			if(toRemove.size() > 0){
 				this.queue.removeAll(toRemove);
 				this.usedCapacity -= toRemove.size();
+				
+				long now = System.currentTimeMillis();
+				long nextEv = Long.MAX_VALUE;
+				for(QosContext qc : this.queue){
+					if(qc.getEstimatedSendingTime() + now < nextEv){
+						nextEv = (long) (qc.getEstimatedSendingTime() + now);
+					}
+				}
+				nextEvent = nextEv;
 			}
 
-			long now = System.currentTimeMillis();
-			long nextEv = Long.MAX_VALUE;
-			for(QosContext qc : this.queue){
-				if(qc.getEstimatedSendingTime() + now < nextEv){
-					nextEv = (long) (qc.getEstimatedSendingTime() + now);
-				}
-			}
-			nextEvent = nextEv;
 		}
 	}
 
