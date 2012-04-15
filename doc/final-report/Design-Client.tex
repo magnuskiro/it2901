@@ -136,11 +136,14 @@ A lightweight component for easily setting up and using HTTP connections. While 
     % the numbering on the figure and in the text does not match. This should maybe be fixed. 
 		\textbf{Client credentials} (Visualized in Fig.\ref{fig:ClientCredentialsDataFlowDiagram})
 		\begin{enumerate}
-			\item From client application
-			\item To client library via API/interface
-			\item Via SAML to ID-server
-			\item Back to client library as valid SAML-token
-			\item Stored in library until client App changes credentials
+			\item The Client application sends credentials to the library interface
+			\item The interface passes the credentials on to the token manager, through the sequencer
+			\item The token manager stores the credentials in the credential storage
+			\item The token manager sends the credentials to the SAML comunicator in order to fetch a token
+			\item The SAML communicator requests a token from the identity server
+			\item The identity server sends a token to the SAML communicator
+			\item The token is returned to the token manager
+			\item The token manager stores the token in the credential storage
 		\end{enumerate}
 		
 	% The numbering on the figure and in the text does not match. This should maybe be fixed. 
