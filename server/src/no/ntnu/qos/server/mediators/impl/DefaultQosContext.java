@@ -28,7 +28,7 @@ public class DefaultQosContext extends AbstractQosContext {
 		//We have to make sure that if we are on a local network we don't use
 		//-1 for bandwidth
 		long bandwidth = pBandwidth != -1 ? pBandwidth : Integer.MAX_VALUE;
-		this.estTimeSend = this.size() / bandwidth;
+		this.estTimeSend = (this.size() / bandwidth)*1000;
 
 		this.startedMediate = (Long) synCtx.getProperty(MediatorConstants.QOS_TIME_ADDED);
 		this.ttl = (Long) synCtx.getProperty(MediatorConstants.QOS_TTL);

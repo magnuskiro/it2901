@@ -14,6 +14,7 @@ import no.ntnu.qos.server.mediators.TRContext;
 
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
+import org.apache.synapse.core.axis2.Axis2MessageContext;
 /**
  * This mediator finds out if there is enough bandwidth to send a message, 
  * if not, it will check if other sending messages has lower priority and should be stopped,
@@ -33,7 +34,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 	@Override
 	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		this.logMessage(synLog, "NoThreads:"+threads.incrementAndGet(), QosLogType.INFO);
-		
+
 
 		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
 		long initialCapacity = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH)
@@ -64,7 +65,15 @@ public class ThrottleMediator extends AbstractQosMediator{
 					return true;
 				}else{
 					this.logMessage(synLog, "Could not send message right away, " +
-							"trying to preempt messages", QosLogType.INFO);
+							"trying to preempt messages, queue size: "+((TRContextImpl)trCtx).size()+
+							", available bandwidth: "+trCtx.availableBandwidth()+
+							", Message Size: "+((Axis2MessageContext)synCtx).getAxis2MessageContext().getInboundContentLength()+
+							", Priority: "+qCtx.getPriority()
+							, QosLogType.INFO);
+					for(QosContext qCon:((TRContextImpl)trCtx).getQueue()){
+						this.logMessage(synLog, "Message in queue, priority: "+qCon.getPriority()+",from: "+
+								qCon.getMessageContext().getProperty(MediatorConstants.QOS_FROM_ADDR), QosLogType.INFO);
+					}
 					List<QosContext> preemptees = trCtx.preemptContexts(qCtx);
 					for(QosContext preempted:preemptees){
 						this.logMessage(synLog, "Preempted Message:" +

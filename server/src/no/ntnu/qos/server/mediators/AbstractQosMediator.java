@@ -73,9 +73,9 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 			}
 			switch(type){
 			case INFO:
-				log.traceOrDebug(from+message); break;
+				log.traceOrDebug(from+" "+message); break;
 			case WARN:
-				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR +from+ message); break;
+				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR +from+" "+ message); break;
 			}
 		}
 	}
