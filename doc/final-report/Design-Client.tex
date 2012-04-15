@@ -14,7 +14,7 @@ The client architecture consists of the following components: The client applica
 \\\\
 
 \indent \textbf{Client library:}\\
-% needs to be rewritten and clearified. 
+% TODO: needs to be rewritten and clearified. 
 This component will handle all communication with the service providers, as well as authenticating users and prioritizing their messages, based on who they are, and what their current role is. The authorization will involve a component from the server side of the project, the identity server, which returns a token if the client is authorized. Client applications connect through a simple interface to provide credentials and data.
 \\\\ 
 
@@ -121,6 +121,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
         \centering
         \includegraphics[width=\textwidth]{ClientCredentialsDataFlowDiagram}
         \caption{Client Credentials Flow}
+        This figure describes how the client credentials are sent through the client library and through the system in general. 
         \label{fig:ClientCredentialsDataFlowDiagram}
     \end{figure}
     
@@ -128,6 +129,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
         \centering
         \includegraphics[width=\textwidth]{ClientDataFlowDiagram}
         \caption{Client Data Flow}
+        This is the message sequence. It describes the route the individual mesages takes throguth the system. 
         \label{fig:ClientDataFlowDiagram}
     \end{figure}
     
@@ -156,6 +158,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\centering	
 			\includegraphics[width=\textwidth]{Detailedclientarchitecture}
 			\caption{Detailed Client Architecture}
+			This describes in detail the sctructure of the client library. 
 			\label{fig:DetailedClientArchitecture}
 		\end{figure}
 
@@ -185,34 +188,44 @@ Responsible for storing token objects as well as user supplied credentials. Also
 
 	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}
 		\begin{figure}[H]
+		% TODO: reference it in the text.		
 			\centering	
 			\includegraphics[width=\textwidth]{CliSeqDiaAcceptclientinfo}
 			\caption{Accept client info}
+			This describes how client credentials are set in the client library. 
 			\label{fig:CliSeqDiaAcceptclientinfo}
 		\end{figure}
 		\begin{figure}[H]
+		% TODO: reference it in the text.
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
+			This describes how the client library gets a token and stores it when there is no stored token in the library already. 
 			\caption{Getting non-stored token}
 			\label{fig:CliSeqDiaGettingnon-storedtoken}
 		\end{figure}
 		\begin{figure}[H]
+		% TODO: reference it in the text.
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingStoredToken}
 			\caption{Getting stored token}
+			When a token exists we return the token without creating a new one. 
 			\label{fig:CliSeqDiaGettingStoredToken}
 		\end{figure}
 		\begin{figure}[H]
+		% TODO: reference it in the text. 
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaReceivereply}
 			\caption{Receive reply}
+			This is how the client library sends a reply to the client. 
 			\label{fig:CliSeqDiaReceivereply}
 		\end{figure}
 	% this sequence diagram might be better structured. Maybe with arrows happening first to be closer to echother. 
 		\begin{figure}[H]
+		% TODO: reference it in the text. 
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaSendData}
 			\caption{Send data}
+			This diagram describes how data is sent through the client library. 
 			\label{fig:CliSeqDiaSendData}
 		\end{figure}
 

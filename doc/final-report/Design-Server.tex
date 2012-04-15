@@ -135,6 +135,7 @@
             \centering
             \includegraphics[width=\textwidth]{DataFlowDiagramServer}
             \caption{Server Data Flow}
+            This diagram displays how the date flows through the server side. 
             \label{fig:DataFlowDiagramServer}
         \end{figure}
 \\
@@ -145,9 +146,11 @@ Service Response:\\
 To follow this flow, follow the blue arrows in figure \ref{fig:DataFlowDiagramServer}. The ESB receives a response message from the Service, it is then sent through a sequence of mediators, first the Metadata mediator, and then  the Store mediator. The Store mediator stores the message in the Prioritized Message Store. The message is stored until the Sampling Message Processor picks it out before sending it on to another sequence of mediators. First in the sequence is the MS mediator, then the Throttle Mediator and finally the Send mediator. The send mediator sends the message back to the client and the flow is completed.
 \\
     \begin{figure}[h]
+    % TODO: reference in text. 
         \centering
         \includegraphics[scale=0.5]{SAMLauthenticationflow}
         \caption{SAML Authentication Flow}
+        This describes the flow of an authentication request. 
         \label{fig:SAMLauthenticationflow}
     \end{figure}
 \\           
@@ -194,6 +197,7 @@ Sampling Message Processor:\\
     This section contains some sequence diagrams which you can use to get a more in depth look into the code and methods used in the mediators above.
     
         \begin{figure}[H]
+        % TODO: ref in text. 
             \centering
             \includegraphics[scale=0.3]{System-levelsequencediagram}
             \caption{System-level sequence diagram}
@@ -202,6 +206,7 @@ Sampling Message Processor:\\
         \end{figure}
         
         \begin{figure}[H]
+        % TODO: ref in text 
             \centering
             \includegraphics[scale=0.3]{SAMLmediator}
             \caption{SAML mediator sequence diagram}
@@ -210,6 +215,7 @@ Sampling Message Processor:\\
         \end{figure}
         
         \begin{figure}[H]
+        % TODO: ref in text. 
             \includegraphics[scale=0.28,angle=-90]{Responsesequencediagram}
             \caption{Response sequence sequence diagram}
             This diagram describes, in some detail, how a response message from the web service to the Client is passed through the ESB.
@@ -217,6 +223,7 @@ Sampling Message Processor:\\
         \end{figure}
     
         \begin{figure}[H]
+        % TODO: ref in text. 
             \centering
             \includegraphics[scale=0.3]{MSmediatorsequence}
             \caption{Metadata mediator sequence}
@@ -225,6 +232,7 @@ Sampling Message Processor:\\
         \end{figure}
         
         \begin{figure}[H]
+        % TODO: ref in text. 
             \centering
             \includegraphics[scale=0.4]{Metadatamediatorsequencediagram}
             \caption{MS mediator sequence diagram}
