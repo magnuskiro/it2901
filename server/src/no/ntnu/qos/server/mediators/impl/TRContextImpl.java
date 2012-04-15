@@ -109,7 +109,7 @@ public class TRContextImpl implements TRContext {
 	public long nextEvent() {
 		//Add a random amount (at most 10ms) to sleep so everyone doesn't
 		//wake up at once
-		int rand = (int)Math.random()*10 + 1;
+		int rand = (int)(Math.random()*10) + 1;
 		long n = nextEvent - System.currentTimeMillis() + rand;
 		return n >= 0 ? n : rand;
 	}
