@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
@@ -27,9 +28,12 @@ public class ThrottleMediator extends AbstractQosMediator{
 	private static long minBandwidthPerMessage;
 	private static long timeout;
 	private static final Map<String, TRContext> trCtxs = new HashMap<String, TRContext>();
+	private static AtomicInteger threads = new AtomicInteger(0);
 
 	@Override
 	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
+		this.logMessage(synLog, "NoThreads:"+threads.incrementAndGet(), QosLogType.INFO);
+		
 
 		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
 		long initialCapacity = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH)
@@ -56,6 +60,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 			while((System.currentTimeMillis()-timeStarted) < timeout && 
 					(!qCtx.useTTL() || qCtx.getTimeToLive()>0)){
 				if(send(qCtx, trCtx, synLog)){
+					threads.decrementAndGet();
 					return true;
 				}else{
 					this.logMessage(synLog, "Could not send message right away, " +
@@ -67,6 +72,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 					}
 					this.logMessage(synLog, "Trying to send message again", QosLogType.INFO);
 					if(send(qCtx, trCtx, synLog)){
+						threads.decrementAndGet();
 						return true;
 					}
 				}
@@ -86,6 +92,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 		} catch (IOException e) {
 			this.logMessage(synLog, "Error reading message data: could not get it's size", QosLogType.WARN);
 		}
+		threads.decrementAndGet();
 		return false;
 	}
 
