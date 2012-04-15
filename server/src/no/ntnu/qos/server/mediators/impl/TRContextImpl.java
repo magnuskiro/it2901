@@ -129,5 +129,13 @@ public class TRContextImpl implements TRContext {
 			}
 		}
 	}
+	
+	public Queue<QosContext> getQueue(){
+		synchronized (queue) {
+			Queue<QosContext> result = new PriorityQueue<QosContext>();
+			result.addAll(queue);
+			return result;
+		}
+	}
 
 }
