@@ -58,6 +58,14 @@ public class TRContextTest {
 	public void init(){
 		trc = new TRContextImpl(AVAILABLE_BANDWIDTH);
 	}
+	
+	@Test
+	public void testPriority() throws IOException{
+		QosContext lowPri = new DefaultQosContext(synCtx);
+		trc.add(lowPri);
+		trc.add(new DefaultQosContext(synCtx2));
+		assertEquals(lowPri, ((TRContextImpl)trc).getQueue().peek());
+	}
 
 	@Test
 	public void testAdd() throws IOException {

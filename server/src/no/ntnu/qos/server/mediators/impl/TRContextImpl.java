@@ -109,7 +109,7 @@ public class TRContextImpl implements TRContext {
 	public long nextEvent() {
 		//Add a random amount (at most 10ms) to sleep so everyone doesn't
 		//wake up at once
-		int rand = (int)Math.random()*10 + 1;
+		int rand = (int)(Math.random()*10) + 1;
 		long n = nextEvent - System.currentTimeMillis() + rand;
 		return n >= 0 ? n : rand;
 	}
@@ -127,6 +127,14 @@ public class TRContextImpl implements TRContext {
 				throw new IllegalArgumentException("TR bandwidth can not be less " +
 						"than one, argument was: " + bandwidth);
 			}
+		}
+	}
+	
+	public Queue<QosContext> getQueue(){
+		synchronized (queue) {
+			Queue<QosContext> result = new PriorityQueue<QosContext>();
+			result.addAll(queue);
+			return result;
 		}
 	}
 
