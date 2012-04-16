@@ -20,7 +20,7 @@
 
     The customer has not given us many strict requirements, but instead they have suggested a few things that we could do. Given this freedom, we decided that we should improve on the base requirements by adding most of the things mentioned in this section. 
 
-    The following is a list of technology requirements. 
+    The following is a list of technology requirements. We have a scale from 1 to 4 where we rate the importance of our requirements. 1 is the most important while 4 is the least important. There are requirements that share a priority as they are equally important to the completion of the project. 
 
 \begin{center}
     \begin{tabular}{| p{4cm} | p{8cm} |}
@@ -30,7 +30,7 @@
         \hline
         Name & Written in java  \\
         \hline
-        Priority & 3 \\
+        Priority & 1 \\
         \hline
         Purpose & Java is chosen to ensure that the code can be reused, that it is easily readable for others, and that it is OS independent. \\
         \hline 
@@ -74,7 +74,7 @@
         \hline
         Name & Standards \\
         \hline
-        Priority & 4 \\
+        Priority & 1 \\
         \hline
         Purpose & Use standards where they can be used \\
         \hline 
@@ -118,7 +118,7 @@
         \hline
         Name & Documentation  \\
         \hline
-        Priority & 5 \\
+        Priority & 2 \\
         \hline
         Purpose & To have extensive documentation on every part of our project. This will ensure that anyone can replicate our results later. This is also important to the task, where we have researched QoS. \\
         \hline 
@@ -140,7 +140,7 @@
         \hline
         Name & Use metadata to determine priority  \\
         \hline
-        Priority & 6 \\
+        Priority & 3 \\
         \hline
         Purpose & - \\
         \hline 
@@ -162,7 +162,7 @@
         \hline
         Name & GlassFish \\
         \hline
-        Priority & 7 \\
+        Priority & 2 \\
         \hline
         Purpose & Make it easy to use webapplications in a production environment. \\
         \hline 
@@ -182,9 +182,9 @@
         \hline
         ID & 8 \\
         \hline
-        Name & set Package priority \\
+        Name & Set package priority \\
         \hline
-        Priority & 8 \\
+        Priority & 2 \\
         \hline
         Purpose & Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future. \\
         \hline 
@@ -200,13 +200,35 @@
     \\  ---  \\
     
     \begin{tabular}{| p{4cm} | p{8cm} |}
-        % There are no requirements on resource usage, but we should try to keep it lightweight.
+        % Nettwork Resources. 
         \hline
         ID & 9 \\
         \hline
+        Name & Network Resources \\
+        \hline
+        Priority & 3 \\
+        \hline
+        Purpose & Maximize the useage of network resources. Use the given resources the best way possible. \\
+        \hline 
+        Constraints, assumptions, dependencies & -\\
+        \hline  
+        Functional & The customer wants \\
+        \hline
+        Non-Functional & -\\ 
+        \hline
+        Design constraints & -\\
+        \hline
+    \end{tabular}
+    \\  ---  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % There are no requirements on resource usage, but we should try to keep it lightweight.
+        \hline
+        ID & 10 \\
+        \hline
         Name & Resource usage  \\
         \hline
-        Priority & 9 \\
+        Priority & 4 \\
         \hline
         Purpose & Minimize overhead and runtime. The faster it goes, the better. The less resources it uses the better. \\
         \hline 
