@@ -25,7 +25,11 @@ import org.apache.synapse.SynapseLog;
  *
  */
 public class SAMLMediator extends AbstractQosMediator {
-	private static final QName friendlyName = new QName("FriendlyName"); 
+	private static final QName friendlyName = new QName("FriendlyName");
+	/**
+	 * Set a variable to detach the SAML assertion
+	 */
+	private static boolean detachAssertion = true;
 
 	@Override
 	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
@@ -39,13 +43,21 @@ public class SAMLMediator extends AbstractQosMediator {
 					"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
 			return false;
 		}
+		if(service.isEmpty() || service.trim().isEmpty()){
+			this.logMessage(synLog, "Could not " +
+					"find a valid service endpoint in SAML assertion.\n" +
+					"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
+			return false;
+		}
 
 		synCtx.setProperty(MediatorConstants.QOS_SERVICE, service);
 		synCtx.setProperty(MediatorConstants.QOS_CLIENT_ROLE, clientRole);
 
 		this.logMessage(synLog, "Set client role to: " + 
 				clientRole + ", set service to: " + service, QosLogType.INFO);
-		this.stripSAML(synCtx, synLog);
+		if(detachAssertion){
+			this.stripSAML(synCtx, synLog);
+		}
 		return true;
 	}
 
@@ -101,10 +113,26 @@ public class SAMLMediator extends AbstractQosMediator {
 		}
 		return result;
 	}
+	
+	private String getService(MessageContext ctx){
+		String result = "";
+		OMElement as = getSAMLAssertion(ctx.getEnvelope());
+		if(as != null){
+			
+		}
+		return result;
+	}
 
 	@Override
 	protected String getName() {
 		return "SAMLMediator";
 	}
 
+	public static boolean isDetachAssertion() {
+		return detachAssertion;
+	}
+
+	public static void setDetachAssertion(boolean detachAssertion) {
+		SAMLMediator.detachAssertion = detachAssertion;
+	}
 }
