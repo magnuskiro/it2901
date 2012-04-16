@@ -51,8 +51,14 @@ public class OutMetadataMediator extends AbstractQosMediator {
 		//This is the work this mediator does.
 		final String clientRole = (String)synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE);
 		final String service = (String)synCtx.getProperty(MediatorConstants.QOS_SERVICE);
-		final int pri = ppd.getPriority(clientRole, service);
-		final int dif = ppd.getDiffserv(clientRole, service);
+		int pri = ppd.getPriority(clientRole, service);
+		int dif = ppd.getDiffserv(clientRole, service);
+		if(pri<0 || dif <0){
+			this.logMessage(synLog, "Client '"+clientRole+"' or service '"+service+
+					"' not configured in '"+ppdFilename+"'", QosLogType.WARN);
+			pri=0;
+			dif=0;
+		}
 		synCtx.setProperty(MediatorConstants.QOS_PRIORITY, pri);
 		synCtx.setProperty(MediatorConstants.QOS_DIFFSERV, dif);
 		synCtx.setProperty(MediatorConstants.QOS_TIME_ADDED, System.currentTimeMillis());
