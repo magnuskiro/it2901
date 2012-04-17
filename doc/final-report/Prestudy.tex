@@ -126,4 +126,15 @@ Competing clients in a low bandwidth scenario:\\
         So far we have outlined major alternative architectures which could be alternatives to our project, but there are also alternatives within our proposed solution. One such alternative is not to use a premade ESB, but rather build one ourselves. This solution was thoroughly investigated, but was eventually turned down because of the massive amount of work that had to be done, the quality of an already made ESB is much higher than we could ever achieve during this project, and lastly, the open source tools available to implement the functionality needed for SAML was not very well documented, and would take considerable time to get familiar with.
 
         On the client side we also have the choice of having either a \gls{http}\footnote{Hypertext Transfer Protocol} proxy or writing our own custom library. Both have some advantages and disadvantages, a proxy would be better for integration with client programs, but creating this proxy or configuring and customizing an already existing solution is not trivial. On the same note, creating a library for use in client programs is easier, but this would mean that client programs would need to be altered to be usable with our middleware, which isn’t that desirable. We chose to go down the road of least resistance, as we see it currently we would have do quite a lot of research into proxies which could in the worst case scenario result in just wasted time as far as our product goes. A client library would from our perspective be easier as we would have more control, the overall design should be easier and we know that with this sort of library we can integrate OpenSAML which is a huge advantage.  
+    
+    \subsection{Process model}\label{Process model}
+    Our initial thoughts on the process was way of. At first we thought we could use scrum methodically and have weekly sprints. And most importantly start coding at once. This was before we really figured out what our task was. And the implications the task had on our approach to a solution. 
+    
+    When the Task Description and Requirements(\ref{Task Description and Requirements}) became apparent we had to radically rethink our approach to the whole development approach and process. 
+    
+    The task required us to research a lot before we could design our system. And the design was essential for us to be able to implement a solution to the given task. We ended up with a waterfall like approach. Our project life cycle is described in section \ref{Software project life cycle}.
+    
+    The gantt [TODO: ref the gantt chart\ref{The gant chart}] chart is the result of the process planning. In short terms the plan consists of four parts: research, design, implementation, documentation. In in practice we find out how to solve the task before we design our final solution. Then we code and setup the the system and test it. And summarise it all in the documentation part.
+    
+    \subsection{Tools}\label{Tools}          
           
