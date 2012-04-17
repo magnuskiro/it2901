@@ -34,7 +34,7 @@ public class SAMLMediator extends AbstractQosMediator {
 	@Override
 	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 
-		final String service = synCtx.getTo().getAddress();
+		final String service = this.getService(synCtx);
 		final String clientRole = this.getClientRole(synCtx);
 
 		if(clientRole.isEmpty() || clientRole.trim().isEmpty()){
@@ -116,10 +116,6 @@ public class SAMLMediator extends AbstractQosMediator {
 	
 	private String getService(MessageContext ctx){
 		String result = "";
-		OMElement as = getSAMLAssertion(ctx.getEnvelope());
-		if(as != null){
-			
-		}
 		return result;
 	}
 
