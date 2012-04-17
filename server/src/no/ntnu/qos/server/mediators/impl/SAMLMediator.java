@@ -1,6 +1,7 @@
 package no.ntnu.qos.server.mediators.impl;
 
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
 
@@ -26,6 +27,9 @@ import org.apache.synapse.SynapseLog;
  */
 public class SAMLMediator extends AbstractQosMediator {
 	private static final QName friendlyName = new QName("FriendlyName");
+	private static final QName recipient = new QName(MediatorConstants.QOS_RECIPIENT);
+	private static final Pattern endpointPattern = Pattern.compile(
+			"(https|http)://[0-9]+.[0-9]+.[0-9]+.[0-9]+:[0-9]+");
 	/**
 	 * Set a variable to detach the SAML assertion
 	 */
@@ -36,7 +40,7 @@ public class SAMLMediator extends AbstractQosMediator {
 
 		final String service = this.getService(synCtx);
 		final String clientRole = this.getClientRole(synCtx);
-
+		
 		if(clientRole.isEmpty() || clientRole.trim().isEmpty()){
 			this.logMessage(synLog, "Could not " +
 					"find a valid client role in SAML assertion.\n" +
@@ -95,6 +99,24 @@ public class SAMLMediator extends AbstractQosMediator {
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	private OMElement getSAMLSubject(OMElement samlAssertion){
+		if(samlAssertion != null){
+			Iterator<OMElement> iter = samlAssertion.getChildElements();
+			return getOMElement(iter, "Subject");
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private OMElement getSAMLSubjectConformation(OMElement samlSubject){
+		OMElement subject = this.getSAMLSubject(samlSubject);
+		if(subject != null){
+			return getOMElement(subject.getChildElements(), "SubjectConfirmation");
+		}
+		return null;
+	}
 
 	@SuppressWarnings("unchecked")
 	private String getClientRole(MessageContext ctx){
@@ -114,8 +136,22 @@ public class SAMLMediator extends AbstractQosMediator {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private String getService(MessageContext ctx){
 		String result = "";
+		OMElement subjectConf = getSAMLSubjectConformation(getSAMLAssertion(ctx.getEnvelope()));
+		if(subjectConf != null){
+			Iterator<OMElement> iter = subjectConf.getChildElements();
+			while(iter.hasNext()){
+				OMElement attribute = iter.next();
+				result = attribute.getAttributeValue(recipient);
+				break;
+			}
+		}
+		String[] res = endpointPattern.split(result);
+		if(res.length > 1){
+			result = res[1];
+		}
 		return result;
 	}
 
