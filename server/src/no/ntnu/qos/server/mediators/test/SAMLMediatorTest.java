@@ -24,18 +24,18 @@ import org.apache.axis2.addressing.EndpointReference;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.config.SynapseConfiguration;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SAMLMediatorTest {
 
 	private static MessageContext synCtx;
 	private static final String CLIENT_ROLE = "clientRole1";
-	private static final String SERVICE = "127.0.0.1";
+	private static final String SERVICE = "/services/IdentityServer";
 	private static final String SAML_BODY = "SAMLinSOAP.xml";
 	
-	@BeforeClass
-	public static void setupMessageContext() throws FileNotFoundException, AxisFault{
+	@Before
+	public void setupMessageContext() throws FileNotFoundException, AxisFault{
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
 				new SynapseConfiguration(), null);
 		//Configure the message context:
@@ -69,6 +69,24 @@ public class SAMLMediatorTest {
 		assertTrue("Mediate synapse context", sm.mediate(synCtx));
 		assertEquals("Service", SERVICE, synCtx.getProperty(MediatorConstants.QOS_SERVICE));
 		assertEquals("Client role", CLIENT_ROLE, synCtx.getProperty(MediatorConstants.QOS_CLIENT_ROLE));
+	}
+	
+	@Test
+	public void testNotDetatch(){
+		SAMLMediator m = new SAMLMediator();
+		SAMLMediator.setDetachAssertion(false);
+		assertTrue("SAML mediator manages to mediate", m.mediate(synCtx));
+		assertTrue("Messages does not contain SAML assertion", synCtx.getEnvelope().getBody().getChildren().hasNext());
+		//System.out.println(synCtx.getEnvelope());
+	}
+	
+	@Test
+	public void testDetatch(){
+		SAMLMediator m = new SAMLMediator();
+		SAMLMediator.setDetachAssertion(true);
+		assertTrue("SAML mediator manages to mediate", m.mediate(synCtx));
+		assertFalse("Messages does not contain SAML assertion", synCtx.getEnvelope().getBody().getChildren().hasNext());
+		//System.out.println(synCtx.getEnvelope());
 	}
 	
 	@Test
