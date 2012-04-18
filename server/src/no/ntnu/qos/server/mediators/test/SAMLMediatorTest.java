@@ -31,7 +31,7 @@ public class SAMLMediatorTest {
 
 	private static MessageContext synCtx;
 	private static final String CLIENT_ROLE = "clientRole1";
-	private static final String SERVICE = "/services/IdentityServer";
+	private static final String SERVICE = "/services/EchoService";
 	private static final String SAML_BODY = "SAMLinSOAP.xml";
 	
 	@Before
@@ -74,7 +74,7 @@ public class SAMLMediatorTest {
 	@Test
 	public void testNotDetatch(){
 		SAMLMediator m = new SAMLMediator();
-		SAMLMediator.setDetachAssertion(false);
+		m.setDetachAssertion(false);
 		assertTrue("SAML mediator manages to mediate", m.mediate(synCtx));
 		assertTrue("Messages does not contain SAML assertion", synCtx.getEnvelope().getBody().getChildren().hasNext());
 		//System.out.println(synCtx.getEnvelope());
@@ -83,7 +83,7 @@ public class SAMLMediatorTest {
 	@Test
 	public void testDetatch(){
 		SAMLMediator m = new SAMLMediator();
-		SAMLMediator.setDetachAssertion(true);
+		m.setDetachAssertion(true);
 		assertTrue("SAML mediator manages to mediate", m.mediate(synCtx));
 		assertFalse("Messages does not contain SAML assertion", synCtx.getEnvelope().getBody().getChildren().hasNext());
 		//System.out.println(synCtx.getEnvelope());

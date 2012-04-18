@@ -20,7 +20,7 @@ public class OutMetadataMediator extends AbstractQosMediator {
 
 
 	private final static PersistentPriorityData ppd = new PersistentPriorityData();
-	private static String ppdFilename;
+	private String ppdFilename;
 	@Override
 	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 
@@ -71,7 +71,7 @@ public class OutMetadataMediator extends AbstractQosMediator {
 	}
 
 	public void setPpdFilename(String ppdFilename) {
-		OutMetadataMediator.ppdFilename = ppdFilename;
+		this.ppdFilename = ppdFilename;
 	}
 
 	public String getPpdFilename() {

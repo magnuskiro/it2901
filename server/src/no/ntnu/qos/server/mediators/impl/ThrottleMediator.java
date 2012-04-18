@@ -26,8 +26,8 @@ import org.apache.synapse.core.axis2.Axis2MessageContext;
  */
 public class ThrottleMediator extends AbstractQosMediator{
 
-	private static long minBandwidthPerMessage;
-	private static long timeout;
+	private long minBandwidthPerMessage;
+	private long timeout;
 	private static final Map<String, TRContext> trCtxs = new HashMap<String, TRContext>();
 	private static AtomicInteger threads = new AtomicInteger(0);
 
@@ -124,20 +124,20 @@ public class ThrottleMediator extends AbstractQosMediator{
 	}
 
 
-	public static void setMinBandwidthPerMessage(long minBandwidthPerMessage) {
-		ThrottleMediator.minBandwidthPerMessage = minBandwidthPerMessage;
+	public void setMinBandwidthPerMessage(long minBandwidthPerMessage) {
+		this.minBandwidthPerMessage = minBandwidthPerMessage;
 	}
 
-	public static long getMinBandwidthPerMessage() {
+	public long getMinBandwidthPerMessage() {
 		return minBandwidthPerMessage;
 	}
 
-	public static long getTimeout() {
+	public long getTimeout() {
 		return timeout;
 	}
 
-	public static void setTimeout(long timeout) {
-		ThrottleMediator.timeout = timeout;
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
 	}
 
 }

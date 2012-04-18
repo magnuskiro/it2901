@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 
+import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMXMLBuilderFactory;
 import org.apache.synapse.MessageContext;
@@ -16,13 +17,16 @@ import org.apache.synapse.SynapseLog;
  */
 public class EchoWrapperMediator extends AbstractQosMediator {
 	private final static String wrapping = 
-			"<ns2:echo xmlns:ns2=\"http://service.ntnu.no/\">" +
+			"<ns2:echo xmlns:ns2=\"http://this.should.work.org\">" +
 			"<textToEcho></textToEcho>" +
 			"</ns2:echo>";
 
 	@Override
 	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
 		if(synCtx.getEnvelope()!=null && synCtx.getEnvelope().getBody()!=null){
+			if(synCtx.getEnvelope().getHeader()==null){
+				synCtx.getEnvelope().addChild(OMAbstractFactory.getSOAP12Factory().createSOAPHeader());
+			}
 			OMElement saml = synCtx.getEnvelope().getBody().getFirstElement();
 			OMElement echo = (OMElement) OMXMLBuilderFactory.createOMBuilder(
 					new ByteArrayInputStream(wrapping.getBytes())).getDocumentElement();

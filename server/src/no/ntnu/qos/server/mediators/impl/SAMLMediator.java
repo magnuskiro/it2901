@@ -29,15 +29,14 @@ public class SAMLMediator extends AbstractQosMediator {
 	private static final QName friendlyName = new QName("FriendlyName");
 	private static final QName recipient = new QName(MediatorConstants.QOS_RECIPIENT);
 	private static final Pattern endpointPattern = Pattern.compile(
-			"(https|http)://[0-9]+.[0-9]+.[0-9]+.[0-9]+:[0-9]+");
+			"(https|http)://[0-9]+.[0-9]+.[0-9]+.[0-9]+(:[0-9]+)?");
 	/**
 	 * Set a variable to detach the SAML assertion
 	 */
-	private static boolean detachAssertion = true;
+	private boolean detachAssertion = true;
 
 	@Override
 	public boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
-
 		final String service = this.getService(synCtx);
 		final String clientRole = this.getClientRole(synCtx);
 		
@@ -47,7 +46,7 @@ public class SAMLMediator extends AbstractQosMediator {
 					"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
 			return false;
 		}
-		if(service.isEmpty() || service.trim().isEmpty()){
+		if(service==null || service.isEmpty() || service.trim().isEmpty()){
 			this.logMessage(synLog, "Could not " +
 					"find a valid service endpoint in SAML assertion.\n" +
 					"Envelope was:\n" + synCtx.getEnvelope(), QosLogType.WARN);
@@ -148,9 +147,11 @@ public class SAMLMediator extends AbstractQosMediator {
 				break;
 			}
 		}
-		String[] res = endpointPattern.split(result);
-		if(res.length > 1){
-			result = res[1];
+		if(result != null && !result.isEmpty()){
+			String[] res = endpointPattern.split(result);
+			if(res.length > 1){
+				result = res[1];
+			}			
 		}
 		return result;
 	}
@@ -160,11 +161,11 @@ public class SAMLMediator extends AbstractQosMediator {
 		return "SAMLMediator";
 	}
 
-	public static boolean isDetachAssertion() {
+	public boolean isDetachAssertion() {
 		return detachAssertion;
 	}
 
-	public static void setDetachAssertion(boolean detachAssertion) {
-		SAMLMediator.detachAssertion = detachAssertion;
+	public void setDetachAssertion(boolean detachAssertion) {
+		this.detachAssertion = detachAssertion;
 	}
 }

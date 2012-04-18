@@ -25,7 +25,6 @@ public class ThrottleMediatorTest {
 	private static final long TTL = 1000;
 	private static final int PRIORITY = 10;
 	
-	@SuppressWarnings("static-access")
 	@BeforeClass
 	public static void setupMessageContext() throws AxisFault, SOAPProcessingException{
 		synCtx = new Axis2MessageContext(new org.apache.axis2.context.MessageContext(), 
