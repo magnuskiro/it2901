@@ -9,34 +9,13 @@
     
     \subsubsection{Use Cases}\label{Server Use Cases}
     This section will outline the use cases that we have thought of in relation to the server side. With the help of these you should get a rough idea of what we want the server side to be able to do.\\\\
-    \textbf{Title:} Request for SAML authentication \\
-    \textbf{Actors:} Client, Enterprise service bus(ESB) and Identity server(IS)\\
-    \textbf{Main}
-    \begin{enumerate}
-        \item Client sends a SOAP message to ESB containing credentials
-        \item ESB mediates the message to the IS
-        \item IS fetches SAML Token
-        \item IS sends the message to ESB
-        \item ESB adds metadata to SOAP message
-        \item ESB sends the message back to the client
-    \end{enumerate}
-    \textbf{Extensions:}
-    \begin{itemize}
-        \item[] 3a. Invalid credentials 
-        \item[] 4a. IS returns error message
-        \item[] 6a. ESB sends error message to client
-    \end{itemize}
-    \textbf{Precondition:}
-    \begin{itemize}
-        \item There exists a connection between the client and the ESB
-    \end{itemize}
-    ~\\
     \textbf{Title:} Request mediation\\
+    \textbf{Requirements:} 3, 7
     \textbf{Actors:} Client, ESB, GlassFish\\
     \textbf{Main}
     \begin{enumerate}
         \item Client sends SOAP message with SAML Token to ESB proxy
-        \item ESB authenticates SAML Token(See Authentication use case)
+        \item ESB extracts SAML token to get the client role
         \item ESB removes SAML metadata from message
         \item ESB adds metadata to message context.
         \item ESB sends message to GlassFish endpoint
@@ -52,6 +31,7 @@
     \end{itemize}
     ~\\
     \textbf{Title:} Response mediation \\
+    \textbf{Requirements:} 2, 3, 7
     \textbf{Actors:} Client, ESB, GlassFish \\
     \textbf{Main}
     \begin{enumerate}
@@ -86,10 +66,11 @@
     \end{itemize}
     ~\\
     \textbf{Title:} Prioritize messages\\
+    \textbf{Requirements:} 2, 6, 8
     \textbf{Actors:} ESB\\
     \textbf{Main}
     \begin{enumerate}
-        \item ESB acquires QoS information (by magick)
+        \item ESB acquires QoS information through settings
         \item ESB adds QoS information to the SOAP header of the message
         \item ESB sets diffserv field in IP header
     \end{enumerate}
@@ -98,24 +79,6 @@
     \begin{itemize}
         \item Response mediation
         \item Monitoring Service communication
-    \end{itemize}
-    ~\\
-    \textbf{Title:} Authenticate SAML token\\
-    \textbf{Actors:} ESB, IS\\
-    \textbf{Main}
-    \begin{enumerate}
-        \item ESB sends SAML token to IS
-        \item IS authenticates the token
-        \item IS sends verification to ESB
-    \end{enumerate}
-    \textbf{Extensions:}
-    \begin{itemize}
-        \item[]	2a. SAML token is not valid.
-        \item[]	3a. IS sends error to ESB
-    \end{itemize}
-    \textbf{Precondition:}
-    \begin{itemize}
-        \item Request Mediation
     \end{itemize}
 
     \subsubsection{Description of ESB concepts}\label{Description of ESB concepts} 
