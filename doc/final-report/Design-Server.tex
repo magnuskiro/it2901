@@ -118,7 +118,7 @@ To follow this flow, follow the blue arrows in figure \ref{fig:DataFlowDiagramSe
     \end{figure}
 \\           
 SAML Authentication Request:\\
-The ESB receives a request (from a Client) directed at the Identity Server (IS), the ESB relays this message to the IS. The ESB receives the response from the IS, and sends it through a mediator sequence consisting of the Priority mediator and the Send mediator. The send mediator sends the response to the Client.
+This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the Identity Server (IS), the ESB relays this message to the IS. The ESB receives the response from the IS, and sends it through a mediator sequence consisting of the Priority mediator and the Send mediator. The send mediator sends the response to the Client.
 
     \subsubsection{Extensions to the ESB}\label{Extensions to the ESB} 
     This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and extensions we make to the ESB, and then a short description of the built-in mediators we will use.
