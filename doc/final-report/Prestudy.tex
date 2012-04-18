@@ -62,13 +62,12 @@
         \centering
         \includegraphics[scale=0.4]{Simplemessagesending}
         \caption{Simple message sending}
-        % TODO: wire figure description.
-        [ TODO: get things done, write this description, and reference it in the text.]
+        One client communicates with one server through one router.
         \label{fig:Simple message sending}
     \end{figure}
 \\
 Simple message sending:\\
-    In this test, we want to test the ability of the client and the ESB to communicate. We want to see that the client is able to send messages(\gls{message}) to the server and get a response back. For monitoring purposes, this test will rely on both applications to log their behavior. In order for us to give this test the green light we must see a message going out from the client then passing through the ESB to GlassFish. Then finally a reply should be sent back from GlassFish to the ESB and then to the client.
+    In this test, shown in figure \ref{fig:Simple message sending}, we want to test the ability of the client and the ESB to communicate. We want to see that the client is able to send messages(\gls{message}) to the server and get a response back. For monitoring purposes, this test will rely on both applications to log their behavior. In order for us to give this test the green light we must see a message going out from the client then passing through the ESB to GlassFish. Then finally a reply should be sent back from GlassFish to the ESB and then to the client.
 \\\\
 Setting Quality of Service:\\
     In this test, we want to test the client and the ESB’s ability to set the DiffServ field in the IP header. The first requirement is that the test “Simple message sending” has been passed. For this test to be considered a success, the client has to send a message to the ESB, which is responds with the DiffServ value in the SOAP header. The ESB must at this point have set the DiffServ value in the IP header. The client should then use a service on GlassFish, but this time the IP header must contain the correct DiffServ value. In order to monitor this test, only a packet sniffer located on the client and ESB side needs to be used. The packets must be examined, and the correct DiffServ value must be present in the IP header of all packets, except the first one going out from the client.
@@ -76,14 +75,13 @@ Setting Quality of Service:\\
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.4]{3Clientmessagesending}
-        \caption{3 Client message sending}
-        % TODO: wire figure description.
-        [ TODO: get things done, write this description, and reference it in the text.]
+        \caption{Three clients message sending}
+	Three clients communicate with the same server through the same router. One of the clients will have a higher priority than the two others, in order to test the servers ability to prioritize.
         \label{fig:threeclientmessagesending}
     \end{figure}
 \\   
 Prioritizing messages:\\
-    In this test we want to test the ESB’s ability to prioritize messages. The scenario will be set up with two clients sending lots of messages in an attempt to flood the capacity of the network. All of these messages should have the same priority, but intermittently, a third client with a higher priority will attempt to send some messages. What we are looking for is that these higher priority messages should be sent out from the ESB before the ones with lower priority and, if necessary, it has to stop some already sending messages. For this test to be successful, we must see some lower priority messages being preempted or held back. To do this, the log file of the ESB must be studied, and there should be some clear indications of one of the requirements.
+    In this test we want to test the ESB’s ability to prioritize messages. The scenario will be set up as shown in figure \ref{fig:threeclientmessagesending}, with two clients sending lots of messages in an attempt to flood the capacity of the network. All of these messages should have the same priority, but intermittently, a third client with a higher priority will attempt to send some messages. What we are looking for is that these higher priority messages should be sent out from the ESB before the ones with lower priority and, if necessary, it has to stop some already sending messages. For this test to be successful, we must see some lower priority messages being preempted or held back. To do this, the log file of the ESB must be studied, and there should be some clear indications of one of the requirements.
 \\\\
 Changing DiffServ value:\\
     In this test we want to check the ESB’s ability to change the DiffServ value after a reconfiguration. The test and the result can be performed and examined the same way as “Setting Quality of Service”, but this time the test has to be run twice. One where the configuration has one DiffServ value, and a second run where the DiffServ value has a different value. For the test to be successful, one would have to examine the resulting \gls{pcap}\footnote{\Gls{pcap} is short for Packet capture which in our text this usually refers to a program which captures the traffic on a given socket} files on the server side, and check each run to see if the two tries have different DiffServ values.
@@ -91,31 +89,29 @@ Changing DiffServ value:\\
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.4]{2Clientdifferentpathsmessagesending}
-        \caption{2 Clients different paths message sending}
-        % TODO: wire figure description.
-        [ TODO: get things done, write this description, and reference it in the text.]            
+        \caption{Two Clients with different paths}
+        Two  clients communicating with the same server, but with different paths.
         \label{fig:2 Clients different paths message sending}
     \end{figure}
 \\    
 Multipath server routing:\\
-    In this test we want to look at the ESB’s capabilities to talk to the MS and understand the routing result. From the MS the ESB should get some routing information about the topology of the network. As you can see in \ref{fig:threeclientmessagesending}, if the link between the server and the first router is not the limiting factor, the two clients should not get in each others way. Therefore, since we get the information about the last router from the MS, the ESB should understand that there is likely no problem and should not preempt any messages. To check if this is actually the case, the ESB will need some time to adjust as it does not get the full picture of the network topology, but after this time, no messages should be dropped from the ESB’s side.
+    In this test we want to look at the ESB’s capabilities to talk to the MS and understand the routing result. From the MS the ESB should get some routing information about the topology of the network. As you can see in figure \ref{fig:2 Clients different paths message sending}, if the link between the server and the first router is not the limiting factor, the two clients should not get in each others way. Therefore, since we get the information about the last router from the MS, the ESB should understand that there is likely no problem and should not preempt any messages. To check if this is actually the case, the ESB will need some time to adjust as it does not get the full picture of the network topology, but after this time, no messages should be dropped from the ESB’s side.
 \\
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.4]{3Clientswheretwoarecompeting}
-        \caption{3 Clients where two are competing}
-        % TODO: wire figure description.
-        [ TODO: get things done, write this description, and reference it in the text.]        
+        \caption{Tree Clients where two are competing}
+        Three clients communicate with the same server, but only two of them share the path.
         \label{fig:3clientstwocompeting}
     \end{figure}
 \\
 Competing clients in a multipath environment:\\
-    This test is a compilation of the tests “Multipath server routing” and “Prioritizing messages”. For this test we want to make sure that the ESB is smart enough to only preempt the messages going to one of the competing clients. As you can see in the figure \ref{fig:3clientstwocompeting} there is one client which should not affect either of the two others if the link between the server and the first router is not a bottleneck. This should allow this client to receive messages even though the two other clients are competing for scarce resources. To check that this test is successful, a combination of the clients log files and the server log files will have to be used. If most(over 96\%) of the messages arrive at the higher priority client and the third client is not affected then this test is successful.
+    This test is a compilation of the tests “Multipath server routing” and “Prioritizing messages”. For this test we want to make sure that the ESB is smart enough to only preempt the messages going to one of the competing clients. As you can see in figure \ref{fig:3clientstwocompeting}, there is one client which should not affect either of the two others if the link between the server and the first router is not a bottleneck. This should allow this client to receive messages even though the two other clients are competing for scarce resources. To check that this test is successful, a combination of the clients log files and the server log files will have to be used. If most(over 96\%) of the messages arrive at the higher priority client and the third client is not affected then this test is successful.
 \\\\
 Competing clients in a low bandwidth scenario:\\
-    In this test we want to test that the ESB can manage to prioritize messages in a network with a joint bottleneck, but with different endpoints. In figure \ref{fig:3clientstwocompeting}, if the link between the server and the first router is the bottleneck, the ESB should after a small initialisation understand that it has to preempt messages going out to all clients in order to let a higher priority client get the service it is supposed to get. The scenario will be set up in such a way that one of the two competing clients will have higher priority than the two others, the two lower priority clients should then send a steady stream of messages which should fill the bottleneck link. The third client should then start sending some messages which must now fill the entire bottleneck link and create a situation where the ESB has to hold back or preempt messages going to either of the two other clients. As before, a combination of the ESB and the clients log files have to be examined.
+    In this test we want to test that the ESB can manage to prioritize messages in a network with a joint bottleneck, but with different endpoints. In figure \ref{fig:3clientstwocompeting}, if the link between the server and the first router is the bottleneck, the ESB should after a small initialisation understand that it has to preempt messages going out to all clients, in order to let a higher priority client get the service it is supposed to get. The scenario will be set up in such a way that one of the two competing clients will have higher priority than the two others, the two lower priority clients should then send a steady stream of messages, which should fill the bottleneck link. The third client should then start sending some messages which must now fill the entire bottleneck link, and create a situation where the ESB has to hold back or preempt messages going to either of the two other clients. As before, a combination of the ESB and the clients log files have to be examined.
            
-    \subsection{Alternative solutions}\label{Alternative solutions} [Solutions that we have thought about but discarded.]
+    \subsection{Alternative solutions}\label{Alternative solutions}
 
         The customer also gave us a paper\cite{soa-qos-pdf} which described a previous project they had worked on which tried to solve something quite similar to what we were tasked with. The paper described a system which were used in conjunction with Tactical routers to retrieve bandwidth information and to control sending of messages into this network. As the customer explained this work was not something we could directly copy as the project had not used a lot of web standards and had focused more on the tactical routers as opposed to web services. What we could take out of it however was how they throttled messages. The paper contained five methods which we could easily implement and use their result as an indication of what methods we should use to throttle or hold back messages.
 
@@ -126,4 +122,15 @@ Competing clients in a low bandwidth scenario:\\
         So far we have outlined major alternative architectures which could be alternatives to our project, but there are also alternatives within our proposed solution. One such alternative is not to use a premade ESB, but rather build one ourselves. This solution was thoroughly investigated, but was eventually turned down because of the massive amount of work that had to be done, the quality of an already made ESB is much higher than we could ever achieve during this project, and lastly, the open source tools available to implement the functionality needed for SAML was not very well documented, and would take considerable time to get familiar with.
 
         On the client side we also have the choice of having either a \gls{http}\footnote{Hypertext Transfer Protocol} proxy or writing our own custom library. Both have some advantages and disadvantages, a proxy would be better for integration with client programs, but creating this proxy or configuring and customizing an already existing solution is not trivial. On the same note, creating a library for use in client programs is easier, but this would mean that client programs would need to be altered to be usable with our middleware, which isn’t that desirable. We chose to go down the road of least resistance, as we see it currently we would have do quite a lot of research into proxies which could in the worst case scenario result in just wasted time as far as our product goes. A client library would from our perspective be easier as we would have more control, the overall design should be easier and we know that with this sort of library we can integrate OpenSAML which is a huge advantage.  
+    
+    \subsection{Process model}\label{Process model}
+    Our initial thoughts on the process was way of. At first we thought we could use scrum methodically and have weekly sprints. And most importantly start coding at once. This was before we really figured out what our task was. And the implications the task had on our approach to a solution. 
+    
+    When the Task Description and Requirements(\ref{Task Description and Requirements}) became apparent we had to radically rethink our approach to the whole development approach and process. 
+    
+    The task required us to research a lot before we could design our system. And the design was essential for us to be able to implement a solution to the given task. We ended up with a waterfall like approach. Our project life cycle is described in section \ref{Software project life cycle}.
+    
+    The gantt [TODO: ref the gantt chart\ref{The gant chart}] chart is the result of the process planning. In short terms the plan consists of four parts: research, design, implementation, documentation. In in practice we find out how to solve the task before we design our final solution. Then we code and setup the the system and test it. And summarise it all in the documentation part.
+    
+    \subsection{Tools}\label{Tools}          
           
