@@ -46,7 +46,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			  \item[] 5a. Return error
 		\end{itemize}
 		\textbf{Precondition:}  None\\
-		\textbf{See:} None
+		\textbf{See:} Requirement 6 (Section \ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Accept data to be sent \\
@@ -57,7 +57,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item Data is passed to the sequencer.
 			\item Sequencer creates DataObject.
 		\end{enumerate}
-		\textbf{Precondition:} Client has established connection to the Library interface and authenticated it's credentials. \\
+		\textbf{Precondition:} Client has established connection to the Library interface and it's credentials are accepted. \\
 		\textbf{See:} Accept client info
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,7 +74,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			  \item[] 2a. Return error
 		\end{itemize}
 		\textbf{Precondition:} DataObject has been created, and contains both bandwidth info and a token \\
-		\textbf{See:} Accept client credentials, Accept data to be sent and Fetch bandwidth info
+		\textbf{See:} Accept client credentials, Accept data to be sent and Fetch bandwidth info, requirement 8 (Section \ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Get SAML token \\
@@ -94,7 +94,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item[] 4a. Client library throws error
 		\end{itemize}
 		\textbf{Precondition:} Client has given library credentials and data to send, and a SAML token for the destination doesn’t already exist. Connection to server has been established. \\
-		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info and Connect to server
+		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info and Connect to server, requirement 2, 3 and 6 (Section \ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Transaction towards server \\
