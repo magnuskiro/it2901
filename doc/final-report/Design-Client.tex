@@ -188,13 +188,14 @@ This takes the reply from the identity server and parses it into a token object 
 		\indent \textbf{Credential Storage} \\
 Responsible for storing token objects as well as user supplied credentials. Also makes sure that no token objects are returned if they are invalid or expired.
 
-	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}
+	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}\\
+This section contains all the sequence diagrams for the client, with descriptions for each one.
 		\begin{figure}[H]
 		% TODO: reference it in the text.		
 			\centering	
 			\includegraphics[width=\textwidth]{CliSeqDiaAcceptclientinfo}
 			\caption{Accept client info}
-			This describes how client credentials are set in the client library. 
+			This describes how the client credentials are passsed from the client, through the interfce and into the credential storage.
 			\label{fig:CliSeqDiaAcceptclientinfo}
 		\end{figure}
 		\begin{figure}[H]
@@ -202,7 +203,7 @@ Responsible for storing token objects as well as user supplied credentials. Also
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
 			\caption{Getting non-stored token}
-			This describes how the client library gets a token and stores it when there is no stored token in the library already. 
+			This describes how the client library gets a token and stores it when there is no token stored in the library already. 
 			\label{fig:CliSeqDiaGettingnon-storedtoken}
 		\end{figure}
 		\begin{figure}[H]
@@ -210,7 +211,7 @@ Responsible for storing token objects as well as user supplied credentials. Also
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingStoredToken}
 			\caption{Getting stored token}
-			When a token exists we return the token without creating a new one. 
+			When a token exists we return that token instead of creating a new one. 
 			\label{fig:CliSeqDiaGettingStoredToken}
 		\end{figure}
 		\begin{figure}[H]
@@ -218,16 +219,15 @@ Responsible for storing token objects as well as user supplied credentials. Also
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaReceivereply}
 			\caption{Receive reply}
-			This is how the client library sends a reply to the client. 
+			This diagram shows how the client library receives a reply, and sends it to the client. 
 			\label{fig:CliSeqDiaReceivereply}
 		\end{figure}
-	% this sequence diagram might be better structured. Maybe with arrows happening first to be closer to echother. 
 		\begin{figure}[H]
 		% TODO: reference it in the text. 
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaSendData}
 			\caption{Send data}
-			This diagram describes how data is sent through the client library. 
+			This diagram describes how data moves through the client library, receives a token, and eventually gets sent to the server. 
 			\label{fig:CliSeqDiaSendData}
 		\end{figure}
 
