@@ -29,11 +29,11 @@ public class SAMLParserImpl implements SAMLParser{
 			e.printStackTrace();
 		}
 		OMElement root = builder.getDocumentElement();
-				
+
 		OMElement header = null;
 		OMElement qosElem = null;
 		OMElement diffElem = null;
-		
+
 		//Get relevant Header elements
 		Iterator<OMElement> iter = null;
 		iter = root.getChildrenWithLocalName("Header");
@@ -48,7 +48,7 @@ public class SAMLParserImpl implements SAMLParser{
 				diffElem = iter.next();
 			} 
 		} 
-	
+
 		//Get assertion
 		OMElement body = null;
 		OMElement assertion = null;
@@ -74,10 +74,10 @@ public class SAMLParserImpl implements SAMLParser{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
 			}
 		}
-		}
-		
+
 		//If all the required elements were available
 		if(qosElem!=null && diffElem!=null && assertion!=null && date!=null) {
 			//Make sure it's built and nice first!

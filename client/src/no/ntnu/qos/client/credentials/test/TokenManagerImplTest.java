@@ -152,12 +152,6 @@ public class TokenManagerImplTest {
         assertEquals("changed the password", "newPassword", credentials[2]); // [2] is the password
     }
 
-    @Test
-    public void setTokenInDataObjectTest(){
-    	tokenManager.setTokenInDataObject(dataObject);
-        assertEquals("Set token in DataObject", token.getXML(), dataObject.getSamlToken().getXML());
-        assertEquals("Set token in DataObject", destination, dataObject.getSamlToken().getDestination());
-    }
 
 
 }

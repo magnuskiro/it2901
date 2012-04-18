@@ -22,7 +22,6 @@ import no.ntnu.qos.client.credentials.SAMLCommunicator;
 import no.ntnu.qos.client.credentials.SAMLParser;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.impl.ConfigManager;
-import no.ntnu.qos.client.impl.ReceiveObjectImpl;
 import no.ntnu.qos.client.net.impl.RequestSOAPAction;
 
 import org.apache.http.HttpEntity;
@@ -57,7 +56,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 
 	private SAMLParser samlParser;
 	private ExceptionHandler exceptionHandler;
-	private ReceiveObjectImpl recObj;
 	
 	//Socket
 	private SSLSocket socket;
@@ -84,7 +82,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		// network communication with the identity server.
 		
 		String dest = "https://"+destination.getHost() + destination.getPath();
-		this.recObj = new ReceiveObjectImpl();
 		try {
 			this.destination = new URI("https://"+destination.getHost()+":"+destination.getPort()+"/services/IdentityServer");
 		} catch (URISyntaxException e1) {
@@ -130,13 +127,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		} catch (UnsupportedEncodingException e) {
 			exceptionHandler.unsupportedEncodingExceptionThrown(e);
 			ConfigManager.LOGGER.warning("Illegal message syntax");
-			try {
-				recObj.setReply("UnsupportedEncodingException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong " +
-						"while setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 		((AbstractHttpEntity)body).setContentType("text/xml");
@@ -153,24 +143,10 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		} catch (UnknownHostException e1) {
 			exceptionHandler.unknownHostExceptionThrown(e1);
 			ConfigManager.LOGGER.warning("Invalid host");
-			try {
-				recObj.setReply("UnknownHostException");
-			} catch (InterruptedException e2) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong " +
-						"while setting reply in receiveObject");
-				e2.printStackTrace();
-			}
 			return e1.getLocalizedMessage();
 		} catch (IOException e1) {
 			exceptionHandler.ioExceptionThrown(e1);
 			ConfigManager.LOGGER.warning("IO Exception on making SSL socket");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e2) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e2.printStackTrace();
-			}
 			return e1.getLocalizedMessage();
 		}
 		//Set Traffic class and get certificate
@@ -195,13 +171,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IO exception handshaking or binding" +
 					" socket to connection");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 		//Create the request, set parameters and insert message into body.
@@ -216,24 +185,10 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		} catch (HttpException e) {
 			exceptionHandler.httpExceptionThrown(e);
 			ConfigManager.LOGGER.warning("HttpException preprocessing request");
-			try {
-				recObj.setReply("HttpException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		} catch (IOException e) {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IOException proprocessing request");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 		ConfigManager.LOGGER.info("Ready to send to: " +destination.getHost()
@@ -246,25 +201,11 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IOException while executing request," +
 					" connection closed?");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		} catch (HttpException e) {
 			exceptionHandler.httpExceptionThrown(e);
 			ConfigManager.LOGGER.warning("HttpException while executing request," +
 					" connection closed?");
-			try {
-				recObj.setReply("HttpException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 		//Process the response
@@ -275,24 +216,10 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		} catch (HttpException e) {
 			exceptionHandler.httpExceptionThrown(e);
 			ConfigManager.LOGGER.warning("HttpException processing reply");
-			try {
-				recObj.setReply("HttpException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		} catch (IOException e) {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IOException processing reply");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 
@@ -306,24 +233,10 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 			// Service messed up!
 			e.printStackTrace();
 			ConfigManager.LOGGER.severe("Reply not parseable!");
-			try {
-				recObj.setReply("ParseException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		} catch (IOException e) {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IOException while parsing reply!");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
 		//Close connection
@@ -333,25 +246,8 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		} catch (IOException e) {
 			exceptionHandler.ioExceptionThrown(e);
 			ConfigManager.LOGGER.warning("IOException closing connection");
-			try {
-				recObj.setReply("IOException");
-			} catch (InterruptedException e1) {
-				ConfigManager.LOGGER.severe("Something went horribly wrong while" +
-						" setting reply in receiveObject");
-				e1.printStackTrace();
-			}
 			return e.getLocalizedMessage();
 		}
-		//Set reply in receiveObject
-		ConfigManager.LOGGER.info("Setting reply and forwarding it");
-		try {
-			recObj.setReply(replyBody);
-		} catch (InterruptedException e) {
-			// Should only happen if either client or client lib halted!
-			e.printStackTrace();
-			ConfigManager.LOGGER.severe("Interrupted while setting reply!!");
-		}
-		//informs the sequencer of a reply
 		return replyBody;
 	}
 

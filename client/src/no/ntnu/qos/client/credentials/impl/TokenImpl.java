@@ -2,12 +2,15 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenAxiom;
+import no.ntnu.qos.client.impl.ConfigManager;
+
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.ByteArrayInputStream;
 import java.net.URI;
+import java.util.TimeZone;
 
 public class TokenImpl implements Token, TokenAxiom {
 	OMElement token;
@@ -16,6 +19,8 @@ public class TokenImpl implements Token, TokenAxiom {
 	URI destination;
 	int priority;
 	int diffServ;
+	private static final TimeZone timeZone = TimeZone.getDefault();
+	private static final long timeZoneOffset = timeZone.getRawOffset();
 	
 	@Deprecated
 	public TokenImpl(String tokenString, long validUntil, URI destination) {
@@ -55,7 +60,8 @@ public class TokenImpl implements Token, TokenAxiom {
             when (currentTimeMillis() + 30sec < validUntil) then the token is still valid, we do nothing.
 
         */
-        return validUntil > (System.currentTimeMillis() + expirationTimeBuffer);
+		ConfigManager.LOGGER.info(validUntil+" : "+(System.currentTimeMillis() + expirationTimeBuffer - timeZoneOffset));
+        return validUntil > (System.currentTimeMillis() + expirationTimeBuffer - timeZoneOffset);
     }
 
     @Override

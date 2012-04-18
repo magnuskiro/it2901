@@ -20,16 +20,6 @@ public class TokenManagerImpl implements TokenManager {
 	}
 
 	@Override
-	public void setTokenInDataObject(DataObject dataObject) {
-		if(dataObject.getSamlToken()==null || !credentialStorage.hasToken(dataObject.getDestination())){
-			String[] credentials = credentialStorage.getCredentials();
-			Token token = samlCommunicator.getToken(dataObject.getDestination(), credentials[0], credentials[1], credentials[2]);
-			dataObject.setToken(token);
-			credentialStorage.storeToken(token);
-		}
-	}
-
-	@Override
 	public void setCredentials(String username, String role, String password) {
 		credentialStorage.setCredentials(username,role,password);
 	}

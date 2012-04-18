@@ -120,7 +120,7 @@ public class CreateAssertion {
 			SubjectConfirmationData mySubjectConfirmationData = 
 					subjectConfirmationDataBuilder.buildObject();
 			mySubjectConfirmationData.setNotBefore(now);
-			mySubjectConfirmationData.setNotOnOrAfter(now.plusMinutes(2));
+			mySubjectConfirmationData.setNotOnOrAfter(now.plusMinutes(maxSessionTimeOutInMinutes));
 			mySubjectConfirmationData.setRecipient(recipient);
 			
 			SubjectConfirmationBuilder subjectConfirmationBuilder =

@@ -2,6 +2,7 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.client.impl.ConfigManager;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -25,12 +26,17 @@ public class CredentialStorageImpl implements CredentialStorage {
 
 	@Override
 	public boolean hasToken(URI destination) {
+		ConfigManager.LOGGER.info("Checked token:"+destination);
 		if(tokens.containsKey(getKeystring(destination)) ) {
+			ConfigManager.LOGGER.info("Checked token exists:"+destination);
 			if (tokens.get(getKeystring(destination)).isValid()) {
+				ConfigManager.LOGGER.info("Checked token is valid:"+destination);
 				return true;
 			}
+			ConfigManager.LOGGER.info("Checked token not valid:"+destination);
 			tokens.remove(getKeystring(destination));
 		}
+		ConfigManager.LOGGER.info("Checked token not exists:"+destination);
 		return false;
 	}
 
@@ -58,6 +64,7 @@ public class CredentialStorageImpl implements CredentialStorage {
 
 	@Override
 	public void storeToken(Token token) {
+		ConfigManager.LOGGER.info("Stored token:"+token.getDestination());
 		tokens.put(getKeystring(token.getDestination()), token);
 	}
 
