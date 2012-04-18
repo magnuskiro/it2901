@@ -3,14 +3,13 @@
         \begin{figure}[htb]
             \centering
             \includegraphics[width=\textwidth]{birdarch}
-            \caption{Birds eye view of the overall architecture.}
-            Our initial thought of the basic view of our system. 
+            \caption{Our initial thoughts of the basic server architecture}
             \label{fig:birdarch}
         \end{figure}
 
     \subsection{Server side Architecture}\label{Server side Architecture}
     
-        The server side architecture consists of several components, the WSO2 ESB, the WSO2 \gls{identity server}, the Tactical Router and the GlassFish server. All of these components are already available, so what we will have to make is \glspl{mediator}\footnote{\Gls{mediator} - A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB} in the ESB.
+        The server side architecture consists of several components, the WSO2 ESB, the WSO2 \gls{identity server}, the Tactical Router and the GlassFish server. Most of them are visible in the initial architechture shown in figure \ref{fig:birdarch}. All of these components are already available, so what we will have to make is \glspl{mediator}\footnote{\Gls{mediator} - A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB} in the ESB.
 
         Before the client can request a web service it has to have an identification. To get an ID-\gls{token} it has to contact the Identity Server using the ESB as a \gls{proxy}\footnote{\Gls{proxy} - A proxy server acts as an intermediary between clients and servers} (Fig.\ref{fig:Serversidearchitecture}-1). Then the client can request a web service from the ESB. Several things will then happen in the ESB. First the request message is sent to the SAML mediator (Fig.\ref{fig:Serversidearchitecture}-2), this mediator contacts the Identity Server to validate the clients ID-token (Fig.\ref{fig:Serversidearchitecture}-3). If the token is validated and the client is supposed to have access to the requested service, the message is passed on to the GlassFish proxies (Fig.\ref{fig:Serversidearchitecture}-4), otherwise it is dropped. The ESB acting as a proxy will then send the request along to the requested service on the GlassFish server (Fig.\ref{fig:Serversidearchitecture}-5).
 
