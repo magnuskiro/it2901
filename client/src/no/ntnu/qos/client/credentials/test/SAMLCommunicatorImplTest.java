@@ -23,8 +23,6 @@ public class SAMLCommunicatorImplTest {
 		assertNotNull(token);
 		assertEquals(10, token.getDiffServ());
 		assertEquals(100, token.getPriority());
-		System.out.println(token.getXML());
-		fail("Not yet implemented");
 	}
 
 }

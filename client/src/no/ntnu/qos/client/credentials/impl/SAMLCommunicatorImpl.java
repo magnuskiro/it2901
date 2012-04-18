@@ -1,17 +1,7 @@
 package no.ntnu.qos.client.credentials.impl;
 
-import no.ntnu.qos.client.ExceptionHandler;
-import no.ntnu.qos.client.Sequencer;
-import no.ntnu.qos.client.credentials.SAMLCommunicator;
-import no.ntnu.qos.client.credentials.SAMLParser;
-import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.client.impl.ConfigManager;
-import no.ntnu.qos.client.impl.ReceiveObjectImpl;
-import no.ntnu.qos.client.net.impl.RequestSOAPAction;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -19,10 +9,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
@@ -30,6 +16,14 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import no.ntnu.qos.client.ExceptionHandler;
+import no.ntnu.qos.client.credentials.SAMLCommunicator;
+import no.ntnu.qos.client.credentials.SAMLParser;
+import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.client.impl.ConfigManager;
+import no.ntnu.qos.client.impl.ReceiveObjectImpl;
+import no.ntnu.qos.client.net.impl.RequestSOAPAction;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
@@ -72,9 +66,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 	private HttpParams params;
 	private HttpProcessor httpProcessor;
 	
-	//need an http-thingamajig and possibly other stuff
-	private Sequencer sequencer;
-	
 	private URI destination;
 	
 	public SAMLCommunicatorImpl(){
@@ -93,6 +84,7 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		// network communication with the identity server.
 		
 		String dest = "https://"+destination.getHost() + destination.getPath();
+		this.recObj = new ReceiveObjectImpl();
 		try {
 			this.destination = new URI("https://"+destination.getHost()+":"+destination.getPort()+"/services/IdentityServer");
 		} catch (URISyntaxException e1) {
@@ -360,7 +352,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 			ConfigManager.LOGGER.severe("Interrupted while setting reply!!");
 		}
 		//informs the sequencer of a reply
-		sequencer.returnData(recObj);
 		return replyBody;
 	}
 
