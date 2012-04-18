@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import no.ntnu.qos.client.DataListener;
 import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.credentials.TokenManager;
@@ -13,9 +16,6 @@ import no.ntnu.qos.client.impl.SequencerImpl;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com - 21/03/12

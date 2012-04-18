@@ -1,20 +1,8 @@
 package no.ntnu.qos.client.credentials.test;
 
-import no.ntnu.qos.client.DataObject;
-import no.ntnu.qos.client.ExceptionHandler;
-import no.ntnu.qos.client.QoSClient;
-import no.ntnu.qos.client.Sequencer;
-import no.ntnu.qos.client.credentials.SAMLParser;
-import no.ntnu.qos.client.credentials.Token;
-import no.ntnu.qos.client.credentials.TokenManager;
-import no.ntnu.qos.client.credentials.impl.SAMLParserImpl;
-import no.ntnu.qos.client.credentials.impl.TokenImpl;
-import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
-import no.ntnu.qos.client.impl.QoSClientImpl;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -24,7 +12,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.*;
+import no.ntnu.qos.client.DataObject;
+import no.ntnu.qos.client.ExceptionHandler;
+import no.ntnu.qos.client.QoSClient;
+import no.ntnu.qos.client.Sequencer;
+import no.ntnu.qos.client.credentials.SAMLParser;
+import no.ntnu.qos.client.credentials.Token;
+import no.ntnu.qos.client.credentials.TokenManager;
+import no.ntnu.qos.client.credentials.impl.SAMLParserImpl;
+import no.ntnu.qos.client.credentials.impl.TokenManagerImpl;
+import no.ntnu.qos.client.impl.QoSClientImpl;
+
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**

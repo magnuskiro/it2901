@@ -1,19 +1,21 @@
 package no.ntnu.qos.client.credentials.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.NoSuchElementException;
+
 import no.ntnu.qos.client.credentials.CredentialStorage;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.impl.CredentialStorageImpl;
 import no.ntnu.qos.client.credentials.impl.TokenImpl;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.NoSuchElementException;
-
-import static org.junit.Assert.*;
 
 /**
  * 
@@ -29,6 +31,7 @@ public class CredentialStorageImplTest {
 	static String user, role, pass;
 	static String user2, role2, pass2;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setup() throws Exception {
 		user = "testUser";

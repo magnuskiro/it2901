@@ -1,6 +1,7 @@
 package no.ntnu.qos.client.credentials.impl;
 
-import javax.swing.text.AbstractDocument.AttributeContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.joda.time.DateTime;
 import org.opensaml.Configuration;
@@ -17,7 +18,6 @@ import org.opensaml.saml2.core.Condition;
 import org.opensaml.saml2.core.Conditions;
 import org.opensaml.saml2.core.Issuer;
 import org.opensaml.saml2.core.NameID;
-import org.opensaml.saml2.core.OneTimeUse;
 import org.opensaml.saml2.core.Subject;
 import org.opensaml.saml2.core.SubjectConfirmation;
 import org.opensaml.saml2.core.SubjectConfirmationData;
@@ -34,33 +34,16 @@ import org.opensaml.saml2.core.impl.OneTimeUseBuilder;
 import org.opensaml.saml2.core.impl.SubjectBuilder;
 import org.opensaml.saml2.core.impl.SubjectConfirmationBuilder;
 import org.opensaml.saml2.core.impl.SubjectConfirmationDataBuilder;
-import org.opensaml.xacml.policy.AttributeValueType;
-import org.opensaml.xacml.policy.impl.AttributeValueTypeImplBuilder;
-import org.opensaml.xml.XMLObjectBuilder;
-import org.opensaml.xml.XMLObjectBuilderFactory;
-import org.opensaml.xml.io.Marshaller;
-import org.opensaml.xml.io.MarshallerFactory;
-import org.opensaml.xml.schema.XSString;
-import org.opensaml.xml.util.XMLHelper;
-import org.w3c.dom.Element;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.opensaml.Configuration;
-import org.opensaml.saml2.core.Assertion;
-import org.opensaml.saml2.core.impl.AssertionMarshaller;
 import org.opensaml.ws.soap.soap11.Body;
 import org.opensaml.ws.soap.soap11.Envelope;
 import org.opensaml.ws.soap.soap11.Header;
 import org.opensaml.xml.XMLObject;
+import org.opensaml.xml.XMLObjectBuilder;
 import org.opensaml.xml.XMLObjectBuilderFactory;
 import org.opensaml.xml.io.Marshaller;
-import org.opensaml.xml.io.MarshallingException;
-import org.opensaml.xml.schema.impl.XSStringImpl;
+import org.opensaml.xml.schema.XSString;
 import org.opensaml.xml.util.XMLHelper;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 
 public class CreateAssertion {
@@ -112,6 +95,7 @@ public class CreateAssertion {
         return envelope;
     }
 	
+	@SuppressWarnings("rawtypes")
 	private Assertion createAssertion (String destination, String fName, String role) {
 		
 		String recipient = destination;

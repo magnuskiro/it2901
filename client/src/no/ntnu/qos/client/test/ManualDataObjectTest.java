@@ -12,6 +12,7 @@ public class ManualDataObjectTest {
 	public static void main(String[] args) throws URISyntaxException {
 		String xml = "<?xml version=\"1.0\" ?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><ns2:hello xmlns:ns2=\"http://me.test.org/\"><name>My text goes here</name></ns2:hello></S:Body></S:Envelope>";
 		URI destination = new URI("http://122.22.33.44/destination");
+		@SuppressWarnings("deprecation")
 		Token samlToken = new TokenImpl(
 				"<saml2:Assertion IssueInstant=\"2012-03-12T13:50:20.021Z\" " +
 				"Version=\"2.0\" xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" +

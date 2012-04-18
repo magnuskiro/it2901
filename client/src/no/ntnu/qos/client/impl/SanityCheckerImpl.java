@@ -1,11 +1,9 @@
 package no.ntnu.qos.client.impl;
 
-import no.ntnu.qos.client.DataObject;
-import no.ntnu.qos.client.SanityChecker;
-
-import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import no.ntnu.qos.client.SanityChecker;
 
 public class SanityCheckerImpl implements SanityChecker{
 
