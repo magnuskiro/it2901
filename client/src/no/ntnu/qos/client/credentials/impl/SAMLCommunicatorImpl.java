@@ -90,6 +90,7 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		CreateAssertion assertionGenerator = new CreateAssertion();
 		String soap = assertionGenerator.createSAML(dest, role);
 		String reply = run(this.destination, soap, (ReceiveObjectImpl)dataObj.getReceiveObject());
+
 		Token replyToken;
 		try {
 			replyToken = samlParser.tokenize(reply, destination);
