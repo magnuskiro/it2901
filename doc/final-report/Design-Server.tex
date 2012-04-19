@@ -181,6 +181,33 @@ Sampling Message Processor:\\
             This diagram describes how the SAML mediator will get data from the message, and set it in the message context so it can be used later in the response sequence
             \label{fig:SAMLmediator}
         \end{figure}
+        
+        \begin{figure}[H]
+        % TODO: ref in text 
+            \centering
+            \includegraphics[scale=0.3]{InMetadatamediator}
+            \caption{InMetadata mediator sequence diagram}
+            This diagram shows how the InMetadata mediator works when it adds the IP address and Time-to-Live.
+            \label{fig:InMetadatamediator}
+        \end{figure}
+        
+        \begin{figure}[H]
+        % TODO: ref in text. 
+            \centering
+            \includegraphics[scale=0.4]{OutMetadatamediatorsequencediagram}
+            \caption{OutMetadata mediator sequence diagram}
+            The diagram shows how OutMetadata mediator works.
+            \label{fig:OutMetadatamediatorsequencediagram}
+        \end{figure}
+        
+        \begin{figure}[H]
+        % TODO: ref in text 
+            \centering
+            \includegraphics[scale=0.3]{SoapPrioritymediator}
+            \caption{SOAP Priority mediator sequence diagram}
+            This diagram shows the inner working of the SOAP priority mediator.
+            \label{fig:SoapPrioritymediator}
+        \end{figure}
     
         \begin{figure}[H]
         % TODO: ref in text. 
@@ -192,13 +219,23 @@ Sampling Message Processor:\\
         \end{figure}
         
         \begin{figure}[H]
-        % TODO: ref in text. 
+        % TODO: ref in text 
             \centering
-            \includegraphics[scale=0.4]{OutMetadatamediatorsequencediagram}
-            \caption{MS mediator sequence diagram}
-            This diagram describes the MS mediator contacting the Monitoring Service for bandwidth information
-            \label{fig:OutMetadatamediatorsequencediagram}
+            \includegraphics[scale=0.3]{DiffServmediator}
+            \caption{DiffServ mediator sequence diagram}
+            How we set DiffServ priority on the underlying Socket.
+            \label{fig:DiffServmediator}
         \end{figure}
+        
+        \begin{figure}[H]
+        % TODO: ref in text 
+            \centering
+            \includegraphics[scale=0.3]{Throttlemediator}
+            \caption{Throttle mediator sequence diagram}
+            The meat of the server side mediators.
+            \label{fig:Throttlemediator}
+        \end{figure}
+        
 
     \subsubsection{Configuration of the ESB}\label{Configuration of the ESB} 
     This section will detail the different configuration options which can be controlled on the ESB.
