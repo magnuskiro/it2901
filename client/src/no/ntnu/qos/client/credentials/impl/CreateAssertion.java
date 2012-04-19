@@ -1,214 +1,83 @@
 package no.ntnu.qos.client.credentials.impl;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.joda.time.DateTime;
-import org.opensaml.Configuration;
-import org.opensaml.DefaultBootstrap;
-import org.opensaml.common.SAMLVersion;
-import org.opensaml.saml2.core.Assertion;
-import org.opensaml.saml2.core.Attribute;
-import org.opensaml.saml2.core.AttributeStatement;
-import org.opensaml.saml2.core.AttributeValue;
-import org.opensaml.saml2.core.AuthnContext;
-import org.opensaml.saml2.core.AuthnContextClassRef;
-import org.opensaml.saml2.core.AuthnStatement;
-import org.opensaml.saml2.core.Condition;
-import org.opensaml.saml2.core.Conditions;
-import org.opensaml.saml2.core.Issuer;
-import org.opensaml.saml2.core.NameID;
-import org.opensaml.saml2.core.Subject;
-import org.opensaml.saml2.core.SubjectConfirmation;
-import org.opensaml.saml2.core.SubjectConfirmationData;
-import org.opensaml.saml2.core.impl.AssertionBuilder;
-import org.opensaml.saml2.core.impl.AttributeBuilder;
-import org.opensaml.saml2.core.impl.AttributeStatementBuilder;
-import org.opensaml.saml2.core.impl.AuthnContextBuilder;
-import org.opensaml.saml2.core.impl.AuthnContextClassRefBuilder;
-import org.opensaml.saml2.core.impl.AuthnStatementBuilder;
-import org.opensaml.saml2.core.impl.ConditionsBuilder;
-import org.opensaml.saml2.core.impl.IssuerBuilder;
-import org.opensaml.saml2.core.impl.NameIDBuilder;
-import org.opensaml.saml2.core.impl.OneTimeUseBuilder;
-import org.opensaml.saml2.core.impl.SubjectBuilder;
-import org.opensaml.saml2.core.impl.SubjectConfirmationBuilder;
-import org.opensaml.saml2.core.impl.SubjectConfirmationDataBuilder;
-import org.opensaml.ws.soap.soap11.Body;
-import org.opensaml.ws.soap.soap11.Envelope;
-import org.opensaml.ws.soap.soap11.Header;
-import org.opensaml.xml.XMLObject;
-import org.opensaml.xml.XMLObjectBuilder;
-import org.opensaml.xml.XMLObjectBuilderFactory;
-import org.opensaml.xml.io.Marshaller;
-import org.opensaml.xml.schema.XSString;
-import org.opensaml.xml.util.XMLHelper;
-import org.w3c.dom.Document;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 
-public class CreateAssertion {
-	
-	static String strIssuer = "http://example.org";
-	static String strNameID = "General Curly";
-	static String strNameQualifier = "Example Qualifier";
-	static String sessionID = "abcd1234";
-	static String strAttrName = "";
-	static String strAuthMethod = "";
-	static int maxSessionTimeOutInMinutes = 60;
-	static String authnContext = "urn:oasis:names:tc:SAML:2.0:ac:classes:Password";
-
-	public String createSAML(String dest, String role) {
-		String destination = dest;
-		String friendlyName = "qosClientRole";
-		String clientRole = role;
+/**
+ * helper class  that builds SAML assertions
+ * @author Håvard
+ *
+ */
+public class CreateAssertion{
+	/**
+	 * 
+	 * @param destination
+	 * @param role
+	 * @return 
+	 */
+	public String createSAML(String destination, String role){
+		String token, time;
 		
-		Assertion myAssertion = createAssertion(destination, friendlyName, clientRole);
-		Envelope envelope = buildSOAP11Envelope(myAssertion);
-		
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        DocumentBuilder builder;
-		try {
-			builder = factory.newDocumentBuilder();
-			Document dom = builder.newDocument();
-			Marshaller out = Configuration.getMarshallerFactory ().getMarshaller(envelope);
-			out.marshall(envelope, dom);
-		String result = XMLHelper.prettyPrintXML(dom);
-		return result;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        return null;
-	}
-	
-    private static Envelope buildSOAP11Envelope(XMLObject payload) {
-        XMLObjectBuilderFactory bf = Configuration.getBuilderFactory();
-        Envelope envelope = (Envelope) bf.getBuilder(Envelope.DEFAULT_ELEMENT_NAME).buildObject(Envelope.DEFAULT_ELEMENT_NAME);
-        Body body = (Body) bf.getBuilder(Body.DEFAULT_ELEMENT_NAME).buildObject(Body.DEFAULT_ELEMENT_NAME);
-        Header header = (Header) bf.getBuilder(Header.DEFAULT_ELEMENT_NAME).buildObject(Header.DEFAULT_ELEMENT_NAME);
+		DateFormat	dateFormatter	= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        Calendar	calendar		= Calendar.getInstance();
+        TimeZone	timeZone		= TimeZone.getDefault();
+        long		TimeZoneOffset	= timeZone.getRawOffset() + timeZone.getDSTSavings();
+        long		validUntil		= System.currentTimeMillis() + 3600000 -TimeZoneOffset;
         
-        header.setSchemaLocation("hah");
-        body.getUnknownXMLObjects().add(payload);
-        envelope.setBody(body);
-        envelope.setHeader(header);
+        calendar.setTimeInMillis(validUntil);
+        time = dateFormatter.format(calendar.getTime()) + "Z";
         
-        return envelope;
-    }
-	
-	@SuppressWarnings("rawtypes")
-	private Assertion createAssertion (String destination, String fName, String role) {
-		
-		String recipient = destination;
-		String friendlyName = fName;
-		String clientRole = role;
-		try {
-			DefaultBootstrap.bootstrap();
-
-			/* Create NameID */
-			NameIDBuilder nameIDBuilder = new NameIDBuilder();
-			NameID myNameID = nameIDBuilder.buildObject();
-			myNameID.setValue(strNameID);
-			myNameID.setFormat(NameID.UNSPECIFIED);
-			myNameID.setNameQualifier(strNameQualifier);
-			
-			/* Create timestamp */
-			DateTime now = new DateTime();
-			
-			/* Create subject confirmation */
-			SubjectConfirmationDataBuilder subjectConfirmationDataBuilder = 
-					new SubjectConfirmationDataBuilder();
-			SubjectConfirmationData mySubjectConfirmationData = 
-					subjectConfirmationDataBuilder.buildObject();
-			mySubjectConfirmationData.setNotBefore(now);
-			mySubjectConfirmationData.setNotOnOrAfter(now.plusMinutes(maxSessionTimeOutInMinutes));
-			mySubjectConfirmationData.setRecipient(recipient);
-			
-			SubjectConfirmationBuilder subjectConfirmationBuilder =
-					new SubjectConfirmationBuilder();
-			SubjectConfirmation mySubjectConfirmation = 
-					subjectConfirmationBuilder.buildObject();
-			mySubjectConfirmation.setSubjectConfirmationData(mySubjectConfirmationData);
-			
-			/* Create subject */
-			SubjectBuilder subjectBuilder = new SubjectBuilder();
-			Subject mySubject = subjectBuilder.buildObject();
-			mySubject.setNameID(myNameID);
-			mySubject.getSubjectConfirmations().add(mySubjectConfirmation);
-			
-			/* Create authentication statement */
-			AuthnStatementBuilder authnStatementBuilder = 
-					new AuthnStatementBuilder();
-			AuthnStatement myAuthnStatement = 
-					authnStatementBuilder.buildObject();
-			
-			DateTime now2 = new DateTime();
-			myAuthnStatement.setAuthnInstant(now2);
-			myAuthnStatement.setSessionIndex(sessionID);
-			myAuthnStatement.setSessionNotOnOrAfter(now2.
-					plus(maxSessionTimeOutInMinutes));
-			
-			AttributeStatementBuilder attributeStatementBuilder =
-					new AttributeStatementBuilder();
-			AttributeStatement myAttributeStatement = 
-					attributeStatementBuilder.buildObject();
-			AttributeBuilder myAttributeBuilder = new AttributeBuilder();
-			Attribute myAttribute = myAttributeBuilder.buildObject();
-			myAttribute.setFriendlyName(friendlyName);
-			myAttribute.setName("urn:oid:1.3.6.1.4.1.5923.1.1.1.1");
-			
-			XMLObjectBuilderFactory builderFactory = Configuration.getBuilderFactory();
-			XMLObjectBuilder stringBuilder = builderFactory.getBuilder(XSString.TYPE_NAME);
-			XSString attrNewValue = (XSString) stringBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
-			attrNewValue.setValue(clientRole);
-
-			myAttribute.getAttributeValues().add(attrNewValue);
-			myAttributeStatement.getAttributes().add(myAttribute);
-			
-			
-			AuthnContextBuilder authnContextBuilder = 
-					new AuthnContextBuilder();
-			AuthnContext myAuthnContext = authnContextBuilder.buildObject();
-			
-			AuthnContextClassRefBuilder authnContextClassRefBuilder =
-					new AuthnContextClassRefBuilder();
-			AuthnContextClassRef myAuthnContextClassRef =
-					authnContextClassRefBuilder.buildObject();
-			myAuthnContextClassRef.setAuthnContextClassRef(authnContext);
-			
-			myAuthnContext.setAuthnContextClassRef(myAuthnContextClassRef);
-			myAuthnStatement.setAuthnContext(myAuthnContext);
-			
-			/* Create the do-not-cache condition */
-			OneTimeUseBuilder oneTimeUseBuilder = new OneTimeUseBuilder();
-			Condition myCondition = oneTimeUseBuilder.buildObject();
-			
-			ConditionsBuilder conditionsBuilder = new ConditionsBuilder();
-			Conditions conditions = conditionsBuilder.buildObject();
-			conditions.getConditions().add(myCondition);
-			
-			/* Create issuer */
-			IssuerBuilder issuerBuilder = new IssuerBuilder();
-			Issuer myIssuer = issuerBuilder.buildObject();
-			myIssuer.setValue(strIssuer);
-			
-			/* Create assertion */
-			AssertionBuilder assertionBuilder = new AssertionBuilder();
-			Assertion assertion = assertionBuilder.buildObject();
-			assertion.setVersion(SAMLVersion.VERSION_20);
-			assertion.setID(sessionID);
-			assertion.setIssueInstant(now);
-			assertion.setIssuer(myIssuer);
-			assertion.setSubject(mySubject);
-			assertion.getAuthnStatements().add(myAuthnStatement);
-			assertion.setConditions(conditions);
-			assertion.getAttributeStatements().add(myAttributeStatement);
-			
-			return assertion;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
+        
+        token = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+        		"<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+        			"<S:Header/>" +
+        			"<S:Body>" +
+        				"<saml2:Assertion xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\" " +
+        				"ID=\"abcd1234\" " +
+        				"IssueInstant=\"2012-04-18T10:07:27.304Z\" " +
+        				"Version=\"2.0\"> " +
+        					"<saml2:Issuer>" +
+        						"http://example.org" +
+        					"</saml2:Issuer> " +
+        					"<saml2:Subject> " +
+        						"<saml2:NameID Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\" " +
+        						"NameQualifier=\"Example Qualifier\">" +
+        							"General Curly" +
+        						"</saml2:NameID> " +
+        						"<saml2:SubjectConfirmation> " +
+        							"<saml2:SubjectConfirmationData NotBefore=\"2012-04-18T10:07:27.304Z\" " +
+        							"NotOnOrAfter=\"2012-04-18T10:09:27.304Z\" " +
+        							"Recipient=\"" + destination +"\" /> " +
+        						"</saml2:SubjectConfirmation> " +
+        					"</saml2:Subject> " +
+        					"<saml2:Conditions> " +
+        						"<saml2:OneTimeUse /> " +
+        					"</saml2:Conditions> " +
+        					"<saml2:AuthnStatement AuthnInstant=\"2012-04-18T10:07:27.422Z\" " +
+        					"SessionIndex=\"abcd1234\" " +
+        					"SessionNotOnOrAfter=\"" + time + "\"> " +
+        						"<saml2:AuthnContext>" +
+        							"<saml2:AuthnContextClassRef>" +
+        								"urn:oasis:names:tc:SAML:2.0:ac:classes:Password" +
+        							"</saml2:AuthnContextClassRef> " +
+        						"</saml2:AuthnContext> " +
+        					"</saml2:AuthnStatement> " +
+        					"<saml2:AttributeStatement> " +
+        						"<saml2:Attribute FriendlyName=\"qosClientRole\" Name=\"urn:oid:1.3.6.1.4.1.5923.1.1.1.1\"> " +
+        							"<saml2:AttributeValue xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
+        							"xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+        							"xsi:type=\"xs:string\">" + role + "</saml2:AttributeValue> " +
+        						"</saml2:Attribute> " +
+        					"</saml2:AttributeStatement> " +
+        				"</saml2:Assertion>" +
+        			"</S:Body>" +
+        		"</S:Envelope>";
+        
+        
+        
+		return token;		
 	}
 }
