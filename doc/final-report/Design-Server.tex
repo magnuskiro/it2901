@@ -181,14 +181,6 @@ Sampling Message Processor:\\
             This diagram describes how the SAML mediator will get data from the message, and set it in the message context so it can be used later in the response sequence
             \label{fig:SAMLmediator}
         \end{figure}
-        
-        \begin{figure}[H]
-        % TODO: ref in text. 
-            \includegraphics[scale=0.28,angle=-90]{Responsesequencediagram}
-            \caption{Response sequence sequence diagram}
-            This diagram describes, in some detail, how a response message from the web service to the Client is passed through the ESB.
-            \label{fig:Responsesequencediagram}
-        \end{figure}
     
         \begin{figure}[H]
         % TODO: ref in text. 
@@ -209,7 +201,7 @@ Sampling Message Processor:\\
         \end{figure}
 
     \subsubsection{Configuration of the ESB}\label{Configuration of the ESB} 
-    This section will be about how the ESB is to be configured.
+    This section will detail the different configuration options which can be controlled on the ESB.
 
     \subsubsection{Modification of the ESB}\label{Modification of the ESB} 
 		The WSO2 ESB source code will have to be modified to allow for setting the DiffServ field in the IP-header of packets sent. The idea is that we will set a property, DiffServ, in the message context, and let the HTTPsender get this property and set it on the socket used for sending.
