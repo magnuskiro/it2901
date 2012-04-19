@@ -4,28 +4,31 @@
     <proxy name="EchoService" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
         <target endpoint="echoservice" inSequence="main" outSequence="main"/>
     </proxy>
-    <!--A proxy for the dummy Identity Server, really an echo service-->
-    <proxy name="IdentityServer" transports="https http" startOnLoad="true" trace="disable">
-        <target endpoint="SAMLEcho">
+    <!--A proxy for the dummy Identity Server, just sends back to the client with added properties-->
+    <proxy name="IdentityServer" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
             <inSequence>
-                <!--used to wrap saml assertion so the web service can recognize it-->
-                 <class name="no.ntnu.qos.server.mediators.impl.EchoWrapperMediator"/>
+                <in>
+                    <!--Lets the send and out mediators know the message should be send back to client-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SendBackMediator"/>
+                </in>
+                <out>
+                    <!--used to get role and recipient from the saml assertion-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SAMLMediator">
+                        <property name="detachAssertion" value="false"/>
+                    </class>
+                    <!--used to determine diffserv and priority from ppd.xml, role and recipient-->
+                    <class name="no.ntnu.qos.server.mediators.impl.OutMetadataMediator">
+                        <property name="ppdFilename" value="ppd.xml"/>
+                    </class>
+                    <!--used to set diffserv and priority in soap header, so the client library can use it later-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SoapPriorityMediator"/>
+                    <!--used to set the diffserv field in the IP-headers of packets sent to client-->
+                    <class name="no.ntnu.qos.server.mediators.impl.DiffservMediator"/>
+                    <!--sends the message back to the client-->
+                    <send/>
+                </out>
             </inSequence>
-            <outSequence>
-                <!--used to unwrap the saml assertion so the client library can recognize it-->
-                <class name="no.ntnu.qos.server.mediators.impl.EchoStripperMediator"/>
-                <!--used to get role and recipient from the saml assertion-->
-                <class name="no.ntnu.qos.server.mediators.impl.SAMLMediator">
-                    <property name="detachAssertion" value="false"/>
-                </class>
-                <!--used to determine diffserv and priority from ppd.xml, role and recipient-->
-                <class name="no.ntnu.qos.server.mediators.impl.OutMetadataMediator">
-                    <property name="ppdFilename" value="ppd.xml"/>
-                </class>
-                <!--used to set diffserv and priority in soap header, so the client library can use it later-->
-                <class name="no.ntnu.qos.server.mediators.impl.SoapPriorityMediator"/>
-                <send/>
-            </outSequence>
         </target>
     </proxy>
     <!--This sequence is started by messageProcessor after being picked out by the PrioritizedStore
@@ -43,16 +46,12 @@
             <!--How long, in ms, a message can stay in throttleMediator before being discarded-->
             <property name="timeout" value="1000"/>
         </class>
-        <!--sends the respnse to the client-->
+        <!--sends the response to the client-->
         <send/>
     </sequence>
-    <!--The endpoint used by the EchoService proxy-->
+    <!--The endpoint used by the EchoService proxy, localhost can be changed if GlassFish is on different computer-->
     <endpoint name="echoservice">
         <address uri="http://localhost:8080/EchoServiceLargeReply/EchoServiceService" statistics="enable"/>
-    </endpoint>
-    <!--The endpoint used by the IdentityServer proxy-->
-    <endpoint name="SAMLEcho">
-        <address uri="http://localhost:8080/SAMLEcho/SAMLEcho" statistics="enable"/>
     </endpoint>
     <!--A message store that prioritizes messages based on priority and time added-->
     <messageStore class="no.ntnu.qos.server.store.PrioritizedMessageStore" name="PrioritizedStore"/>
