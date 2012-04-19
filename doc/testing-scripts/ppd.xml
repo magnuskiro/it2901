@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <services>
+        <service name="/services/EchoService" useDefault="false">
+            <client role="clientRole1">
+                <priority>10</priority>
+                <diffserv>10</diffserv>
+            </client>
+            <client role="clientRole2">
+                <priority>100</priority>
+                <diffserv>24</diffserv>
+            </client>
+            <client role="Default">
+                <priority>0</priority>
+                <diffserv>8</diffserv>
+            </client>
+        </service>
+    </services>
+</config>
