@@ -147,8 +147,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item The token is returned to the token manager
 			\item The token manager stores the token in the credential storage
 		\end{enumerate}
-		\\\\
-		
+		\\\\	
 		\textbf{Client Data} (Visualized in Fig.\ref{fig:ClientDataFlowDiagram})
 		\begin{enumerate}
 			\item The client generates data and sends it to the library via API/Interface
@@ -206,7 +205,7 @@ This section contains all the sequence diagrams for the client, with description
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
 			\caption{Getting non-stored token}
-			This describes how the client library gets a token and stores it when there is no token stored in the library already. 
+			This describes how the client library acquires a token from an external source, and stores it, when can't find the desired token in the storage, or if the token is invalid.
 			\label{fig:CliSeqDiaGettingnon-storedtoken}
 		\end{figure}
 		\begin{figure}[H]
