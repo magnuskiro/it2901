@@ -47,8 +47,14 @@ public class TokenManagerImpl implements TokenManager {
 			}else{
 				ConfigManager.LOGGER.info("Token not found in credential storage, fetching from identity server");
 				String[] credentials = credentialStorage.getCredentials();
-				Token newToken = samlCommunicator.getToken(dataObj.getDestination(),
-						credentials[0], credentials[1], credentials[2]);
+				Token newToken;
+				try {
+					newToken = samlCommunicator.getToken(dataObj.getDestination(),
+							credentials[0], credentials[1], credentials[2], dataObj);
+				} catch (Exception e) {
+					ConfigManager.LOGGER.warning("Could not get token from Identity Server");
+					return;
+				}
 				credentialStorage.storeToken(newToken);
 				ConfigManager.LOGGER.info("Setting token in dataobject");
 				dataObj.setToken(newToken); 
