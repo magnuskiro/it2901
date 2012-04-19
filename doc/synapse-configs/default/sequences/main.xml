@@ -2,9 +2,9 @@
 <!--The main sequence, used by our test service proxy defined in synapse.xml-->
 <sequence xmlns="http://ws.apache.org/ns/synapse" name="main" trace="enable" statistics="enable">
     <in>
-        <!--used to get role and recipient from the saml assertion-->
+        <!--used to get role and recipient from the SAML assertion-->
         <class name="no.ntnu.qos.server.mediators.impl.SAMLMediator">
-            <!--When set to true, the saml assertion is removed from message, web services does not want it-->
+            <!--When set to true, the SAML assertion is removed from message, web services does not want it-->
             <property name="detachAssertion" value="true"/>
         </class>
         <!--Sets the IP address of the client as a property in the Message Context
