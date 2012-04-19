@@ -150,9 +150,11 @@ A lightweight component for easily setting up and using HTTP connections. While 
 		\textbf{Client Data} (Visualized in Fig.\ref{fig:ClientDataFlowDiagram})
 		\begin{enumerate}
 			\item The client generates data and sends it to the library via API/Interface
-			\item The library does its magic, and sends the data to the  server
-			\item The server sends a response to the library
-			\item The library passes the response to the client
+			\item The data moves on to the sequencer and down to the message hander
+			\item The message handler tells httpCore to establish a connection to the server, and the data is sent
+			\item The server sends a reply that is picked up by httpCore and forwarded to the messageHandler
+			\item The interface is notified of the reply
+			\item The interface notifies the client that the reply is ready
 		\end{enumerate}
 		
 	\subsubsection{Architecture}\label{client architecture}
