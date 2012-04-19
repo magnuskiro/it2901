@@ -2,19 +2,19 @@
 
 This chapter will introduce the design and architecture of the client side of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
     
-    The class diagram is a usefull addition when understanding the architecture of the client library and it's functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
+    The class diagram is a usefull addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
 		
     \subsubsection{Introduction}\label{client introduction}
-The client architecture consists of the following components: The client application, the client library and the Monitoring Service. Additionally, the library makes use of some external components to do some of it's work.
+The client architecture consists of the following components: The client application, the client library and the Monitoring Service. Additionally, the library makes use of some external components to do some of its work.
 
     \subsubsection{Component description:}\label{Component description}
 
 \indent \indent \textbf{Client application:}\\
-	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the prioritization it should have.
+	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get and to interact properly with our server setup.
 \\\\
 
 \indent \textbf{Client library:}\\
-% TODO: needs to be rewritten and clearified. 
+% TODO: needs to be rewritten and clarified. 
 This component will handle all communication with the service providers, as well as authenticating users and prioritizing their messages, based on who they are, and what their current role is. The authorization will involve a component from the server side of the project, the identity server, which returns a token if the client is authorized. Client applications connect through a simple interface to provide credentials and data.
 \\\\ 
 
@@ -35,7 +35,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item Client software connects to the library interface
 			\item Client delivers its credentials
 			\item Credentials are passed from the interface to the sequencer.
-			\item Credentials are sanitized by the sanity checker and passes.
+			\item Credentials are checked by the sanity checker and passes.
 			\item Credentials are passed from the sequencer to the token manger.
 			\item Credentials are stored in the credential store.
 			\item Buffer, for previous tokens, is flushed
@@ -55,7 +55,8 @@ A lightweight component for easily setting up and using HTTP connections. While 
 		\begin{enumerate}
 			\item Client delivers data to be sent.
 			\item Data is passed to the sequencer.
-			\item Sequencer creates DataObject.
+			\item Sequencer creates DataObject and ReceiveObject.
+			\item ReceiveObject is returned to client.
 		\end{enumerate}
 		\textbf{Precondition:} Client has established connection to the Library interface and it's credentials are accepted. \\
 		\textbf{See:} Accept client info
@@ -103,7 +104,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 		\begin{enumerate}
 			\item MessageHandler sends buffered data to server
 			\item Server returns reply to data.
-			\item The ReturnObject in the DataObject gets the data from the server.
+			\item The ReceiveObject in the DataObject gets the data from the server.
 			\item MessageHandler send data to sequencer.
 			\item Sequencer sends data to interface (QosClient)
 			\item Client fires a data received event to all listeners.
@@ -173,8 +174,7 @@ Known in the class diagram as “QosClient”, responsible for providing a clean
 The central piece of the client library. Responsible for keeping a record of all other modules in the system and communicate between them as well as making sure everything happens in the right order.
 \\\\
 		\indent \textbf{Sanity checker} \\
-	% TODO: rewrite this section!
-This module is simply there to do some easy verification of data that comes from the client, to make sure that it isn’t faulty in any obvious way (e.g: Data that isn’t xml, or credentials that are empty).
+This modules single purpose is to check the credentials provided by the client for sanity, in other words make sure they're conform to the rules for the credentials. It does however not verify that they are valid.
 \\\\
 		\indent \textbf{Token Manager} \\
 This provides a nice and clean interface for the sequencer to store credentials and fetch tokens for data transmissions.
