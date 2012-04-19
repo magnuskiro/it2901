@@ -73,17 +73,11 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		samlParser = new SAMLParserImpl();
 	}
 	
-//	public static void main(String[] args) {
-//		
-//		CreateAssertion assertionGenerator = new CreateAssertion();
-//		String soap = assertionGenerator.createSAML("lalala", "ROLFOL");
-//		System.out.println(soap);
-//	}
+
 	public Token getToken(URI destination, String userName, String role,
 			String password, DataObject dataObj) throws Exception {
 		exceptionHandler = dataObj.getExceptionHandler();
-        // TODO write the rest of the method. which probably includes the 
-		// network communication with the identity server.
+
 		
 		String dest = "https://"+destination.getHost() + destination.getPath();
 		try {
@@ -95,7 +89,6 @@ public class SAMLCommunicatorImpl implements SAMLCommunicator {
 		// Create assertion and wrap it in SOAP, return as String
 		CreateAssertion assertionGenerator = new CreateAssertion();
 		String soap = assertionGenerator.createSAML(dest, role);
-//		String soap = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Header/><S:Body><ns2:echo xmlns:ns2=\"http://this.should.work.org\"><textToEcho><saml2:Assertion xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\" ID=\"abcd1234\" IssueInstant=\"2012-04-18T10:07:27.304Z\" Version=\"2.0\"> <saml2:Issuer>http://example.org</saml2:Issuer> <saml2:Subject> <saml2:NameID Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\" NameQualifier=\"Example Qualifier\">General Curly</saml2:NameID> <saml2:SubjectConfirmation> <saml2:SubjectConfirmationData NotBefore=\"2012-04-18T10:07:27.304Z\" NotOnOrAfter=\"2012-04-18T10:09:27.304Z\" Recipient=\"https://78.91.9.62/services/EchoService\" /> </saml2:SubjectConfirmation> </saml2:Subject> <saml2:Conditions> <saml2:OneTimeUse /> </saml2:Conditions> <saml2:AuthnStatement AuthnInstant=\"2012-04-18T10:07:27.422Z\" SessionIndex=\"abcd1234\" SessionNotOnOrAfter=\"2012-04-18T10:07:27.482Z\"> <saml2:AuthnContext> <saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml2:AuthnContextClassRef> </saml2:AuthnContext> </saml2:AuthnStatement> <saml2:AttributeStatement> <saml2:Attribute FriendlyName=\"qosClientRole\" Name=\"urn:oid:1.3.6.1.4.1.5923.1.1.1.1\"> <saml2:AttributeValue xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"xs:string\">clientRole1</saml2:AttributeValue> </saml2:Attribute> </saml2:AttributeStatement> </saml2:Assertion></textToEcho></ns2:echo></S:Body></S:Envelope>";
 		String reply = run(this.destination, soap, (ReceiveObjectImpl)dataObj.getReceiveObject());
 		Token replyToken;
 		try {
