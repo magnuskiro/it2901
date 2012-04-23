@@ -1,16 +1,17 @@
 \subsection{Client Side}\label{client side}
 
-This chapter will introduce the design and architecture of the client side of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
+This chapter will introduce the client side design, and architecture of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
     
+    %TODO: add and ref class diagram
     The class diagram is a usefull addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
 		
     \subsubsection{Introduction}\label{client introduction}
-The client architecture consists of the following components: The client application, the client library and the Monitoring Service. Additionally, the library makes use of some external components to do some of its work.
+The client architecture consists of the following two components: The client applicationand the client library. Additionally, the library makes use of some external components to do some of its work.
 
     \subsubsection{Component description:}\label{Component description}
 
 \indent \indent \textbf{Client application:}\\
-	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get and to interact properly with our server setup.
+	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get, and to interact properly with our server setup.
 \\\\
 
 \indent \textbf{Client library:}\\
