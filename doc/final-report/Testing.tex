@@ -4,6 +4,15 @@
     %% To be written, about the testing routines and NS3 and the test results. 
     
     % test setup
+    \subsection{Setup}\label{Testing:Setup}
+        \subsubsection{Client Setup}\label{Testing:Setup:Client}
+            The client starts by reading its configuration file. Its filename can be provided as the only command line argument, otherwise it defaults to "client.config'. This configuration file contains variables such as username, password, role, service to contact, what the request should be, how many requests to send and with what interval it should send them at, and some describing what to log.
+
+            The client expects the request to contain '{REQID}' as part of the request message, and before sending it, the client will replace it with '{REQID=XX}' where 'XX' is the number of the request. This way the client can check that it gets the right response by checking whether '{REQID=XX}' is present in the response, and whether the ID is correct. This makes validating the response from the service easier, but it restricts the service to put the request message somewhere in the response. Another side effect of this being the only validation is that other errors in the response are not easily detected as long as the '{REQID=XX}' is there. If for example the response is cut short, by the stream being cut, as long as the ID is present it will be treated as valid. The client also prints the length of the response, so scripts that parse the results can pick up on responses with abnormal lengths.
+
+            After reading the configuration file the client makes an instance of the client library\ref{some client library reference} using the username, password and role, and itself as an ExceptionHandler. By implementing itself as the ExceptionHandler the client will be notified about all the exceptions ocurring in the client library, the client does not act upon these exceptions, but it does log them. 
+
+            For more details about configuring the test client read the example configuration provided \ref{attachments:client.config}. For more detailed information on how the test client works, the java file with javadoc is provided \ref{attachments:TestClient.java}.
     % mobiemu (NS3) 
-    % test cases. 
+    % test cases.
     % test results. 
