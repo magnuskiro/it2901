@@ -1,2 +1,89 @@
-\section{Server Setup Guide}\label{Server Setup Guide} 
-    [The server setup guide]
+\section{Server Setup Guide}\label{Server Setup Guide}
+	\begin{shaded}
+	We have altered some source code which our project is dependent upon. That is why it is quite important that anyone wanting to use our setup follow the steps below. Our ESB mediators will not work unless this is done properly.
+	\end{shaded}
+
+	First we have to download the ESB from wso2.org, and extract it, for this project we used version 4.0.3 found here:
+\url{http://wso2.org/products/download/esb/java/4.0.3/wso2esb-4.0.3.zip}
+
+	This version of the ESB uses httpcore-nio version 4.1.3, which does not support setting DiffServ in the IP header. To fix this we have to download its source code and make some modifications to it.
+
+	Now we need to retrieve the source of HTTPCore, this can be done by pasting the command in Listing:\ref{svn:checkout hc} into a bash prompt. This will download the source compatible with WSO2 into a folder named “hc”, this may take some time depending on your Internet connection.
+\lstset{language=bash}
+\begin{lstlisting}[frame=single, caption={Checkout HttpCore source}, label=svn:checkout hc, breaklines=true]
+$ svn checkout http://svn.apache.org/repos/asf/httpcomponents/httpcore/tags/4.1.3/ hc
+\end{lstlisting}
+
+	After the download has finished we have a working directory, of the version of HTTPCore which WSO2 ESB uses, and it is now time to apply our patch to enable support for traffic class. The instruction in Listing:\ref{svn:apply hc patch} describes how. Here “hc.diff” is a file containing our changes which svn can use to alter the working directory. The file “hc.diff” can be found in \ref{attachment:hc diff}.
+\begin{lstlisting}[frame=single, caption={Apply HC patch}, label=svn:apply hc patch]
+$ cd hc/
+$ patch -p0 -i /path/to/hc.diff
+\end{lstlisting}
+
+	Since we have now applied our patch we just need to compile HTTPCore in order to use it in Synapse later on. To build it we just copy-paste the commands from Listing:\ref{mvn:compile hc} and let it compile.
+\begin{lstlisting}[frame=single, caption={Build HttpCore-NIO}, label=mvn:compile hc, breaklines=true]
+$ cd hc/httpcore-nio/
+$ mvn clean install
+\end{lstlisting}
+
+	When the building is complete we can add the relevant jar, “hc/httpcore-nio/target/httpcore-nio-4.1.3.jar” to the WSO2 ESB. For the ESB to recognize it correctly it must have the correct name, and it must also have the correct data in the META-INF folder inside the jar. To fix this we follow the steps in Listing:\ref{copy jar}.
+\begin{lstlisting}[frame=single, caption={Create WSO2 compatible jars}, label=copy jar, breaklines=true]
+$ cd /path/to/wso2esb/repository/components/plugins/
+$ mkdir backup
+$ cp httpcore-nio-4.1.3.wso2v2.jar backup/httpcore-nio-4.1.3.wso2v2.jar
+$ mkdir build
+$ cp /path/to/hc/httpcore-nio/target/httpcore-nio-4.1.3.jar build/httpcore-nio-4.1.3.jar
+$ cp httpcore-nio-4.1.3.wso2v2.jar build/httpcore-nio-4.1.3.wso2v2.jar
+$ cd build
+$ unzip httpcore-nio-4.1.3.wso2v2.jar
+$ zip -r httpcore-nio-4.1.3.jar META-INF
+$ cd ..
+$ cp build/httpcore-nio-4.1.3.jar httpcore-nio-4.1.3.wso2v2.jar
+\end{lstlisting}
+
+	Java 1.6 only support setting DiffServ on IPv4, so to make java actually set the DiffServ header we must set IPv4 as the prefered IP stack. This is done by adding the command line option -Djava.net.preferIPv4Stack=true when starting the java program. This should be done with all clients as well as ESB. The ESB is usually started by running /path/to/wso2esb/bin/wso2server.sh, so we edit this file adding the line containing "-Djava.net.preferIPv4Stack=true" in Listing:\ref{modify wso2server.sh}.
+
+\begin{lstlisting}[frame=single, caption={Changes made to wso2server.sh}, label=modify wso2server.sh, breaklines=true]
+while [ "$status" = "$START_EXIT_STATUS" ]
+do
+    $JAVACMD \
+    -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
+    -Xms256m -Xmx512m -XX:MaxPermSize=256m \
+    $JAVA_OPTS \
+    -Dimpl.prefix=Carbon \
+    -Dcom.sun.management.jmxremote \
+    -classpath "$CARBON_CLASSPATH" \
+    -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" \
+    -Djava.io.tmpdir="$CARBON_HOME/tmp" \
+    -Djava.net.preferIPv4Stack=true \
+    -Dwso2.server.standalone=true \
+    -Dcarbon.registry.root=/ \
+    -Dcarbon.xbootclasspath="$CARBON_XBOOTCLASSPATH" \
+    -Djava.command="$JAVACMD" \
+    -Dcarbon.home="$CARBON_HOME" \
+    -Dwso2.transports.xml="$CARBON_HOME/repository/conf/mgt-transports.xml" \
+    -Djava.util.logging.config.file="$CARBON_HOME/lib/log4j.properties" \
+    -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
+    -Dcomponents.repo="$CARBON_HOME/repository/components/plugins" \
+    -Dcom.atomikos.icatch.file="$CARBON_HOME/lib/transactions.properties" \
+    -Dcom.atomikos.icatch.hide_init_file_path=true \
+    -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true \
+    -Dcom.sun.jndi.ldap.connect.pool.authentication=simple  \
+    -Dcom.sun.jndi.ldap.connect.pool.timeout=3000  \
+    org.wso2.carbon.bootstrap.Bootstrap $*
+
+    status=$?
+done
+\end{lstlisting}
+
+
+	Now that the ESB is set up, and supporting DiffServ, we can add our own components to it. The first thing to add is a jar-file containing all the custom mediators and the custom message store. Copy the file “no.ntnu.qos.jar” found in \ref{attachment:server jar} to the folder /path/to/wso2esb/repository/components/lib/.
+	
+	Next we add a base configuration for the ESB to use, extract “synapseconfig.zip” found in \ref{attachment:server config} into /path/to/wso2esb/repository/deployment/server/synapse-configs/. This configuration contains setup of mediator sequences to be used, and a simple sample service endpoint/proxy configuration.
+	
+	Finally, before starting the ESB, we should add the template xml-files found in “mediatorconf.zip” in \ref{attachment:mediator config} to the folder /path/to/wso2esb/.\\
+
+	The ESB should now be ready and can be started by running the script:\\
+\begin{lstlisting}[frame=single, label=run esb server, breaklines=true]
+$ ./path/to/wso2esb/bin/wso2server.sh
+\end{lstlisting}

@@ -1,6 +1,6 @@
     \subsection{Server Side}\label{Server Side Design}
 
-    In this chapter we are going to introduce the design, configuration and modification that we have done to the server side. In section \ref{Server Introduction} we will introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, \ref{Server Use Cases}. Section \ref{Description of ESB concepts} will go into more detail about what the framework consists of. The section will also guide you through the basic processing units which is used in the framework. The next section, \ref{Textual Server Dataflow}, contains the dataflow through the server side, which will help you get a good overview of our thoughts about the design. \ref{Extensions to the ESB} goes into detail in describing our custom components in the framework, and together with the dataflow should give you a good understanding of the whole server side. Together with section \ref{Server Sequence Diagrams} you should get good system overview. Section \ref{Configuration of the ESB} will give you the details about how we have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and running. The last section, \ref{Modification of the ESB} will depict how we have modified the framework to be able to meet our requirements, with this section you should be able to tell what modifications were needed and how we have altered those pieces. 
+    In this chapter we are going to introduce the design, implementation and configuration that we have done on the server side. In section \ref{Server Introduction} we will introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, \ref{Server Use Cases}. Section \ref{Description of ESB concepts} will go into more detail about what the framework consists of. The section will also guide you through the basic processing units which is used in the framework. The next section, \ref{Textual Server Dataflow}, contains the dataflow through the server side, which will help you get a good overview of our design. \ref{Extensions to the ESB} goes into detail in describing our custom components in the framework, and together with the dataflow should give you a good understanding of the whole server side. Together with section \ref{Server Sequence Diagrams} you should get good system overview. Section \ref{Configuration of the ESB} will give you the details about how we have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and running.
 
     \subsubsection{Introduction}\label{Server Introduction}
     The server side architecture consists of several components, the WSO2 ESB, the Monitoring Service and the GlassFish server. The GlassFish server is not necessary to modify and the MS is something we must assume exist in the network. The ESB is what we have to modify, configure and extend to meet our requirements.
@@ -225,7 +225,7 @@ Sampling Message Processor:\\
         
         \begin{figure}[H] 
             \centering
-            \includegraphics[scale=0.3]{Throttlemediator}
+            \includegraphics[scale=0.3, angle=270]{Throttlemediator}
             \caption{Throttle mediator sequence diagram}
             The meat of the server side mediators.
             \label{fig:Throttlemediator}
@@ -236,7 +236,7 @@ Sampling Message Processor:\\
 	In this section we will explain how to configure the ESB. For general configuration of the ESB, f.ex. configuring new services or WS-Discovery, please refer to the official WSO2 ESB or Apache Synapse documentation.
 
 	\begin{shaded}
-	It is highly recommended that you follow the appendix [TODO: add reference to appendix] for an in depth guide on how to setup the ESB with the needed modifications before you read this section.
+	It is highly recommended that you follow appendix \ref{Server Setup Guide} for an in depth guide on how to setup the ESB with the needed modifications before you read this section.
 	\end{shaded}
 
 	First we will look at the file “ppd.xml”, which should now be in “/path/to/wso2esb/”, ppd is short for Persistent Priority Data. This file contains maps from “service name” and “client role” to “priority” and “diffserv”. Here “service name” should be the path to the service on the ESB, “client role” should be the name of the client’s role, “priority” is the internal priority we use in the ESB (higher is better) and “diffserv” is the value that will be set in the IP header on communications with the client. Both DiffServ and priority must be integers.
@@ -287,9 +287,4 @@ Sampling Message Processor:\\
 	\item and the messageProcessor, where the parameter interval can be set, this determines how often a message should be taken out of the message store, measured in ms.
 	\end{itemize}
 	Other things in this file should mostly be untouched, as they define what the ESB does with messages, most of which is needed to do the prioritizing and throttling.
-	%The ESB can also be configured through its web interface on https://ADDRESS:9443/carbon
-
-    \subsubsection{Modification of the ESB}\label{Modification of the ESB} 
-		The WSO2 ESB source code will have to be modified to allow for setting the DiffServ field in the IP-header of packets sent. The idea is that we will set a property, DiffServ, in the message context, and let the DiffServ mediator retrieve this property and set it on the socket used for sending.
-
-The source code for all the dependencies of WSO2 ESB is included in its source code. As such we only altered files in this source. This made it easier for us to build and create a runnable instance of WSO2’s ESB. To also try and support future versions of Apache Synapse and WSO2 we have also pushed the changes upstream, which should mean that in the future WSO2 will support setting DiffServ by default.    
+	%The ESB can also be configured through its web interface on https://ADDRESS:9443/carbon    
