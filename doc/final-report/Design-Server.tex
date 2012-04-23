@@ -283,8 +283,8 @@ Sampling Message Processor:\\
 
 	The last file we will look at is synapse.xml (\ref{attachment:server config}), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
 	\begin{itemize}
-	\item the sequence qos, where we can find the configuration for the Throttle mediator. Here we can set the properties minBandwidthPerMessage (integer measured in Bps) as well timeout, which is the longest time a message will be allowed to try sending (integer measured in ms) before it is discarded.
-	\item and the messageProcessor, where the parameter interval can be set, this determines how often a message should be taken out of the message store, measured in ms.
+	\item The sequence qos where we can find the configuration for the throttle mediator. Here we can set the property minBandwidthPerMessage (integer, measured in Bps) and timeout(integer, measured in ms). Timeout is the longest time a message will be allowed to try sending before it is discarded.
+	\item The messageProcessor. here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in ms.
 	\end{itemize}
 	Other things in this file should mostly be untouched, as they define what the ESB does with messages, most of which is needed to do the prioritizing and throttling.
 	%The ESB can also be configured through its web interface on https://ADDRESS:9443/carbon    
