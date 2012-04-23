@@ -90,6 +90,8 @@
     The ESB is built around the notion of a message context, this object contains all the information regarding the message and the context around it. In the message context we can add properties, manipulate the message itself and manipulate the sending streams of the message. All the properties added during the receiving of a message is also added to the outgoing message, which we can use to our advantage.
 
     Each mediator in the sequence get access to the message context of the incoming or the outgoing message and can thus manipulate the context to its liking. When the mediator is done with the work it is supposed to do, it either calls the next mediator, sending it the possibly altered message context or returning true to indicate that the work is done.
+    
+    As you will soon see, we have taken full advantage of the modularity in the ESB. This means that even though much of the functionality in our mediators could be moved into one or two mediators we have decided to make many. For us this means much easier testing of each component and it gives each mediator a better defined role. For our customer this means an easier setup where they can mix and match each mediator and easily create custom sequences with just the functionality they need.
 
     \subsubsection{Dataflow}\label{Textual Server Dataflow} 
         This section describes the data flow through the ESB with the help of two diagrams. As a bonus, these diagrams show the general architecture of the server side very well.
@@ -120,7 +122,7 @@ SAML Authentication Request:\\
 This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the dummy Identity Server, the ESB then uses the SendBack mediator to send the same message it got in back. The message then travels to the Out sequence where it gets a priority, a DiffServ value and some metadata gets added to the header of the message. The reason why this is done is explained in the section [TODO: Add reference to Identity Server problems here].%TODO fix
 
     \subsubsection{Extensions to the ESB}\label{Extensions to the ESB} 
-    This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and extensions we make to the ESB, and then a short description of the built-in mediators we will use.
+    This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and then a short description of the built-in mediators we will use. All of our custom mediators have an accompanying sequence diagram to give a detailed overview of their inner working.
 \\\\
 \textbf{Custom mediators:}\\\\
 SAML mediator:\\
@@ -159,10 +161,10 @@ Store mediator:\\
     This is a build in mediator that stores the message context in a message store, here this is the Prioritized Message store.
 \\\\
 Sampling Message Processor:\\
-    This is not a mediator. It is a built in class that takes messages out of the Prioritized Message Store at a defined interval. And then sends them to a mediator sequence, here starting with MS mediator.
+    This is not a mediator. It is a built in class that takes messages out of the Prioritized Message Store at a defined interval. And then sends them to a mediator sequence, here starting with the DiffServ mediator.
 
     \subsubsection{Sequence Diagrams}\label{Server Sequence Diagrams}
-    This section contains some sequence diagrams which you can use to get a more in depth look into the code and methods used in the mediators above.
+    This section contains some sequence diagrams which you can use to get a more in depth look into the code and methods used in the mediators above. The diagrams may not reflect the actual method names or display the full complexity of the code, but they should be sufficiently detailed that it should be possible to recognize them in the code.
     
         \begin{figure}[H]
         % TODO: ref in text. 
@@ -238,12 +240,62 @@ Sampling Message Processor:\\
         
 
     \subsubsection{Configuration of the ESB}\label{Configuration of the ESB} 
-    This section will detail the different configuration options which can be controlled on the ESB.
+		In this section we will explain how to configure the ESB. For general configuration of the ESB, f.ex. configuring new services or WS-Discovery, please refer to the official WSO2 ESB or Apache Synapse documentation.
+
+	\begin{shaded}
+	It is highly recommended that you follow the appendix [TODO: add reference to appendix] for an in depth guide on how to setup the ESB with the needed modifications before you read this section.
+	\end{shaded}
+
+	First we will look at the file “ppd.xml”, which should now be in “/path/to/wso2esb/”, ppd is short for Persistent Priority Data. This file contains maps from “service name” and “client role” to “priority” and “diffserv”. Here “service name” should be the path to the service on the ESB, “client role” should be the name of the client’s role, “priority” is the internal priority we use in the ESB (higher is better) and “diffserv” is the value that will be set in the IP header on communications with the client. Both diffserv and priority must be integers.
+	The service element also has the useDefault property, which when set to true lets roles not configured in this file use values in the default role. When useDefault is set to false unconfigured clients will get a priority and DiffServ of 0. If useDefault is set to false there is no need to configure a default client for the service.
+	Below is an example setup of a service in ppd.xml \ref{xml:ppd}.
+
+\lstset{language=XML}
+\begin{lstlisting}[frame=single]\label{xml:ppd}
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+   <services>
+	   <service name="/services/EchoService" 
+	   useDefault="true">
+	         <client role="clientRole1">
+	           <priority>100</priority>
+	           <diffserv>10</diffserv>
+	         </client>
+	       <client role="Default">
+	           <priority>321</priority>
+	           <diffserv>8</diffserv>
+	       </client>
+	   </service>
+   </services>
+</config>
+	\end{lstlisting}
+
+
+	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration \ref{xml:ms}.
+\begin{lstlisting}[frame=single]\label{xml:ms}
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+   <RoutingInfos>
+	   <RoutingInfo>
+	       <destIP>127.0.0.1</destIP>
+	       <lastTR>bob</lastTR>
+	       <bandwidth>0.2</bandwidth>
+	   </RoutingInfo>
+   </RoutingInfos>
+</config>
+\end{lstlisting}
+	If the MSCommunicator is modified to communicate with a Monitoring Service this file will not be needed anymore.
+
+	The last file we will look at is synapse.xml (\ref{attachment:server config}), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
+	\begin{itemize}
+	\item the sequence qos, where we can find the configuration for the Throttle mediator. Here we can set the properties minBandwidthPerMessage (integer measured in Bps) as well timeout, which is the longest time a message will be allowed to try sending (integer measured in ms) before it is discarded.
+	\item and the messageProcessor, where the parameter interval can be set, this determines how often a message should be taken out of the message store, measured in ms.
+	\end{itemize}
+	Other things in this file should mostly be untouched, as they define what the ESB does with messages, most of which is needed to do the prioritizing and throttling.
+
+	The ESB can also be configured through its web interface on https://ADDRESS:9443/carbon
 
     \subsubsection{Modification of the ESB}\label{Modification of the ESB} 
-		The WSO2 ESB source code will have to be modified to allow for setting the DiffServ field in the IP-header of packets sent. The idea is that we will set a property, DiffServ, in the message context, and let the HTTPsender get this property and set it on the socket used for sending.
+		The WSO2 ESB source code will have to be modified to allow for setting the DiffServ field in the IP-header of packets sent. The idea is that we will set a property, DiffServ, in the message context, and let the DiffServ mediator retrieve this property and set it on the socket used for sending.
 
-The source code for all the dependencies of WSO2 ESB is included in its source code. As such we only altered files in this source. This made it easier for us to build and create a runnable instance of WSO2’s ESB. To also try and support future versions of Apache Synapse and WSO2 we have also applied the changes to the latest version of the underlying libraries.
-
-In Apache Synapse we have altered the way it sends responses to already established connections. This alteration is dependent on support in the underlying library of Apache HTTPComponents(HC for short) which we have also altered to include support for setting traffic class. Since Synapse is dependent on HC we are, as of the midterm report, trying to get our changes accepted into HC\footnote{Link to our ticket in HTTPComponents HTTPCore issue tracker  [\href{https://issues.apache.org/jira/browse/HTTPCORE-295}{JIRA: HTTPCore Issue 295}]}. We have included in our references SVN diff files and included instructions on how to apply them to a newly downloaded version of HC. We are planning to also push our changes in Synapse upstream, but we are waiting for the acceptance of our HC changes first.
-    
+The source code for all the dependencies of WSO2 ESB is included in its source code. As such we only altered files in this source. This made it easier for us to build and create a runnable instance of WSO2’s ESB. To also try and support future versions of Apache Synapse and WSO2 we have also pushed the changes upstream, which should mean that in the future WSO2 will support setting DiffServ by default.    
