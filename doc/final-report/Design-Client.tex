@@ -1,16 +1,16 @@
 \subsection{Client Side}\label{client side}
 
-This chapter will introduce the design and architecture of the client side of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
+This chapter will introduce the client side design, and architecture of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
     
-    The class diagram is a usefull addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
+    The class diagram, found in appendix \ref{File Attachments}, is a usefull addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
 		
     \subsubsection{Introduction}\label{client introduction}
-The client architecture consists of the following components: The client application, the client library and the Monitoring Service. Additionally, the library makes use of some external components to do some of its work.
+The client architecture consists of the following two components: The client application and the client library. Additionally, the library makes use of some external components to do some of its work.
 
     \subsubsection{Component description:}\label{Component description}
 
 \indent \indent \textbf{Client application:}\\
-	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get and to interact properly with our server setup.
+	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get, and to interact properly with our server setup.
 \\\\
 
 \indent \textbf{Client library:}\\
@@ -147,8 +147,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item The token is returned to the token manager
 			\item The token manager stores the token in the credential storage
 		\end{enumerate}
-		\\\\
-		
+		\\\\	
 		\textbf{Client Data} (Visualized in Fig.\ref{fig:ClientDataFlowDiagram})
 		\begin{enumerate}
 			\item The client generates data and sends it to the library via API/Interface
@@ -206,7 +205,7 @@ This section contains all the sequence diagrams for the client, with description
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
 			\caption{Getting non-stored token}
-			This describes how the client library gets a token and stores it when there is no token stored in the library already. 
+			This describes how the client library acquires a token from an external source, and stores it, when can't find the desired token in the storage, or if the token is invalid.
 			\label{fig:CliSeqDiaGettingnon-storedtoken}
 		\end{figure}
 		\begin{figure}[H]
@@ -214,7 +213,7 @@ This section contains all the sequence diagrams for the client, with description
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingStoredToken}
 			\caption{Getting stored token}
-			When a token exists we return that token instead of creating a new one. 
+			When a token exists, we return that token instead of creating a new one. 
 			\label{fig:CliSeqDiaGettingStoredToken}
 		\end{figure}
 		\begin{figure}[H]
@@ -222,7 +221,7 @@ This section contains all the sequence diagrams for the client, with description
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaReceivereply}
 			\caption{Receive reply}
-			This diagram shows how the client library receives a reply, and sends it to the client. 
+			This diagram shows how the client library receives a reply and sends it to the client. 
 			\label{fig:CliSeqDiaReceivereply}
 		\end{figure}
 		\begin{figure}[H]
