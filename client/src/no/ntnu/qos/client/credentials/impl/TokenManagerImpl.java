@@ -2,7 +2,6 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.credentials.CredentialStorage;
-import no.ntnu.qos.client.credentials.SAMLCommunicator;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.impl.ConfigManager;
@@ -12,11 +11,9 @@ import no.ntnu.qos.client.impl.ConfigManager;
  */
 public class TokenManagerImpl implements TokenManager {
 	private CredentialStorage credentialStorage;
-	SAMLCommunicator samlCommunicator;
 
 	public TokenManagerImpl(String user, String role, String password) {
 		credentialStorage = new CredentialStorageImpl(user, role, password);
-		samlCommunicator = new SAMLCommunicatorImpl();
 	}
 
 	@Override
@@ -49,7 +46,7 @@ public class TokenManagerImpl implements TokenManager {
 				String[] credentials = credentialStorage.getCredentials();
 				Token newToken;
 				try {
-					newToken = samlCommunicator.getToken(dataObj.getDestination(),
+					newToken = new SAMLCommunicatorImpl().getToken(dataObj.getDestination(),
 							credentials[0], credentials[1], credentials[2], dataObj);
 				} catch (Exception e) {
 					ConfigManager.LOGGER.warning("Could not get token from Identity Server");
