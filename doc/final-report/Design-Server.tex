@@ -246,12 +246,12 @@ Sampling Message Processor:\\
 	It is highly recommended that you follow the appendix [TODO: add reference to appendix] for an in depth guide on how to setup the ESB with the needed modifications before you read this section.
 	\end{shaded}
 
-	First we will look at the file “ppd.xml”, which should now be in “/path/to/wso2esb/”, ppd is short for Persistent Priority Data. This file contains maps from “service name” and “client role” to “priority” and “diffserv”. Here “service name” should be the path to the service on the ESB, “client role” should be the name of the client’s role, “priority” is the internal priority we use in the ESB (higher is better) and “diffserv” is the value that will be set in the IP header on communications with the client. Both diffserv and priority must be integers.
+	First we will look at the file “ppd.xml”, which should now be in “/path/to/wso2esb/”, ppd is short for Persistent Priority Data. This file contains maps from “service name” and “client role” to “priority” and “diffserv”. Here “service name” should be the path to the service on the ESB, “client role” should be the name of the client’s role, “priority” is the internal priority we use in the ESB (higher is better) and “diffserv” is the value that will be set in the IP header on communications with the client. Both DiffServ and priority must be integers.
 	The service element also has the useDefault property, which when set to true lets roles not configured in this file use values in the default role. When useDefault is set to false unconfigured clients will get a priority and DiffServ of 0. If useDefault is set to false there is no need to configure a default client for the service.
-	Below is an example setup of a service in ppd.xml \ref{xml:ppd}.
+	Below is an example setup of a service in ppd.xml.\\
 
 \lstset{language=XML}
-\begin{lstlisting}[frame=single] \label{xml:ppd}
+\begin{lstlisting}[frame=single] %Ok to not have this referenced =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
    <services>
@@ -268,11 +268,12 @@ Sampling Message Processor:\\
 	   </service>
    </services>
 </config>
-\end{lstlisting}
+\end{lstlisting}\\
 
+	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration.\\
 
-	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration \ref{xml:ms}.
-\begin{lstlisting}[frame=single] \label{xml:ms}
+\lstset{language=XML}
+\begin{lstlisting}[frame=single] %It is ok that this is not referenced in text =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
    <RoutingInfos>
@@ -283,7 +284,8 @@ Sampling Message Processor:\\
 	   </RoutingInfo>
    </RoutingInfos>
 </config>
-\end{lstlisting}
+\end{lstlisting}\\
+
 	If the MSCommunicator is modified to communicate with a Monitoring Service this file will not be needed anymore.
 
 	The last file we will look at is synapse.xml (\ref{attachment:server config}), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
