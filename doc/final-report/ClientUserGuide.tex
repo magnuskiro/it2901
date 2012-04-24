@@ -102,20 +102,20 @@ public void newData(ReceiveObject recObj);
 
     The client library supports logging both to file and console, by default it only logs to console, and only warnings and above. To set whether to log to console you can call:
 
-\begin{lstlisting}[caption={Turn logging on or of}, label=userguideTogglelogging]
+\begin{lstlisting}[caption={Turn logging to console on or off}, label=userguideTogglelogtoconsole]
     client.setLogToConsole(boolean on);
 \end{lstlisting}
 
     To set logging to file:
     
 \begin{lstlisting}[caption={Turn logging to file on or off}, label=userguideTogglelogtofile]
-    client.setLogToConsole(boolean on);
+    client.setLogToFile(boolean on);
 \end{lstlisting}
 
-    To change the level of the logging between warning and above and everything:
-    
+    To change the level of the logging between warning and above, or everything:
+
 \begin{lstlisting}[caption={Switch between the two logging scopes}, label=userguideToggleloggingdetails]
-    client.setLogging(boolean on);
+    client.setFineLogging(boolean on);
 \end{lstlisting}
 
 \subsection{Caveats}\label{userguideCaveats}
