@@ -1,0 +1,405 @@
+\section{Mobiemu Setup Guide}\label{Mobiemu Setup Guide}
+In this appendix we will show you how to setup the Mobiemu framework to make it ready to run the tests from Chapter \ref{Testing}.
+
+We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we are using and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure it self.
+
+Since this framework is quite nice and packages up everything before a system test all we need to do is unpack one of our run folders and we should be good to go. We have included a compressed folder which contains five compressed folders where each of these contains a test which we need to unpack in order to run.
+
+After you have unpacked on of these tests we only have to add the ESB and GlassFish to be able to run the tests.
+
+We will assume that you have unpacked on of our tests and created a folder named “system-test” which contains the whole experiment.
+
+\begin{shaded}
+In order to do the next part you will need to have setup the ESB with our changes, if you have not done so, please see appendix \ref{Server Setup Guide}
+\end{shaded}
+
+\lstset{language=bash}
+\begin{lstlisting}[frame=single, caption={Copy ESB and GlassFish into System test}, label=mobiemu:copy esb, breaklines=true]
+$ cd /path/to/system-test/experiments/esb/
+$ cp /path/to/esb/bin/ bin
+$ cp /path/to/esb/dbscripts/ dbscripts
+$ cp /path/to/esb/lib/ lib
+$ cp /path/to/esb/repository/ repository
+$ cp /path/to/esb/samples/ samples
+$ cp /path/to/esb/tmp/ tmp
+
+$ cd ..
+$ cp /path/to/glassfish/ glassfish
+\end{lstlisting}
+
+Now we just have to add the testing client.
+\lstset{language=bash}
+\begin{lstlisting}[frame=single, caption={Adding the test client}, label=mobiemu:adding test client, breaklines=true]
+$ cd /path/to/system-test/experiments/
+$ mkdir EchoClient
+$ cp /path/to/EchoClientClient.jar EchoClient/
+\end{lstlisting}
+
+Now we need to just copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
+
+You may also need to change the path in “system-test-2.py” please have a look at \ref{mobiemu:system-test-2.py changes} and change it to reflect your setup.
+
+The last thing we need to do is just edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Just edit the path under “[ns3]” to point to your path to NS3.
+
+Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
+\lstset{language=bash}
+\begin{lstlisting}[frame=single, caption={Run Mobiemu}, label=mobiemu:run, breaklines=true]
+$ cd /path/to/system-test
+$ sudo su
+# ./run.py run
+\end{lstlisting}
+
+You will now be running one of our system tests!\\
+
+The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you just want to verify our tests.
+
+Below is the full settings files for all of our system test, the comments within it is from the Mobiemu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
+
+\lstset{language=make}
+\begin{lstlisting}[frame=single, caption={Setting.cfg}, label=mobiemu:setting.cfg, breaklines=true]
+#
+# This configuration file contains the parameters for the experiments run by run.py.
+#
+# When an experiment starts, scripts are executed in the following order (for each repetition):
+#
+# 1. Scripts specified in config.init_scripts are executed
+# 2. Virtual network devices are created
+# 3. ns-3 is started
+# 4. One lxc-container is started for each node in the experiment
+# 2. In lxc: Any modules specified in the experiment are executed in parallell
+# 3. In lxc: Wait for config.initial_wait
+# 5. In lxc: Start experiment script
+# 6. In lxc: Wait for config.experiment_wait
+# 7. In lxc: Wait for config.shutdown_wait / 2. If the experiment is still running, attempt to kill it.
+# 8. In lxc: Stop all modules
+#
+# This is repeated for every repetition of the experiment. Note that multiple experiments may be executed
+# by separating them by a "," in the configuration.
+#
+# When run.py is run without parameters it attempts to estimate the total time it will take to execute
+# the current configuration.
+#
+# Modules and experiment-scripts are passed all parameters in their configuration and in the general-section as environment variables.
+# Topology scripts (ns-3 simulation scripts) are passed all configuration parameters as parameters to the script. E.g. --total_nodes=xxx
+#
+# Output is logged to core.log and node*.log
+
+[general]
+# total nodes in the experiment
+total_nodes=4
+
+# intial random seed
+initial_random_seed=31
+
+#list of experiments to run. Each experiment must match a config section
+experiments=enoughBandwidth
+
+# Number of times to repeat each configuration of the experiment
+repetitions=10
+
+# Time to run the experiment (in seconds)
+experiment_duration=600
+
+# Time to wait initially before starting the experiment, e.g. for routing protocols to converge and modules to start.
+initial_wait=10
+
+# Time to wait after the experiment before shutting down the emulator
+shutdown_wait=30
+
+# Config for ns3 script, used to generate the topology and connect to the virtual devices. The name must match a config section.
+topology=system-test-2
+
+# Process priorities for experiment and simulator scripts.
+simulator_niceness=-20
+experiment_niceness=19
+
+# Enable or disable debug messages. This will also output all commands executed by run.py
+show_debug_messages=False
+
+# Set to True if the lxc-containers use chroot
+use_chroot=False
+
+# Script to call before starting. This script is executed before the modules.
+init_scripts=set_long_queues.sh
+
+[directories]
+main=.
+# where to store experiments when they are done
+results=%(main)s/results
+
+# where to store output from experiments while the experiment is running
+dumps=%(main)s/dumps
+
+# if general.use_chroot is true, this directory will be bound to mobiemu within the lxc-container, relative
+# to chroot_rootpoints
+chroot_bindpoint=/mobiemu
+
+# List of chroot root mountpoints, may have wildcards.
+chroot_rootpoints=../../chroot/node?,../../chroot/node??
+
+# lxc working directory when using chroot. This is also where all output will be stored. It should be
+# set to an empty directory relative to the chroot environment. These directories should also be included
+# in the [results_archiver]-section, so that they are archived after each experiment.
+
+chroot_working_dir=%(chroot_bindpoint)s/dumps/
+
+# Path to module scripts (must be available within the lxc container)
+modules=%(main)s/modules
+
+# Path to experiment scripts (must be available within the lxc container)
+experiments=%(main)s/experiments
+
+# Path to topology scripts
+topologies=%(main)s/topologies
+
+# Path to configuration file templates
+configs=%(main)s/configs
+
+[ns3]
+# Path to ns-3
+path=../../ns-allinone-3.13/ns-3.13/
+
+[source_archiver]
+# Before each simulation all files and directories listed here will be archived and put together with the results
+include=settings.cfg run.py modules experiments topologies configs
+exclude=
+
+[results_archiver]
+# Moves the results from the given directory and stores them in the directory specified in directories.results
+include=dumps/*
+
+[system-test-2]
+# System-test-2 see report chapter 8 section 3 under Three clients message sending
+#
+# Parameters specified here are passed to the script. In addition, the special parameters
+# --nodes, --seed and --duration, are set to the number of nodes, the current random seed
+# and the experiment duration, respectively.
+# When specifying multiple values separated by a "," the experiment will be repeated
+# an extra time for each value.
+dataRate=1KBps,5KBps,10KBps,20KBps,40KBps
+#MTU needs to be defined
+mtu=2304
+# The ns-3 script. Must be in directories.topolgies.
+script=system_test_2.cc
+
+[enoughBandwidth]
+#Load modules within lxc prior to loading ns3, but before starting experiment. The modules
+#may have a configuration section with additional parameters which are passed to the module as
+#environment variables.
+#modules=manualrouting.py,manualarp.py,tcpdump.sh
+modules=monitoring_service.py,manualarp.py,tcpdump.sh
+#modules=tcpdump.sh
+
+#experiment script to run within lxc. Automatically terminated (SIGTERM is sent) after
+#%(experiment_duration + shutdown_wait/2)
+experiment=system_test_2.py
+
+[tcpdump.sh]
+# shell environment variables can be used in filter
+filter=
+device=eth0
+
+[manualarp.py]
+arp_mac=00:16:3e:00:01:%0.2X
+arp_ip=10.0.0.%s
+
+[ipv4_multicast_route.sh]
+device=eth0
+[manualrouting.py]
+[monitoring_service.py]
+\end{lstlisting}
+
+The most important variables and their meaning is described below.
+
+\begin{itemize}
+\item total\_nodes=4 - This is the total number of nodes in the testing, this variable is passed to NS3 so it can use it and setup the right amount of nodes. Since we don’t have dynamic tests this should be coordinated with the NS3 topology.
+\item initial\_random\_seed=31 - This seed is passed to all scripts which use random variables. In our testing we have no random variables so this should not be of great importance.
+\item repetitions=10 - The number of repetitions for each test. In our setup this means 10 repetitions for each bandwidth.
+\item experiment\_duration=600 - Total duration for the experiment, this must be coordinated with the “system-test-2.py” file you can see in \ref{mobiemu:system-test-2.py}.
+\item dataRate=1KBps,5KBps,10KBps,20KBps,40KBps - These are the different datarates that the experiment is run with. Each of these will be repeated “repetition” number of times.
+\item experiment=system\_test\_2.py - This is the experiment in “experiments” to run, please see \ref{mobiemu:system-test-2.py} for more information.
+\end{itemize}
+
+Next we will take a look at our testing file. This file is what starts the ESB, GlassFish and each of the clients. It is run inside its own LXC and as such needs to check which node it is so as to start the right application.
+
+\lstset{language=Python}
+\begin{lstlisting}[frame=single, caption={System-test-2.py}, label=mobiemu:system-test-2.py, breaklines=true]
+#!/usr/bin/env python
+
+from os import getenv
+from subprocess import Popen
+from time import sleep
+
+node_id = int(getenv('node_id'))
+path = '/home/qos/server/mobiemu/system-test-2/experiments/'
+gfSleep = 60
+wso2Sleep = 190
+experimentSleep = 320
+
+#Since node 2 is a "router" node we don't do anything there
+if node_id == 1:
+   #This is the ESB/GlashFish node
+   #Start GlashFish:
+   print 'Starting GlashFish'
+   gf = Popen(['{0}glassfish/bin/./startserv'.format(path)])
+   #Wait for glassfish to start
+   sleep(gfSleep)
+   #Start ESB
+   print 'Starting WSO2'
+   wso2 = Popen(['{0}esb/bin/./wso2server.sh'.format(path)])
+   #Need to sleep to wait for experiment to finish
+   sleep(wso2Sleep + experimentSleep)    
+   print 'Done with experiment, terminating GlashFish and WSO2'
+   wso2.kill()
+   gf.terminate()
+elif node_id == 2 or node_id == 3 or node_id == 4:
+   #This is the client node
+   #Need to wait for GF and WSO2 to start
+   print 'Starting node 3, EchoClientClient'
+   sleep(gfSleep + wso2Sleep)
+   echo = Popen(['java', '-Djava.net.preferIPv4Stack=true', '-jar', '{0}EchoClient/EchoClientClient.jar'.format(path), '{0}client_{1}.config'.format(path, node_id - 1)])
+   sleep(experimentSleep)
+   #Check if echo has terminated,
+   #poll() returns None if it hasn't terminated
+   echo.poll()
+   if not echo.returncode:
+       #Client has most likely crashed at this point
+       #as such we need to kill it, softly with this song...
+       echo.terminate()
+\end{lstlisting}
+
+There should really be nothing to special about this file. It first starts up GlassFish and then the ESB, each client sleeps until the ESB has started and then they start sending their messages.
+
+\begin{itemize}\label{mobiemu:system-test-2.py changes}
+\item path = '/home/qos/server/mobiemu/system-test-2/experiments/' - This will need to be changed to reflect where it is run from, this has to be this way because it is run with root and it needs an absolute path.
+\end{itemize}
+
+The last file we will look at is the topology file, this defines the topology in NS3 and creates Tap-Bridges which we connect the LXCs to.
+
+\lstset{language=C++}
+\begin{lstlisting}[frame=single, caption={System-test-2 Topology}, label=mobiemu:topology, breaklines=true]
+/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation;
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+// Network topology
+// //
+// //            ESB      Client Client  Client
+// //             |         |       |       |       
+// //             ===========================
+// //                         LAN
+// //
+
+
+#include <iostream>
+#include <fstream>
+
+#include "ns3/core-module.h"
+#include "ns3/csma-module.h"
+#include "ns3/point-to-point-module.h"
+#include "ns3/internet-module.h"
+#include "ns3/ipv4-address-helper.h"
+#include "ns3/stats-module.h"
+#include "ns3/tap-bridge-helper.h"
+#include "ns3/ipv4-global-routing-helper.h"
+
+using namespace ns3;
+using std::stringstream;
+using std::string;
+
+NS_LOG_COMPONENT_DEFINE ("QoS System test 1");
+
+void printTime(int interval)
+{
+    Ptr<RealtimeSimulatorImpl> impl = DynamicCast<RealtimeSimulatorImpl>(Simulator::GetImplementation ());
+    Time real_time = impl->RealtimeNow();
+
+    Time sim_time = Simulator::Now();
+
+    std::cout << "drift:" << real_time.GetMilliSeconds() << ":" << sim_time.GetMilliSeconds() << ":" << (real_time.GetMilliSeconds() - sim_time.GetMilliSeconds()) << std::endl;
+    Simulator::Schedule(Seconds(interval), &printTime, interval);
+}
+
+int main (int argc, char *argv[])
+{
+    CommandLine cmd;
+    uint32_t run_time= 200, seed = 1, n = 3, mtu = 0;
+    string runID;
+    string dataRate;
+    cmd.AddValue ("duration", "Duration of simulation", run_time);
+    cmd.AddValue ("seed", "Seed for the Random generator", seed);
+    cmd.AddValue ("runID", "Identity of this run", runID);
+    cmd.AddValue("datarate", "Data rate for LAN", dataRate);
+    cmd.AddValue("nodes", "Not used in this test", n);
+    cmd.AddValue("mtu", "MTU used for TapBridges", mtu);
+   
+    cmd.Parse(argc, argv);
+   
+    stringstream s;
+    s << "Duration: " << run_time << ", Seed: " << seed << ", runID: " << runID << ", DataRate: " << dataRate;
+    std::cout << s.str() << std::endl;
+
+    SeedManager::SetSeed (seed);
+    GlobalValue::Bind ("SimulatorImplementationType", StringValue ("ns3::RealtimeSimulatorImpl"));
+    GlobalValue::Bind ("ChecksumEnabled", BooleanValue (true));
+   
+    NodeContainer nodes;
+    nodes.Create(4);
+   
+    CsmaHelper csma;
+    csma.SetChannelAttribute ("DataRate", StringValue (dataRate));
+   
+    NetDeviceContainer csmaDevices;
+    csmaDevices = csma.Install (nodes);
+   
+    TapBridgeHelper tapBridge;
+    tapBridge.SetAttribute ("Mode", StringValue ("UseLocal"));
+    tapBridge.SetAttribute ("Mtu", UintegerValue(mtu));
+   
+    //Tap bridge setup for ESB
+    std::cout << "Adding tap bridge: tap-1\n";
+    tapBridge.SetAttribute ("DeviceName", StringValue ("tap-1"));
+    tapBridge.Install (nodes.Get(0), csmaDevices.Get(0));
+   
+    //Tap bridge setup for client 1
+    std::cout << "Adding tap bridge: tap-2\n";
+    tapBridge.SetAttribute ("DeviceName", StringValue ("tap-2"));
+    tapBridge.Install (nodes.Get(1), csmaDevices.Get(1));
+   
+    //Tap bridge setup for client 2
+    std::cout << "Adding tap bridge: tap-3\n";
+    tapBridge.SetAttribute ("DeviceName", StringValue ("tap-3"));
+    tapBridge.Install (nodes.Get(2), csmaDevices.Get(2));
+
+    //Tap bridge setup for client 3
+    std::cout << "Adding tap bridge: tap-4\n";
+    tapBridge.SetAttribute ("DeviceName", StringValue ("tap-4"));
+    tapBridge.Install (nodes.Get(3), csmaDevices.Get(3));
+   
+   
+   
+    std::cout << "Starting simulation. Will run for " << run_time << " seconds...\n";  
+    Simulator::Schedule(Seconds(0), &printTime, 1);
+    Simulator::Stop (Seconds (run_time));
+
+    Simulator::Run();
+
+    Simulator::Destroy ();
+
+    std::cout << "Done.\n";
+}
+\end{lstlisting}
+
+There should be very little here which needs explaining, as NS3 in itself is quite complex. Therefore we refer you to the NS3\footnote{Documentation for NS3 \url{http://www.nsnam.org/docs/release/3.13/tutorial/singlehtml/index.html}} documentation if you would like extend the topology.
