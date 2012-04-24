@@ -1,7 +1,6 @@
 \section{Client User Guide}\label{Client User Guide} 
 \subsection{Intro}\label{userguideIntro}
-This is the user manual for the QoS client library by %<insert group info>%todo!
-Here we will cover, as simplistically as possible, how to use the library to communicate with our server implementation in such a way as to properly set the diffserv value on the packages sent from the client to the server.
+This is the user manual for the QoS client library. Here we will cover, as simplistically as possible, how to use the library to communicate with our server implementation in such a way as to properly set the diffserv value on the packages sent from the client to the server.
 First we will cover steps you need to take in order to be able to use our library, then move on to the easiest way to use it, as well as how to use it with a listener pattern. This will be followed by a section on the available setting in the library, and finally we will bring up some caveats of our implementation that is worth keeping in mind.
 
 \subsection{Required interfaces}\label{userguideReqiredInterfaces}
@@ -90,14 +89,14 @@ If you for some reason wish to change the user credentials during execution, thi
 \subsection{Logging}\label{userguideLogging}
 The client library supports logging both to file and console, by default it only logs to console, and only warnings and above.
 To set whether to log to console you can call:
-\begin{lstlisting}[caption={Turn logging on or of}, label=userguideTogglelogging]
+\begin{lstlisting}[caption={Turn logging to console on or off}, label=userguideTogglelogtoconsole]
     client.setLogToConsole(boolean on);
 \end{lstlisting}
 To set logging to file:
 \begin{lstlisting}[caption={Turn logging to file on or off}, label=userguideTogglelogtofile]
-    client.setLogToConsole(boolean on);
+    client.setLogToFile(boolean on);
 \end{lstlisting}
-To change the level of the logging between warning and above and everything:
+To change the level of the logging between warning and above, or everything:
 \begin{lstlisting}[caption={Switch between the two logging scopes}, label=userguideToggleloggingdetails]
     client.setLogging(boolean on);
 \end{lstlisting}
