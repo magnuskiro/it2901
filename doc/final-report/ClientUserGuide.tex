@@ -1,11 +1,14 @@
 \section{Client User Guide}\label{Client User Guide} 
-\subsection{Intro}\label{userguideIntro}
-This is the user manual for the QoS client library by %<insert group info>%todo!
-Here we will cover, as simplistically as possible, how to use the library to communicate with our server implementation in such a way as to properly set the diffserv value on the packages sent from the client to the server.
-First we will cover steps you need to take in order to be able to use our library, then move on to the easiest way to use it, as well as how to use it with a listener pattern. This will be followed by a section on the available setting in the library, and finally we will bring up some caveats of our implementation that is worth keeping in mind.
+    
+    \subsection{Intro}\label{userguideIntro}
+    
+    This is the user manual for the QoS client library. Here we will cover how to use the client library to communicate with our server implementation, in a way that properly set the diffserv value on the packages sent from the client to the server. This manual is intended to be as simplistic and understandable as possible.
 
-\subsection{Required interfaces}\label{userguideReqiredInterfaces}
-One of the most important parts of all network communication is being able to catch and handle exceptions gracefully, in order for a client using our library to be notified of exceptions that occur they will have to implement the ExceptionHandler interface found in no.ntnu.qos.client.ExceptionHandler. This interface contains several methods, which are:
+    First we will cover the steps you need to take in order to be able to use our library. Then move on to the easiest way to use it, as well as how to use it with a listener pattern. This will be followed by a section covering the available settings in the library, and finally we will bring up some caveats of our implementation that is worth keeping in mind.
+
+    \subsection{Required interfaces}\label{userguideReqiredInterfaces}
+    
+    One of the most important parts of all network communication is being able to catch and handle exceptions gracefully. In order for a client, the user of our library, to be notified of exceptions that occur they will have to implement the ExceptionHandler interface found in no.ntnu.qos.client.ExceptionHandler. This interface contains several methods, which are:
 
 \lstset{language=java}
 \lstset{frame=single}
@@ -38,12 +41,13 @@ public void socketExceptionThrown(SocketException e);
 public void unsupportedEncodingExceptionThrown(UnsupportedEncodingException e);
 \end{lstlisting}
 
-The most important of these is the IOException method, as this is the exception that will be thrown (As a straightforward IOException, or as a subclass of it called NoHttpResponseException) whenever the connection is closed without receiving the full reply from the server. In addition to the normal occurrences of this exception it will also happen whenever the server decides to cut a connection for priority reasons.
+    The most important of these is the IOException method. This is the exception that will be thrown (As a straightforward IOException, or as a subclass of it called NoHttpResponseException) whenever the connection is closed without receiving the full reply from the server. In addition to the normal occurrences of this exception it will also happen whenever the server decides to cut a connection for priority reasons.
 
-It is worth noting that whenever an exception is thrown for a specific request, the response for that request is set to the name of the exception, so as to enable the client to find out which request has been terminated by an exception.
+    It is worth noting that whenever an exception is thrown for a specific request, the response for that request is set to the name of the exception, so as to enable the client to find out which request has been terminated by an exception.
 
 \subsection{Using the library}\label{userguideUsingLibrary}
-Once you’ve implemented the ExceptionHandler interface the client library can be easily constructed using:
+    
+    Once you’ve implemented the ExceptionHandler interface the client library can be easily constructed using:
 
 \begin{lstlisting}[caption={Constructing the library}, label=userguideConstruction]
 QoSClient client = New QoSClientImpl(String username, String userrole, String password, ExceptionHandler this);
@@ -56,20 +60,25 @@ ReceiveObject replyObject = client.send(String soap, URI destination);
 String reply = replyObject.receive();
 \end{lstlisting}
 
-The string you send has to be a valid soap message. The soap message has to contain a valid envelope with a body element, more on this in the caveats section.
-The ReceiveObject you get back from the send method is a blocking string, which means that calling receive on it will block execution until a reply is available.
+    The string you send has to be a valid soap message. The soap message has to contain a valid envelope with a body element, more on this in the caveats section.
+    
+    The ReceiveObject you get back from the send method is a blocking string, which means that calling receive on it will block execution until a reply is available.
 
 \subsection{Using the library with listeners}\label{userguideUsingLibraryWithListeners}
-After constructing the library as shown above, you are able to add listeners to it using:
+    
+    After constructing the library as shown above, you are able to add listeners to it using:
+    
 \begin{lstlisting}[caption={Add listener}, label=userguideAddlistener]
     client.addListener(DataListener listener);
 \end{lstlisting}
-And remove them again using:
+
+    And remove them again using:
+    
 \begin{lstlisting}[caption={Remove listener}, label=userguideRemovelistener]
     client.removeListener(DataListener listener);
 \end{lstlisting}
 
-The DataListener referenced here is the interface DataListener in the qos client, it requires that you implement a single method:
+    The DataListener referenced here is the interface DataListener in the qos client library, it requires that you implement a single method:
 
 \begin{lstlisting}[caption={The DataListener interface}, label=userguideDatalistener]
 /**
@@ -79,25 +88,32 @@ The DataListener referenced here is the interface DataListener in the qos client
 public void newData(ReceiveObject recObj);
 \end{lstlisting}
 
-Which will be called whenever a ReceiveObject gets some reply data.
+    Which will be called whenever a ReceiveObject gets some reply data.
 
-\subsection{Settings}\label{userguideSettings}
-If you for some reason wish to change the user credentials during execution, this can easily be done by calling:
+\subsection{Change Credentials}\label{Change Credentials}
+    
+    If you for some reason wish to change the user credentials during execution, this can easily be done by calling:
+    
 \begin{lstlisting}[caption={Changing user credentials}, label=userguideCredentials]
     client.setCredentials(String username, String role, String password);
 \end{lstlisting}
 
 \subsection{Logging}\label{userguideLogging}
-The client library supports logging both to file and console, by default it only logs to console, and only warnings and above.
-To set whether to log to console you can call:
+
+    The client library supports logging both to file and console, by default it only logs to console, and only warnings and above. To set whether to log to console you can call:
+
 \begin{lstlisting}[caption={Turn logging on or of}, label=userguideTogglelogging]
     client.setLogToConsole(boolean on);
 \end{lstlisting}
-To set logging to file:
+
+    To set logging to file:
+    
 \begin{lstlisting}[caption={Turn logging to file on or off}, label=userguideTogglelogtofile]
     client.setLogToConsole(boolean on);
 \end{lstlisting}
-To change the level of the logging between warning and above and everything:
+
+    To change the level of the logging between warning and above and everything:
+    
 \begin{lstlisting}[caption={Switch between the two logging scopes}, label=userguideToggleloggingdetails]
     client.setLogging(boolean on);
 \end{lstlisting}
