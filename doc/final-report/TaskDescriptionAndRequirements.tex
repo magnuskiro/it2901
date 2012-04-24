@@ -1,0 +1,245 @@
+\section{Task Description and Requirements}\label{Task Description and Requirements} 
+
+    Our task is to provide a \gls{qos}\footnote{\gls{qos} refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements.[\url{http://en.Wikipedia.org/wiki/Quality_of_service}]}(QoS) layer to web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer must therefore priorities between different messages, of varying importance, that clients and services want to send. Our software will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
+    
+    \subsection{Description}\label{Description}        
+    Our assignment is to create a Java application which will function as a \gls{middleware}\footnote{In the report \gls{middleware} will refer to the program we are making. Other distinctions should be made explicitly in the text.} layer between \glspl{webservice}\footnote{\glspl{webservice} - A software system designed to support interoperable machine-to-machine interaction over a network.[\url{http://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/\#soapmessage}]}, and clients trying to use these services. The middleware needs to process \gls{soap}\footnote{\gls{soap} - A lightweight protocol intended for exchanging structured information in the implementation of web services in computer networks.[\url{http://www.w3.org/TR/soap12-part1/\#intro}]} messages, which is the communication protocol for most web services, in order to be able to do its task. On the server side, the middleware needs to process messages and understand \gls{saml}\footnote{\gls{saml} - Security Assertion Markup Language.[\url{https://secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
+
+    Our software needs to be able to modify the \gls{tos}/\gls{diffserv} \gls{packet} header\footnote{\gls{tos} - Type of Service, a field in the IPv4 header, now obsolete and replaced by DiffServ.[\url{http://en.wikipedia.org/wiki/Type_of_Service}]} in order for the \gls{tactical router}\footnote{\Gls{tactical router} - A Multi-topology router used in military networks} to prioritize correctly. Currently NATO has just defined one class, BULK, which is to be used with web services. It is defined in the STANAG 4406 as Military message Handling system. This standard may change in the future and our middleware should handle these upcoming changes gracefully.
+
+    In addition to this, the middleware needs to be able to retrieve the available \gls{bandwidth}\footnote{\Gls{bandwidth} - Available or consumed data communication resources.[\url{https://secure.wikimedia.org/wikipedia/en/wiki/Bandwidth_(computing)}]} in the network, which in the real system will be retrieved from the tactical routers. In our testing this information will come from a dummy layer, but how this information is obtained should also be very modular, so that the customer can change how the bandwidth information is obtained later.
+
+    With all this information, the role of the client, the relationship between the client and the service, and the available bandwidth, our middleware layer should be able to prioritize messages. Our product should, as much as possible, use existing web standards, the customer outlined some of their choices and options we have for implementation, like SAML, \gls{xacml}\footnote{eXtensible Access Control Markup Language. [\url{https://secure.wikimedia.org/wikipedia/en/wiki/Xacml}]}, \gls{ws-security}\footnote{\gls{ws-security} - An extension to \gls{soap} to apply security to web services} and \gls{wso2 esb}\footnote{\gls{wso2 esb} - An Enterprise Service Bus built on top of Apache Synapse. [\url{http://wso2.com/products/enterprise-service-bus/}]}. In addition to this, our middleware needs to work with \gls{glassfish}\footnote{Application server written in Java. [\url{http://glassfish.java.net/}]}, as that is the application server the customer uses.
+   
+    \subsection{Requirements}\label{Requirements}
+    As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
+    
+    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we will try to deliver a prototype to the customer before the final delivery in May.
+
+    The customer does not require any prototypes along the way, just a working piece of software by the end of the project, so the deadline we have set for the prototype is self-imposed. 
+
+    The customer has not given us many strict requirements, but instead they have suggested a few things that we could do. Given this freedom, we decided that we should improve on the base requirements by adding most of the things mentioned in this section. 
+
+    The following is a list of technology requirements. We have a scale from 1 to 4 where we rate the importance of our requirements. 1 is the most important while 4 is the least important. There are requirements that share a priority as they are equally important to the completion of the project. 
+
+\begin{center}
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Written in java
+        \hline
+        ID & 1 \\
+        \hline
+        Name & Written in java  \\
+        \hline
+        Priority & 1 \\
+        \hline
+        Purpose & Java is chosen to ensure that the code can be reused, that it is easily readable for others, and that it is OS independent. \\
+        \hline 
+        Constraints, assumptions, dependencies & The Java JVM and skills in java programming. \\
+        \hline  
+        Functional & Working on all platforms that support java. Not OS dependent. \\
+        \hline
+        Non-Functional & Ensure good code quality and code conventions \\ 
+        \hline
+        Design constraints & Because we chose to work with WSO2 ESB we decided that we would just use Java version 6. This is because the ESB is hardcoded to use Java version 6, we felt that this was not a big hindrance  \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % High priority messages must arrive, even at the cost of dropping lower priority messages.
+        \hline
+        ID & 2 \\
+        \hline
+        Name & Message prioritizing \\
+        \hline
+        Priority & 1 \\
+        \hline
+        Purpose & Differentiate the messages being sent and make sure that high priority messages is sent before low priority messages. \\
+        \hline 
+        Constraints, assumptions, dependencies & -\\
+        \hline  
+        Functional & High priority messages must arrive, even at the cost of dropping lower priority messages.  \\
+        \hline
+        Non-Functional & - \\ 
+        \hline
+        Design constraints & - \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Use standards where they can be used
+        \hline
+        ID & 3 \\
+        \hline
+        Name & Standards \\
+        \hline
+        Priority & 1 \\
+        \hline
+        Purpose & Use standards where they can be used \\
+        \hline 
+        Constraints, assumptions, dependencies & -\\
+        \hline  
+        Functional & SAML, Diffserv \\
+        \hline
+        Non-Functional & Use web standards were we can and it makes sense \\ 
+        \hline
+        Design constraints & - \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Test thoroughly
+        \hline
+        ID & 4 \\
+        \hline
+        Name & Testing  \\
+        \hline
+        Priority & 2 \\
+        \hline
+        Purpose & Use \gls{ns3}\footnote{\gls{ns3} is a network simulator.[\url{http://www.nsnam.org/}]} for testing. \\
+        \hline 
+        Constraints, assumptions, dependencies & We will be limited in the types of network we can create. Since this is also not real world testing we can only say something about a best case scenario in the simulation.\\
+        \hline  
+        Functional & The testing framework should be working and we should have test results from it.\\
+        \hline
+        Non-Functional & We used unit tests while coding to make sure that the code worked correctly. \\ 
+        \hline
+        Design constraints & The tests have to be designed with the functionality in mind, not the existing code. \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Extensive documentation
+        \hline
+        ID & 5 \\
+        \hline
+        Name & Documentation  \\
+        \hline
+        Priority & 2 \\
+        \hline
+        Purpose & To have extensive documentation on every part of our project. This will ensure that anyone can replicate our results later. This is also important to the customers as they want to replicate our results to see if this type of QoS could be used in an actual network.\\
+        \hline 
+        Constraints, assumptions, dependencies & -\\
+        \hline  
+        Functional & The documentation should be so extensive and thoroughly written that anyone can replicate our results. And the use of our library should be documented to help anyone wanting to use it. \\
+        \hline
+        Non-Functional & All documentation shall be in English and be written to the best of our abilities to ensure good quality. \\ 
+        \hline
+        Design constraints & There are some constraints that were set by the institute. These constraint dictates sections that has to be present in the report. \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Use metadata to determine priority
+        \hline
+        ID & 6 \\
+        \hline
+        Name & Use metadata to determine priority  \\
+        \hline
+        Priority & 3 \\
+        \hline
+        Purpose & The purpose of this requirement is that our software should use metadata to determine the priority of clients. As the server side has to tell clients which priority they get they have to use metadata to inform the clients. \\
+        \hline 
+        Constraints, assumptions, dependencies & Since we have to support SOAP messages we are limited in they ways we can express this metadata. \\
+        \hline  
+        Functional & The metadata has to be presented in a way that a client using SOAP can interpret. \\
+        \hline
+        Non-Functional & -\\ 
+        \hline
+        Design constraints & -\\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % GlassFish must be supported as the application server
+        \hline
+        ID & 7 \\
+        \hline
+        Name & GlassFish \\
+        \hline
+        Priority & 2 \\
+        \hline
+        Purpose & Make it easy to use Web Services in a production environment. \\
+        \hline 
+        Constraints, assumptions, dependencies & This puts some constraints on the type of services we can deploy. \\
+        \hline  
+        Functional & GlassFish must be supported as the application server.  \\
+        \hline
+        Non-Functional & - \\ 
+        \hline
+        Design constraints & - \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Must be able to set priority on network layer packets
+        \hline
+        ID & 8 \\
+        \hline
+        Name & Set package priority \\
+        \hline
+        Priority & 2 \\
+        \hline
+        Purpose & Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future. \\
+        \hline 
+        Constraints, assumptions, dependencies & Since we are using Java we are constrained to IPv4 as Java does not support setting the Type of Service field on IPv6\footnote{There is not much documentation about this, but during our testing we found that DiffServ would not be set unless we forced IPv4 [\url{http://docs.oracle.com/javase/7/docs/api/java/net/Socket.html#setTrafficClass\%28int\%29}]}.\\
+        \hline  
+        Functional & Must be able to set priority on network layer packets. There must also be an easy way to configure this priority so that future NATO DiffServ classes will be supported. \\
+        \hline
+        Non-Functional & -\\ 
+        \hline
+        Design constraints & - \\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % Nettwork Resources. 
+        \hline
+        ID & 9 \\
+        \hline
+        Name & Network Resources \\
+        \hline
+        Priority & 3 \\
+        \hline
+        Purpose & Minimize the usage of network resources. Use the given resources the best way possible. \\
+        \hline 
+        Constraints, assumptions, dependencies & Since we are to use as little network resources as possible we have some rather large constraints on the messages we can exchange. This would imply among other things that the metadata we want to exchange can not be sent as separate messages, but should be piggybacked on other messages. \\
+        \hline  
+        Functional & Use as little network resources as possible.\\
+        \hline
+        Non-Functional & -\\ 
+        \hline
+        Design constraints & -\\
+        \hline
+    \end{tabular}
+    \\  \vdots  \\
+    
+    \begin{tabular}{| p{4cm} | p{8cm} |}
+        % There are no requirements on resource usage, but we should try to keep it lightweight.
+        \hline
+        ID & 10 \\
+        \hline
+        Name & Resource usage  \\
+        \hline
+        Priority & 4 \\
+        \hline
+        Purpose & Minimize overhead and runtime. The faster it goes, the better. The less resources it uses the better. \\
+        \hline 
+        Constraints, assumptions, dependencies & -\\
+        \hline  
+        Functional & The customer has only said that we can expect the product to be used on a standard laptop with full Java support. This means that as long as the program runs on our laptops we should be good to go resource wise. \\
+        \hline
+        Non-Functional & -\\ 
+        \hline
+        Design constraints & -\\
+        \hline
+    \end{tabular}
+    \\
+\end{center}

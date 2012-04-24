@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--The main sequence, used by our test service proxy defined in synapse.xml-->
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="main" trace="enable" statistics="enable">
+    <in>
+        <!--used to get role and recipient from the SAML assertion-->
+        <class name="no.ntnu.qos.server.mediators.impl.SAMLMediator">
+            <!--When set to true, the SAML assertion is removed from message, web services does not want it-->
+            <property name="detachAssertion" value="true"/>
+        </class>
+        <!--Sets the IP address of the client as a property in the Message Context
+        Also gets time to live properties from the soap headers, and sets them as properties in the message context-->
+        <class name="no.ntnu.qos.server.mediators.impl.InMetadataMediator"/>
+    </in>
+    <out>
+        <!--used to determine diffserv and priority from ppd.xml, role and recipient-->
+        <class name="no.ntnu.qos.server.mediators.impl.OutMetadataMediator">
+            <property name="ppdFilename" value="ppd.xml"/>
+        </class>
+        <!--used to set diffserv and priority in soap header, so the client library can use it later-->
+        <class name="no.ntnu.qos.server.mediators.impl.SoapPriorityMediator"/>
+        <!--used to get capacity of path to client, and name of last Tactical Router on the path
+        sets these as properties in the message context -->
+        <class name="no.ntnu.qos.server.mediators.impl.MSMediator"/>
+        <!--stores the message in PrioritizedStore defined in synapse.xml-->
+        <store messageStore="PrioritizedStore"/>
+    </out>
+</sequence>

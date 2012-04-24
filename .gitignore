@@ -13,3 +13,9 @@
 *.gls
 *.ist
 *.xdy
+*.dvi
+*.*~
+
+*.idea/*
+
+Bibliography.tex
