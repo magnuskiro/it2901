@@ -2,7 +2,6 @@ package no.ntnu.qos.client.credentials.impl;
 
 import no.ntnu.qos.client.DataObject;
 import no.ntnu.qos.client.credentials.CredentialStorage;
-import no.ntnu.qos.client.credentials.SAMLCommunicator;
 import no.ntnu.qos.client.credentials.Token;
 import no.ntnu.qos.client.credentials.TokenManager;
 import no.ntnu.qos.client.impl.ConfigManager;
@@ -12,11 +11,9 @@ import no.ntnu.qos.client.impl.ConfigManager;
  */
 public class TokenManagerImpl implements TokenManager {
 	private CredentialStorage credentialStorage;
-	SAMLCommunicator samlCommunicator;
 
 	public TokenManagerImpl(String user, String role, String password) {
 		credentialStorage = new CredentialStorageImpl(user, role, password);
-		samlCommunicator = new SAMLCommunicatorImpl();
 	}
 
 	@Override
@@ -47,8 +44,14 @@ public class TokenManagerImpl implements TokenManager {
 			}else{
 				ConfigManager.LOGGER.info("Token not found in credential storage, fetching from identity server");
 				String[] credentials = credentialStorage.getCredentials();
-				Token newToken = samlCommunicator.getToken(dataObj.getDestination(),
-						credentials[0], credentials[1], credentials[2]);
+				Token newToken;
+				try {
+					newToken = new SAMLCommunicatorImpl().getToken(dataObj.getDestination(),
+							credentials[0], credentials[1], credentials[2], dataObj);
+				} catch (Exception e) {
+					ConfigManager.LOGGER.warning("Could not get token from Identity Server");
+					return;
+				}
 				credentialStorage.storeToken(newToken);
 				ConfigManager.LOGGER.info("Setting token in dataobject");
 				dataObj.setToken(newToken); 

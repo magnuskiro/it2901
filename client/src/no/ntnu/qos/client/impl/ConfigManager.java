@@ -15,7 +15,7 @@ public class ConfigManager {
 	//Logger variables
 	public static final Logger LOGGER = Logger.getLogger("no.ntnu.qos.client");
 	private static FileHandler file;
-
+	public static final int DIFFSERV = 42;
 
 	/**
 	 * Whether to log anything more important than severe.
