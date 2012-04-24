@@ -96,7 +96,7 @@ public class TestClient implements ExceptionHandler{
 		connection = new QoSClientImpl(config.get(USERNAME),
 				config.get(ROLE), config.get(PASSWORD), this);
 
-		connection.setLogging(true);
+		connection.setFineLogging(true);
 		connection.setLogToFile(config.containsKey(LOG_TO_FILE)&&config.get(LOG_TO_FILE).equals(TRUE));
 		connection.setLogToConsole(false);
 		

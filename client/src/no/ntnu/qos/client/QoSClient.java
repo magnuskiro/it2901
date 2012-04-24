@@ -51,10 +51,10 @@ public interface QoSClient {
     public void receive(ReceiveObject recObj);
     
     /**
-     * Inform the ConfigManager whether to log or not.
+     * Inform the ConfigManager whether to log with fine details or not.
      * @param on
      */
-    public void setLogging(boolean on);
+    public void setFineLogging(boolean on);
     
     /**
      * Inform the ConfigManager whether to log to file or not.

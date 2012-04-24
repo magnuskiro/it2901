@@ -21,7 +21,7 @@ public class ConfigManager {
 	 * Whether to log anything more important than severe.
 	 * @param on boolean
 	 */
-	public static void setLogging(boolean on) {
+	public static void setFineLogging(boolean on) {
 		if(on) {
 			LOGGER.setLevel(Level.FINEST);
 			LOGGER.config("Set Logging to on");

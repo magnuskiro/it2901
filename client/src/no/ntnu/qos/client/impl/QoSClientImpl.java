@@ -66,8 +66,8 @@ public class QoSClientImpl implements QoSClient {
 	}
 
 	@Override
-	public void setLogging(boolean on) {
-		ConfigManager.setLogging(on);
+	public void setFineLogging(boolean on) {
+		ConfigManager.setFineLogging(on);
 	}
 
 	@Override
