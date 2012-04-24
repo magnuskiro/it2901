@@ -16,6 +16,8 @@ Automated & Yes \\
 \hline
 Expected Result & We expect to see that the ESB will preempt even higher priority messages in the lower bandwidth tests because of the low timeout, but on higher bandwidths the sending time of the all the messages should be lower than on the later tests. To put that in the same setting as our results, we expect the percentage of successfully received messages to be lower than in the tests below, but we expect the time to also be lower across the board.  \\
 \hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+\hline
 \end{tabular}
 \\ \ldots \\
 \begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:2}
@@ -31,6 +33,8 @@ ESB variables & \textbf{Timeout: 1000} \\
 Automated & Yes \\
 \hline
 Expected Result & We expect to have a higher percentage of completed messages on 10KBps than with a timeout of 500 and we expect the results on 1-, 20- and 40KBps to be relatively unchanged. \\
+\hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
 \hline
 \end{tabular}
 \\ \ldots \\
@@ -48,6 +52,8 @@ Automated & Yes \\
 \hline
 Expected Result & We expect all the messages on 20 and 40KBps to arrive, we expect that on 10KBps more messages should arrive, but not all. The time taken should again increase. \\
 \hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+\hline
 \end{tabular}
 \\ \ldots \\
 \begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:4}
@@ -64,6 +70,8 @@ Automated & Yes \\
 \hline
 Expected Result & We expect that 10-, 20- and 40KBps should be enough to get most of the messages for the high priority client through, the time taken should again increase and this should be noticeable on 40KBps compared to Test 1.  \\
 \hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+\hline
 \end{tabular}
 \\ \ldots \\
 \begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:5}
@@ -79,6 +87,26 @@ ESB variables & \textbf{Timeout: 100 000} \\
 Automated & Yes \\
 \hline
 Expected Result & We expect the same percentage on 10-, 20- and 40KBps as Test 4. What we want to see is that on 5KBps the percentage is increased quite substantially compared to the previous tests. \\
+\hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+\hline
+\end{tabular}
+\\ \ldots \\
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:6}
+\hline
+ID & 6 \\
+\hline
+Description & In this test what we have done is to remove our Throttle mediator which should mean that our ESB setup will no longer be doing any throttling of messages. The message queue is still there so there will be some priority in the sending and receiving. We want to test this because this should give us some idea about how our setup will do against no QoS at all. \\
+\hline
+NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+\hline
+ESB variables & \textbf{N/A} \\
+\hline
+Automated & Yes \\
+\hline
+Expected Result & We expect that the average percentage of all the clients will be slightly above what our test can do, we refer to section \ref{Testing:About:Strengths} for some elaboration about this. What we want to see is that on lower bandwidths the average time taken for messages to arrive at Client 4 will be substantially higher than when we use the Throttle mediator. This will indicate that our Throttle mediator actually does some useful work and also indicate that this could be a viable strategy for our customer to continue researching. \\
+\hline
+Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
 \hline
 \end{tabular}
 \\ \ldots \\
