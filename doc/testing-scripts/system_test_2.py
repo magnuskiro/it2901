@@ -10,7 +10,6 @@ gfSleep = 60
 wso2Sleep = 190
 experimentSleep = 320
 
-#Since node 2 is a "router" node we don't do anything there
 if node_id == 1:
 	#This is the ESB/GlashFish node
 	#Start GlashFish:
