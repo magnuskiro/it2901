@@ -134,12 +134,13 @@ public void newData(ReceiveObject recObj);
     
     For our implementation of the client server set, this doesn’t matter much since no credential validation is ever done, but it might matter if the client library is extended to interact with an actual identity server. If this is done, both the SAML communicator as well as the SAML parser should be reimplemented.
 
-\subsubsection{Redundant token fetching}
-If two or more requests are sent to the same service-set at the same time and the token has not already been fetched for that service-set there is a high probability that the token will be fetched over the network several times before being stored in the credential storage. Meaning you will waste network bandwidth getting the same information several times.
+    \subsubsection{Redundant token fetching}
+    
+    If two or more requests are sent to the same service-set at the same time and the token has not already been fetched for that service-set there is a high probability that the token will be fetched over the network several times before being stored in the credential storage. Meaning you will waste network bandwidth getting the same information several times.
 
-\subsection{Example code}\label{userguideExample}
+    \subsection{Example code}\label{userguideExample}
 
-A simple client that will send a soap containing “Hello World” to the service at “https://localhost:443/service/myService” and retry 4 times
+    A simple client that will send a soap containing “Hello World” to the service at “https://localhost:443/service/myService” and retry 4 times
 
 \begin{lstlisting}[caption={A simple example client}, label=userguideExampleclient]
 public class ExampleClient implements ExceptionHandler {
