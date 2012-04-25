@@ -3,17 +3,32 @@
     % TODO: fix ref.
 
     The test service is very simple and deployable with GlassFish. It expects a request like this:
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=\textwidth]{TestServiceRequest}
-        \label{fig:TestServiceRequest}
-    \end{figure}
+    \lstset{language=xml}
+    \begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header/>
+    <S:Body>
+        <ns2:hello xmlns:ns2="http://me.test.org">
+            <name>PAYLOAD</name>
+        </ns2:hello>
+    </S:Body>
+</S:Envelope>
+    \end{lstlisting}
     \\
     And responds like this:
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=\textwidth]{TestServiceResponse}
-        \label{fig:TestServiceResponse}
-    \end{figure}
+    \begin{lstlisting}
+<?xml version='1.0' encoding='utf-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:helloResponse xmlns:ns2="http://me.test.org">
+            <return>
+                PAYLOAD!
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales magna at est iaculis vel fermentum velit tristique. Cras nulla urna, ultrices vitae posuere a, iaculis sit amet lectus. Aliquam mattis sapien et elit commodo ...
+            </return>
+        </ns2:helloResponse>
+    </S:Body>
+</S:Envelope>
+    \end{lstlisting}
     \\
-    With PAYLOAD intact, and 10Kb of Lorem Ipsum\footnote{\url{http://www.lipsum.com/} - simply dummy text}. We add these 10Kb's of text to ensure that the response is considerably larger than the request, which should get us more realistic results when testing. We also sends the original payload back so the test client can easily identify which request was responded to. Those 10Kb of text also has a large impact on testing, it means that on lower than 10KBps bandwidth all the messages can't be sent in time. We chose to have it this way because it would give us a predictable test and also some static configuration on the ESB could be configured with this in mind.
+    With PAYLOAD intact, and 10KB of Lorem Ipsum\footnote{\url{http://www.lipsum.com/} - simply dummy text}. We add these 10KB of text to ensure that the response is considerably larger than the request, which should get us more realistic results when testing. We also send the original payload back so the test client can easily identify which request was responded to. Those 10KB of text also has a large impact on testing, it means that on lower than 10KBps bandwidth all the messages can't be sent in time. We chose to have it this way because it would give us a predictable test and also some static configuration on the ESB could be configured with this in mind.
