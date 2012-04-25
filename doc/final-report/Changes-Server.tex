@@ -1,2 +1,10 @@
 \subsubsection{Server Changes}\label{Changes:Server}
-    % TODO: Write about changes to Server
+    On the server side there was not a lot of big changes during the implementation.
+    
+    The biggest change from early design to final design is probably the ThrottleMediator, before we started implementation we were very unsure of what we would be able to do in this mediator. So we wrote down a few things we wanted to try, most of which we managed to implement. We wanted to make it more dynamic, and maybe learn something from how long data took to be sent to the different endpoints. Time was a limited resource, but we ended up making more out of it than what was initially anticipated.
+
+    Initially OutMetadataMediator did the work of SoapPriorityMediator as well, but we split them up because we figured several more specialized mediators would be more modular and easier to modify later.
+
+    During implementation we found out that we had to get the IP address of the client in the 'in' sequence for use later in the 'out sequence, so we made InMetadataMediator take care of this as well as getting potential time to live data.
+
+    Because of the lack of the Identity Server we needed an alternative to send the diffserv value back to the client. So we made the SAML-sequence described in \ref{Description of ESB concepts} under SAML Authentication Request.
