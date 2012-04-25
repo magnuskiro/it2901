@@ -2,7 +2,7 @@
 
 This chapter will introduce the client side design, and architecture of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
     
-    The class diagram, found in appendix \ref{File Attachments}, is a usefull addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
+    The class diagram, found in appendix \ref{File Attachments}, is a useful addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
 		
     \subsubsection{Introduction}\label{client introduction}
 The client architecture consists of the following two components: The client application and the client library. Additionally, the library makes use of some external components to do some of its work.
@@ -24,7 +24,7 @@ This component will be used to parse and manipulate \gls{xml}\footnote{\gls{xml}
 \\\\
 
 \indent \textbf{Apache \gls{httpcomponents}:}\\
-A lightweight component for easily setting up and using HTTP connections. While not strictly necessary this component will allow us to connect and communicate across networks far more easily than the standard java componentsy.
+A lightweight component for easily setting up and using HTTP connections. While not strictly necessary this component will allow us to connect and communicate across networks far more easily than the standard java components.
 
 	\subsubsection{Use Cases}\label{client use cases}
 %%%%%%%%%%%%%%%%%%%%
@@ -94,7 +94,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item[] 3a. Server returns error
 			\item[] 4a. Client library throws error
 		\end{itemize}
-		\textbf{Precondition:} Client has given library credentials and data to send, and a SAML token for the destination doesn’t already exist. Connection to server has been established. \\
+		\textbf{Precondition:} Client has given library credentials and data to send, and a SAML token for the destination doesn't already exist. Connection to server has been established. \\
 		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info and Connect to server, requirement 2, 3 and 6 (Section \ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,7 +111,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 		\end{enumerate}
 		\textbf{Extension:}
 		\begin{itemize}
-			 \item[] 2a. Server unavailable, reply doesn’t arrive within timeout, etc.
+			 \item[] 2a. Server unavailable, reply doesn't arrive within timeout, etc.
 			 \item[] 3a. Throw error.
 		\end{itemize}
 		\textbf{Precondition:} Data to send exists, SAML token is in cache, connection to server active.\\
@@ -132,7 +132,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
         \centering
         \includegraphics[width=\textwidth]{ClientDataFlowDiagram}
         \caption{Client Data Flow}
-        This is the message sequence. It describes the route the individual mesages takes throguth the system. 
+        This is the message sequence. It describes the route the individual messages takes through the system. 
         \label{fig:ClientDataFlowDiagram}
     \end{figure}
     
@@ -141,7 +141,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item The Client application sends credentials to the library interface
 			\item The interface passes the credentials on to the token manager, through the sequencer
 			\item The token manager stores the credentials in the credential storage
-			\item The token manager sends the credentials to the SAML comunicator in order to fetch a token
+			\item The token manager sends the credentials to the SAML communicator in order to fetch a token
 			\item The SAML communicator requests a token from the identity server
 			\item The identity server sends a token to the SAML communicator
 			\item The token is returned to the token manager
@@ -163,7 +163,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\centering	
 			\includegraphics[width=\textwidth]{Detailedclientarchitecture}
 			\caption{Detailed Client Architecture}
-			This describes in detail the sctructure of the client library. 
+			This describes in detail the structure of the client library. 
 			\label{fig:DetailedClientArchitecture}
 		\end{figure}
 
@@ -197,7 +197,7 @@ This section contains all the sequence diagrams for the client, with description
 			\centering	
 			\includegraphics[width=\textwidth]{CliSeqDiaAcceptclientinfo}
 			\caption{Accept client info}
-			This describes how the client credentials are passsed from the client, through the interfce and into the credential storage.
+			This describes how the client credentials are passed from the client, through the interface and into the credential storage.
 			\label{fig:CliSeqDiaAcceptclientinfo}
 		\end{figure}
 		\begin{figure}[H]
