@@ -41,7 +41,7 @@ $ cd ..
 $ cp build/httpcore-nio-4.1.3.jar httpcore-nio-4.1.3.wso2v2.jar
 \end{lstlisting}
 
-	Java 1.6 only support setting DiffServ on IPv4, so to make java actually set the DiffServ header we must set IPv4 as the prefered IP stack. This is done by adding the command line option -Djava.net.preferIPv4Stack=true when starting the java program. This should be done with all clients as well as ESB. The ESB is usually started by running /path/to/wso2esb/bin/wso2server.sh, so we edit this file adding the line containing "-Djava.net.preferIPv4Stack=true" in Listing:\ref{modify wso2server.sh}.
+	Java 1.6 only support setting DiffServ on IPv4, so to make java actually set the DiffServ header we must set IPv4 as the preferred IP stack. This is done by adding the command line option -Djava.net.preferIPv4Stack=true when starting the java program. This should be done with all clients as well as ESB. The ESB is usually started by running /path/to/wso2esb/bin/wso2server.sh, so we edit this file adding the line containing "-Djava.net.preferIPv4Stack=true" in Listing:\ref{modify wso2server.sh}.
 
 \begin{lstlisting}[frame=single, caption={Changes made to wso2server.sh}, label=modify wso2server.sh, breaklines=true]
 while [ "$status" = "$START_EXIT_STATUS" ]

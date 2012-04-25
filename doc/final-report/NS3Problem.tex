@@ -1,0 +1,48 @@
+\section{NS3 Problems}\label{NS3 Problems}
+	When trying to set up the test we wanted, illustrated in section \ref{System testing}, we encountered some strange problems which we could not solve in time for this project. Below is an outline of the problem and a possible solution sketched out by the creator of MobiEmu.
+	
+	The problem seem to stem from NS3 and how it "installs" the different abilities to each node in the network. In listing \ref{NS3:Problem code} we have tried to illustrate the problem.
+	
+\lstset{language=C++}
+\begin{lstlisting}[frame=single, caption={This code snippet does not work}, label=NS3:Problem code, breaklines=true]
+NodeContainer net1 (esb, r);
+NodeContainer net2 (r, client);
+NodeContainer all (esb, r, client);
+NodeContainer shortCut (esb, client);
+
+PointToPointHelper p2p;
+p2p.SetDeviceAttribute ("DataRate", StringValue (constDataRate));
+//pointToPoint.SetChannelAttribute ("Delay", StringValue ("2ms"));
+
+NetDeviceContainer esbToRouterDevices;
+esbToRouterDevices = p2p.Install (net1);
+
+p2p.SetChannelAttribute ("DataRate", StringValue (dataRate));
+//pointToPoint.SetChannelAttribute ("Delay", StringValue ("2ms"));
+
+NetDeviceContainer routerToClientDevices;
+routerToClientDevices = p2p.Install (net2);
+
+TapBridgeHelper tapBridge;
+tapBridge.SetAttribute ("Mode", StringValue ("UseLocal"));
+tapBridge.SetAttribute ("Mtu", UintegerValue(mtu)); 
+
+//Tap bridge setup for ESB
+std::cout << "Adding tap bridge: tap-1\n";
+tapBridge.SetAttribute ("DeviceName", StringValue ("tap-1"));
+tapBridge.Install (esb, esbToRouterDevices.Get(0));
+
+//Tap bridge setup for router
+std::cout << "Adding tap bridge: tap-2\n";
+tapBridge.SetAttribute ("DeviceName", StringValue ("tap-2"));
+tapBridge.Install (r, esbToRouterDevices.Get(1));
+
+//Tap bridge setup for router
+std::cout << "Adding tap bridge: tap-3\n";
+tapBridge.SetAttribute ("DeviceName", StringValue ("tap-3"));
+tapBridge.Install (client, routerToClientDevices.Get(1));
+\end{lstlisting}
+	
+	When we try to run this code inside each LXC container we do not get the communication that we expect to see. What happens instead is that only the nodes coming from the same "NodeContainer" get to talk to each other. We can then induce communication through the two other nodes if we change which "NodeContainer" we use when we install the tap bridges. The strange thing is that there is not much which would indicate this inside the source code.
+	
+	The solution which was illustrated to us by the creator of MobiEmu was to create all the LXCs with two network connections, then inside NS3 create twice as many tap bridges and connect all this up. We did not have time do this as this would require much more knowledge about LXC, we would have to alter MobiEmu substantially to create all the extra tap bridges and we would need to change the NS3 scripts. In addition, this solution was not at all guaranteed to work which would mean that we could put down many hours with out any results. We mentioned this in the testing chapter (ref:\ref{Testing:About:Suite}) that we decided together with the customer that this would take to long time with to little time left in the project.
