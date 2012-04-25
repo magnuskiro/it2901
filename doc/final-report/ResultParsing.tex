@@ -8,5 +8,6 @@ $ python2 GroupResults.py /path/to/results/ /path/to/where/you/want/results/grou
     \end{lstlisting}
     This script will move the results from the first folder to the second, and group them in subfolders with the name of their bandwidth capacities. When choosing a folder to move them to we recommend choosing a subfolder of a general results folder, this way you can use the script parseall.sh like this:
     \begin{lstlisting}
-$ python2 parseall.sh /path/to/folder/containing/the/folder/you/moved/results/to/
+$ ./parseall.sh "-m -t -p" /path/to/folder/containing/the/folder/you/moved/results/to/ "2 3 4"
     \end{lstlisting}
+    Here the first argument "-m -t -p" is the optional arguments used for ParseResults.py, and the last argument "2 3 4" are the nodes to parse output from.
