@@ -1,16 +1,17 @@
-\section{Mobiemu Setup Guide}\label{Mobiemu Setup Guide}
-In this appendix we will show you how to setup the Mobiemu framework to make it ready to run the tests from Chapter \ref{Testing}.
+\section{MobiEmu Setup Guide}\label{MobiEmu Setup Guide}
 
-We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we are using and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure it self.
+    In this appendix we will show you how to setup the MobiEmu framework to make it ready to run the tests from Chapter \ref{Testing}.
+
+    We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we are using and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
 
 Since this framework is quite nice and packages up everything before a system test all we need to do is unpack one of our run folders and we should be good to go. We have included a compressed folder which contains five compressed folders where each of these contains a test which we need to unpack in order to run.
 
-After you have unpacked on of these tests we only have to add the ESB and GlassFish to be able to run the tests.
+After you have unpacked one of these tests we only have to add the ESB and GlassFish to be able to run the tests.
 
-We will assume that you have unpacked on of our tests and created a folder named “system-test” which contains the whole experiment.
+We will assume that you have unpacked one of our tests and created a folder named “system-test” which contains the whole experiment.
 
 \begin{shaded}
-In order to do the next part you will need to have setup the ESB with our changes, if you have not done so, please see appendix \ref{Server Setup Guide}
+    In order to do the next part you will need to have set up the ESB with our changes, if you have not done so, please see appendix \ref{Server Setup Guide}
 \end{shaded}
 
 \lstset{language=bash}
@@ -27,7 +28,8 @@ $ cd ..
 $ cp /path/to/glassfish/ glassfish
 \end{lstlisting}
 
-Now we just have to add the testing client.
+    Now we just have to add the testing client.
+    
 \lstset{language=bash}
 \begin{lstlisting}[frame=single, caption={Adding the test client}, label=mobiemu:adding test client, breaklines=true]
 $ cd /path/to/system-test/experiments/
@@ -35,25 +37,26 @@ $ mkdir EchoClient
 $ cp /path/to/EchoClientClient.jar EchoClient/
 \end{lstlisting}
 
-Now we need to just copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
+    Now we need to just copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
 
-You may also need to change the path in “system-test-2.py” please have a look at \ref{mobiemu:system-test-2.py changes} and change it to reflect your setup.
+    You may also need to change the path in “system-test-2.py” please have a look at \ref{mobiemu:system-test-2.py changes} and change it to reflect your setup.
 
-The last thing we need to do is just edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Just edit the path under “[ns3]” to point to your path to NS3.
+    The last thing we need to do is just edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Just edit the path under “[ns3]” to point to the path to NS3.
 
-Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
+    Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
+    
 \lstset{language=bash}
-\begin{lstlisting}[frame=single, caption={Run Mobiemu}, label=mobiemu:run, breaklines=true]
+\begin{lstlisting}[frame=single, caption={Run MobiEmu}, label=mobiemu:run, breaklines=true]
 $ cd /path/to/system-test
 $ sudo su
 # ./run.py run
 \end{lstlisting}
 
-You will now be running one of our system tests!\\
+    You will now be running one of our system tests!\\
 
-The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you just want to verify our tests.
+    The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you just want to verify our tests.
 
-Below is the full settings files for all of our system test, the comments within it is from the Mobiemu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
+    Below is the full settings files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
 
 \lstset{language=make}
 \begin{lstlisting}[frame=single, caption={Setting.cfg}, label=mobiemu:setting.cfg, breaklines=true]
@@ -130,7 +133,7 @@ results=%(main)s/results
 # where to store output from experiments while the experiment is running
 dumps=%(main)s/dumps
 
-# if general.use_chroot is true, this directory will be bound to mobiemu within the lxc-container, relative
+# if general.use_chroot is true, this directory will be bound to MobiEmu within the lxc-container, relative
 # to chroot_rootpoints
 chroot_bindpoint=/mobiemu
 
