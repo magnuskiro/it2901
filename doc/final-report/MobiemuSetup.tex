@@ -14,7 +14,7 @@ We will assume that you have unpacked one of our tests and created a folder name
     In order to do the next part you will need to have set up the ESB with our changes, if you have not done so, please see appendix \ref{Server Setup Guide}
 \end{shaded}
 
-\lstset{language=bash}
+\lstset{language=bash, style=bash}
 \begin{lstlisting}[frame=single, caption={Copy ESB and GlassFish into System test}, label=mobiemu:copy esb, breaklines=true]
 $ cd /path/to/system-test/experiments/esb/
 $ cp /path/to/esb/bin/ bin
@@ -28,9 +28,9 @@ $ cd ..
 $ cp /path/to/glassfish/ glassfish
 \end{lstlisting}
 
-    Now we just have to add the testing client.
-    
-\lstset{language=bash}
+
+Now we just have to add the testing client.
+\lstset{language=bash, style=bash}
 \begin{lstlisting}[frame=single, caption={Adding the test client}, label=mobiemu:adding test client, breaklines=true]
 $ cd /path/to/system-test/experiments/
 $ mkdir EchoClient
@@ -43,9 +43,8 @@ $ cp /path/to/EchoClientClient.jar EchoClient/
 
     The last thing we need to do is just edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Just edit the path under “[ns3]” to point to the path to NS3.
 
-    Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
-    
-\lstset{language=bash}
+Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
+\lstset{language=bash, style=bash}
 \begin{lstlisting}[frame=single, caption={Run MobiEmu}, label=mobiemu:run, breaklines=true]
 $ cd /path/to/system-test
 $ sudo su
@@ -58,7 +57,7 @@ $ sudo su
 
     Below is the full settings files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
 
-\lstset{language=make}
+\lstset{language=make, style=bash}
 \begin{lstlisting}[frame=single, caption={Setting.cfg}, label=mobiemu:setting.cfg, breaklines=true]
 #
 # This configuration file contains the parameters for the experiments run by run.py.
@@ -225,7 +224,7 @@ The most important variables and their meaning is described below.
 
 Next we will take a look at our testing file. This file is what starts the ESB, GlassFish and each of the clients. It is run inside its own LXC and as such needs to check which node it is so as to start the right application.
 
-\lstset{language=Python}
+\lstset{language=Python, style=python}
 \begin{lstlisting}[frame=single, caption={System-test-2.py}, label=mobiemu:system-test-2.py, breaklines=true]
 #!/usr/bin/env python
 
@@ -278,7 +277,7 @@ There should really be nothing to special about this file. It first starts up Gl
 
 The last file we will look at is the topology file, this defines the topology in NS3 and creates Tap-Bridges which we connect the LXCs to.
 
-\lstset{language=C++}
+\lstset{language=C++, style=c++}
 \begin{lstlisting}[frame=single, caption={System-test-2 Topology}, label=mobiemu:topology, breaklines=true]
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
