@@ -1,0 +1,12 @@
+\section{Result Parsing}\label{Result Parsing}
+    In this apendix we will describe how to use the scripts provided to parse the results we get from testing with MobiEmu.
+    
+    If tests are run with different bandwidth capacities we can use the script GroupResults.py like this:
+    \lstset{language=bash}
+    \begin{lstlisting}
+$ python2 GroupResults.py /path/to/results/ /path/to/where/you/want/results/grouped/
+    \end{lstlisting}
+    This script will move the results from the first folder to the second, and group them in subfolders with the name of their bandwidth capacities. When choosing a folder to move them to we recommend choosing a subfolder of a general results folder, this way you can use the script parseall.sh like this:
+    \begin{lstlisting}
+$ python2 parseall.sh /path/to/folder/containing/the/folder/you/moved/results/to/
+    \end{lstlisting}
