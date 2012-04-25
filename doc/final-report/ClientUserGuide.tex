@@ -127,7 +127,7 @@ The client library requires that this is a valid SOAP envelope, with an element 
 
 \subsubsection{User credentials}
 User credentials are not checked for validity (beyond very basic sanity checking) until the library attempts to get a token.
-For our implementation of the client server set, this doesn’t matter much since no credential validation is ever done, but it might matter if the client library is extended to interact with an actual identity server. If this is done, both the SAML communicator as well as the SAML parser should be reimplemented.
+For our implementation of the client server set, this doesn't matter much since no credential validation is ever done, but it might matter if the client library is extended to interact with an actual identity server. If this is done, both the SAML communicator as well as the SAML parser should be reimplemented.
 
 \subsubsection{Redundant token fetching}
 If two or more requests are sent to the same service-set at the same time and the token has not already been fetched for that service-set there is a high probability that the token will be fetched over the network several times before being stored in the credential storage. Meaning you will waste network bandwidth getting the same information several times.
