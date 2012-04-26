@@ -243,7 +243,8 @@ Sampling Message Processor:\\
 	The service element also has the useDefault property, which when set to true lets roles not configured in this file use values in the default role. When useDefault is set to false unconfigured clients will get a priority and DiffServ of 0. If useDefault is set to false there is no need to configure a default client for the service.
 	Below is an example setup of a service in ppd.xml.\\
 
-\lstset{language=XML}
+\lstset{language=XML, style=eclipse}
+\lstset{showstringspaces=false}
 \begin{lstlisting}[frame=single] %Ok to not have this referenced =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
@@ -266,6 +267,7 @@ Sampling Message Processor:\\
 	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration.\\
 
 \lstset{language=XML}
+\lstset{showstringspaces=false}
 \begin{lstlisting}[frame=single] %It is ok that this is not referenced in text =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>

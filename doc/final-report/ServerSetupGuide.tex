@@ -9,7 +9,7 @@
 	This version of the ESB uses httpcore-nio version 4.1.3, which does not support setting DiffServ in the IP header. To fix this we have to download its source code and make some modifications to it.
 
 	Now we need to retrieve the source of HTTPCore, this can be done by pasting the command in Listing:\ref{svn:checkout hc} into a bash prompt. This will download the source compatible with WSO2 into a folder named “hc”, this may take some time depending on your Internet connection.
-\lstset{language=bash}
+\lstset{language=bash, style=shell}
 \begin{lstlisting}[frame=single, caption={Checkout HttpCore source}, label=svn:checkout hc, breaklines=true]
 $ svn checkout http://svn.apache.org/repos/asf/httpcomponents/httpcore/tags/4.1.3/ hc
 \end{lstlisting}

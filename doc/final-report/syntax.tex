@@ -8,11 +8,7 @@
 % Java
 \definecolor{javacomment}{RGB}{0,0,255} 
 \definecolor{javastring}{RGB}{255,0,255} 
-\definecolor{javakeyword}{RGB}{165,42,42}
-\definecolor{javared}{rgb}{0.6,0,0}
-\definecolor{javagreen}{rgb}{0.25,0.5,0.35}
-\definecolor{javapurple}{rgb}{0.5,0,0.35} 
-\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} 
+\definecolor{javakeyword}{RGB}{165,42,42} 
 
 % Bash
 \definecolor{bashcomment}{RGB}{0,0,255}
@@ -51,7 +47,7 @@
     stringstyle=\color{c++string}
 }
 
-\lstdefinestyle{xml}
+\lstdefinelanguage{xml}
 {
   morestring=[b]",
   morestring=[s]{>}{<},
@@ -59,6 +55,8 @@
   stringstyle=\color{black},
   identifierstyle=\color{darkblue},
   keywordstyle=\color{cyan},
-  morekeywords={xmlns,version, type, return, ns2, S, Envelope, Body}% list your attributes here
+  morekeywords={xmlns,version, type, return, ns2, S, Envelope, Body, config, 
+                RoutingInfo, RoutingInfos, services, service, name, destIP, 
+                lastTR, bandwidth, client, role}% list your attributes here
 }
 
