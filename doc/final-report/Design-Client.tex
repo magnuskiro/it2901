@@ -14,7 +14,6 @@ The client architecture consists of the following two components: The client app
 \\\\
 
 \indent \textbf{Client library:}\\
-% TODO: needs to be rewritten and clarified. 
 This component will handle all communication with the service providers, as well as authenticating users and prioritizing their messages, based on who they are, and what their current role is. The authorization will involve a component from the server side of the project, the identity server, which returns a token if the client is authorized. Client applications connect through a simple interface to provide credentials and data.
 \\\\ 
 
@@ -193,7 +192,6 @@ Responsible for storing token objects as well as user supplied credentials. Also
 	\subsubsection{Sequence Diagrams}\label{client sequence diagrams}\\
 This section contains all the sequence diagrams for the client, with descriptions for each one.
 		\begin{figure}[H]
-		% TODO: reference it in the text.		
 			\centering	
 			\includegraphics[width=\textwidth]{CliSeqDiaAcceptclientinfo}
 			\caption{Accept client info}
@@ -201,7 +199,6 @@ This section contains all the sequence diagrams for the client, with description
 			\label{fig:CliSeqDiaAcceptclientinfo}
 		\end{figure}
 		\begin{figure}[H]
-		% TODO: reference it in the text.
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingnon-storedtoken}
 			\caption{Getting non-stored token}
@@ -209,7 +206,6 @@ This section contains all the sequence diagrams for the client, with description
 			\label{fig:CliSeqDiaGettingnon-storedtoken}
 		\end{figure}
 		\begin{figure}[H]
-		% TODO: reference it in the text.
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaGettingStoredToken}
 			\caption{Getting stored token}
@@ -217,7 +213,6 @@ This section contains all the sequence diagrams for the client, with description
 			\label{fig:CliSeqDiaGettingStoredToken}
 		\end{figure}
 		\begin{figure}[H]
-		% TODO: reference it in the text. 
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaReceivereply}
 			\caption{Receive reply}
@@ -225,7 +220,6 @@ This section contains all the sequence diagrams for the client, with description
 			\label{fig:CliSeqDiaReceivereply}
 		\end{figure}
 		\begin{figure}[H]
-		% TODO: reference it in the text. 
 			\centering	
 			\includegraphics[scale=0.4, angle=-90]{CliSeqDiaSendData}
 			\caption{Send data}

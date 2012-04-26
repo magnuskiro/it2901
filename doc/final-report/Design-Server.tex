@@ -265,7 +265,7 @@ Sampling Message Processor:\\
 
 	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration.\\
 
-\lstset{language=XML}
+\lstset{language=XML, style=eclipse}
 \lstset{showstringspaces=false}
 \begin{lstlisting}[frame=single, caption={ppd.xml}, label=ppd listing, breaklines=true] %It is ok that this is not referenced in text =)
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -288,4 +288,3 @@ Sampling Message Processor:\\
 	\item The messageProcessor. here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in ms.
 	\end{itemize}
 	Other things in this file should mostly be untouched, as they define what the ESB does with messages, most of which is needed to do the prioritizing and throttling.
-	%The ESB can also be configured through its web interface on https://ADDRESS:9443/carbon    
