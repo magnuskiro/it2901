@@ -1,7 +1,7 @@
-\subsubsection{Server Changes}\label{Changes:Server}
+\subsubsection{Server Specific Changes}\label{Changes:Server}
     On the server side there was not a lot of big changes during the implementation.
     
-    The biggest change from early design to final design is probably the ThrottleMediator, before we started implementation we were very unsure of what we would be able to do in this mediator. So we wrote down a few things we wanted to try, most of which we managed to implement. We wanted to make it more dynamic, and maybe learn something from how long data took to be sent to the different endpoints. Time was a limited resource, but we ended up making more out of it than what was initially anticipated.
+    The biggest change from early design to final design is probably the ThrottleMediator. Before we started the implementation, we were very unsure of what we would be able to do in this mediator. So we wrote down a few things we wanted to try, most of which we managed to implement. We wanted to make it more dynamic, and maybe learn something from how long data took to be sent to the different endpoints. Time was a limited resource, but we ended up making more out of it than what was initially anticipated.
 
     Initially OutMetadataMediator did the work of SoapPriorityMediator as well, but we split them up because we figured several more specialized mediators would be more modular and easier to modify later.
 
