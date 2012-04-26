@@ -46,8 +46,8 @@ def move_folders(folder, move_to, prints=False, remove=False):
 		create_dir(m_t)
 		print_progress(prints, 'Created folder: {0}'.format(m_t))
 		new_length = len(results[key])
-		for i, folder in enumerate(results[key]):
-			move(folder, m_t)
+		for i, folder2 in enumerate(results[key]):
+			move(folder2, m_t)
 			print_progress(prints, 'Moving folder\t{0}%'.format(int((i+1.0)/new_length))*100)
 	if remove:
 		print_progress(prints, 'Removing original result folder')
@@ -66,7 +66,7 @@ def create_dir(folder):
 	try:
 		mkdir(folder)
 	except OSError:
-		pass
+		print 'Folder ({0}) already excist'.format(folder)
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Move results from a System Test result folder and group them')

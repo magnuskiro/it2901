@@ -2,8 +2,35 @@
 
 	As most of the tests below are quite alike the reasoning behind them are also quite like. The main difference between them are the “Timeout” which refer to the timeout the ESB uses. For more about the “Timeout” see \ref{Configuration of the ESB}.
 
-	Since this project had somewhat of a research focus from the customers side we did not perform these test in order for us to validate our system. Instead we have run these tests to try and say something about the feasibility of the original question asked when we started. We will come back to this topic in the result section.
-	
+	Since this project had somewhat of a research focus from the customers side we did not perform these test in order for us to validate our system. Instead we have run these tests to try and say something about the feasibility of the original question asked when we started. We will come back to this topic in the result section.\\
+    
+    We used the same client setups for all of the tests. The low priority clients, Client 1 and 2, was configured like this:
+\begin{lstlisting}
+%This is a comment
+%variables are written with NAME:VALUE
+%line without ':' or '%' is treated as end of file.
+%doLog:boolean, whether to log or not, default is true.
+doLog:true
+%logToFile:boolean, whether or not client library should log to file, default is false.
+logToFile:true
+%username:String, Must be configured.
+username:testname
+%password:String, Must be configured.
+password:testpassword
+%role:String, Must be configured.
+role:clientRole1
+%service:URI, Must be configured.
+service:https://10.0.0.1:8243/services/EchoService
+%interval:long, between requests in milliseconds, only one request if not configured
+interval:1000
+%nofreqs: int, number of requests to send, send forever if not configured
+nofreqs:100
+%delay:long, wait before first request in milliseconds, default is 0
+delay:10
+%request:SOAP, Must be configured.
+request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header/><S:Body><ns2:hello xmlns:ns2="http://me.test.org"><name>{REQID}</name></ns2:hello></S:Body></S:Envelope>
+\end{lstlisting}
+    Client 2 had 0 as delay. While the high priority client, Client 3, had interval=3000, nofreqs=30 and delay=15.
 \begin{center}
 
 \begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:1}
@@ -16,7 +43,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{Timeout: 500} \\
+	ESB variables & \textbf{Timeout: 500}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
@@ -38,7 +65,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{Timeout: 1000} \\
+	ESB variables & \textbf{Timeout: 1000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
@@ -60,7 +87,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{Timeout: 2000} \\
+	ESB variables & \textbf{Timeout: 2000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
@@ -82,7 +109,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{Timeout: 5000} \\
+	ESB variables & \textbf{Timeout: 5000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
@@ -104,7 +131,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{Timeout: 100 000} \\
+	ESB variables & \textbf{Timeout: 100 000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
@@ -124,7 +151,7 @@
 	\hline
 	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
 	\hline
-	ESB variables & \textbf{N/A} \\
+	ESB variables & \textbf{Timeout: N/A}, interval: 500, minimum bandwidth per message: N/A \\
 	\hline
 	Automated & Yes \\
 	\hline
