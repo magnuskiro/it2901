@@ -1,35 +1,29 @@
 \subsubsection{Test Client}\label{Testing:About:Client}
-    In this section we will shortly describe the test client used for testing, Echo client - \ref{attachmet:file:EchoClientClient}.
+    In this section we will shortly describe the test client used for testing, "EchoClientClient.jar"(ref:\ref{attachment:file:EchoClientClient jar}).
 
     The client starts by reading its configuration file. Its filename can be provided as the only command line argument, otherwise it defaults to "client.config'. This configuration file contains variables such as username, password, role, service to contact, what the request should be, how many requests to send and with what interval it should send them at, and some describing what to log.
 
     The client expects the request to contain '{REQID}' as part of the request message, and before sending it, the client will replace it with '{REQID=XX}' where 'XX' is the number of the request. This way the client can check that it gets the right response by checking whether '{REQID=XX}' is present in the response, and whether the ID is correct. This makes validating the response from the service easier, but it restricts the service to put the request message somewhere in the response. Another side effect of this being the only validation is that other errors in the response are not easily detected as long as the '{REQID=XX}' is there. If for example the response is cut short, by the stream being cut, as long as the ID is present it will be treated as valid. The client also prints the length of the response, so scripts that parse the results can pick up on responses with abnormal lengths.
 
-    After reading the configuration file the client makes an instance of the client library\ref{some client library reference} 
-    % TODO: fix ref.
-    using the username, password and role, and itself as an ExceptionHandler. By implementing itself as the ExceptionHandler the client will be notified about all the exceptions occurring in the client library, the client does not act upon these exceptions, but it does log them. A normal client might want to send a request again here.
+    After reading the configuration file the client makes an instance of the client library described in section \ref{client side}, using the username, password and role, and itself as an ExceptionHandler. By implementing itself as the ExceptionHandler the client will be notified about all the exceptions occurring in the client library, the client does not act upon these exceptions, but it does log them. A normal client might want to send a request again here.
     
     A timer is used to start the sending/receiving in a new thread at the interval specified and the number of times specified. Starting new threads for every request and sending at a small interval is a good way to test how the client library handles concurrent requests.
 
     The actual sending and receiving of data is rather simple, as you can see in this code snippet:
-    \lstset{language=Java, style=java}
+    \lstset{language=Java, style=eclipse}
     \lstset{frame=single}
     \lstset{breaklines=true}
+    \lstset{showstringspaces=false}
     \begin{lstlisting}
-//Uses connection.sendData(data, destination) to send a request.
-//Here {REQID} in the request found in clientConfig is replaced with {REQID=reqID}
-//The client library will put the response in the returned ReceiveObject when it is received.
+/* Uses connection.sendData(data, destination) to send a request. Here {REQID} in the request found in clientConfig is replaced with {REQID=reqID}. The client library will put the response in the returned ReceiveObject when it is received. */
 ReceiveObject ro = connection.sendData(
 config.get(DATA).replace("{"+REQID+"}", "{"+REQID+"="+reqID+"}"), destination);
 try {
     logLine("Waiting for response "+reqID);
 
-    //Calls the blocking method ReceiveObject.receive() to get the response.
-    //An alternative to this would be to make a DataListener and add it to connection.
-    //this way, every listener would receive all the responses,
-    //and would be unsuited for this test
+/* Calls the blocking method ReceiveObject.receive() to get the response. An alternative to this would be to make a DataListener and add it to connection This way, every listener would receive all the responses, and would be unsuited for this test */
     String response = ro.receive();
     \end{lstlisting}
     \\
-    For more details about configuring the test client read the example configuration provided \ref{attachments:client.config}. For more detailed information on how the test client works, the java file with javadoc is provided \ref{attachments:TestClient.java}.
-    % TODO: fix refs. 
+    For more details about configuring the test client read the example configuration provided in appendix \ref{attachment:file:Client config}. For more detailed information on how the test client works, the java, TestClient.java, file with javadoc is also provided in appendix \ref{attachment:file:TestClient java}.
+

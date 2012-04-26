@@ -119,7 +119,7 @@ To follow this flow, follow the blue arrows in figure \ref{fig:DataFlowDiagramSe
     \end{figure}
 \\           
 SAML Authentication Request:\\
-This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the dummy Identity Server, the ESB then uses the SendBack mediator to send the same message it got in back. The message then travels to the Out sequence where it gets a priority, a DiffServ value and some metadata gets added to the header of the message. The reason why this is done is explained in the section [TODO: Add reference to Identity Server problems here].%TODO fix
+This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the dummy Identity Server, the ESB then uses the SendBack mediator to send the same message it got in back. The message then travels to the Out sequence where it gets a priority, a DiffServ value and some metadata gets added to the header of the message. The reason why this is done is explained in section \ref{Changes:IS}.
 
     \subsubsection{Extensions to the ESB}\label{Extensions to the ESB} 
     This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and then a short description of the built-in mediators we will use. All of our custom mediators have an accompanying sequence diagram to give a detailed overview of their inner working which is referenced in the title.
@@ -133,7 +133,7 @@ InMetadata mediator(\ref{fig:InMetadatamediator}):\\
 \\\\
 OutMetadata mediator(\ref{fig:OutMetadatamediatorsequencediagram}):\\
     This mediator retrieves the client role and service properties from the message context. These properties are then used along with a persistent registry to infer a priority for the message, and what the DiffServ field in the IP header should be set as. The priority and DiffServ values are then set as new properties in the message context.
-    The DiffServ property in the message context will be used in the synapse core to set the DiffServ field before sending the message (See \ref{Modification of the ESB}).
+    The DiffServ property in the message context will be used in the synapse core to set the DiffServ field before sending the message (See \ref{Server Setup Guide}).
 \\\\
 SoapPriority mediator(\ref{fig:SoapPrioritymediator}):\\
 	This mediator adds the DiffServ value and the priority as two custom SOAP header items. We use these fields on the client side in order for the clients to use the same DiffServ value.
@@ -167,7 +167,6 @@ Sampling Message Processor:\\
     This section contains some sequence diagrams which you can use to get a more in depth look into the code and methods used in the mediators above. The diagrams may not reflect the actual method names or display the full complexity of the code, but they should be sufficiently detailed that it should be possible to recognize them in the code.
     
         \begin{figure}[H]
-        % TODO: ref in text. 
             \centering
             \includegraphics[scale=0.3]{System-levelsequencediagram}
             \caption{System-level sequence diagram}
@@ -243,7 +242,8 @@ Sampling Message Processor:\\
 	The service element also has the useDefault property, which when set to true lets roles not configured in this file use values in the default role. When useDefault is set to false unconfigured clients will get a priority and DiffServ of 0. If useDefault is set to false there is no need to configure a default client for the service.
 	Below is an example setup of a service in ppd.xml.\\
 
-\lstset{language=XML}
+\lstset{language=XML, style=eclipse}
+\lstset{showstringspaces=false}
 \begin{lstlisting}[frame=single] %Ok to not have this referenced =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
@@ -266,6 +266,7 @@ Sampling Message Processor:\\
 	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration.\\
 
 \lstset{language=XML}
+\lstset{showstringspaces=false}
 \begin{lstlisting}[frame=single] %It is ok that this is not referenced in text =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
@@ -281,7 +282,7 @@ Sampling Message Processor:\\
 
 	If the MSCommunicator is modified to communicate with a Monitoring Service this file will not be needed anymore.
 
-	The last file we will look at is synapse.xml (\ref{attachment:server config}), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
+	The last file we will look at is synapse.xml (ref:\ref{attachment:file:synapse-configs.zip} - synapse-configs.zip), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
 	\begin{itemize}
 	\item The sequence qos where we can find the configuration for the throttle mediator. Here we can set the property minBandwidthPerMessage (integer, measured in Bps) and timeout(integer, measured in ms). Timeout is the longest time a message will be allowed to try sending before it is discarded.
 	\item The messageProcessor. here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in ms.

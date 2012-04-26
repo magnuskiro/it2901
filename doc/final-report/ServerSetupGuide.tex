@@ -9,12 +9,12 @@
 	This version of the ESB uses httpcore-nio version 4.1.3, which does not support setting DiffServ in the IP header. To fix this we have to download its source code and make some modifications to it.
 
 	Now we need to retrieve the source of HTTPCore, this can be done by pasting the command in Listing:\ref{svn:checkout hc} into a bash prompt. This will download the source compatible with WSO2 into a folder named “hc”, this may take some time depending on your Internet connection.
-\lstset{language=bash}
+\lstset{language=bash, style=shell}
 \begin{lstlisting}[frame=single, caption={Checkout HttpCore source}, label=svn:checkout hc, breaklines=true]
 $ svn checkout http://svn.apache.org/repos/asf/httpcomponents/httpcore/tags/4.1.3/ hc
 \end{lstlisting}
 
-	After the download has finished we have a working directory, of the version of HTTPCore which WSO2 ESB uses, and it is now time to apply our patch to enable support for traffic class. The instruction in Listing:\ref{svn:apply hc patch} describes how. Here “hc.diff” is a file containing our changes which svn can use to alter the working directory. The file “hc.diff” can be found in \ref{attachment:hc diff}.
+	After the download has finished we have a working directory, of the version of HTTPCore which WSO2 ESB uses, and it is now time to apply our patch to enable support for traffic class. The instruction in Listing:\ref{svn:apply hc patch} describes how. Here “hc.diff” is a file containing our changes which svn can use to alter the working directory. The file “hc.diff” can be found in appendix \ref{attachment:file:hc.diff}.
 \begin{lstlisting}[frame=single, caption={Apply HC patch}, label=svn:apply hc patch]
 $ cd hc/
 $ patch -p0 -i /path/to/hc.diff
@@ -77,11 +77,11 @@ done
 \end{lstlisting}
 
 
-	Now that the ESB is set up, and supporting DiffServ, we can add our own components to it. The first thing to add is a jar-file containing all the custom mediators and the custom message store. Copy the file “no.ntnu.qos.jar” found in \ref{attachment:server jar} to the folder /path/to/wso2esb/repository/components/lib/.
+	Now that the ESB is set up, and supporting DiffServ, we can add our own components to it. The first thing to add is a jar-file containing all the custom mediators and the custom message store. Copy the file “no.ntnu.qos.jar” found in appendix \ref{attachment:file:no.ntnu.qos.jar} to the folder /path/to/wso2esb/repository/components/lib/.
 	
-	Next we add a base configuration for the ESB to use, extract “synapseconfig.zip” found in \ref{attachment:server config} into /path/to/wso2esb/repository/deployment/server/synapse-configs/. This configuration contains setup of mediator sequences to be used, and a simple sample service endpoint/proxy configuration.
+	Next we add a base configuration for the ESB to use, extract “synapse-configs.zip” found in \ref{attachment:file:synapse-configs.zip} into /path/to/wso2esb/repository/deployment/server/synapse-configs/. This configuration contains setup of mediator sequences to be used, and a simple sample service endpoint/proxy configuration.
 	
-	Finally, before starting the ESB, we should add the template xml-files found in “mediatorconf.zip” in \ref{attachment:mediator config} to the folder /path/to/wso2esb/.\\
+	Finally, before starting the ESB, we should add the template xml-files found in “mediator-configuration.zip” in appendix \ref{attachment:file:mediator-configuration.zip} to the folder /path/to/wso2esb/.\\
 
 	The ESB should now be ready and can be started by running the script:\\
 \begin{lstlisting}[frame=single, label=run esb server, breaklines=true]

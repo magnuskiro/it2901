@@ -1,0 +1,178 @@
+Index: httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java	(revision 1300963)
++++ httpcore-nio/src/main/java/org/apache/http/impl/nio/NHttpConnectionBase.java	(working copy)
+@@ -30,6 +30,7 @@
+ import java.io.IOException;
+ import java.net.InetAddress;
+ import java.net.InetSocketAddress;
++import java.net.Socket;
+ import java.net.SocketAddress;
+ import java.nio.channels.ReadableByteChannel;
+ import java.nio.channels.WritableByteChannel;
+@@ -66,6 +67,7 @@
+ import org.apache.http.nio.reactor.SessionBufferStatus;
+ import org.apache.http.nio.reactor.SessionInputBuffer;
+ import org.apache.http.nio.reactor.SessionOutputBuffer;
++import org.apache.http.nio.reactor.SocketAccessor;
+ import org.apache.http.nio.util.ByteBufferAllocator;
+ import org.apache.http.params.HttpConnectionParams;
+ import org.apache.http.params.HttpParams;
+@@ -87,7 +89,7 @@
+  * @since 4.0
+  */
+ public class NHttpConnectionBase
+-        implements NHttpConnection, HttpInetConnection, SessionBufferStatus {
++        implements NHttpConnection, HttpInetConnection, SessionBufferStatus, SocketAccessor {
+ 
+     protected final ContentLengthStrategy incomingContentStrategy;
+     protected final ContentLengthStrategy outgoingContentStrategy;
+@@ -418,5 +420,14 @@
+             .append(this.session.getRemoteAddress());
+         return buf.toString();
+     }
++    
++    @Override
++    public Socket getSocket(){
++        if(this.session instanceof SocketAccessor){
++            return ((SocketAccessor)this.session).getSocket();
++        }else{
++            return null;
++        }
++    }
+ 
+ }
+Index: httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/SSLIOSession.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/SSLIOSession.java	(revision 1300963)
++++ httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/SSLIOSession.java	(working copy)
+@@ -30,6 +30,7 @@
+ import org.apache.http.nio.reactor.EventMask;
+ import org.apache.http.nio.reactor.IOSession;
+ import org.apache.http.nio.reactor.SessionBufferStatus;
++import org.apache.http.nio.reactor.SocketAccessor;
+ import org.apache.http.params.HttpParams;
+ 
+ import javax.net.ssl.SSLContext;
+@@ -40,6 +41,7 @@
+ import javax.net.ssl.SSLException;
+ import java.io.IOException;
+ import java.net.InetSocketAddress;
++import java.net.Socket;
+ import java.net.SocketAddress;
+ import java.nio.ByteBuffer;
+ import java.nio.channels.ByteChannel;
+@@ -51,7 +53,7 @@
+  *
+  * @since 4.0
+  */
+-public class SSLIOSession implements IOSession, SessionBufferStatus {
++public class SSLIOSession implements IOSession, SessionBufferStatus, SocketAccessor {
+ 
+     private final IOSession session;
+     private final SSLEngine sslEngine;
+@@ -493,4 +495,13 @@
+ 
+     }
+ 
++    @Override
++    public Socket getSocket(){
++        if (session instanceof SocketAccessor) {
++            return ((SocketAccessor)session).getSocket();
++        } else {
++            return null;
++        }
++    }
++
+ }
+Index: httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java	(revision 1300963)
++++ httpcore-nio/src/main/java/org/apache/http/impl/nio/reactor/IOSessionImpl.java	(working copy)
+@@ -29,6 +29,7 @@
+ 
+ import java.io.IOException;
+ import java.net.InetSocketAddress;
++import java.net.Socket;
+ import java.net.SocketAddress;
+ import java.nio.channels.ByteChannel;
+ import java.nio.channels.Channel;
+@@ -40,13 +41,14 @@
+ 
+ import org.apache.http.nio.reactor.IOSession;
+ import org.apache.http.nio.reactor.SessionBufferStatus;
++import org.apache.http.nio.reactor.SocketAccessor;
+ 
+ /**
+  * Default implementation of {@link IOSession}.
+  *
+  * @since 4.0
+  */
+-public class IOSessionImpl implements IOSession {
++public class IOSessionImpl implements IOSession, SocketAccessor {
+ 
+     private final SelectionKey key;
+     private final ByteChannel channel;
+@@ -358,4 +360,14 @@
+         return buffer.toString();
+     }
+ 
++    @Override
++    public Socket getSocket(){
++       Channel channel = this.channel;
++        if (channel instanceof SocketChannel) {
++            return ((SocketChannel)channel).socket();
++        } else {
++            return null;
++        }
++    }
++
+ }
+Index: httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java
+===================================================================
+--- httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java	(revision 0)
++++ httpcore-nio/src/main/java/org/apache/http/nio/reactor/SocketAccessor.java	(working copy)
+@@ -0,0 +1,42 @@
++/*
++ * ====================================================================
++ * Licensed to the Apache Software Foundation (ASF) under one
++ * or more contributor license agreements.  See the NOTICE file
++ * distributed with this work for additional information
++ * regarding copyright ownership.  The ASF licenses this file
++ * to you under the Apache License, Version 2.0 (the
++ * "License"); you may not use this file except in compliance
++ * with the License.  You may obtain a copy of the License at
++ *
++ *   http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing,
++ * software distributed under the License is distributed on an
++ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
++ * KIND, either express or implied.  See the License for the
++ * specific language governing permissions and limitations
++ * under the License.
++ * ====================================================================
++ *
++ * This software consists of voluntary contributions made by many
++ * individuals on behalf of the Apache Software Foundation.  For more
++ * information on the Apache Software Foundation, please see
++ * <http://www.apache.org/>.
++ *
++ */
++
++package org.apache.http.nio.reactor; 
++
++import java.net.Socket;
++
++/**
++ * Interface intended to support retreival of the underlying Socket in 
++ * classes implementing this interface
++ */
++public interface SocketAccessor{
++    /**
++     * Return the underlying socket
++     * @return - the underlying Socket, may be null.
++     */
++    public Socket getSocket();
++}
+\ No newline at end of file
