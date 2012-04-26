@@ -2,12 +2,12 @@
     In this chapter we will discuss what can be worked on further and improved in the future. Some things we did not have time to do as well as we might have wanted, and some things that we knew would have to be made/modified later.
     
     \subsubsection{Server}\label{Future:Server}
-        In our MS Mediator we use a dummy implementation of the MS Communicator, which just reads an xml-file with the needed data. A future work would be to make an implementation that acutally contacts a Monitoring Service and use this in the mediator.
+        In our MS Mediator we use a dummy implementation of the MS Communicator, which just reads an xml-file with the needed data. Making an implementation that actually contacts a Monitoring Service, and use this in the mediator, is something that should be implemented in the future.
 
-        The throttling done in the ESB is relatively static, one configuration will work very well for some scenarios, but might not work as well for other ones. In the future, making it more dynamic might be desireable. The first thing to do might be to make and use a new implementation of the Message Processor instead of the built in SamplingMessageProcessor, retrieving a messages from the Prioritiezed Message Store dynamically instead of just once every predefined interval milliseconds could get you a long way. Also the Throttle mediator could be made more dynamic, for example by varying the now static variables based on percieved network load.
+        The throttling done in the ESB is relatively static, one configuration will work very well for some scenarios, but might not work as well for other ones. In the future, making it more dynamic might be desirable. The first thing to do might be to make and use a new implementation of the Message Processor instead of the built in SamplingMessageProcessor, retrieving a messages from the Prioritized Message Store dynamically instead of just once every predefined interval milliseconds could get you a long way. Also the Throttle mediator could be made more dynamic, for example by varying the now static variables based on perceived network load.
 
-        If propper SAML authentication is implemented the IdentityServer proxys sequence would have to be modified as well.
+        If proper SAML authentication is implemented the IdentityServer proxys sequence would have to be modified as well.
 
 \subsubsection{Client}\label{Future:Client}
-As mentioned in the changes-secton (\ref{Changes}), the components related to authentication on the client side were not implemented as desired due to the problems with the Identity Server. Naturally, this is something that can be adressed in the future, when a proper IS is working.
+As mentioned in the changes-section (\ref{Changes}), the components related to authentication on the client side were not implemented as desired due to the problems with the Identity Server. Naturally, this is something that can be addressed in the future, when a proper IS is working.
 
