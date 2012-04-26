@@ -2,7 +2,7 @@
     In this section we will shortly describe the test service used for testing, "EchoServiceLargeReply.war"(ref:\ref{attachment:file:EchoServiceLargeReply.war}).
 
     The test service is very simple and deployable with GlassFish. It expects a request like this:
-    \lstset{language=XML, style=xml}
+    \lstset{language=XML, style=eclipse}
     \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -31,3 +31,4 @@
     \end{lstlisting}
     \\
     With PAYLOAD intact, and 10KB of Lorem Ipsum\footnote{\url{http://www.lipsum.com/} - simply dummy text}. We add these 10KB of text to ensure that the response is considerably larger than the request, which should get us more realistic results when testing. We also send the original payload back so the test client can easily identify which request was responded to. Those 10KB of text also has a large impact on testing, it means that on lower than 10KBps bandwidth all the messages can't be sent in time. We chose to have it this way because it would give us a predictable test and also some static configuration on the ESB could be configured with this in mind.
+
