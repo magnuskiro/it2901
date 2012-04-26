@@ -244,7 +244,7 @@ Sampling Message Processor:\\
 
 \lstset{language=XML, style=eclipse}
 \lstset{showstringspaces=false}
-\begin{lstlisting}[frame=single] %Ok to not have this referenced =)
+\begin{lstlisting}[frame=single, caption={ms.xml}, label=ms listing, breaklines=true] %Ok to not have this referenced =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
    <services>
@@ -261,13 +261,13 @@ Sampling Message Processor:\\
 	   </service>
    </services>
 </config>
-\end{lstlisting}\\
+\end{lstlisting}
 
 	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KBps. Below is an example configuration.\\
 
 \lstset{language=XML, style=eclipse}
 \lstset{showstringspaces=false}
-\begin{lstlisting}[frame=single] %It is ok that this is not referenced in text =)
+\begin{lstlisting}[frame=single, caption={ppd.xml}, label=ppd listing, breaklines=true] %It is ok that this is not referenced in text =)
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
    <RoutingInfos>
@@ -278,7 +278,7 @@ Sampling Message Processor:\\
 	   </RoutingInfo>
    </RoutingInfos>
 </config>
-\end{lstlisting}\\
+\end{lstlisting}
 
 	If the MSCommunicator is modified to communicate with a Monitoring Service this file will not be needed anymore.
 
