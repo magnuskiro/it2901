@@ -57,7 +57,10 @@ def create_message_graph(files, prints=False, graph=False):
 			for i, key in enumerate(sorted(mess.keys())):
 				d.write(str(i*2) + '\t' + str(mess[key][0]) + '\t')
 			d.write('\n')
-		plot_message_graph(graph_name, file_name)
+		try:
+			plot_message_graph(graph_name, file_name)
+		except OSError e:
+			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return mess
 
 def create_time_graph(files, prints=False, graph=False):
@@ -94,7 +97,10 @@ def create_time_graph(files, prints=False, graph=False):
 			for i, key in enumerate(sorted(result.keys())):
 				d.write(str(i*2) + '\t' + str(result[key][0]) + '\t' + str(result[key][2]) + '\t')
 			d.write('\n')
-		plot_time_graph(graph_name, file_name)
+		try:
+			plot_time_graph(graph_name, file_name)
+		except OSError o:
+			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return result
 		
 def get_plot_name(prompt=""):
