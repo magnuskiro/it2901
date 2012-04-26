@@ -5,6 +5,7 @@
 	Since this project had somewhat of a research focus from the customers side we did not perform these test in order for us to validate our system. Instead we have run these tests to try and say something about the feasibility of the original question asked when we started. We will come back to this topic in the result section.\\
     
     We used the same client setups for all of the tests. The low priority clients, Client 1 and 2, was configured like this:
+\lstset{language=matlab}
 \begin{lstlisting}
 %This is a comment
 %variables are written with NAME:VALUE
@@ -49,7 +50,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Expected Result & We expect to see that the ESB will preempt even higher priority messages in the lower bandwidth tests because of the low timeout, but on higher bandwidths the sending time of the all the messages should be lower than on the later tests. To put that in the same setting as our results, we expect the percentage of successfully received messages to be lower than in the tests below, but we expect the time to also be lower across the board.  \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 1} you can find the appropriate compressed test case.\\
 	\hline
 \end{tabular}
 
@@ -71,7 +72,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Expected Result & We expect to have a higher percentage of completed messages on 10KBps than with a timeout of 500 and we expect the results on 1-, 20- and 40KBps to be relatively unchanged. \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 2} you can find the appropriate compressed test case.\\
 	\hline
 \end{tabular}
 
@@ -93,7 +94,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Expected Result & We expect all the messages on 20 and 40KBps to arrive, we expect that on 10KBps more messages should arrive, but not all. The time taken should again increase. \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 3} you can find the appropriate compressed test case.\\
 	\hline
 \end{tabular}
 
@@ -115,7 +116,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Expected Result & We expect that 10-, 20- and 40KBps should be enough to get most of the messages for the high priority client through, the time taken should again increase and this should be noticeable on 40KBps compared to Test 1.  \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 4} you can find the appropriate compressed test case.\\
 	\hline
 \end{tabular}
 
@@ -137,7 +138,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Expected Result & We expect the same percentage on 10-, 20- and 40KBps as Test 4. What we want to see is that on 5KBps the percentage is increased quite substantially compared to the previous tests. \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 5} you can find the appropriate compressed test case.\\
 	\hline
 \end{tabular}
 \\ \ldots \\
@@ -155,9 +156,9 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect that the average percentage of all the clients will be slightly above what our test can do, we refer to section \ref{Testing:About:Strengths} for some elaboration about this. What we want to see is that on lower bandwidths the average time taken for messages to arrive at Client 4 will be substantially higher than when we use the Throttle mediator. This will indicate that our Throttle mediator actually does some useful work and also indicate that this could be a viable strategy for our customer to continue researching. \\
+	Expected Result & We expect that the average percentage of all the clients will be slightly above what our test can do, we refer to section \ref{Testing:About:Weaknesses} for some elaboration about this. What we want to see is that on lower bandwidths the average time taken for messages to arrive at Client 4 will be substantially higher than when we use the Throttle mediator. This will indicate that our Throttle mediator actually does some useful work and also indicate that this could be a viable strategy for our customer to continue researching. \\
 	\hline
-	Folder with compressed test & [TODO: add reference to the compressed folder with our test here]\\
+	Folder with compressed test & In appendix \ref{attachment:file:Test Case 6} you can find the appropriate compressed test case. \\
 	\hline
 \end{tabular}
 
