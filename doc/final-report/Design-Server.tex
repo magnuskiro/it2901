@@ -119,7 +119,7 @@ To follow this flow, follow the blue arrows in figure \ref{fig:DataFlowDiagramSe
     \end{figure}
 \\           
 SAML Authentication Request:\\
-This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the dummy Identity Server, the ESB then uses the SendBack mediator to send the same message it got in back. The message then travels to the Out sequence where it gets a priority, a DiffServ value and some metadata gets added to the header of the message. The reason why this is done is explained in the section [TODO: Add reference to Identity Server problems here].%TODO fix
+This flow is shown in figure \ref{fig:SAMLauthenticationflow}.The ESB receives a request (from a Client) directed at the dummy Identity Server, the ESB then uses the SendBack mediator to send the same message it got in back. The message then travels to the Out sequence where it gets a priority, a DiffServ value and some metadata gets added to the header of the message. The reason why this is done is explained in section \ref{Changes:IS}.
 
     \subsubsection{Extensions to the ESB}\label{Extensions to the ESB} 
     This section will contain a textual description of all the mediators used in the ESB. First we will describe all the custom mediators and then a short description of the built-in mediators we will use. All of our custom mediators have an accompanying sequence diagram to give a detailed overview of their inner working which is referenced in the title.
@@ -282,7 +282,7 @@ Sampling Message Processor:\\
 
 	If the MSCommunicator is modified to communicate with a Monitoring Service this file will not be needed anymore.
 
-	The last file we will look at is synapse.xml (\ref{attachment:server config}), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
+	The last file we will look at is synapse.xml (ref:\ref{attachment:file:synapse-configs.zip} - synapse-configs.zip), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
 	\begin{itemize}
 	\item The sequence qos where we can find the configuration for the throttle mediator. Here we can set the property minBandwidthPerMessage (integer, measured in Bps) and timeout(integer, measured in ms). Timeout is the longest time a message will be allowed to try sending before it is discarded.
 	\item The messageProcessor. here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in ms.
