@@ -16,20 +16,10 @@
     
     \subsection{Changes}\label{Changes}
         There are a lot of changes from the initial prestudy design to the final design described in this chapter. The prestudy design did not go into a lot of detail because of limited knowledge about the systems we were to be using. Some assumptions made proved to be wrong, and a lot of difficulties popped up along the way. We had a very long planning phase before the implementation in this project. Before we started the implementation we were much closer to the final design than we were in the prestudy, with only a few notable changes made during implementation. These changes are what we would like to discuss in this chapter. This discussion should help you get a better understanding of some of our discoveries, and maybe why we ended up with the product we now have.
+     
 
-     %   \input{Changes-Client}
-     %   \input{Changes-Server}
-      %  \input{Changes-OpenSAML}
-      
-\subsubsection{Client specific changes}\label{Changes:client}
- \\\\
-Sanity checker:\\
-The design of the client library initially called for a sanity checker to validate the messages the client was trying to send and the credentials the client supplied. During implementation we discovered that in order to sanity check the soap message it would either have to be an excessively simplistic sanity check, or we would have to parse the entire message. Parsing the entire message would sanity check it far more thoroughly than we would have been able to, so the sanity checking of soap messages was removed from the sanity checker module, and we ended up relying on the sanity checking built into the parser in Axiom.
-\\\\
-MSCommunicator:\\
-Initially the plan was to integrate the MSCommunicator module in the client library. But we realized that bandwidth data is not necessary for deciding on the DiffServ-value, as that is decided by the Identity Server and returned through SAML.
-Additionally, due to the fact that the data sent by the client will be smaller than the data returned from the web service most of the time, and the network will usually consist of several clients connected to one service we saw no need to prioritize and hold back messages on the client side based on the bandwidth of the network.
-
+   \input{Changes-Client}
+   \input{Changes-Server}
 \subsubsection{Changes that affect both sides}\label{Changes:both}
 \\\\
 OpenSAML:\\
@@ -53,6 +43,7 @@ Our original design called for the implementation of the WSO2 Identity Server, b
     This was as far as we got before our prototype demonstration, and as already mentioned, our customer agreed that we could drop the Identity Server and instead use a dummy layer in the ESB. This means that our final product does not use the IS, and users cannot log on to the system because there is no user store, so the client will create static SAML-tokens which it sends to the dummy layer in the ESB, which then returns the same SAML-token, but wraps in in a SOAP message containing information about the clients priority in the system and its diffserv value.
 
     Had any of us had some experience with WS-security from before, and been familiar with the WS-security policy language, and the Axis2, Axiom, Rampart and Tomcat from Apache, which the WSO2 Identity Server builds upon,  we might have been more successful. We were quite frankly stumbling around in the dark, without knowing exactly where to begin.
+
 
 
 
