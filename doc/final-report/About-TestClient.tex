@@ -16,21 +16,17 @@
     \lstset{language=Java, style=java}
     \lstset{frame=single}
     \lstset{breaklines=true}
+    \lstset{showstringspaces=false}
     \begin{lstlisting}
-//Uses connection.sendData(data, destination) to send a request.
-//Here {REQID} in the request found in clientConfig is replaced with {REQID=reqID}
-//The client library will put the response in the returned ReceiveObject when it is received.
+/* Uses connection.sendData(data, destination) to send a request. Here {REQID} in the request found in clientConfig is replaced with {REQID=reqID}. The client library will put the response in the returned ReceiveObject when it is received. */
 ReceiveObject ro = connection.sendData(
 config.get(DATA).replace("{"+REQID+"}", "{"+REQID+"="+reqID+"}"), destination);
 try {
     logLine("Waiting for response "+reqID);
 
-    //Calls the blocking method ReceiveObject.receive() to get the response.
-    //An alternative to this would be to make a DataListener and add it to connection.
-    //this way, every listener would receive all the responses,
-    //and would be unsuited for this test
+/* Calls the blocking method ReceiveObject.receive() to get the response. An alternative to this would be to make a DataListener and add it to connection This way, every listener would receive all the responses, and would be unsuited for this test */
     String response = ro.receive();
     \end{lstlisting}
     \\
     For more details about configuring the test client read the example configuration provided \ref{attachments:client.config}. For more detailed information on how the test client works, the java file with javadoc is provided \ref{attachments:TestClient.java}.
-    % TODO: fix refs. 
+    % TODO: fix refs.
