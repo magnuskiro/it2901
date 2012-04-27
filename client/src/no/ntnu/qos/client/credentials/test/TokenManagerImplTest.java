@@ -30,6 +30,7 @@ import org.junit.Test;
 /**
  * @author Magnus Kirø - magnuskiro@ underdusken.no/gmail.com - 21/03/12
  */
+@SuppressWarnings("unused")
 public class TokenManagerImplTest {
     static String user, role, password, soapFromUser, tokena, tokenb, pre, post, time;
     static URI destination, destination2;
@@ -124,6 +125,7 @@ public class TokenManagerImplTest {
                         
     }
 
+ /* DEPRECATED TEST
     @Test
     public void getTokenTest(){
         tokenManager.setTokenInDataObject(dataObject);
@@ -133,7 +135,7 @@ public class TokenManagerImplTest {
         assertNotSame(tokenManager.getToken(dataObject), tokenManager.getToken(dataObject2));
 
     }
-
+*/
     @Test
     public void constructorCredentialsTest(){
         TokenManager tokenManager1 = new TokenManagerImpl(user, role, password);

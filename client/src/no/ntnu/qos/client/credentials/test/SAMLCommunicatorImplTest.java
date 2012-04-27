@@ -10,8 +10,9 @@ import no.ntnu.qos.client.credentials.impl.SAMLCommunicatorImpl;
 
 import org.junit.Test;
 
+@SuppressWarnings("unused")
 public class SAMLCommunicatorImplTest {
-
+/* DEPRECATED TEST
 	@Test
 	public void test() throws URISyntaxException {
 		SAMLCommunicatorImpl SAMLCommunicator = new SAMLCommunicatorImpl();
@@ -24,5 +25,5 @@ public class SAMLCommunicatorImplTest {
 		assertEquals(10, token.getDiffServ());
 		assertEquals(100, token.getPriority());
 	}
-
+*/
 }
