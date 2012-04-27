@@ -11,3 +11,11 @@ $ python2 GroupResults.py /path/to/results/ /path/to/where/you/want/results/grou
 $ ./parseall.sh "-m -t -p" /path/to/folder/containing/the/folder/you/moved/results/to/ "2 3 4"
     \end{lstlisting}
     Here the first argument "-m -t -p" is the optional arguments used for ParseResults.py, and the last argument "2 3 4" are the nodes to parse output from.
+    
+    ParseResults works by entering a folder and looping over all the files at the bottom of that folder structure. It expects that the folder contains only similar runs, e.g. runs with speed 10KBps and timeout of 500ms. It then retrieves all the log files from each of the nodes from the commandline. It then calculates the average time taken with standard deviation and the number of successful messages received back at the client. It then outputs this information and can optionally create graphs of this information.
+    
+    ParseResults can be run seperatly from the scripts mentioned above by running
+    \begin{lstlisting}
+$ python2 ParseResults.py -t -m -p /path/to/folder/ 2 3 4
+    \end{lstlisting}
+    Here "-t" means calculate average time, "-m" means calculate successful messages, "-p" print result to console and "2 3 4" are the nodes to extract results from. Should you need any help the "-h" option alone should be quite helpful.
