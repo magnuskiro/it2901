@@ -81,7 +81,7 @@ public class DataObject {
 
 	/**
 	 * gets the message destination
-	 * @return
+	 * @return URI of the destination
 	 */
 	public URI getDestination(){
 		return destination;
@@ -89,7 +89,7 @@ public class DataObject {
 
 	/**
 	 * gets the diffServ value this message will have
-	 * @return
+	 * @return diffServ field for message
 	 */
 	public int getDiffServ(){
 		return diffServ;
@@ -97,7 +97,7 @@ public class DataObject {
 
 	/**
 	 * gets the priority value of the message
-	 * @return
+	 * @return Priority of the message
 	 */
 	public int getPriority(){
 		return priority;
@@ -116,7 +116,7 @@ public class DataObject {
 
 	/**
 	 * returns the SAML token in this object
-	 * @return
+	 * @return the Token of this message
 	 */
 	public Token getSamlToken() {
 		return samlToken;
@@ -132,7 +132,7 @@ public class DataObject {
 
 	/**
 	 * gets the receiveObject to return the reply in
-	 * @return
+	 * @return Receive object for this message
 	 */
 	public ReceiveObject getReceiveObject(){
 		return receiveObj;

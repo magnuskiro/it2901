@@ -46,7 +46,7 @@ public interface QoSClient {
     /**
      * Informs the interface that the replyObject now contains a reply.
      * Should trigger a listener at the client
-     * @param dataObj	- the ReceiveObject that has received a reply
+     * @param recObj	- the ReceiveObject that has received a reply
      */
     public void receive(ReceiveObject recObj);
     

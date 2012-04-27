@@ -8,15 +8,15 @@ import java.util.TimeZone;
 
 /**
  * helper class  that builds SAML assertions
- * @author Håvard
+ * @author HÃ¥vard
  *
  */
 public class CreateAssertion{
 	/**
 	 * 
-	 * @param destination
-	 * @param role
-	 * @return 
+	 * @param destination destination of the token
+	 * @param role role of the user
+	 * @return String of token
 	 */
 	public String createSAML(String destination, String role){
 		String token, time;

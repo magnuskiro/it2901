@@ -33,7 +33,7 @@ public interface Sequencer {
 	/**
 	 * Return data from the service to the client.
 	 * passes it on to the QoSClient
-	 * @param dataObj	- the ReceiveObject that has received a reply
+	 * @param recObj	- the ReceiveObject that has received a reply
 	 */
 	public void returnData(ReceiveObject recObj);
 

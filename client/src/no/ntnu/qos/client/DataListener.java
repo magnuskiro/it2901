@@ -8,7 +8,7 @@ package no.ntnu.qos.client;
 public interface DataListener {
 	/**
 	 * Default receive method
-	 * @param data SOAP data
+	 * @param recObj ReceiveObject that got a reply
 	 */
 	public void newData(ReceiveObject recObj);
 }
