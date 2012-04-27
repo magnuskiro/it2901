@@ -15,7 +15,8 @@ import org.apache.synapse.core.axis2.Axis2MessageContext;
 /**
  * This mediator sets the from-endpoint as a QOS_FROM_ADDR property in the message context.
  * It also sets the QOS_USE_TTL and QOS_TTL properties based on a soap header.
- * @author mahou
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class InMetadataMediator extends AbstractQosMediator {

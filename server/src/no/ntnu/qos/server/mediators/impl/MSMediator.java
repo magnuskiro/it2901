@@ -18,6 +18,7 @@ import org.apache.synapse.SynapseLog;
  * TR GUID as properties in the MessageContext.
  *
  * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class MSMediator extends AbstractQosMediator {

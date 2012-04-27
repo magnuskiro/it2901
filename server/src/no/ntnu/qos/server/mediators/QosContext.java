@@ -1,7 +1,13 @@
 package no.ntnu.qos.server.mediators;
 
 import org.apache.synapse.MessageContext;
-
+/**
+ * This is a wrapper class around a MessageContext
+ * It has some helper methods practical for throttling.
+ * @author Ola Martin
+ * @author Jørgen
+ *
+ */
 public interface QosContext extends Comparable<QosContext> {
 
 	/**

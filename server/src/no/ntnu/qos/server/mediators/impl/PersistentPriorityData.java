@@ -21,7 +21,8 @@ import org.apache.axiom.om.OMXMLParserWrapper;
 
 /**
  * This class stores persistent data regarding priorities.
- * @author Ola Martin & Jørgen
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class PersistentPriorityData {

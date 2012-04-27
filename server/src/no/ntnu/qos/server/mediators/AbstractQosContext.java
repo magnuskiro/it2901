@@ -4,7 +4,13 @@ import java.io.IOException;
 
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
-
+/**
+ * This is an abstract implementation of QosContext, 
+ * it implements some of the functionality needed for a QosContext
+ * @author Ola Martin
+ * @author Jørgen
+ *
+ */
 public abstract class AbstractQosContext implements QosContext {
 	
 	private final MessageContext synContext;

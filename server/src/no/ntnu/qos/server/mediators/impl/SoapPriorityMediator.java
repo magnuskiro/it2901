@@ -12,7 +12,12 @@ import org.apache.synapse.SynapseLog;
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
 import no.ntnu.qos.server.mediators.QosLogType;
-
+/**
+ * This mediator adds diffserv and priority as headers in the SOAP header.
+ * @author Ola Martin
+ * @author Jørgen
+ *
+ */
 public class SoapPriorityMediator extends AbstractQosMediator {
 
 	@Override

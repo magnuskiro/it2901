@@ -5,8 +5,10 @@ import org.apache.synapse.SynapseLog;
 
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 /**
- * This mediator is used to reply to the client, basically just echos.
- * @author mahou
+ * This mediator sets response=true and sets the client as the recipient.
+ * This way the Message Context will be sent through 'out' mediator sequence
+ * and the send mediator will send it back to the client.
+ * @author Ola Martin
  *
  */
 public class SendBackMediator extends AbstractQosMediator {

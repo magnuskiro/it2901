@@ -13,7 +13,12 @@ import org.apache.http.nio.reactor.SocketAccessor;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
 import org.apache.synapse.transport.nhttp.ServerWorker;
-
+/**
+ * This is the default implementation of QosContext
+ * @author Ola Martin
+ * @author Jørgen
+ *
+ */
 public class DefaultQosContext extends AbstractQosContext {
 
 	private final double estTimeSend;

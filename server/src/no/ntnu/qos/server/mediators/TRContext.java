@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Contains a priority queue of QosContexts
+ * and some helper methods to do throttling.
  * @author Ola Martin
  *
  */
