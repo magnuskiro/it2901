@@ -11,16 +11,16 @@
         \label{fig:totaloverview}
     \end{figure}
 
-    \input{Design-Client}
-    \input{Design-Server}
+    \input{designImpl/Design-Client}
+    \input{designImpl/Design-Server}
     
     \subsection{Changes}\label{Changes}
         There are a lot of changes from the initial prestudy design to the final design described in this chapter. The prestudy design did not go into a lot of detail because of limited knowledge about the systems we were to be using. Some assumptions made proved to be wrong, and a lot of difficulties popped up along the way. We had a very long planning phase before the implementation in this project. Before we started the implementation we were much closer to the final design than we were in the prestudy, with only a few notable changes made during implementation. These changes are what we would like to discuss in this chapter. This discussion should help you get a better understanding of some of our discoveries, and maybe why we ended up with the product we now have.
      
-
-   \input{Changes-Client}
-   \input{Changes-Server}
-\subsubsection{Changes that affect both sides}\label{Changes:both}
+   \input{designImpl/Changes-Client}
+   \input{designImpl/Changes-Server}
+   
+    \subsubsection{Changes that affect both sides}\label{Changes:both}
 \\\\
 OpenSAML:\\
 OpenSAML is not used at all. If we had succeeded in implementing the Identity Server, the IS would take care of all SAML generation. Since we use a dummy layer in the ESB to “simulate” the IS, the client needs to generate SAML, but it takes far too much time to initialize the OpenSAML libraries for it to be useful in our case, so we decided not to use it, and instead use Apache Axiom to build a proper SOAP-wrapped SAML-message based on some hardcoded strings, and variable roles and timestamps.
@@ -28,9 +28,10 @@ OpenSAML is not used at all. If we had succeeded in implementing the Identity Se
 Tokens:\\
 The biggest change since the initial design finalization is how tokens are fetched and used in our implementation. The initial idea was that the server side would contain an identity server, which our client would identify itself towards. As it turned out, setting up and using the identity server was a near impossible task (see details on why below) that would have taken us far beyond our project deadline, so together with the customer it was decided that since this wasn't a part of the requirements for the project, it could be dropped. What we ended up with was a far simpler system where the client itself creates a token, which is then sent to a simple echo service on the server to get the SOAP headers we needed from it.\\
 
-\subsubsection{Regarding the Identity Server}\label{Changes:IS}
-
-Our original design called for the implementation of the WSO2 Identity Server, but our final product does not include it as we ran into some problems while trying to set it up. After discussing our situation with the customer, they agreed that we could drop it. It was, after all, not a functional requirement from their side, though it would be preferable to have it included.
+    \subsubsection{Regarding the Identity Server}\label{Changes:IS}
+    [TODO: RegardinIS.tex fil i bruk ?!]
+    
+    Our original design called for the implementation of the WSO2 Identity Server, but our final product does not include it as we ran into some problems while trying to set it up. After discussing our situation with the customer, they agreed that we could drop it. It was, after all, not a functional requirement from their side, though it would be preferable to have it included.
 
     There are several reasons why we failed to implement the Identity Server, one of which is that we started our research of the IS too late, only two weeks before our prototype demonstration, and we only had one group member working on it. After seeing how well documented and fairly easy to use the WSO2 ESB was, we figured that the IS couldn't be much worse, but we figured wrong. Which leads us to the next source of our problems; the WSO2 Identity Server product page at \url{http://wso2.com/products/identity-server} is severely lacking in documentation. The user guide and administration manual contains barely no information about how to configure it and set it up to be usable in different usage scenarios. They provide links to some blog posts that employees had written back in 2009, and even though the blogs contained some useful information, and sometimes provided example configuration files and client code, they did not state which versions of the different products they were basing their examples on, so we don't know if there were compatibility problems between different versions of the IS and ESB.
 

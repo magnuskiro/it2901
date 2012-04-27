@@ -9,6 +9,4 @@ We used this blog post LINK TIL BLOGG to try and set up communication between th
 
 Next, we tried configuring the IS to issue username tokens and send them over HTTPS, which would remove the need for endpoint encryption and was after all the use case we had in mind. We could find no specific examples for this scenario, so we tried creating our own security policy file, and adjust the settings in the ESB and IS. We managed to get the IS to create username tokens, but nothing more, as it crashed when trying to send it to the ESB, stating that the SOAP header did not include a security element. Monitoring the SOAP messages we could see that the header infact did contain this element, so we don't know why the IS couldn't find it. 
 
-
-
 Had any of us had some experience with WS-security from before, and been familiar with the WS-security policy language, and the Axis2, Axiom, Rampart and Tomcat from Apache
