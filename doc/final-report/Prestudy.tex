@@ -1,16 +1,16 @@
-\section{Prestudy}\label{Prestudy} This project is one that requires quite a lot of prestudy before we can begin coding or even designing the architecture. Since the customer wanted us to implement existing technologies, such as Glassfish, WSO2, SAML etc. we needed to spend some time researching those technologies to figure out what to use, and how to use it. The following sections will describe the the overall architecture of how we imagined our system to be like. 
+\section{Prestudy}\label{Prestudy} 
+	This project was one that requires quite a lot of prestudy before we could begin coding or even designing the architecture. Since the customer wanted us to implement existing technologies, such as Glassfish, WSO2, SAML etc. we needed to spend some time researching those technologies to figure out what to use, and how to use it. The following sections will describe the the overall architecture of how we imagined our system to be like. 
 
         \begin{figure}[htb]
             \centering
             \includegraphics[width=\textwidth]{birdarch}
             \caption{Basic server architecture}
-            This shows our initial thoughts of how the servers side architecture wold look like. This has been changed later in the project. 
+            This shows our initial thoughts of how the servers side architecture would look like. This was changed later in the project. 
             \label{fig:birdarch}
         \end{figure}
 
     \subsection{Server side Architecture}\label{Server side Architecture}
-    
-        The server side architecture consists of several components, the WSO2 ESB, the WSO2 \gls{identity server}, the Tactical Router and the GlassFish server. Most of them are visible in the initial architecture shown in figure \ref{fig:birdarch}. All of these components are already available, so what we will have to make is \glspl{mediator}\footnote{\Gls{mediator} - A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB} in the ESB.
+        The server side architecture consists of several components, the WSO2 ESB, the Tactical Router and the GlassFish server. Most of them are visible in the initial architecture shown in figure \ref{fig:birdarch}. All of these components are already available, so what we needed to make was \glspl{mediator}\footnote{\Gls{mediator} - A component in WSO2 ESB which can be used to work on incoming or outgoing messages that passes through the ESB} in the ESB.
 
         Before the client can request a web service it has to have an identification. To get an ID-\gls{token} it has to contact the Identity Server using the ESB as a \gls{proxy}\footnote{\Gls{proxy} - A proxy server acts as an intermediary between clients and servers} (Fig.\ref{fig:Serversidearchitecture}-1). Then the client can request a web service from the ESB. Several things will then happen in the ESB. First the request message is sent to the SAML mediator (Fig.\ref{fig:Serversidearchitecture}-2), this mediator contacts the Identity Server to validate the clients ID-token (Fig.\ref{fig:Serversidearchitecture}-3). If the token is validated and the client is supposed to have access to the requested service, the message is passed on to the GlassFish proxies (Fig.\ref{fig:Serversidearchitecture}-4), otherwise it is dropped. The ESB acting as a proxy will then send the request along to the requested service on the GlassFish server (Fig.\ref{fig:Serversidearchitecture}-5).
 
@@ -35,7 +35,7 @@
             \includegraphics[scale=0.5]{Client-sideArchitechture}
             % do not import the new figure as the old one is corret as this is the prestudy. 
             \caption{The Client side Architecture}
-            The client architecture shows the basic thought of how the system should look like and the communication to and from the client library. 
+            The client architecture shows the basic thought of what the system should look like and the communication to and from the client library. 
             \label{fig:Client-sideArchitechture}
         \end{figure}
  
@@ -51,7 +51,7 @@
     We decided quite early on that we wanted to do unit testing of every piece of code that we would produce, i.e. test driven development. The reason behind this choice is that we think it will result in better code quality. An added bonus is the simplification of integration testing, due to easier discovery of whether a new code addition will integrate with the old code. Also writing the tests first lets us concentrate more on exactly what the methods should do, instead of the content and how it should do it. One of the problems with test driven development however, is the possible bias that could occur, we could end up only satisfying the test and not the actual requirements. This could be countered to some extent by writing more comprehensive tests. Another positive point in favour of unit testing is the requirement we have, which states that the product has to be written in Java where such test are easy to integrate and write using JUnit.
 
     \subsection{Integration testing}\label{Integration testing}
-   For integration testing, we decided that we wanted to do automated system testing every other week in collaboration with code reviews. The procedure we are going to follow will be coding new features in a separate branch. Once every other week the finished branches will have all their unit tests run thoroughly, followed by a code review of at least one person. Then if the automated system tests are fully operational, they will also be run to look for additional errors which the unit tests can not pick up. This point is likely to change in the future as a two week time interval might be to long given the short implementation period. The advantage of doing this integration testing is better overall code quality, since we will test code before it is used by other parts of the system. Since we are also doing code reviews, people will also gain experience with other parts of the system which they previously had not worked on. This will benefit everyone since knowledge about the system is shared, and it will help in the eventuality of someone getting sick. The advantage of developing in separate branches is the reduced risk of polluting code other people are working on, and a better separation of stable and unstable code.
+   For integration testing, we decided that we wanted to do automated system testing every other week in collaboration with code reviews. The procedure we are going to follow will be coding new features in a separate branch. Once every other week the finished branches will have all their unit tests run thoroughly, followed by a code review of at least one person. Then if the automated system tests are fully operational, they will also be run to look for additional errors which the unit tests can not pick up. This point is likely to change in the future as a two week time interval might be too long given the short implementation period. The advantage of doing this integration testing is better overall code quality, since we will test code before it is used by other parts of the system. Since we are also doing code reviews, people will also gain experience with other parts of the system which they previously had not worked on. This will benefit everyone since knowledge about the system is shared, and it will help in the eventuality of someone getting sick. The advantage of developing in separate branches is the reduced risk of polluting code other people are working on, and a better separation of stable and unstable code.
 
     \subsection{System testing}\label{System testing}
     
@@ -74,10 +74,10 @@
     \end{figure}
 \\
 Simple message sending:\\
-    In this test, shown in figure \ref{fig:Simple message sending}, we want to test the ability of the client and the ESB to communicate. We want to see that the client is able to send messages(\gls{message}) to the server and get a response back. For monitoring purposes, this test will rely on both applications to log their behavior. In order for us to give this test the green light we must see a message going out from the client then passing through the ESB to GlassFish. Then finally a reply should be sent back from GlassFish to the ESB and then to the client.
+    In this test, shown in figure \ref{fig:Simple message sending}, we want to test the ability of the client and the ESB to communicate. We want to see that the client is able to send messages(definition can be found in glossary under \gls{message}) to the server and get a response back. For monitoring purposes, this test will rely on both applications to log their behavior. In order for us to give this test the green light we must see a message going out from the client then passing through the ESB to GlassFish. Then finally a reply should be sent back from GlassFish to the ESB and then to the client.
 \\\\
 Setting Quality of Service:\\
-    In this test, we want to test the client and the ESB’s ability to set the DiffServ field in the IP header. The first requirement is that the test “Simple message sending” has been passed. For this test to be considered a success, the client has to send a message to the ESB, which is responds with the DiffServ value in the SOAP header. The ESB must at this point have set the DiffServ value in the IP header. The client should then use a service on GlassFish, but this time the IP header must contain the correct DiffServ value. In order to monitor this test, only a packet sniffer located on the client and ESB side needs to be used. The packets must be examined, and the correct DiffServ value must be present in the IP header of all packets, except the first one going out from the client.
+    In this test, we want to test the client and the ESB’s ability to set the DiffServ field in the IP header. The first requirement is that the test “Simple message sending” has been passed. For this test to be considered a success, the client has to send a message to the ESB, which will responds with the DiffServ value in the SOAP header. The ESB must at this point have set the DiffServ value in the IP header. The client should then use a service on GlassFish, but this time the IP header must contain the correct DiffServ value. In order to monitor this test, only a packet sniffer located on the client and ESB side needs to be used. The packets must be examined, and the correct DiffServ value must be present in the IP header of all packets, except the first one going out from the client.
 \\
     \begin{figure}[h]
         \centering
@@ -88,10 +88,10 @@ Setting Quality of Service:\\
     \end{figure}
 \\   
 Prioritizing messages:\\
-    In this test we want to test the ESB’s ability to prioritize messages. The scenario will be set up as shown in figure \ref{fig:threeclientmessagesending}, with two clients sending lots of messages in an attempt to flood the capacity of the network. All of these messages should have the same priority, but intermittently, a third client with a higher priority will attempt to send some messages. What we are looking for is that these higher priority messages should be sent out from the ESB before the ones with lower priority and, if necessary, it has to stop some already sending messages. For this test to be successful, we must see some lower priority messages being preempted or held back. To do this, the log file of the ESB must be studied, and there should be some clear indications of one of the requirements.
+    In this test we want to test the ESB’s ability to prioritize messages. The scenario will be set up as shown in figure \ref{fig:threeclientmessagesending}, with two clients sending lots of messages in an attempt to flood the capacity of the network. All of these messages should have the same priority, but intermittently, a third client with a higher priority will attempt to send some messages. What we are looking for is that these higher priority messages should be sent out from the ESB before the ones with lower priority and, if necessary, it has to stop some already being sent messages. For this test to be successful, we must see some lower priority messages being preempted or held back. To do this, the log file of the ESB must be studied, and there should be some clear indications of one of the requirements.
 \\\\
 Changing DiffServ value:\\
-    In this test we want to check the ESB’s ability to change the DiffServ value after a reconfiguration. The test and the result can be performed and examined the same way as “Setting Quality of Service”, but this time the test has to be run twice. One where the configuration has one DiffServ value, and a second run where the DiffServ value has a different value. For the test to be successful, one would have to examine the resulting \gls{pcap}\footnote{\Gls{pcap} is short for Packet capture, which in our text usually refers to a program which captures the traffic on a given socket} files on the server side, and check each run to see if the two tries have different DiffServ values.
+    In this test we want to check the ESB’s ability to change the DiffServ value after a reconfiguration. The test can be performed and the result examined the same way as “Setting Quality of Service”, but this time the test has to be run twice. One where the configuration has one DiffServ value, and a second run where the DiffServ field has a different value. For the test to be successful, one would have to examine the resulting \gls{pcap}\footnote{\Gls{pcap} is short for Packet capture, which in our text usually refers to a program which captures the traffic on a given socket} files on the server side, and check each run to see if the two tries have different DiffServ values.
 \\
     \begin{figure}[h]
         \centering
@@ -107,7 +107,7 @@ Multipath server routing:\\
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.4]{3Clientswheretwoarecompeting}
-        \caption{Tree Clients where two are competing}
+        \caption{Three Clients where two are competing}
         Three clients communicate with the same server, but only two of them share the path.
         \label{fig:3clientstwocompeting}
     \end{figure}
