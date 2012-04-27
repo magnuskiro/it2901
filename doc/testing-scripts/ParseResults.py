@@ -59,7 +59,7 @@ def create_message_graph(files, prints=False, graph=False):
 			d.write('\n')
 		try:
 			plot_message_graph(graph_name, file_name)
-		except OSError e:
+		except OSError:
 			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return mess
 
@@ -99,7 +99,7 @@ def create_time_graph(files, prints=False, graph=False):
 			d.write('\n')
 		try:
 			plot_time_graph(graph_name, file_name)
-		except OSError o:
+		except OSError:
 			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return result
 		
