@@ -31,38 +31,32 @@
     "Individuals and interactions" is strongly connected with the organization of our team (ref:\ref{Team Organization}). The flat team structure forced us to have a good dialog among the group members. This increased the team members interaction and strengthens the team communication. The strengthened communication promotes the individuals of the group and the team members confidence, which in turn increases the total productivity of the group. The frequent interactions with the customer are also a part of our adaption to the agile development method. 
     
     "Customer Collaboration" is the aspect of the group contacting the customer and keeping a good dialog with them. This was to make sure that we produced the product that the customer wanted. To achieve this part of the agile manifesto we had meetings with the customer every week, and had frequent email correspondence to iron out the bumps in our product. The frequent communication with the customer helped us to create a more precise and consistent system with better documentation. The main part of the communication with the customer was for the benefit of the project, and constant improvement. The constant improvement and iterative work flow is a central part of the agile method. 
-    \\\\
+    
     Scrum is an agile development methodology. Waterfall is not. Waterfall takes development very much a step at a time. While agile like approaches like scrum run around a track, repeating its steps over and over. The common steps of waterfall and scrum agile are: planning, build, test, review, deploy. 
                
     Scrum does these steps in an iterative manner. First planning, building, testing and then review. These steps are repeated several times before another bigger review is done, followed by testing. This cycle repeats over and over, until the project is done. 
     
     Waterfall  does these steps one at a time. First the planning part until all the planning is complete. Then the implementation part where all the coding is done. Testing follows as a natural step. The testing is thorough, so that no more coding or testing has to be done. Then the review part follows, where functionality, requirements and completeness is assessed. And deployment comes as the last step, when everything is working as it should and everything else is complete.  
-    \\\\
+    
     We ended up using something like iterative waterfall. Where we planned a lot in the beginning, started coding and testing nearly at the same time, the testing consisting of unit tests at that stage. While coding we had reviews and a bit of quality control of the code. And when the code was complete we started system testing. System testing and code improvement went in iterations as we found problems and mistakes that were overlooked before. Then we followed with the documentation part, representing a sort of deployment phase of the waterfall methodology. 
 
     \subsection{System Technology}\label{System Technology}
     
-    We  intend to do a test driven development in order to achieve high quality code. This will give us something to test while we are working, and it will also give us a great way to tell if some new piece of code gets in the way of previously written code. For this purpose we will use \gls{junit}\footnote{\gls{junit} - A testing framework for the Java programming language. [\url{http://junit.org/}]} as the testing framework. We will also be doing periodical code reviews approximately every two weeks of development, synchronized with a code/feature freeze where we make sure everything works. As the customer wanted extensive testing of the middleware, we agreed to do testing on the network emulator NS3, as we have someone in the group already familiar with it. The advantage of using NS3 will be extensive testing, but also a great deal of empirical and verifiable data, which the customer can also use to evaluate the product.
-
-    We will use \gls{git}\footnote{\gls{git} - A free and open source, distributed version control system. [\url{http://www.git-scm.com}]} and \gls{github}\footnote{\gls{github} - A web-based hosting service for software development projects that use the Git version control system. [\url{http://www.github.com}]} to handle our file repository, although Google Docs will be used for easy sharing and collaboration of schedules, meeting minutes, and reports. Even though the course set us up to use \gls{svn} (SVN)\footnote{\gls{svn} - A version control system}, we decided against this as Git gives us more options to develop code which will not greatly affect other parts of the code base before we decide to integrate it. To this extent we have decided that we should take advantage of Git’s built in support for ‘branches’ as much as possible. The argument for using Google Docs is that we have the possibility of editing a document together and easy sharing of documents. Delivered reports will be created with \gls{latex}\footnote{\gls{latex} - A document preparation system for the \TeX -typesetting program}, which we prefer over standard word processors. Our GitHub repository is open to the public, and the software will be released as open source, most likely under the Apache License.\footnote{\url{http://www.apache.org/licenses/LICENSE-2.0.html}} In some places we are forced to use the ASF, like the changes we have done to Apache HTTPComponents and Apache Synapse, but as the licenses allows for derived works to be licensed under a different license we are free to chose a different one. The Apache License version 2.0 is also compatible with the GPLv3 so there is no problem for us in using either. 
-    We agreed to use the Apache2 license. FFI could not find any negativities for them in the license so we decided to use it. 
-
-    Each of us is free to choose his own \gls{ide}\footnote{\gls{ide} - Integrated Development Environment} for programming. Because we are using Git, there should be no problem in using the IDE of our choice, and this gives us the added advantage that each person can use the tool which he is most comfortable with. We will stick to the standard \gls{java coding conventions}.
+    To begin with we intended to use \gls{junit}\footnote{\gls{junit} - A testing framework for the Java programming language. [\url{http://junit.org/}]} tests throughout the project. This started well in the implementation phase, but faded away towards the end of the implementation phase. Especially when the implementation was a week delayed and we used a lot of time debugging and making the system actually work. 
     
-    Since we were so free to choose which tools we wanted to use we decided that this list should be quite lightweight. However the list compiled should be an indication of what is needed for the project. Some of the tools were chosen by us as is and other were demanded by needs of other components. All tools used can be  upgraded, downgraded or dropped during the course of this project. The final report will contain the official list as such this list is not in any way final. Our final report will also contain a list with supported tools tested with the final product.
-    \begin{itemize}
-    % TODO: we must have a full list of tested versions of technologies in the full version of this report, probably under testing.
-        \item Git version 1.7.x
-        \item Java version 1.6.x
-        \item Free choice of IDE
-        \item JUnit version 4.x
-        \item NS3 version 3.13
-        \item WSO2 ESB 4.0.3
-        \item Axiom version 1.2.11  -  Note that our server code must use the same version of axiom as the ESB.
-	\item HTTPCore version 4.1.4
-	\item Commons-logging version 1.1.1
-	\item MobiEmu
-	\subitem MobiEmu was installed with all dependencies, for more see \url{https://code.google.com/p/mobiemu/} for all of MobiEmu requirements.
-    \end{itemize}
+    At the beginning we planned to have code reviews and go through all the code and fix code deficiencies. This was meant to happen every other week. As good as this intention is we didn't manage to do it as often as we would like. In the server side we had two code reviews. With the client we had none. We also experienced that the code reviews didn't really work out as we had planned. While debugging the client library and the server side of the developed application we found a lot of bugs and logic errors after the code reviews. This means that our code reviews were bad and that they didn't really fulfil their purpose. 
     
+    One of our requirements were that the system should be thoroughly tested. To accomplishe this requirement we decided to use the MobiEmu framework. MobiEmu is a network emulator that emulates network traffic and behaviour. It is based on NS3 and can test multiple nodes in a virtual network. This gives us the advantage of testing our system to a good extent of the real time battle situation that the system is thought to operate in. Another reason that we used this testing framework is that one of our group members had previous experience with it. The testing framwork gave us useful test results that are discussed in section \ref{Testing}.
 
+    Furthermore we used \gls{git}\footnote{\gls{git} - A free and open source, distributed version control system. [\url{http://www.git-scm.com}]} and \gls{github}\footnote{\gls{github} - A web-based hosting service for software development projects that use the Git version control system. [\url{http://www.github.com}]} to handle our files and repository. 
+    
+    Along with git we used Google-docs, now drive, to store and share documents. This helped us greatly in the cooperation of this project. Google docs allowed us to be multiple people to working on the same document at the same time. 
+    
+    \gls{latex}\footnote{\gls{latex} - A document preparation system for the \TeX -typesetting program} is obviously the preferred report scripting language for the task of writing this report. Latex helped us a lot in the report writing process. Syntax highlighting, easy integration of figures and good structure to the report files are examples of benefits we got from using \Tex.
+    
+    With input from the customer and their approval we decided to use Apache2 license for our code. As far as all parties could find there was no negative sides for any of us. 
+
+    As for the personal development environment. The individual person was responsible to get his system to work. While the choice of environment is free we presume that we acchieved greater productivity than if everyone was foreced to use the same environment, e.g: ubuntu with eclipse.  
+
+    As for a total list of tools that was use, see the section about Tested tools, (ref:\ref{toolslist})    
+    

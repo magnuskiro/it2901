@@ -1,7 +1,7 @@
 \subsubsection{Client Specific Changes}\label{Changes:client}
  \\\\
 Sanity checker:\\
-The design of the client library initially called for a sanity checker to validate the messages the client was trying to send and the credentials the client supplied. During implementation we discovered that in order to sanity check the soap message it would either have to be an excessively simplistic sanity check, or we would have to parse the entire message. Parsing the entire message would sanity check it far more thoroughly than we would have been able to, so the sanity checking of soap messages was removed from the sanity checker module, and we ended up relying on the sanity checking built into the parser in Axiom.
+The design of the client library initially called for a sanity checker to validate the messages the client was trying to send and the credentials the client supplied. During implementation we discovered that in order to sanity check the SOAP message it would either have to be an excessively simplistic sanity check, or we would have to parse the entire message. Parsing the entire message would sanity check it far more thoroughly than we would have been able to, so the sanity checking of SOAP messages was removed from the sanity checker module, and we ended up relying on the sanity checking built into the parser in Axiom.
 \\\\
 MSCommunicator:\\
 Initially the plan was to integrate the MSCommunicator module in the client library. But we realized that bandwidth data is not necessary for deciding on the DiffServ-value, as that is decided by the Identity Server and returned through SAML.
