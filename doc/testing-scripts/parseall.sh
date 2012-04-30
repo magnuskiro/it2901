@@ -1,14 +1,27 @@
 #!/bin/sh
-cd $1
-#for folder in *; do
-#	echo 
-#	echo ----------$folder,-----------
-#	cd $folder
+SCRIPT=`readlink -f $0`
+DIR=`dirname "$SCRIPT"`
+cd $2
+for folder in *; do
+	echo 
+	echo ----------$folder,-----------
+	cd $folder
 	for fold in *; do
 		echo ----------$fold,---------
-		cd '/home/qos/server/Result Scripts/'
-		python ParseResults.py -t -m $1$folder/$fold/ 2 3 4
+		cd "$DIR"
+        case "$1" in
+        *-g*)
+            GRAPHNAME=$folder$fold
+            ;;
+        *)
+            GRAPHNAME=""
+            ;;
+        esac
+        python2 ParseResults.py $1 $GRAPHNAME $2$folder/$fold/ $3
 		echo
 	done
-	cd $1
-#done
+	cd $2
+done
+cd "$DIR"
+mkdir graphs
+mv *.png graphs/
