@@ -1,2 +1,29 @@
 \subsection{Results}\label{Testing:Results}
-    TODO: finish it
+	In this section we will go over the results for each of the test cases in the preceding section. We will compare the results with each other and also compare most of the cases to the "No throttle mediator" scenario.\\
+	 
+    \textbf{Test case 1:}\\
+    In test 1 we wanted to find out how the ESB would perform with a low timeout. From our expectations we want to see that the average time for messages to arrive is low, but we do not expect this test to have as good a percentage as the rest. 
+    
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.3]{graphs/500ms10KBps_time}
+		\caption{Time graph, timeout equal to 500 and bandwidth of 10kBps} 
+		\label{figure:results:500ms10KBps_time}
+	\end{figure}
+    
+    The actual results do indeed match our expectation quite well. As you can see in figure \ref{figure:results:500ms20KBps_time} the time taken is quite low, if we compare that time to the time in figure \ref{figure:results:2000ms20KBps_time} we can easily see that the lower timeout has an effect on the results and in most of the cases it is correct that the lower timeout does make the ESB quicker.\\
+    
+    \textbf{Test case 2:}\\
+    this be text\\
+    
+    \textbf{Test case 3:}\\
+    this be text\\
+    
+    \textbf{Test case 4:}\\
+    this be text\\
+    
+    \textbf{Test case 5:}\\
+    this be text\\
+    
+    \textbf{Test case 6:}\\
+    this be text\\
