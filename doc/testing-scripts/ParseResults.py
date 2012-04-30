@@ -12,7 +12,7 @@ def add_arguments(parser):
 	parser.add_argument('-m', '--messages', action='store_true', help='Generate a graph over the number of messages successfully received back for each client')
 	parser.add_argument('-t' ,'--time', action='store_true',  help='Generate a graph over the average time each client waited for reply')
 	parser.add_argument('-p' ,'--print', action='store_true',  help='Print results to terminal')
-	parser.add_argument('-g' ,'--graph', action='store_true',  help='Create graphs of the results')
+	parser.add_argument('-g' ,'--graph', metavar='name_for_graph', type=str,  help='Create graphs of the results')
 	parser.add_argument('-c', '--core', action='store_true', help='Print info about core')
 	
 def get_files(folder, nodes):
@@ -28,7 +28,7 @@ def get_files(folder, nodes):
 					result[f] = [path.abspath(root + '/' + fil)]
 	return result
 	
-def create_message_graph(files, prints=False, graph=False):
+def create_message_graph(files, graph_name, prints=False, graph=False):
 	file_name = 'message_data.dat'
 	total_messages = re.compile(r"(?<=nofreqs set to:)[ 0-9]+")
 	actual_messages = re.compile(r"INFO: [0-9]+ms: Got response for [0-9]+")
@@ -52,7 +52,6 @@ def create_message_graph(files, prints=False, graph=False):
 		for key in sorted(mess.keys()):
 			print 'Percentage of messages received for', key, ':', mess[key][0]
 	if graph:
-		graph_name = get_plot_name('Type in a name for the message graph: ')
 		with open(file_name, 'w') as d:
 			for i, key in enumerate(sorted(mess.keys())):
 				d.write(str(i*2) + '\t' + str(mess[key][0]) + '\t')
@@ -63,7 +62,7 @@ def create_message_graph(files, prints=False, graph=False):
 			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return mess
 
-def create_time_graph(files, prints=False, graph=False):
+def create_time_graph(files, graph_name, prints=False, graph=False):
 	file_name = 'time_data.dat'
 	times_pattern = re.compile(r"(?<=INFO: )[0-9]+(?=ms: Got response for)")
 	result = {}
@@ -92,7 +91,6 @@ def create_time_graph(files, prints=False, graph=False):
 		for key in sorted(result.keys()):
 			print 'Average time for received messages(in ms) for ', key, ':', result[key][0], '\tdeviation:', int(result[key][2]),'({0}%)'.format(int((result[key][2]/result[key][0])*100))
 	if graph:
-		graph_name = get_plot_name('Type in a name for the time graph: ')
 		with open(file_name, 'w') as d:
 			for i, key in enumerate(sorted(result.keys())):
 				d.write(str(i*2) + '\t' + str(result[key][0]) + '\t' + str(result[key][2]) + '\t')
@@ -102,10 +100,6 @@ def create_time_graph(files, prints=False, graph=False):
 		except OSError:
 			print 'Could not plot graph.\nEnsure that you have Gnuplot installed and rerun this program'
 	return result
-		
-def get_plot_name(prompt=""):
-	inp = raw_input(prompt)
-	return inp
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Parse result from a System Test and generate graphs')
@@ -118,6 +112,6 @@ if __name__ == '__main__':
 		print core.readline(),
 	#print files
 	if(args['messages']):
-		create_message_graph(files, args['print'], args['graph'])
+		create_message_graph(files, args['graph'], args['print'], len(args['graph']) != 0)
 	if(args['time']):
-		create_time_graph(files, args['print'], args['graph'])
+		create_time_graph(files, args['graph'], args['print'], len(args['graph']) != 0)
