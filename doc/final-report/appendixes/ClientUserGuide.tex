@@ -4,7 +4,7 @@
     
     This is the user manual for the QoS client library. Here we will cover how to use the client library to communicate with our server implementation, in a way that properly set the diffserv value on the packages sent from the client to the server. This manual is intended to be as simplistic and understandable as possible.
 
-    First we will cover the steps you need to take in order to be able to use our library. Then move on to the easiest way to use it, as well as how to use it with a listener pattern. This will be followed by a section covering the available settings in the library, and finally we will bring up some caveats of our implementation that is worth keeping in mind.
+    First we will cover the steps one needs to take in order to be able to use our library. Then move on to the easiest way to use it, as well as how to use it with a listener pattern. This will be followed by a section covering the available settings in the library, and finally we will bring up some caveats of our implementation that is worth keeping in mind.
 
     \subsection{Required interfaces}\label{userguideReqiredInterfaces}
     
@@ -60,7 +60,7 @@ ReceiveObject replyObject = client.send(String soap, URI destination);
 String reply = replyObject.receive();
 \end{lstlisting}
 
-    The string you send has to be a valid soap message. The soap message has to contain a valid envelope with a body element, more on this in the caveats section.
+    The string you send has to be a valid SOAP message. The SOAP message has to contain a valid envelope with a body element, more on this in the caveats section.
     
     The ReceiveObject you get back from the send method is a blocking string, which means that calling receive on it will block execution until a reply is available.
 
