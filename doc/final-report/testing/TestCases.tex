@@ -42,13 +42,13 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: 500}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect to see that the ESB will preempt even higher priority messages in the lower bandwidth tests because of the low timeout, but on higher bandwidths the sending time of the all the messages should be lower than on the later tests. To put that in the same setting as our results, we expect the percentage of successfully received messages to be lower than in the tests below, but we expect the time to also be lower across the board.  \\
+	Expected Result & We expect to see that the ESB will time out even higher priority messages in the lower bandwidth tests because of the low timeout, but on higher bandwidths the sending time of the all the messages should be lower than on the later tests. To put that in the same setting as our results, we expect the percentage of successfully received messages to be lower than in the tests below, but we expect the time to also be lower across the board.  \\
 	\hline
 	Folder with compressed test & In appendix \ref{attachment:file:Test Case 1} you can find the appropriate compressed test case.\\
 	\hline
@@ -60,17 +60,17 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	ID & 2 \\
 	\hline
-	Description & In this test we have increased the timeout substantially, we expect to see some improvements on 10KBps and still retain some of the benefits of a lower timeout on 20- and 40KBps \\
+	Description & In this test we have increased the timeout substantially, we expect to see some improvements on 10kBps and still retain some of the benefits of a lower timeout on 20- and 40kBps \\
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: 1000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect to have a higher percentage of completed messages on 10KBps than with a timeout of 500 and we expect the results on 1-, 20- and 40KBps to be relatively unchanged. \\
+	Expected Result & We expect to have a higher percentage of completed messages on 10kBps than with a timeout of 500 and we expect the results on 1-, 20- and 40kBps to be relatively unchanged. \\
 	\hline
 	Folder with compressed test & In appendix \ref{attachment:file:Test Case 2} you can find the appropriate compressed test case.\\
 	\hline
@@ -86,13 +86,13 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: 2000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect all the messages on 20 and 40KBps to arrive, we expect that on 10KBps more messages should arrive, but not all. The time taken should again increase. \\
+	Expected Result & We expect all the messages on 20 and 40kBps to arrive, we expect that on 10kBps more messages should arrive, but not all. The time taken should again increase. \\
 	\hline
 	Folder with compressed test & In appendix \ref{attachment:file:Test Case 3} you can find the appropriate compressed test case.\\
 	\hline
@@ -108,13 +108,13 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: 5000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect that 10-, 20- and 40KBps should be enough to get most of the messages for the high priority client through, the time taken should again increase and this should be noticeable on 40KBps compared to Test 1.  \\
+	Expected Result & We expect that 10-, 20- and 40kBps should be enough to get most of the messages for the high priority client through, the time taken should again increase and this should be noticeable on 40kBps compared to Test 1.  \\
 	\hline
 	Folder with compressed test & In appendix \ref{attachment:file:Test Case 4} you can find the appropriate compressed test case.\\
 	\hline
@@ -126,17 +126,17 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	ID & 5 \\
 	\hline
-	Description & In this test we have gone all out. The timeout is massivly increased to see how the ESB behaves on the lowest bandwidths, 1- and 5KBps respectively.  \\
+	Description & In this test we have gone all out. The timeout is massivly increased to see how the ESB behaves on the lowest bandwidths, 1- and 5kBps respectively.  \\
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: 100 000}, interval: 500, minimum bandwidth per message: 10240 \\
 	\hline
 	Automated & Yes \\
 	\hline
-	Expected Result & We expect the same percentage on 10-, 20- and 40KBps as Test 4. What we want to see is that on 5KBps the percentage is increased quite substantially compared to the previous tests. \\
+	Expected Result & We expect the same percentage on 10-, 20- and 40kBps as Test 4. What we want to see is that on 5kBps the percentage is increased quite substantially compared to the previous tests. \\
 	\hline
 	Folder with compressed test & In appendix \ref{attachment:file:Test Case 5} you can find the appropriate compressed test case.\\
 	\hline
@@ -150,7 +150,7 @@ request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schema
 	\hline
 	Repetition(s) & 10 \\
 	\hline
-	NS3 variables & Datarate: 1KBps,5KBps,10KBps,20KBps,40KBps \\
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
 	\hline
 	ESB variables & \textbf{Timeout: N/A}, interval: 500, minimum bandwidth per message: N/A \\
 	\hline
