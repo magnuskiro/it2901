@@ -37,13 +37,13 @@ $ mkdir EchoClient
 $ cp /path/to/EchoClientClient.jar EchoClient/
 \end{lstlisting}
 
-    Now we need to just copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
+    Now we need to copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
 
     You may also need to change the path in “system-test-2.py” please have a look at \ref{mobiemu:system-test-2.py} and change it to reflect your setup.
 
-    The last thing we need to do is just edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Just edit the path under “[ns3]” to point to the path to NS3.
+    The last thing we need to do is edit the settings file and ensure that the “[ns3]” section points to the right path. In listing \ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Edit the path under “[ns3]” to point to the path to NS3.
 
-Now the setup should be completed and it should now be possible to run the framework. In order to do so just run:
+Now the setup should be completed and it should now be possible to run the framework. In order to do so run:
 \lstset{language=bash, style=shell}
 \begin{lstlisting}[frame=single, caption={Run MobiEmu}, label=mobiemu:run, breaklines=true]
 $ cd /path/to/system-test
@@ -53,7 +53,7 @@ $ sudo su
 
     You will now be running one of our system tests!\\
 
-    The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you just want to verify our tests.
+    The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you only want to verify our tests.
 
     Below is the full settings files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
 
@@ -403,4 +403,4 @@ int main (int argc, char *argv[])
 }
 \end{lstlisting}
 
-There should be very little which we could explaining here, as NS3 in itself is quite complex. Therefore we refer you to the NS3\footnote{Documentation for NS3 \url{http://www.nsnam.org/docs/release/3.13/tutorial/singlehtml/index.html}} documentation if you would like extend the topology.
+There should be very little which we could explain here, as NS3 in itself is quite complex. Therefore we refer you to the NS3\footnote{Documentation for NS3 \url{http://www.nsnam.org/docs/release/3.13/tutorial/singlehtml/index.html}} documentation if you would like to extend the topology.
