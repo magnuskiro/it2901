@@ -3,7 +3,7 @@
 from subprocess import Popen, PIPE
 
 def prepare_gnu_plot(plot, boxwidth=1):
-	plot.stdin.write('set terminal postscript enhanced monochrome dashed\n')
+	plot.stdin.write('set terminal postscript enhanced monochrome\n')
 	plot.stdin.write('set xtics ("Node 2" 0, "Node 3" 2, "Node 4" 4) \n')
 	plot.stdin.write('set boxwidth {0}\n'.format(boxwidth))
 	plot.stdin.write('set xrange[-1:5]\n'.format(boxwidth))
