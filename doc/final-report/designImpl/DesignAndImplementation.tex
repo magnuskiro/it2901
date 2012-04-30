@@ -1,5 +1,5 @@
 \section{Design and Implementation}\label{Design and Implementation}
-	In this section we will discuss the design and implementation of the whole system. First of is the section about the client side of the equation and then follows the server side. 
+	In this section we will discuss the design and implementation of the whole system. First off is the section about the client side of the system and then follows the server side. 
 	
 	Below is a first taste of how our system works. In figure \ref{fig:totaloverview} you can see a cloud of clients which can be on the same local network or be on different networks. The \textit{ESB} talks to \textit{GlassFish} where services are placed and clients talk to the ESB which mediates the message into GlassFish. In order for the ESB to know how much bandwidth each client can utilize, it is dependent on the \textit{Monitoring Service} which relays that sort of network information.
     
