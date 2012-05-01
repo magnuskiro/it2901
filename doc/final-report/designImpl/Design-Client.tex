@@ -10,17 +10,14 @@ The client architecture consists of the following two components: The client app
     \subsubsection{Component description:}\label{Component description}
 
 \indent \indent \textbf{Client application:}\\
-	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get, and to interact properly with our server setup.
-\\\\
+	The user-controlled applications that utilize web services. These must be modified to send all communication through the client library in order to get the priority it should get, and to interact properly with our server setup. \\
 
 \indent \textbf{Client library:}\\
 This component will handle all communication with the service providers, as well as authenticating users and prioritizing their messages, based on who they are, and what their current role is. The authorization will involve a component from the server side of the project, the identity server, which returns a token if the client is authorized. Client applications connect through a simple interface to provide credentials and data.
-\\\\ 
 
     \subsubsection{External libraries:}
 \indent \indent \textbf{Axiom:}\\
-This component will be used to parse and manipulate \gls{xml}\footnote{\gls{xml} - eXtensible Markup Language} data in the form of SOAP and SAML. These are fairly extensive and complex data structures so an easy to use external library is essential here.
-\\\\
+This component will be used to parse and manipulate \gls{xml}\footnote{\gls{xml} - eXtensible Markup Language} data in the form of SOAP and SAML. These are fairly extensive and complex data structures so an easy to use external library is essential here. \\
 
 \indent \textbf{Apache \gls{httpcomponents}:}\\
 A lightweight component for easily setting up and using HTTP connections. While not strictly necessary this component will allow us to connect and communicate across networks far more easily than the standard Java components.
