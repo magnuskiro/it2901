@@ -1,6 +1,6 @@
 \section{MobiEmu Setup Guide}\label{MobiEmu Setup Guide}
 
-    In this appendix we will show how to setup the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
+    In this appendix we will show how to set up the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
 
     We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
 
@@ -53,9 +53,9 @@ $ sudo su
 
     You will now be running one of our system tests!\\
 
-    The rest of this appendix will explain the different variables and testing files that we use in our setup, it is not necessary to read this section if you only want to verify our tests.
+    The rest of this appendix will explain the different variables and testing files that we use in our setup, so it is not necessary to read this section if you only want to verify our tests.
 
-    Below is the full settings files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which has a real effect on our tests.
+    Below are the full settings-files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which have a real effect on our tests.
 
 \lstset{language=make, style=shell}
 \begin{lstlisting}[frame=single, caption={Setting.cfg}, label=mobiemu:setting.cfg, breaklines=true]
@@ -269,7 +269,7 @@ elif node_id == 2 or node_id == 3 or node_id == 4:
        echo.terminate()
 \end{lstlisting}
 
-There should really be nothing to special about this file. It first starts up GlassFish and then the ESB, each client sleeps until the ESB has started and then they start sending their messages.
+There should really be nothing too special about this file. It first starts up GlassFish and then the ESB, and each client sleeps until the ESB has started before they start sending their messages.
 
 \begin{itemize}\label{mobiemu:system-test-2.py changes}
 \item path = '/home/qos/server/mobiemu/system-test-2/experiments/' - This will need to be changed to reflect where it is run from, this has to be this way because it is run with root and it needs an absolute path.

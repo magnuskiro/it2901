@@ -1,12 +1,16 @@
 % we might have been a bit slow to get to the coding part but it worked out well(?). 
 % did we complete implementation on time?
 
-Because of all the research needed for this project we planned to start the development phase relatively late in the project. And we did manage to start it at the planned time.
+Because of all the research needed for this project we planned to start the development phase relatively late in the project. And we did manage to start it at the planned time. We had quite a lot to do during the implementation and because of the frameworks we worked with we had to familiarize us with the code of these as well. 
 
 On the server side of the project we quickly saw that most of the implementation would take less time than originally anticipated. That way we could start looking at the test suite earlier as well. However on the client side things went a little more slowly, so we put in more work hours to complete it in time. 
 
-Work on the Identity Server and OpenSAML did not go as planned. The IS was very badly documented, and alot of work hours was put into something that in the end was dropped. OpenSAML was used at some point, but was dropped towards the end because it was too slow to use in the client library. To replace the IS we ended up with a work around which can be used in testing, but should be replaced in a proper system. The IS' is mainly used for enforcement of security, which the customer said is not very important for this project. The work around was accepted by the customer and should not be a problem.
+During implementation we worked on supporting DiffServ in WSO2 which turned out was not that easy. In the end we ended up with implementing Socket access in the underlying Apache \Gls{httpcomponents} which is the underlying network layer in WSO2 ESB. This has enabled us to support DiffServ in \Gls{synapse} and thus WSO2 ESB. These changes has also been pushed upstream\footnote{The corresponding ticket in HttpComponents is \url{https://issues.apache.org/jira/browse/HTTPCORE-295}} and will be supported in future versions.
+
+Work on the Identity Server and OpenSAML did not go as planned. The IS was very badly documented, and a lot of work hours was put into something that in the end was dropped. OpenSAML was used at some point, but was dropped towards the end because it was too slow to use in the client library. To replace the IS we ended up with a work around which can be used in testing, but should be replaced in a proper system. The IS' is mainly used for enforcement of security, which the customer said is not very important for this project. The work around was accepted by the customer and did not become a problem.
 
 We ended up using a bit more resources than planned on the implementation, resulting in work on the final report mostly being pushed back to after the implementation. But we did manage to finish the implementation on time, with only some bug fixes and the work around done after our internal deadline.
 
-If we had more time we would probably be able to implement some more functionality, especially on the ESB. But in the end we managed to implement the most important parts and get some positive results.
+If we had more time we would probably be able to implement some more functionality, especially on the ESB. In the end we managed to implement the most important parts and get some positive results.
+
+Even though we had some setbacks during implementation we did manage to implement more than the customer expected which we are very proud of.

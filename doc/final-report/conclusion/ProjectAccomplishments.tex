@@ -1,8 +1,10 @@
 \subsection{Project accomplishments}\label{Project accomplishments}
-	The problem we set out to investigate was whether or not prioritization on the application level of the OSI model could be beneficial in networks with low bandwidth. We extended an ESB to accommodate changes necessary for prioritization on the server side and crated a custom client library to go with it.
+	The problem we set out to investigate was whether or not prioritization on the application level of the OSI model, together with network level prioritization in the from of DiffServ, could be beneficial in networks with low bandwidth. We extended an ESB to accommodate changes necessary for prioritization on the server side and crated a custom client library to go with it. We also extended a library used by the the ESB to support setting DiffServ.
 	
 	What our results show is that prioritization on the application level is very viable. In our tests we show that there is a lot of improvement that can be made utilizing the network with just high priority messages instead of flooding it. Our results also indicates that having such a layer does not have to big of an performance impact.
 	
 	Because of some drawbacks of our implementation we can't conclude with anything to definite, but as an approach to better utilize available network resources in a constricted bandwidth scenario have the application layer help could mean a great deal.
 	
 	Going forward there are some things that could indeed be improved, but what we have done is shown that having prioritization on the application level could make a large difference.
+
+	Outside the project we've also gotten the change we had to make to Apache HttpComponents Core accepted upstream into the codebase. While a relatively minor change it is a change that stretches outside of the limits of the project and allows for manipulation of the socket for packages going outwards from a server using Apache HttpComponents Core. While this library is used by a large amount of other projects, we are unsure how many will use this new functionality. We however consider this one of the accomplisments of the project.
