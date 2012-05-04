@@ -20,13 +20,17 @@
    \input{designImpl/Changes-Client}
    \input{designImpl/Changes-Server}
    
-    \subsubsection{Changes that affect both sides}\label{Changes:both}
-\\\\
-OpenSAML:\\
-OpenSAML is not used at all. If we had succeeded in implementing the Identity Server, the IS would take care of all SAML generation. Since we use a dummy layer in the ESB to “simulate” the IS, the client needs to generate SAML, but it takes far too much time to initialize the OpenSAML libraries for it to be useful in our case, so we decided not to use it, and instead use Apache Axiom to build a proper SOAP-wrapped SAML-message based on some hardcoded strings, and variable roles and timestamps.
-\\\\
-Tokens:\\
-The biggest change since the initial design finalization is how tokens are fetched and used in our implementation. The initial idea was that the server side would contain an identity server, which our client would identify itself towards. As it turned out, setting up and using the identity server was far more difficult than anticipated (see details on why below), and would have taken us far beyond our project deadline, so together with the customer it was decided that since this wasn't a part of the requirements for the project, it could be dropped. What we ended up with was a far simpler system where the client itself creates a token, which is then sent to a simple echo service on the server to get the SOAP headers we needed from it.\\
+    \subsubsection{Changes that affect both sides}\label{Changes:both}\\
+    
+\indent \indent \textbf{OpenSAML:}\\
+OpenSAML is not used at all. If we had succeeded in implementing the Identity Server, the IS would take care of all SAML generation. Since we use a dummy layer in the ESB to “simulate” the IS, the client needs to generate SAML, but it takes far too much time to initialize the OpenSAML libraries for it to be useful in our case, so we decided not to use it, and instead use Apache Axiom to build a proper SOAP-wrapped SAML-message based on some hardcoded strings, and variable roles and timestamps. The SAML we are currently using in our codebase is generated with openSAML and used as strings to change roles and credentials.\\
+
+\textbf{Tokens:}\\
+The biggest change since the initial design finalization is how tokens are fetched and used in our implementation. The initial idea was that the server side would contain an identity server, which our client would identify itself towards. As it turned out, setting up and using the identity server was far more difficult than anticipated (see details on why below), and would have taken us far beyond our project deadline, so together with the customer it was decided that since this wasn't a part of the requirements for the project, it could be dropped. 
+    
+We tried a simpler solution where the client itself creates a token, which is then sent to a simple echo service on the server to get the SOAP headers we needed from it. This solution proved to be really slow because we genereated the SOAP every time. So the test runs with this implementation was useless. 
+
+What we ended up using was a pre generated SOAP message. This message was then used as a string in the client library where we changed the role and credentials to create a realistic scenario. 
 
     \subsubsection{Regarding the Identity Server}\label{Changes:IS}
     
