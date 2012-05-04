@@ -10,6 +10,8 @@
 
 	\subsubsection{Client}\label{Future:Client}
 		As mentioned in the changes-section (\ref{Changes}), the components related to authentication on the client side were not implemented as desired due to the problems with the Identity Server. Naturally, this is an issue that should be adressed when a proper IS is present.
+
+		The use of HTTPS, which is a result of our wish to use the Identity Server, could also be made more modular. During our testing we did experience some problems with SSL handshaking having timeouts. This should not be big problems as that would almost guarantee that our messages during testing would also timeout.
 		
     	Other then that there is little unfinished tasks in the client library. Althought there could always be better and more unit tests. 
 
