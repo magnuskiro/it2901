@@ -1,7 +1,6 @@
 package no.ntnu.qos.server.mediators.test;
 
 import no.ntnu.qos.server.store.test.PrioritizedMessageStoreTest;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;

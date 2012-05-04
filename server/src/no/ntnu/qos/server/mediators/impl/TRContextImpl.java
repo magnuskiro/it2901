@@ -35,6 +35,7 @@ public class TRContextImpl implements TRContext {
 	public void add(QosContext qCtx) {
 		synchronized (queue) {
 			queue.add(qCtx);
+			qCtx.send();
 			usedCapacity++;
 			long posNext = (long) (qCtx.getEstimatedSendingTime() + System.currentTimeMillis());
 			if(posNext < nextEvent){
@@ -63,6 +64,8 @@ public class TRContextImpl implements TRContext {
 							next.preempt();
 							result.add(this.queue.poll());
 							usedCapacity--;
+						}else{
+							break;
 						}
 					}else{
 						break;
@@ -88,22 +91,27 @@ public class TRContextImpl implements TRContext {
 			if(toRemove.size() > 0){
 				this.queue.removeAll(toRemove);
 				this.usedCapacity -= toRemove.size();
+				
+				long now = System.currentTimeMillis();
+				long nextEv = Long.MAX_VALUE;
+				for(QosContext qc : this.queue){
+					if(qc.getEstimatedSendingTime() + now < nextEv){
+						nextEv = (long) (qc.getEstimatedSendingTime() + now);
+					}
+				}
+				nextEvent = nextEv;
 			}
 
-			long now = System.currentTimeMillis();
-			long nextEv = Long.MAX_VALUE;
-			for(QosContext qc : this.queue){
-				if(qc.getEstimatedSendingTime() + now < nextEv){
-					nextEv = (long) (qc.getEstimatedSendingTime() + now);
-				}
-			}
-			nextEvent = nextEv;
 		}
 	}
 
 	@Override
 	public long nextEvent() {
-		return nextEvent - System.currentTimeMillis();
+		//Add a random amount (at most 10ms) to sleep so everyone doesn't
+		//wake up at once
+		int rand = (int)(Math.random()*10) + 1;
+		long n = nextEvent - System.currentTimeMillis() + rand;
+		return n >= 0 ? n : rand;
 	}
 
 	public int size(){
@@ -119,6 +127,14 @@ public class TRContextImpl implements TRContext {
 				throw new IllegalArgumentException("TR bandwidth can not be less " +
 						"than one, argument was: " + bandwidth);
 			}
+		}
+	}
+	
+	public Queue<QosContext> getQueue(){
+		synchronized (queue) {
+			Queue<QosContext> result = new PriorityQueue<QosContext>();
+			result.addAll(queue);
+			return result;
 		}
 	}
 

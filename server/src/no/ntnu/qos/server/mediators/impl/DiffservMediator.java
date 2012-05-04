@@ -17,7 +17,8 @@ import org.apache.synapse.transport.nhttp.ServerWorker;
 
 /**
  * This mediator sets the diffserv value in the underlying socket.
- * @author Ola Martin & Jørgen
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class DiffservMediator extends AbstractQosMediator {

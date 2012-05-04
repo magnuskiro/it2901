@@ -21,7 +21,8 @@ import org.apache.axiom.om.OMXMLParserWrapper;
 
 /**
  * This class stores persistent data regarding priorities.
- * @author Ola Martin & Jørgen
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class PersistentPriorityData {
@@ -158,13 +159,15 @@ public class PersistentPriorityData {
 					return priorities.get(service).get(clientRole);
 				}
 			}
-			if(useDefaults.get(service)){
-				return priorities.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+			if(useDefaults.containsKey(service)){
+				if(useDefaults.get(service)){
+					return priorities.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+				}				
 			}
+			return -1;
 		}finally{
 			lock.unlock();
 		}
-		return -1;
 	}
 	/**
 	 * Get the diffserv value for messages between client and service.
@@ -186,13 +189,15 @@ public class PersistentPriorityData {
 					return diffservs.get(service).get(clientRole);
 				}
 			}
-			if(useDefaults.get(service)){
-				return diffservs.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+			if(useDefaults.containsKey(service)){
+				if(useDefaults.get(service)){
+					return diffservs.get(service).get(MediatorConstants.QOS_DEFAULT_CLIENT_ROLE);
+				}				
 			}
+			return -1;
 		}finally{
 			lock.unlock();
 		}
-		return -1;
 	}
 	/**
 	 * Check if we should use default values if client-service pair does not exist.

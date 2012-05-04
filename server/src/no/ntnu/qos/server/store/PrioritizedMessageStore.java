@@ -17,7 +17,8 @@ import org.apache.synapse.message.store.AbstractMessageStore;
 /**
  * This message store prioritizes {@link MessageContext} 
  * on {@link QOS_PRIORITY} and {@link QOS_TIME_ADDED}
- * @author Ola Martin & Jørgen
+ * @author Ola Martin
+ * @author Jørgen
  *
  */
 public class PrioritizedMessageStore extends AbstractMessageStore {

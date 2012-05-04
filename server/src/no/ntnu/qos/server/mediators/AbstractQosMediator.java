@@ -14,8 +14,10 @@ import org.apache.synapse.mediators.AbstractMediator;
  */
 public abstract class AbstractQosMediator extends AbstractMediator {
 
+	MessageContext synCtx;
 	@Override
 	public boolean mediate(MessageContext synCtx) {
+		this.synCtx=synCtx;
 		SynapseLog log = this.getLog(synCtx);
 		this.logMessage(log, MediatorConstants.DEBUG_START + 
 				this.getName(), QosLogType.INFO);
@@ -65,11 +67,15 @@ public abstract class AbstractQosMediator extends AbstractMediator {
 	 */
 	protected void logMessage(SynapseLog log, String message, QosLogType type){
 		if(log.isTraceOrDebugEnabled()){
+			String from = "";
+			if(synCtx.getProperty(MediatorConstants.QOS_FROM_ADDR) != null){
+				from = (String) synCtx.getProperty(MediatorConstants.QOS_FROM_ADDR);
+			}
 			switch(type){
 			case INFO:
-				log.traceOrDebug(message); break;
+				log.traceOrDebug(from+" "+message); break;
 			case WARN:
-				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR + message); break;
+				log.traceOrDebugWarn(MediatorConstants.DEBUG_ERROR +from+" "+ message); break;
 			}
 		}
 	}

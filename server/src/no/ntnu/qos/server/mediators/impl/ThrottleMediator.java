@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import no.ntnu.qos.server.mediators.AbstractQosMediator;
 import no.ntnu.qos.server.mediators.MediatorConstants;
@@ -13,6 +14,7 @@ import no.ntnu.qos.server.mediators.TRContext;
 
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
+import org.apache.synapse.core.axis2.Axis2MessageContext;
 /**
  * This mediator finds out if there is enough bandwidth to send a message, 
  * if not, it will check if other sending messages has lower priority and should be stopped,
@@ -24,21 +26,27 @@ import org.apache.synapse.SynapseLog;
  */
 public class ThrottleMediator extends AbstractQosMediator{
 
-	private static long minBandwidthPerMessage;
-	private static long timeout;
+	private long minBandwidthPerMessage;
+	private long timeout;
 	private static final Map<String, TRContext> trCtxs = new HashMap<String, TRContext>();
+	private static AtomicInteger threads = new AtomicInteger(0);
 
 	@Override
 	protected boolean mediateImpl(MessageContext synCtx, SynapseLog synLog) {
+		this.logMessage(synLog, "NoThreads:"+threads.incrementAndGet(), QosLogType.INFO);
+
 
 		String lastTR = (String) synCtx.getProperty(MediatorConstants.QOS_LAST_TR);
 		long initialCapacity = (Long) synCtx.getProperty(MediatorConstants.QOS_BANDWIDTH)
 				/minBandwidthPerMessage;
 		QosContext qCtx;
 		long timeStarted = System.currentTimeMillis();
+		this.logMessage(synLog, this.getName() + " started at " + timeStarted, 
+				QosLogType.INFO);
 		try {
 			qCtx = new DefaultQosContext(synCtx);
 			TRContext trCtx = null;
+			this.logMessage(synLog, "Fetching TRContext from map", QosLogType.INFO);
 			synchronized (trCtxs) {
 				trCtx = trCtxs.get(lastTR);
 				if(trCtx==null){
@@ -48,17 +56,34 @@ public class ThrottleMediator extends AbstractQosMediator{
 					trCtx.setAvailableBandwidth(initialCapacity>1 ? initialCapacity:1);
 				}
 			}
-			while(System.currentTimeMillis()-timeStarted<timeout && 
+			this.logMessage(synLog, "Successfully got TRContext from map, " +
+					"trying to send message", QosLogType.INFO);
+			while((System.currentTimeMillis()-timeStarted) < timeout && 
 					(!qCtx.useTTL() || qCtx.getTimeToLive()>0)){
 				if(send(qCtx, trCtx, synLog)){
+					threads.decrementAndGet();
 					return true;
 				}else{
+					this.logMessage(synLog, "Could not send message right away, " +
+							"trying to preempt messages, queue size: "+((TRContextImpl)trCtx).size()+
+							", available bandwidth: "+trCtx.availableBandwidth()+
+							", Message Size: "+((Axis2MessageContext)synCtx).getAxis2MessageContext().getInboundContentLength()+
+							", Priority: "+qCtx.getPriority()
+							, QosLogType.INFO);
+					for(QosContext qCon:((TRContextImpl)trCtx).getQueue()){
+						this.logMessage(synLog, "Message in queue, priority: "+qCon.getPriority()+",from: "+
+								qCon.getMessageContext().getProperty(MediatorConstants.QOS_FROM_ADDR), QosLogType.INFO);
+					}
 					List<QosContext> preemptees = trCtx.preemptContexts(qCtx);
 					for(QosContext preempted:preemptees){
 						this.logMessage(synLog, "Preempted Message:" +
-								preempted.getMessageContext().getMessageID(), QosLogType.INFO);
+								preempted.getMessageContext().getMessageID()+", from: "+
+								preempted.getMessageContext().getProperty(MediatorConstants.QOS_FROM_ADDR)
+								, QosLogType.INFO);
 					}
+					this.logMessage(synLog, "Trying to send message again", QosLogType.INFO);
 					if(send(qCtx, trCtx, synLog)){
+						threads.decrementAndGet();
 						return true;
 					}
 				}
@@ -70,7 +95,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 					this.logMessage(synLog, "Could not sleep", QosLogType.WARN);
 				}
 			}
-			if(System.currentTimeMillis()-timeStarted>=timeout){
+			if(System.currentTimeMillis()-timeStarted >= timeout){
 				this.logMessage(synLog, "Message timed out: mediator timeout exceeded", QosLogType.INFO);
 			}else if(qCtx.useTTL() && qCtx.getTimeToLive()<=0){
 				this.logMessage(synLog, "Message timed out: message time to live exceeded", QosLogType.INFO);
@@ -78,6 +103,7 @@ public class ThrottleMediator extends AbstractQosMediator{
 		} catch (IOException e) {
 			this.logMessage(synLog, "Error reading message data: could not get it's size", QosLogType.WARN);
 		}
+		threads.decrementAndGet();
 		return false;
 	}
 
@@ -98,20 +124,20 @@ public class ThrottleMediator extends AbstractQosMediator{
 	}
 
 
-	public static void setMinBandwidthPerMessage(long minBandwidthPerMessage) {
-		ThrottleMediator.minBandwidthPerMessage = minBandwidthPerMessage;
+	public void setMinBandwidthPerMessage(long minBandwidthPerMessage) {
+		this.minBandwidthPerMessage = minBandwidthPerMessage;
 	}
 
-	public static long getMinBandwidthPerMessage() {
+	public long getMinBandwidthPerMessage() {
 		return minBandwidthPerMessage;
 	}
 
-	public static long getTimeout() {
+	public long getTimeout() {
 		return timeout;
 	}
 
-	public static void setTimeout(long timeout) {
-		ThrottleMediator.timeout = timeout;
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
 	}
 
 }

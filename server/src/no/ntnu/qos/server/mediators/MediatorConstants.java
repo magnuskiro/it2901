@@ -1,5 +1,10 @@
 package no.ntnu.qos.server.mediators;
-
+/**
+ * These static final Strings are used when getting and adding different properties.
+ * @author Ola Martin
+ * @author Jørgen
+ *
+ */
 public final class MediatorConstants {
 	public static final String QOS_CLIENT_ROLE = "qosClientRole";
 	public static final String QOS_SERVICE = "qosService";
@@ -13,6 +18,7 @@ public final class MediatorConstants {
 	public static final String QOS_FROM_ADDR = "QOS_FROM_ADDR";
 	public static final String QOS_USE_TTL = "qosUseTTL";
 	public static final String QOS_TTL = "qosTTL";
+	public static final String QOS_RECIPIENT = "Recipient";
 	
 	public static final String DEBUG_START = "Start : ";
 	public static final String DEBUG_END = "End : ";
