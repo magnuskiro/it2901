@@ -3,7 +3,7 @@
 
 Because of all the research needed for this project we planned to start the development phase relatively late in the project. And we did manage to start it at the planned time. We had quite a lot to do during the implementation and because of the frameworks we worked with we had to familiarize us with the code of these as well. 
 
-On the server side of the project we quickly saw that most of the implementation would take less time than originally anticipated. That way we started looking at the test suite earlier. However on the client side things went a little slower, so we put in more work hours to complete it in time. 
+On the server side of the project we quickly saw that most of the implementation would take less time than originally anticipated. That way we could start looking at the test suite earlier as well. However on the client side things went a little more slowly, so we put in more work hours to complete it in time. 
 
 During implementation we worked on supporting DiffServ in WSO2 which turned out was not that easy. In the end we ended up with implementing Socket access in the underlying Apache \Gls{httpcomponents} which is the underlying network layer in WSO2 ESB. This has enabled us to support DiffServ in \Gls{synapse} and thus WSO2 ESB. These changes has also been pushed upstream\footnote{The corresponding ticket in HttpComponents is \url{https://issues.apache.org/jira/browse/HTTPCORE-295}} and will be supported in future versions.
 
