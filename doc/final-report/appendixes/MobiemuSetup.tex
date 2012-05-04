@@ -178,7 +178,7 @@ include=dumps/*
 # and the experiment duration, respectively.
 # When specifying multiple values separated by a "," the experiment will be repeated
 # an extra time for each value.
-dataRate=1KBps,5KBps,10KBps,20KBps,40KBps
+dataRate=1kBps,5kBps,10kBps,20kBps,40kBps
 #MTU needs to be defined
 mtu=2304
 # The ns-3 script. Must be in directories.topolgies.
@@ -218,7 +218,7 @@ The most important variables and their meaning is described below.
 \item initial\_random\_seed=31 - This seed is passed to all scripts which use random variables. In our testing we have no random variables so this should not be of great importance.
 \item repetitions=10 - The number of repetitions for each test. In our setup this means 10 repetitions for each bandwidth.
 \item experiment\_duration=600 - Total duration for the experiment, this must be coordinated with the “system-test-2.py” file you can see in Listing:~\ref{mobiemu:system-test-2.py}.
-\item dataRate=1KBps,5KBps,10KBps,20KBps,40KBps - These are the different datarates that the experiment is run with. Each of these will be repeated “repetition” number of times.
+\item dataRate=1kBps,5kBps,10kBps,20kBps,40kBps - These are the different datarates that the experiment is run with. Each of these will be repeated “repetition” number of times.
 \item experiment=system\_test\_2.py - This is the experiment in “experiments” to run, please see Listing:~\ref{mobiemu:system-test-2.py} for more information.
 \end{itemize}
 

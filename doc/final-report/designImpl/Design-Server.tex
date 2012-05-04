@@ -5,7 +5,7 @@ about how we
 have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and running.
 
     \subsubsection{Introduction}\label{Server Introduction}
-    The server side architecture consists of several components, the WSO2 ESB, the Monitoring Service and the GlassFish server. The GlassFish server is not necessary to modify and the MS is something we must assume exist in the network. The ESB is what we have to modify, configure and extend to meet our requirements.
+    The server side architecture consists of several components, the WSO2 ESB, the Monitoring Service and the GlassFish server. The GlassFish server is not necessary to modify and the MS is something we must assume to exist in the network. The ESB is what we have to modify, configure and extend to meet our requirements.
 
     The ESB will be used to implement QoS for the web services. To do this, it will have to communicate with the MS, in addition to the clients and the services. The ESB must be configured to work as a proxy for the services on the GlassFish server. It will also be configured to use certain mediation sequences for incoming requests and outgoing responses. The extensions to the ESB consists mainly of custom mediators used in the mediation sequences. These mediators will have the tasks of determining priority of messages, contacting the MS for bandwidth data, and enforcing the priority. There will also be made modifications to the source code of one of the ESBs libraries to allow DiffServ to be set in the IP header.
     
@@ -85,13 +85,13 @@ have configured the framework, it will not contain description of how we have se
 
     \subsubsection{Description of ESB concepts}\label{Description of ESB concepts} 
 
-    In this section we will shortly describe some important concepts of the ESB and message mediation.
+    In this section we will briefly describe some important concepts of the ESB and message mediation.
 
-    A mediator is the basic processing unit in \gls{synapse}\footnote{\gls{synapse} - An enterprise service bus}. Each message going through the ESB gets mediated through a sequence of mediators, which can be configured through either XML or WSO2’s graphical user interface. As long as the mediator inherit from a Synapse interface, any custom mediator can be used in the same manner as the built in mediators. To control the flow of messages through the ESB, there are two paths that can be controlled, the “in sequence” and the “out sequence”, which can also be configured to only apply for certain endpoints.
+    A mediator is the basic processing unit in \gls{synapse}\footnote{\gls{synapse} - An enterprise service bus}. Each message going through the ESB gets mediated through a sequence of mediators, which can be configured through either XML or WSO2’s graphical user interface. As long as the mediator inherits from a Synapse interface, any custom mediator can be used in the same manner as the built in mediators. To control the flow of messages through the ESB, there are two paths that can be controlled, the “in sequence” and the “out sequence”, which can also be configured to only apply for certain endpoints.
 
-    The ESB is built around the notion of a message context, this object contains all the information regarding the message and the context around it. In the message context we can add properties, manipulate the message itself and manipulate the sending streams of the message. All the properties added during the receiving of a message is also added to the outgoing message, which we can use to our advantage.
+    The ESB is built around the notion of a message context, this object contains all the information regarding the message and the context around it. In the message context we can add properties, manipulate the message itself and manipulate the sending streams of the message. All the properties added during the receiving of a message are also added to the outgoing message, which we can use to our advantage.
 
-    Each mediator in the sequence get access to the message context of the incoming or the outgoing message and can thus manipulate the context to its liking. When the mediator is done with the work it is supposed to do, it either calls the next mediator, sending it the possibly altered message context or returning true to indicate that the work is done.
+    Each mediator in the sequence gets access to the message context of the incoming or the outgoing message and can thus manipulate the context to its liking. When the mediator is done with the work it is supposed to do, it either calls the next mediator, sending it the possibly altered message context or returning true to indicate that the work is done.
     
     As you will soon see, we have taken full advantage of the modularity in the ESB. This means that even though much of the functionality in our mediators could be moved into one or two mediators we have decided to make many. For us this means much easier testing of each component and it gives each mediator a more clearly defined role. For our customer this means an easier setup where they can mix and match each mediator and easily create custom sequences with just the functionality they need.
 
@@ -128,7 +128,7 @@ This flow is shown in Fig:~\ref{fig:SAMLauthenticationflow}.The ESB receives a r
 \\\\
 \textbf{Custom mediators:}\\\\
 SAML mediator(Fig:~\ref{fig:SAMLmediator}):\\
-    This mediator retrieves the user role from the SAML authentication and set this as a property in the message context. The service is retrieved from the 'recipient' field also found in the SAML authentication and added as another property. Depending on the configuration of the ESB this mediator can also detach the SAML authentication if this is no longer needed.
+    This mediator retrieves the user role from the SAML authentication and sets this as a property in the message context. The service is retrieved from the 'recipient' field also found in the SAML authentication and added as another property. Depending on the configuration of the ESB this mediator can also detach the SAML authentication if this is no longer needed.
 \\\\
 InMetadata mediator(Fig:~\ref{fig:InMetadatamediator}):\\
 	This mediator adds the IP of the client to the message context, which is done in order for the MS mediator to do its work. It will also set the Time-to-Live values in the message context if this is present in the SOAP header.
@@ -160,7 +160,7 @@ Send mediator:\\
     This is a built in mediator that sends the message to an endpoint (the requested service).
 \\\\
 Store mediator:\\
-    This is a build in mediator that stores the message context in a message store, here this is the Prioritized Message store.
+    This is a built in mediator that stores the message context in a message store, here this is the Prioritized Message store.
 \\\\
 Sampling Message Processor:\\
     This is not a mediator. It is a built in class that takes messages out of the Prioritized Message Store at a defined interval. And then sends them to a mediator sequence, here starting with the DiffServ mediator.
@@ -287,6 +287,6 @@ Sampling Message Processor:\\
 	The last file we will look at is synapse.xml (ref:~\ref{attachment:file:synapse-configs.zip} - synapse-configs.zip), which should now be in “/path/to/wso2esb/repository/deployment/server/synapse-configs/default/”. This file contains configuration for proxies, endpoints, message stores, mediation sequences, and more. The important things here are:
 	\begin{itemize}
 	\item The sequence qos where we can find the configuration for the throttle mediator. Here we can set the property minBandwidthPerMessage (integer, measured in Bps) and timeout(integer, measured in ms). Timeout is the longest time a message will be allowed to try sending before it is discarded.
-	\item The messageProcessor. here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in milliseconds.
+	\item The messageProcessor. Here the parameter interval can be set. This determines how often a message should be taken out of the message store. This is measured in milliseconds.
 	\end{itemize}
 	Other things in this file should mostly be untouched, as they define what the ESB does with messages, most of which is needed to do the prioritizing and throttling.
