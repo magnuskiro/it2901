@@ -139,7 +139,7 @@
 	As with the previous test we can see an increased again, which is due to the timeout.
     
     \textbf{Test case 6:}\\
-    Without the throttle mediator we expect that the results below is better with regard to number of successful messages, but worse with regard to time.
+    Without the throttle mediator we expect that the results below are better with regard to number of successful messages, but worse with regard to time.
     \begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.5]{NoThrottle10kBps_time}
@@ -156,7 +156,7 @@
 	
 	As we expected without our throttle mediator, the time taken to receive messages back at the client is increased on all bandwidths where the bandwidth is below a certain threshold. Where the bandwidth is large enough, i.e. 40kBps, the time is comparable to our other tests because the bandwidth is more than large enough.
 	
-	The trend is also clear when it comes to successful messages, without our throttle mediator more messages arrive even on lower bandwidths. This is because the throttlemediator discards messages after the timeout, this statement is strengthened by the fact that if we compare no throttle to 100 000 ms timout, the latter performs better, managing to get more high priority messages successfully back, on all capacities (ignoring 1kBps and 40kBps).
+	The trend is also clear when it comes to successful messages, without our throttle mediator more messages arrive even on lower bandwidths. This is because the throttlemediator discards messages after the timeout. This statement is strengthened by the fact that if we compare no throttle to 100 000 ms timout, the latter performs better, managing to get more high priority messages successfully back, on all capacities (ignoring 1kBps and 40kBps).
 	
 	\begin{figure}[H]
 		\centering
@@ -167,6 +167,6 @@
 
     In general, 1kBps was not enough to successfully get responses on requests, probably not enough for the SAML-communication or SSL handshakes either. On the other end, with more than enough bandwidth, that is 40 kBps, there are not any notable differences in any of the test cases. The more interesting statistics are found on the intermediate bandwidth capacities.
 
-    Because of lacks in the testing system, e.g. limited resources, the uncertainties regarding avarage times and responses received can be rather big. Even with this uncertainty we belive we can say something about the impact of the throttle mediator. \\
+    Because of lacks in the testing system, e.g. limited resources, the uncertainties regarding avarage times and responses received can be rather big. Even with this uncertainty we believe we can say something about the impact of the throttle mediator. \\
 
     Checking for DiffServ: Running tests also produce "pcap"-files, these files contain network traffic data. Here we can check whether or not the diffserv field is set correctly, and it would seem it is. 
