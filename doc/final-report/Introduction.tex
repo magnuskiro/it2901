@@ -1,14 +1,14 @@
 \section{Project Introduction}\label{Project Introduction}
-    This is the final report documenting our progress in the course IT2901 - Informatics Project II. It will give a description of the problem we were presented with, how we planned the work for the project, how we organized our group and what development methodology we ended up choosing etc. We will also give a brief discussion about why we have made the decisions we have.
+    This is the final report documenting our progress in the course IT2901 - Informatics Project II. It will give a description of the problem we were presented with, how we planned the work for the project, how we organized our group and what development methodology we ended up choosing, etc. We will also give a brief discussion about why we have made the decisions we have.
     
     \subsection{Project Background}\label{Project Background}
     \begin{quotation}
     \em Essential to Network Based Defence (NBD) is the concept of end-to-end QoS, which in turn requires employing cross-layer QoS signaling. This means that QoS must be considered at all layers of the OSI model, and that QoS information must traverse these layers\ldots \textnormal{-Motivation\footnote{Please see (\ref{File Attachments}) - Quality of Service (QoS) support for Web services in military networks}}
     \end{quotation}
-    This was the introduction we got for our motivation to work on this project. In many ways it illustrates the background of the project and why the customer wanted us to work on it. As the customer is working with wireless networks with very low bandwidth they need to be able to control the flow of messages. The reason for these strict requirements is the command hierarchy and the risks involved which means that some messages in the network are more important than others. To be able to separate those messages there needs to be a collaboration between all the applications and libraries used. Currently there is no or little support for this cooperation on the application level which is what we were tasked to do. For us this assignment would be a challenge not just because it is some what uncharted waters, but also because of the strict requirement to prioritize.
+    This was the introduction we got for our motivation to work on this project. In many ways it illustrates the background of the project and why the customer wanted us to work on it. As the customer is working with wireless networks with very low bandwidth they need to be able to control the flow of messages. The reason for these strict requirements is the command hierarchy and the risks involved which means that some messages in the network are more important than others. To be able to separate those messages there needs to be a collaboration between all the applications and libraries used. Currently there is no or little support for this cooperation on the application level which is what we were tasked to do. For us this assignment would be a challenge not just because it is somewhat uncharted waters, but also because of the strict requirement to prioritize.
 
     \subsection{Customer}\label{Customer}
-    Our customer were two senior researchers at the Norwegian Defence Research Establishment(FFI)    \footnote{Forsvarets Forskningsinstitutt (FFI) - [\url{http://www.ffi.no/}]} working in the SOA division. They had this to say about FFI.
+    Our customer was two senior researchers at the Norwegian Defence Research Establishment(FFI)    \footnote{Forsvarets Forskningsinstitutt (FFI) - [\url{http://www.ffi.no/}]} working in the SOA division. They had this to say about FFI.
 
     \begin{quotation}
     \em The Norwegian Defence Research Establishment (FFI) is the prime institution responsible for defence-related research in Norway. The establishment is the chief adviser on defence-related science and technology to the Ministry of Defence and the Norwegian Armed Forces’ military organization. FFI addresses a broad spectrum of research topics ranging from the assistance of operational units to the support of national security policy via defence planning and technology studies. FFI also has a research unit in Horten focusing on maritime research.
@@ -24,14 +24,14 @@
     
     
     \subsection{Students}\label{Students}
-    The student education is common among the group members. We're all studying informatics on our third year of our bachelors degree. Most of us started studying straight out of high school and have little or no relevant skills besides the university courses. Although some members have done some work outside of university. 
+    The student education is common among the group members. We're all studying informatics on our third year of our bachelors degree. Most of us started studying straight out of high school and have little or no relevant skills besides the university courses, although some members have done some work outside of university. 
     
-    Among the experience in the group some people have experience with Git. We have one person which have done several large scale project which will help us immensely. Some of the people have some experience with NS3 which would come in handy. And everyone have extensive experience with Java.
+    Among the experience in the group some people have experience with Git. We have one person which have done several large scale project which will help us immensely. Some of the people have some experience with NS3 which would come in handy. And everyone has extensive experience with Java.
     
     
     \subsection{Supervisor}\label{Supervisor}
     
-    The institute(IDI) had assigned us a supervisor. The supervisors role was to give guidance to the group related to matters of group dynamics and project management. The supervisor would also assist in the process of solving conflicts in the group, if any. The supervisor would also step in as a mediator if we had experienced any problems with the customer which we could not resolve on our own. The supervisor have also given us feedback on our report and progress throughout the project. This has been valuable feedback that we have used to improve our report.  
+    The institute(IDI) had assigned us a supervisor. The supervisor's role was to give guidance to the group related to matters of group dynamics and project management. The supervisor would also assist in the process of solving conflicts in the group, if any. The supervisor would also step in as a mediator if we had experienced any problems with the customer which we could not resolve on our own. The supervisor has also given us feedback on our report and progress throughout the project. This has been valuable feedback that we have used to improve our report.  
     
     We have had biweekly meetings with the supervisor throughout the project. Every week we sent our weekly report and activity plan to the supervisor to inform him of our progress. 
     
@@ -39,11 +39,11 @@
     \subsection{Document Structure}\label{Document Structure}
     This document is structured in a fashion to show you, the reader, our process throughout this project. It should give you a view into each part of the project from the early weeks when we were struggling to understand the initial design right up until our final moments with testing. 
     
-    We begin with describing the task and the requirements in \emph{Task Description and Requirements}. This is the details of the task we were given by the customer, and the high level requirements that we, together with the customer, agreed upon.
+    We begin with describing the task and the requirements in \emph{Task Description and Requirements}. This provides the details of the task we were given by the customer, and the high level requirements that we, together with the customer, agreed upon.
     
     \emph{Prestudy} continues with our initial thoughts around the project. It includes the architecture we envisioned for the client and the server early on in the project and it will give you some insight into what we initially thought and will serve as a good comparison with our end result.
     
-    Next is the chapters about \emph{Project Management} and \emph{Development Methodology}, these two chapters combined should give an impression of our thoughts and plans for collaborations to reach our end goals. It should also give you an idea about how all of our appended documents, such as Activity Plans, have played a role during the course of the project. After reading theses sections, the team structure and the distribution of responsibilities in the group should be explained.
+    Next come the chapters about \emph{Project Management} and \emph{Development Methodology}. These two chapters combined should give an impression of our thoughts and plans for collaborations to reach our end goals. It should also give you an idea about how all of our appended documents, such as Activity Plans, have played a role during the course of the project. After reading theses sections, the team structure and the distribution of responsibilities in the group should be explained.
     
     The chapter about \emph{Design and Implementation} will focus on the design of our two pieces of software in some detail and should give you a good idea about the overall architecture of the system. After that follows a section which should give the necessary details about our code and how the system works deeper down. Last in this chapter is a section about what has changed from the original design.
     

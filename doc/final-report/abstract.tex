@@ -1,14 +1,14 @@
 {\bf Background:}
 
-A proof of concept project on behalf of FFI looking into the possibilities and viability of QoS prioritisation of web service data in military and/or low bandwidth networks.
+This is a proof of concept project on behalf of FFI looking into the possibilities and viability of QoS prioritisation of web service data in military and/or low bandwidth networks.
 We’ll be looking into a way to implement QoS in a web service network on WSO2 and with a custom client library.
 Using them together we’ll be looking into how such a layer would affect the efficiency of both low priority and high priority requests on the network for various network bandwidths.
 \\\\
 {\bf Results:}
 
-Our results shows that applying prioritization at the application level will have an effect on the speed of which messages arrive in a network with constricted bandwidth. However due to the variation in experiments we can not say much about the actual gains that can be achieved, but we did observe large enough changes so as to say this is a viable way to research more.
+Our results shows that applying prioritization at the application level will have an effect on the speed of which messages arrive in a network with constricted bandwidth. However, due to the variation in experiments, we can not say much about the actual gains that can be achieved, but we did observe large enough changes so as to say this is a viable way to research more.
 
-With our implementation we can see that depending on the available bandwidth and the relative settings there are major gains to be had by prioritizing at the application level. If we compare with and without our prioritization layer we can see that there is a large gap between the average time taken to get messages from the client, to the service and back from the service which is so substantial that it could not be accounted for by chance. The gains are in order of magnitudes better with prioritization.
+With our implementation we can see that, depending on the available bandwidth and the relative settings, there are major gains to be had by prioritizing at the application level. If we compare with and without our prioritization layer we can see that there is a large gap between the average time taken to get messages from the client, to the service and back from the service which is so substantial that it could not be accounted for by chance. The gains are in order of magnitudes better with prioritization.
 
 Adding such a prioritization layer to the web service side did not have a great impact on the performance of the network when there were more than enough bandwidth suggesting that the overhead should not be to large.
 \\\\
