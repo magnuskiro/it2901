@@ -1,0 +1,9 @@
+To compile report with glossary:
+	first compile report.tex
+	run makeglossaries report
+	recompile report.tex
+
+To compile with bibliography:
+	compile report.tex
+	run bibtex report
+	recompile report 2x

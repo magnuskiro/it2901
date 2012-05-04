@@ -1,0 +1,74 @@
+\documentclass[titlepage, a4paper]{article}
+\usepackage[pdfborder=0 0 0]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{attachfile}
+\usepackage{float}
+\usepackage{glossaries}
+\input{Glossary}
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
+\graphicspath{{./graphics/}}
+\title{
+    Quality of Service - FFI \\
+    IT2901 - Group 7  \\ 
+}
+\author{
+    Bremnes, Jan A. S. \\  
+    Johanessen, Stig Tore \\
+    Kirø, Magnus L.\\
+    Nordmoen, Jørgen H.\\ 
+    Støvneng, Ola Martin T.\\
+    Tørresen, Håvard \\
+}
+\date{\today}
+
+\hypersetup{
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,
+    urlcolor=blue
+}
+\makeglossaries
+\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}
+\begin{document}
+\pagenumbering{RomanType}
+\maketitle
+\begin{abstract}\label{abstract}
+	TODO \ldots
+\end{abstract}
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\pagenumbering{arabic}
+
+\section{Project Introduction}\label{Project Introduction}
+    This is the midterm report documenting our progress so far in the course IT2901 - Informatikk Prosjektarbeid II. It will give a description of the problem we were presented with, how we have planned the work for the weeks ahead, how we have organized our group and what development methodology we have chosen etc. We will also give a brief discussion about why we have made the decisions we have. For the midterm report we added detailed design description for both client and server and elaborated more on existing parts of the report. 
+
+%sections
+\input{TaskDescriptionAndRequirements}
+\input{ProjectManagement}
+\input{DevelopmentMethodology}
+\input{Prestudy}
+\input{Design}
+\input{Implementation}
+\input{Testing}
+\input{Results}
+\input{Conclusion}
+\input{ProjectEvaluation}
+\appendix
+\input{WorkBreakdownStructure}
+\input{FileAttachments}
+\addcontentsline{toc}{section}{Glossary}
+\label{Glossary}
+\printglossaries
+%\input{Bibliography}
+\bibliographystyle{plain}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{Bibliography}
+\end{document}

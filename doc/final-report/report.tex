@@ -1,0 +1,116 @@
+\documentclass[titlepage, a4paper]{article}
+\PassOptionsToPackage{hyphens}{url}\usepackage[pdfborder=0 0 0]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{attachfile}
+\usepackage{float}
+\usepackage{glossaries}
+\usepackage{listing}
+\usepackage{listings}
+\usepackage{lstcustom}
+\definecolor{shadecolor}{rgb}{1, 0.8, 0.3}
+\usepackage{framed, color}
+
+% the file that contains our syntax highlighting configuration for the lst listings. 
+\include{syntax}
+
+% the file containing all the words in our glossary. 
+\input{Glossary}
+
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
+\graphicspath{{./graphics/}{./graphics/graphs/}}
+\title{
+    Quality of Service - FFI \\
+    IT2901 - Group 7  \\ 
+}
+\author{
+    Bremnes, Jan A. S.\\
+    Johanessen, Stig Tore\\
+    Kirø, Magnus L.\\
+    Nordmoen, Jørgen H.\\
+    Støvneng, Ola Martin T.\\
+    Tørresen, Håvard\\
+    \\
+    \underline{Supervisor:}\\
+    Duc, Anh Nguyen\\
+    \\
+    \underline{FFI represented by:}\\
+    Johnsen, Frank Trethan \\
+    Bloebaum, Trude Hafsøe
+}
+\date{\today}
+
+\hypersetup{
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,
+    urlcolor=blue
+}
+\makeglossaries
+\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}
+\begin{document}
+\pagenumbering{RomanType}
+\maketitle
+\begin{abstract}\label{abstract}
+    \input{abstract}
+\end{abstract}
+\newpage
+\renewcommand{\abstractname}{Acknowledgements}
+\begin{abstract}\label{acknowledgements}
+    A big thank you to our customer representatives at FFI for an interesting challenge as well as great feedback during the project.
+    \\\\
+    A thank you to Magnus Skjegstad at FFI for use of the  MobiEmu library for easy system testing.
+    \\\\
+    We’d also like to thank Oleg Kalnichevski on the Apache Synapse and Http Components mailing lists for all his help solving the issues we had and getting our patch accepted.
+    \\\\
+    Thanks are extended to our supervisor and everyone else who helped with feedback during the project as well.
+\end{abstract}
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoflistings
+
+\pagenumbering{arabic}
+
+%sections
+\include{Introduction}
+\include{TaskDescriptionAndRequirements}
+\include{Prestudy}
+\include{ProjectManagement}
+\include{DevelopmentMethodology}
+\include{designImpl/DesignAndImplementation}
+\include{testing/Testing}
+\include{evaluation/ProjectEvaluation}
+\include{conclusion/Conclusion}
+
+% appendixes. 
+\appendix
+\include{appendixes/ClientUserGuide}
+\include{appendixes/ServerSetupGuide}
+\include{appendixes/MobiemuSetup}
+\include{appendixes/ResultParsing}
+\include{appendixes/AllResults}
+\include{appendixes/NS3Problem}
+\include{appendixes/ToolsList}
+\include{appendixes/WorkBreakdownStructure}
+\include{appendixes/FileAttachments}
+
+%Glossary
+\addcontentsline{toc}{section}{Glossary}
+\label{Glossary}
+\printglossaries
+
+%Bibliography
+\bibliographystyle{plain}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{Bibliography}
+
+% attachments not directly needed in the report. 
+% Weekly reports, activity plans, schedules and risk list. 
+\include{appendixes/Attachments}
+
+\end{document}

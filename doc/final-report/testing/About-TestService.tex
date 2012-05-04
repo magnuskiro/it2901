@@ -1,0 +1,34 @@
+\subsubsection{Test Service}\label{Testing:About:Service}
+    In this section we will briefly describe the test service used for testing, "EchoServiceLargeReply.war"(ref:~\ref{attachment:file:EchoServiceLargeReply.war}).
+
+    The test service is very simple and deployable with GlassFish. It expects a request like this:
+    \lstset{language=XML, style=eclipse}
+    \begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header/>
+    <S:Body>
+        <ns2:hello xmlns:ns2="http://me.test.org">
+            <name>PAYLOAD</name>
+        </ns2:hello>
+    </S:Body>
+</S:Envelope>
+    \end{lstlisting}
+    \\
+    And responds like this:
+    \begin{lstlisting}
+<?xml version='1.0' encoding='utf-8'?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:helloResponse xmlns:ns2="http://me.test.org">
+            <return>
+                PAYLOAD!
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales magna at est iaculis vel fermentum velit tristique. Cras nulla urna, ultrices vitae posuere a, iaculis sit amet lectus. Aliquam mattis sapien et elit commodo ...
+            </return>
+        </ns2:helloResponse>
+    </S:Body>
+</S:Envelope>
+    \end{lstlisting}
+    \\
+    With PAYLOAD intact, and 10KiB of Lorem Ipsum\footnote{\url{http://www.lipsum.com/} - simply dummy text}. We add these 10KiB of text to ensure that the response is considerably larger than the request, which should get us more realistic results when testing. We also send the original payload back so the test client can easily identify which request was responded to. Those 10KiB of text also has a large impact on testing, it means that on lower than 10kBps bandwidth all the messages can't be sent in time. We chose to have it this way because it would give us a predictable test and also some static configuration on the ESB could be configured with this in mind.
+

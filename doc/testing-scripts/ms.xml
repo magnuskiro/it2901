@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<config>
+		<RoutingInfos>
+			<RoutingInfo>
+				<destIP>10.0.0.2</destIP>
+				<lastTR>bob</lastTR>
+				<bandwidth>40</bandwidth>
+			</RoutingInfo>
+			<RoutingInfo>
+				<destIP>10.0.0.3</destIP>
+				<lastTR>bob</lastTR>
+				<bandwidth>40</bandwidth>
+			</RoutingInfo>
+			<RoutingInfo>
+				<destIP>10.0.0.4</destIP>
+				<lastTR>bob</lastTR>
+				<bandwidth>40</bandwidth>
+			</RoutingInfo>
+		</RoutingInfos>
+	</config>
+	

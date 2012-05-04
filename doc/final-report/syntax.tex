@@ -1,0 +1,62 @@
+% Color definitions for syntax highlighting
+
+% Python
+\definecolor{pythoncomment}{RGB}{0,0,255} 
+\definecolor{pythonstring}{RGB}{255,0,255} 
+\definecolor{pythonkeyword}{RGB}{165,42,42}
+
+% Java
+\definecolor{javacomment}{RGB}{0,0,255} 
+\definecolor{javastring}{RGB}{255,0,255} 
+\definecolor{javakeyword}{RGB}{165,42,42} 
+
+% Bash
+\definecolor{bashcomment}{RGB}{0,0,255}
+\definecolor{bashstring}{RGB}{255,0,255}
+\definecolor{bashkeyword}{RGB}{165,42,42}
+
+% C++
+\definecolor{c++comment}{RGB}{0,0,255}
+\definecolor{c++string}{RGB}{255,0,255}
+\definecolor{c++keyword}{RGB}{46,139,87}
+
+
+% Code listing styles
+\lstdefinestyle{java}
+    {keywordstyle=\color{javakeyword}\bfseries,
+    commentstyle=\color{javacomment},
+    stringstyle=\color{javastring},
+    morecomment=[s][\color{javacomment}]{/**}{*/}
+}
+
+\lstdefinestyle{python}
+  {keywordstyle=\color{pythonkeyword},      
+  commentstyle=\color{pythoncomment},      
+  stringstyle=\color{pythonstring}  
+}
+
+\lstdefinestyle{bash}
+    {keywordstyle=\color{bashkeyword},
+    commentstyle=\color{bashcomment},
+    stringstyle=\color{bashstring}
+}
+
+\lstdefinestyle{c++}
+    {keywordstyle=\color{c++keyword},
+    commentstyle=\color{c++comment},
+    stringstyle=\color{c++string}
+}
+
+\lstdefinelanguage{xml}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version, type, return, ns2, S, Envelope, Body, config, 
+                RoutingInfo, RoutingInfos, services, service, name, destIP, 
+                lastTR, bandwidth, client, role}% list your attributes here
+}
+

@@ -1,0 +1,1327 @@
+<html>
+<head>
+    <style type="text/css">
+
+html,body,table { 
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
+ font-size: 12px;
+ white-space: nowrap;
+}
+
+tr,td,th,table,font,span,div,h1,h2,h3 {
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
+}
+
+h1 {
+ font-size: 16px;
+}
+
+h2 {
+ font-size: 12px;
+ margin-bottom: 2px;
+}
+
+div.separator {
+ margin: 1em;
+}
+
+/*
+ * Header
+ */
+table.proj-header {
+ border: 0;
+ margin: 0;
+ width: auto;
+}
+
+table.proj-header .header {
+ font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+.footer {
+ float: left;
+ width: 100%;
+ margin-top: 50px;  
+ padding-top: 2px;
+ border-style: dotted;
+ border-width: 1px 0 0 0;
+ border-color: #999;
+ font-size: 9px;
+ text-align: right;
+ clear: both;
+ color: #666;
+}
+
+a:link, a:visited {
+ text-decoration: none;
+ color: #666;
+}
+
+a:hover[href] {
+ text-decoration: underline;
+}
+
+
+/*
+ * Layout
+ */
+
+.gantt, .gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ float: left;
+}
+
+.gantt-tasklist, .gantt-chart, .tasklist-table, .resourcelist-table {
+ border-style: solid;
+ border-width: 1px;
+ border-color: #aaa;
+}
+
+.gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ overflow: auto;
+}
+
+.gantt, .tasklist, .resourcelist {
+  clear: both;
+  width: 100%;
+}
+
+.gantt-tasklist {
+ border-width: 1px 0px 1px 1px;
+ width: 30%;
+}
+
+.gantt-chart {
+ border-color: #aaa #aaa #aaa #fff;
+ width: 69.5%;
+}
+
+.tasklist, .resourcelist {
+ clear: left;
+}
+
+table {
+ width: 100%;
+ border-collapse: collapse;
+ border-style: none;
+ border-color: #fff;
+ white-space: nowrap;
+ margin: 0;
+}
+
+tr, td, th {
+ white-space: nowrap;
+ vertical-align: top;
+ padding-top: 1px;
+ padding-bottom: 1px;
+}
+
+th {
+ vertical-align: top;
+}
+
+tr {
+ height: 1.5em;
+}
+
+tr.header {
+ background-color: #aaa;
+ color: #fff;
+}
+
+tr.even {
+ background-color: #eee;
+}
+
+tr.odd {
+ background-color: #fff;
+}
+
+th span, td span {
+ margin-left: 6px;
+ margin-right: 6px;
+}
+
+th.note {
+ min-width: 20em;
+}
+
+td.note {
+ white-space: normal;
+}
+
+/*
+ * Gantt
+ */
+div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
+ overflow: hidden;
+ clear: none;
+ float: left; 
+ height: 0.75em;
+ margin-top: 0.15em;
+ margin-bottom: 0;
+}
+
+div.gantt-complete-done {
+ background-color: #495f6b;
+ height: 0.75em;
+ margin-top: 0;
+ margin-bottom: 0;
+}
+
+div.gantt-complete-notdone {
+ background-color: #8db6cd;
+ border-style: solid;
+ border-width: 1px;
+}
+
+div.gantt-summary {
+ height: 0.3em;
+ margin-top: 0.25em;
+ border-bottom: 2px dashed #000;
+}
+
+div.gantt-empty-end {
+ margin-left: 0;
+}
+
+div.gantt-milestone {
+ float: left;
+ font-size: 0.9em;
+ color: #000000;
+ position: relative;
+ margin-left: 0;
+ margin-right: 0;
+}
+
+div.gantt-resources {
+ float: left;
+ margin-left: 0.5em;
+ white-space: nowrap;
+}
+
+th.gantt-1day-header {
+  width: 19px;
+}
+
+th.gantt-2day-header {
+  width: 39px;
+}
+
+th.gantt-3day-header {
+  width: 59px;
+}
+
+th.gantt-4day-header {
+  width: 79px;
+}
+
+th.gantt-5day-header {
+  width: 99px;
+}
+
+th.gantt-6day-header {
+  width: 119px;
+}
+
+th.gantt-week-header, .gantt-resources {
+ width: 139px;
+}
+
+th.gantt-day-header {
+ margin: 0;
+ padding-top: 1px;
+ padding-bottom: 1px;
+ width: 19px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="tasklist">
+      <h2>
+        <a name="tasks" id="tasks">Tasks</a>
+      </h2>
+      <div class="tasklist-table">
+        <table cellspacing="0" cellpadding="0" border="1">
+          <tr class="header" align="left">
+            <th>
+              <span>WBS</span>
+            </th>
+            <th>
+              <span>Name</span>
+            </th>
+            <th>
+              <span>Start</span>
+            </th>
+            <th>
+              <span>Finish</span>
+            </th>
+            <th>
+              <span>Work</span>
+            </th>
+            <th>
+              <span>Priority</span>
+            </th>
+            <th>
+              <span>Complete</span>
+            </th>
+            <th>
+              <span>Cost</span>
+            </th>
+            <th class="note">
+              <span>Notes</span>
+            </th>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>1</span>
+            </td>
+            <td>
+              <a name="task1" style="margin-left: 0px" id="task1">
+                <span>Planning</span>
+              </a>
+            </td>
+            <td>
+              <span>Jan 18</span>
+            </td>
+            <td>
+              <span>Jan 20</span>
+            </td>
+            <td>
+              <span>18d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>2</span>
+            </td>
+            <td>
+              <a name="task2" style="margin-left: 0px" id="task2">
+                <span>Work on preliminary report</span>
+              </a>
+            </td>
+            <td>
+              <span>Jan 23</span>
+            </td>
+            <td>
+              <span>Feb 3</span>
+            </td>
+            <td>
+              <span>60d </span>
+            </td>
+            <td align="center">
+              <span>10</span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>3</span>
+            </td>
+            <td>
+              <a name="task3" style="margin-left: 0px" id="task3">
+                <span>Submission of Preliminary Report</span>
+              </a>
+            </td>
+            <td>
+              <span>Feb 6</span>
+            </td>
+            <td>
+              <span>Feb 6</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span>Thu 26 Jan 2012, 14:55
+This is a note</span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>4</span>
+            </td>
+            <td>
+              <a name="task4" style="margin-left: 0px" id="task4">
+                <span>Architecture planning</span>
+              </a>
+            </td>
+            <td>
+              <span>Feb 6</span>
+            </td>
+            <td>
+              <span>Mar 5</span>
+            </td>
+            <td>
+              <span>126d </span>
+            </td>
+            <td align="center">
+              <span>9</span>
+            </td>
+            <td align="right">
+              <span>8%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>5</span>
+            </td>
+            <td>
+              <a name="task5" style="margin-left: 0px" id="task5">
+                <span>Work on midterm report</span>
+              </a>
+            </td>
+            <td>
+              <span>Feb 6</span>
+            </td>
+            <td>
+              <span>Mar 9</span>
+            </td>
+            <td>
+              <span>150d </span>
+            </td>
+            <td align="center">
+              <span>7</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6</span>
+            </td>
+            <td>
+              <a name="task6" style="font-weight: bold; margin-left: 0px" id="task6">
+                <span>Work on prototype client</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>84d 2h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.1</span>
+            </td>
+            <td>
+              <a name="task7" style="margin-left: 18px" id="task7">
+                <span>Open SAML</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>27d 4h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.2</span>
+            </td>
+            <td>
+              <a name="task8" style="font-weight: bold; margin-left: 18px" id="task8">
+                <span>Client library</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>56d 6h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.2.1</span>
+            </td>
+            <td>
+              <a name="task9" style="margin-left: 36px" id="task9">
+                <span>Metadata interpreter</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Mar 22</span>
+            </td>
+            <td>
+              <span>10d 3h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.2.2</span>
+            </td>
+            <td>
+              <a name="task10" style="margin-left: 36px" id="task10">
+                <span>Prioritizer</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 22</span>
+            </td>
+            <td>
+              <span>Apr 9</span>
+            </td>
+            <td>
+              <span>12d 3h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.2.3</span>
+            </td>
+            <td>
+              <a name="task11" style="margin-left: 36px" id="task11">
+                <span>Tactical router communication</span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 9</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>5d 7h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.2.4</span>
+            </td>
+            <td>
+              <a name="task12" style="font-weight: bold; margin-left: 36px" id="task12">
+                <span>Interface</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>28d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.2.4.1</span>
+            </td>
+            <td>
+              <a name="task13" style="margin-left: 54px" id="task13">
+                <span>Client integration manual</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 27</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>14d 6h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.2.4.2</span>
+            </td>
+            <td>
+              <a name="task14" style="margin-left: 54px" id="task14">
+                <span>API</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Mar 27</span>
+            </td>
+            <td>
+              <span>13d 2h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7</span>
+            </td>
+            <td>
+              <a name="task15" style="font-weight: bold; margin-left: 0px" id="task15">
+                <span>Work on prototype server</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>131d 5h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.1</span>
+            </td>
+            <td>
+              <a name="task16" style="margin-left: 18px" id="task16">
+                <span>ESB</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Mar 23</span>
+            </td>
+            <td>
+              <span>12d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.2</span>
+            </td>
+            <td>
+              <a name="task17" style="margin-left: 18px" id="task17">
+                <span>Identity server</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 20</span>
+            </td>
+            <td>
+              <span>Apr 3</span>
+            </td>
+            <td>
+              <span>11d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.3</span>
+            </td>
+            <td>
+              <a name="task18" style="margin-left: 18px" id="task18">
+                <span>Glassfish</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 29</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>12d 4h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.4</span>
+            </td>
+            <td>
+              <a name="task19" style="font-weight: bold; margin-left: 18px" id="task19">
+                <span>SAML mediator</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>27d 4h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.4.1</span>
+            </td>
+            <td>
+              <a name="task20" style="margin-left: 36px" id="task20">
+                <span>?</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>27d 4h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.5</span>
+            </td>
+            <td>
+              <a name="task21" style="font-weight: bold; margin-left: 18px" id="task21">
+                <span>QoS mediator</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>41d 3h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.5.1</span>
+            </td>
+            <td>
+              <a name="task22" style="margin-left: 36px" id="task22">
+                <span>Metadata interpreter</span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 2</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>10d 3h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.5.2</span>
+            </td>
+            <td>
+              <a name="task23" style="margin-left: 36px" id="task23">
+                <span>Prioritizer</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 6</span>
+            </td>
+            <td>
+              <span>22d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.5.3</span>
+            </td>
+            <td>
+              <a name="task24" style="margin-left: 36px" id="task24">
+                <span>Tactical router communicator</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 28</span>
+            </td>
+            <td>
+              <span>Apr 9</span>
+            </td>
+            <td>
+              <span>9d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.6</span>
+            </td>
+            <td>
+              <a name="task25" style="font-weight: bold; margin-left: 18px" id="task25">
+                <span>WSO2 network layer</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>27d 2h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.6.1</span>
+            </td>
+            <td>
+              <a name="task26" style="margin-left: 36px" id="task26">
+                <span>?</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 8</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>27d 2h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8</span>
+            </td>
+            <td>
+              <a name="task27" style="margin-left: 0px" id="task27">
+                <span>Creation of test suite</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 13</span>
+            </td>
+            <td>
+              <span>Apr 6</span>
+            </td>
+            <td>
+              <span>38d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>1%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>9</span>
+            </td>
+            <td>
+              <a name="task28" style="margin-left: 0px" id="task28">
+                <span>Testing of prototype</span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 9</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>11d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10</span>
+            </td>
+            <td>
+              <a name="task29" style="margin-left: 0px" id="task29">
+                <span>Work on final report</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 12</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>152d 2h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>11</span>
+            </td>
+            <td>
+              <a name="task30" style="margin-left: 0px" id="task30">
+                <span>Submission of Alpha</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 9</span>
+            </td>
+            <td>
+              <span>Mar 9</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12</span>
+            </td>
+            <td>
+              <a name="task31" style="margin-left: 0px" id="task31">
+                <span>Submission of midterm report</span>
+              </a>
+            </td>
+            <td>
+              <span>Mar 9</span>
+            </td>
+            <td>
+              <span>Mar 9</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>13</span>
+            </td>
+            <td>
+              <a name="task32" style="margin-left: 0px" id="task32">
+                <span>Submission of Beta </span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>14</span>
+            </td>
+            <td>
+              <a name="task33" style="margin-left: 0px" id="task33">
+                <span>Submission of final report draft</span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td>
+              <span>Apr 16</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>15</span>
+            </td>
+            <td>
+              <a name="task34" style="margin-left: 0px" id="task34">
+                <span>Bug fix, polishing, wrapping things up, buffer</span>
+              </a>
+            </td>
+            <td>
+              <span>Apr 17</span>
+            </td>
+            <td>
+              <span>May 25</span>
+            </td>
+            <td>
+              <span>28d 1h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>16</span>
+            </td>
+            <td>
+              <a name="task35" style="margin-left: 0px" id="task35">
+                <span>Deadline</span>
+              </a>
+            </td>
+            <td>
+              <span>May 25</span>
+            </td>
+            <td>
+              <span>May 25</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    </body>
+    </html>

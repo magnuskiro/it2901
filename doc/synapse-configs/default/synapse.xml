@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <!--A proxy for the test web service we used in the tests-->
+    <proxy name="EchoService" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+        <target endpoint="echoservice" inSequence="main" outSequence="main"/>
+    </proxy>
+    <!--A proxy for the dummy Identity Server, just sends back to the client with added properties-->
+    <proxy name="IdentityServer" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
+            <inSequence>
+                <in>
+                    <!--Lets the send and out mediators know the message should be send back to client-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SendBackMediator"/>
+                </in>
+                <out>
+                    <!--used to get role and recipient from the saml assertion-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SAMLMediator">
+                        <property name="detachAssertion" value="false"/>
+                    </class>
+                    <!--used to determine diffserv and priority from ppd.xml, role and recipient-->
+                    <class name="no.ntnu.qos.server.mediators.impl.OutMetadataMediator">
+                        <property name="ppdFilename" value="ppd.xml"/>
+                    </class>
+                    <!--used to set diffserv and priority in soap header, so the client library can use it later-->
+                    <class name="no.ntnu.qos.server.mediators.impl.SoapPriorityMediator"/>
+                    <!--used to set the diffserv field in the IP-headers of packets sent to client-->
+                    <class name="no.ntnu.qos.server.mediators.impl.DiffservMediator"/>
+                    <!--sends the message back to the client-->
+                    <send/>
+                </out>
+            </inSequence>
+        </target>
+    </proxy>
+    <!--This sequence is started by messageProcessor after being picked out by the PrioritizedStore
+    The main sequence started when getting requests to and responses from the test service
+    is defined in a sequences/main.xml-->
+    <sequence name="qos" trace="enable" statistics="enable">
+        <!--used to set the diffserv field in the IP-headers of packets sent to client-->
+        <class name="no.ntnu.qos.server.mediators.impl.DiffservMediator"/>
+        <!--used to hold back messages, to allow others to finish sending
+        Also stops lower priority messages if high priority messages come along-->
+        <class name="no.ntnu.qos.server.mediators.impl.ThrottleMediator">
+            <!--The minimum Bps per message sent through each TR, 
+            this along with the link capacity determine how many messages can be sent at the same time-->
+            <property name="minBandwidthPerMessage" value="10240"/>
+            <!--How long, in ms, a message can stay in throttleMediator before being discarded-->
+            <property name="timeout" value="1000"/>
+        </class>
+        <!--sends the response to the client-->
+        <send/>
+    </sequence>
+    <!--The endpoint used by the EchoService proxy, localhost can be changed if GlassFish is on different computer-->
+    <endpoint name="echoservice">
+        <address uri="http://localhost:8080/EchoServiceLargeReply/EchoServiceService" statistics="enable"/>
+    </endpoint>
+    <!--A message store that prioritizes messages based on priority and time added-->
+    <messageStore class="no.ntnu.qos.server.store.PrioritizedMessageStore" name="PrioritizedStore"/>
+    <!--A message processor that takes at a message from PrioritizedStore every "interval" ms, and sends them to the "sequence" mediator sequence-->
+    <messageProcessor class="org.apache.synapse.message.processors.sampler.SamplingProcessor" name="MessageProcessor" messageStore="PrioritizedStore">
+        <parameter name="interval">100</parameter>
+        <parameter name="sequence">qos</parameter>
+    </messageProcessor>
+</definitions>

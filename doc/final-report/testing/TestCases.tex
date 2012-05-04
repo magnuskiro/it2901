@@ -1,0 +1,167 @@
+	\subsection{Test Cases}\label{Testing:Cases}
+
+	As most of the tests below are quite similar, the reasoning behind them is also fairly similar. The main difference between them is the “Timeout”, which refer to the timeout the ESB uses. For more about the “Timeout” see section~\ref{Configuration of the ESB}.
+
+	Since this project had a research focus from the customers side we did not perform these tests in order for us to validate our system. Instead we have run these tests to try and say something about the feasibility of the original question asked when we started. We will come back to this topic in the result section.\\
+    
+    We used the same client setups for all of the tests. The low priority clients, Client 1 and 2, were configured like this:
+\lstset{language=matlab}
+\begin{lstlisting}
+%This is a comment
+%variables are written with NAME:VALUE
+%line without ':' or '%' is treated as end of file.
+%doLog:boolean, whether to log or not, default is true.
+doLog:true
+%logToFile:boolean, whether or not client library should log to file, default is false.
+logToFile:true
+%username:String, Must be configured.
+username:testname
+%password:String, Must be configured.
+password:testpassword
+%role:String, Must be configured.
+role:clientRole1
+%service:URI, Must be configured.
+service:https://10.0.0.1:8243/services/EchoService
+%interval:long, between requests in milliseconds, only one request if not configured
+interval:1000
+%nofreqs: int, number of requests to send, send forever if not configured
+nofreqs:100
+%delay:long, wait before first request in milliseconds, default is 0
+delay:10
+%request:SOAP, Must be configured.
+request:<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Header/><S:Body><ns2:hello xmlns:ns2="http://me.test.org"><name>{REQID}</name></ns2:hello></S:Body></S:Envelope>
+\end{lstlisting}
+    Client 2 had 0 as delay. While the high priority client, Client 3, had interval=3000, nofreqs=30 and delay=15.
+\begin{center}
+
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:1}
+	\hline
+	ID & 1 \\
+	\hline
+	Description &  In this test what we are looking at is how our system behaves with a very low timeout, since we have full control over the message sizes sent in the test we know that this timeout will be too low on the lower bandwidths, but should perform much better on high bandwidths. \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: 500}, interval: 500, minimum bandwidth per message: 10240 \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect to see that the ESB will time out even higher priority messages in the lower bandwidth tests because of the low timeout, but on higher bandwidths the sending time of the all the messages should be lower than on the later tests. To put that in the same setting as our results, we expect the percentage of successfully received messages to be lower than in the tests below, but we expect the time to also be lower across the board.  \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 1} you can find the appropriate compressed test case.\\
+	\hline
+\end{tabular}
+
+\\ \ldots \\
+
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:2}
+	\hline
+	ID & 2 \\
+	\hline
+	Description & In this test we have increased the timeout substantially, we expect to see some improvements on 10kBps and still retain some of the benefits of a lower timeout on 20- and 40kBps \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: 1000}, interval: 500, minimum bandwidth per message: 10240 \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect to have a higher percentage of completed messages on 10kBps than with a timeout of 500 and we expect the results on 1-, 20- and 40kBps to be relatively unchanged. \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 2} you can find the appropriate compressed test case.\\
+	\hline
+\end{tabular}
+
+\\ \ldots \\
+
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:3}
+	\hline
+	ID & 3 \\
+	\hline
+	Description & Again we have increased the timeout and expect to see some improvements on percentage, but the total time taken should start to drop on higher bandwidths.  \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: 2000}, interval: 500, minimum bandwidth per message: 10240 \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect all the messages on 20 and 40kBps to arrive, we expect that on 10kBps more messages should arrive, but not all. The time taken should again increase. \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 3} you can find the appropriate compressed test case.\\
+	\hline
+\end{tabular}
+
+\\ \ldots \\
+
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:4}
+	\hline
+	ID & 4 \\
+	\hline
+	Description & In this test we want to see how the ESB copes with a much larger timeout.  \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: 5000}, interval: 500, minimum bandwidth per message: 10240 \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect that 10-, 20- and 40kBps should be enough to get most of the messages for the high priority client through, the time taken should again increase and this should be noticeable on 40kBps compared to Test 1.  \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 4} you can find the appropriate compressed test case.\\
+	\hline
+\end{tabular}
+
+\\ \ldots \\
+
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:5}
+	\hline
+	ID & 5 \\
+	\hline
+	Description & In this test we have gone all out. The timeout is massivly increased to see how the ESB behaves on the lowest bandwidths, 1- and 5kBps respectively.  \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: 100 000}, interval: 500, minimum bandwidth per message: 10240 \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect the same percentage on 10-, 20- and 40kBps as Test 4. What we want to see is that on 5kBps the percentage is increased quite substantially compared to the previous tests. \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 5} you can find the appropriate compressed test case.\\
+	\hline
+\end{tabular}
+\\ \ldots \\
+\begin{tabular}{| p{4cm} | p{8cm} |}%\label{test:6}
+	\hline
+	ID & 6 \\
+	\hline
+	Description & In this test what we have done is to remove our Throttle mediator which should mean that our ESB setup will no longer be doing any throttling of messages. The message queue is still there so there will be some priority in the sending and receiving. We want to test this because this should give us some idea about how our setup will do against no QoS at all. \\
+	\hline
+	Repetition(s) & 10 \\
+	\hline
+	NS3 variables & Datarate: 1kBps,5kBps,10kBps,20kBps,40kBps \\
+	\hline
+	ESB variables & \textbf{Timeout: N/A}, interval: 500, minimum bandwidth per message: N/A \\
+	\hline
+	Automated & Yes \\
+	\hline
+	Expected Result & We expect that the average percentage of all the clients will be slightly above what our test can do, we refer to section~\ref{Testing:About:Weaknesses} for some elaboration about this. What we want to see is that on lower bandwidths the average time taken for messages to arrive at Client 4 will be substantially higher than when we use the Throttle mediator. This will indicate that our Throttle mediator actually does some useful work and also indicate that this could be a viable strategy for our customer to continue researching. \\
+	\hline
+	Folder with compressed test & In appendix~\ref{attachment:file:Test Case 6} you can find the appropriate compressed test case. \\
+	\hline
+\end{tabular}
+
+\\ \ldots \\
+
+\end{center}

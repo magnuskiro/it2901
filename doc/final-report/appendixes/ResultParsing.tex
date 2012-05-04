@@ -1,0 +1,21 @@
+\section{Result Parsing}\label{Result Parsing}
+    In this appendix we will describe how to use the scripts provided to parse the results we get from testing with MobiEmu.
+    
+    If tests are run with different bandwidth capacities we can use the script GroupResults.py like this:
+    \lstset{language=bash, style=shell}
+    \begin{lstlisting}
+$ python2 GroupResults.py /path/to/results/ /path/to/where/you/want/results/grouped/
+    \end{lstlisting}
+    This script will move the results from the first folder to the second, and group them in subfolders with the name of their bandwidth capacities. When choosing a folder to move them to we recommend choosing a subfolder of a general results folder, this way you can use the script parseall.sh like this:
+    \begin{lstlisting}
+$ ./parseall.sh "-m -t -p -g" /path/to/folder/containing/the/folder/you/moved/results/to/ "2 3 4" > AllResults.txt
+    \end{lstlisting}
+    Here the first argument "-m -t -p -g" is the optional arguments used for ParseResults.py. If '-g' is present it must be the last argument here. All graphs will be named after the folder names of where the results are, at the end the graphs are moved to the folder "graphs" in the script folder. The last argument "2 3 4" are the nodes to parse output from. "> AllResults.txt" is used to store the output in a file.
+    
+    ParseResults works by entering a folder and looping over all the files at the bottom of that folder structure. It expects that the folder contains only similar runs, e.g. runs with speed 10kBps and timeout of 500ms. It then retrieves all the log files from each of the nodes from the commandline. It then calculates the average time taken with standard deviation and the number of successful messages received back at the client. It then outputs this information and can optionally create graphs of this information.
+    
+    ParseResults can be run seperatly from the scripts mentioned above by running
+    \begin{lstlisting}
+$ python2 ParseResults.py -t -m -p -g nameOfGraph /path/to/folder/ 2 3 4
+    \end{lstlisting}
+    Here "-t" means calculate average time, "-m" means calculate successful messages, "-p" print result to console, "-g" followed by nameOfGraph means we want graphs, and "2 3 4" are the nodes to extract results from. Should you need any help the "-h" option alone should be quite helpful.
