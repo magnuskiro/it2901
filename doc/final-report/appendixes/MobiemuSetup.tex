@@ -1,6 +1,6 @@
 \section{MobiEmu Setup Guide}\label{MobiEmu Setup Guide}
 
-    In this appendix we will show how to setup the MobiEmu framework to make it ready to run the tests from Chapter ~\ref{Testing}.
+    In this appendix we will show how to setup the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
 
     We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
 
@@ -11,7 +11,7 @@ After you have unpacked one of these tests we only have to add the ESB and Glass
 We will assume that you have unpacked one of our tests and created a folder named “system-test” which contains the whole experiment.
 
 \begin{shaded}
-    In order to do the next part you will need to have set up the ESB with our changes, if you have not done so, please see appendix ~\ref{Server Setup Guide}
+    In order to do the next part you will need to have set up the ESB with our changes, if you have not done so, please see appendix~\ref{Server Setup Guide}
 \end{shaded}
 
 \lstset{language=bash, style=shell}
@@ -39,9 +39,9 @@ $ cp /path/to/EchoClientClient.jar EchoClient/
 
     Now we need to copy the file “synapse.xml” into the correct folder and we should be good to go. Copy the “synapse.xml” file from the folder you unpacked into “/path/to/system-test/experiments/esb/repository/deployment/server/synapse-configs/default/”. This will ensure that the ESB is configured correctly with the same timeout as we have run with.
 
-    You may also need to change the path in “system-test-2.py” please have a look at Listing: ~\ref{mobiemu:system-test-2.py} and change it to reflect your setup.
+    You may also need to change the path in “system-test-2.py” please have a look at Listing:~\ref{mobiemu:system-test-2.py} and change it to reflect your setup.
 
-    The last thing we need to do is edit the settings file and ensure that the “[ns3]” section points to the right path. In Listing: ~\ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Edit the path under “[ns3]” to point to the path to NS3.
+    The last thing we need to do is edit the settings file and ensure that the “[ns3]” section points to the right path. In Listing:~\ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Edit the path under “[ns3]” to point to the path to NS3.
 
 Now the setup should be completed and it should now be possible to run the framework. In order to do so run:
 \lstset{language=bash, style=shell}
