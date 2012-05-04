@@ -100,7 +100,7 @@ public void newData(ReceiveObject recObj);
 
 \subsection{Logging}\label{userguideLogging}
 
-    The client library supports logging both to file and console, by default it only logs to console, and only warnings and above. To set whether to log to console you can call:
+    The client library supports logging both to file and console, by default it only logs to console, and only warnings and above. Any log files will be placed in the system default folder, which will normally (on linux) be the folder from which the client has been run. To set whether to log to console you can call:
 
 \begin{lstlisting}[caption={Turn logging to console on or off}, label=userguideTogglelogtoconsole]
     client.setLogToConsole(boolean on);
@@ -136,7 +136,7 @@ public void newData(ReceiveObject recObj);
 
     \subsubsection{Redundant token fetching}
     
-    If two or more requests are sent to the same service-set at the same time and the token has not already been fetched for that service-set there is a high probability that the token will be fetched over the network several times before being stored in the credential storage. Meaning you will waste network bandwidth getting the same information several times.
+    If two or more requests are sent to the same service-set at the same time and the token has not already been fetched for that service-set there is a high probability that the token will be fetched over the network several times before being stored in the credential storage, meaning you will waste network bandwidth getting the same information several times.
 
     \subsection{Example code}\label{userguideExample}
 
