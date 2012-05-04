@@ -20,7 +20,7 @@ This component will handle all communication with the service providers, as well
 This component will be used to parse and manipulate \gls{xml}\footnote{\gls{xml} - eXtensible Markup Language} data in the form of SOAP and SAML. These are fairly extensive and complex data structures so an easy-to-use external library is essential here. \\
 
 \indent \textbf{Apache \gls{httpcomponents}:}\\
-This is a lightweight component for easily setting up and using HTTP connections. While not strictly necessary this component will allow us to connect and communicate across networks far more easily than the standard Java components.
+This is a lightweight component for easily setting up and using HTTP connections. While not strictly necessary this component will allow us to connect and communicate across networks far more easily than the standard Java components. Mainly we will use the \gls{httpCore} package of \gls{httpcomponents}.
 
 	\subsubsection{Use Cases}\label{client use cases}
 %%%%%%%%%%%%%%%%%%%%
@@ -148,8 +148,8 @@ This is a lightweight component for easily setting up and using HTTP connections
 		\begin{enumerate}
 			\item The client generates data and sends it to the library via API/Interface
 			\item The data moves on to the sequencer and down to the message hander
-			\item The message handler tells httpCore to establish a connection to the server, and the data is sent
-			\item The server sends a reply that is picked up by httpCore and forwarded to the messageHandler
+			\item The message handler tells \gls{httpCore} to establish a connection to the server, and the data is sent
+			\item The server sends a reply that is picked up by \gls{httpCore} and forwarded to the messageHandler
 			\item The interface is notified of the reply
 			\item The interface notifies the client that the reply is ready
 		\end{enumerate}
