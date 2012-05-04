@@ -1,4 +1,13 @@
 \section {Raw Results} \label{RawResults}
+Below we have added the raw results of our testing. There are some strange anomalies which we should explain before we dive into the actual results.
+
+As you can see below the deviation, in percent, is quite large in some scenarios. The reason behind this is complex because of the many variables which has an effect, but we will try to explain some of the reasons here.
+
+One of the main reasons behind the large deviation is the inherent randomness of the tests. When Node 4 is sending messages there could be heavy load and there could be a lower load. 
+
+Another factor which has an effect is the low number of messages that we are sending from Node 4. Compared to the other two nodes, Node 4 is sending about one third of the messages meaning and this means that the deviation in percent is larger even though the time is roughly the same.
+
+Another important point is that the time for Node 4 is usually much smaller than for the two other nodes. This means that any messages which is slowed down during transmission for Node 4 crates a larger deviation than for the two other nodes.
     \subsection{500ms}\label{RawResults:500ms}
         ----------10kBps,---------\\
         Percentage of messages received for node2.log : 0.326\\
