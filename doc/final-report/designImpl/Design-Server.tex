@@ -1,5 +1,6 @@
     \subsection{Server Side}\label{Server Side Design}
-    In this chapter we are going to introduce the design, implementation and configuration that we have done on the server side. In section ~\ref{Server Introduction} we will introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, in section ~\ref{Server Use Cases}. Section ~\ref{Description of ESB concepts} will go into more detail about what the framework consists of. The section will also guide you through the basic processing units which is used in the framework. The next section, ~\ref{Textual Server Dataflow}, contains the dataflow through the server side, which will help you get a good overview of our design. Section ~\ref{Extensions to the ESB} goes into detail in describing our custom components in the framework, and together with the dataflow should give you a good understanding of the whole server side. Together with section ~\ref{Server Sequence Diagrams} you should get a good overview of the system. Section ~\ref{Configuration of the ESB} will give you the details 
+    In this chapter we are going to introduce the design, implementation and configuration that we have done on the server side. In section ~\ref{Server Introduction} we will introduce the framework that we have built upon and what we are going to do with it. Next follows use cases, in section ~\ref{Server Use Cases}. Section ~\ref{Description of ESB concepts} will go into more detail about what the framework consists of. The section will also guide you through the basic processing units which is used in the framework. The next section, ~\ref{Textual Server Dataflow}, contains the dataflow through the server side, which will help you get a good overview of our design. Section ~\ref{Extensions to the ESB} goes into detail in describing our custom components in the framework, and together with the dataflow should give you a good understanding of the whole server side. Together with section ~\ref{Server Sequence Diagrams} you should get a good overview of the system. Section ~\ref{Configuration of the ESB} will 
+give you the details 
 about how we 
 have configured the framework, it will not contain description of how we have set variables during testing, but using this description should make it possible to get the framework up and running.
 
@@ -53,7 +54,7 @@ have configured the framework, it will not contain description of how we have se
     \textbf{Main}
     \begin{enumerate}
         \item ESB requests bandwidth information from MS to a specific address
-        \item MS returns bottleneck bandwidth to the ESB, as well as an identifier for the last Tactical Router before the endpoint.
+        \item MS returns bottleneck bandwidth to the ESB, as well as an identifier for the last \gls{tr} before the endpoint.
     \end{enumerate}
     \textbf{Extensions:}
     \begin{itemize}
@@ -140,7 +141,7 @@ SoapPriority mediator(Fig:~\ref{fig:SoapPrioritymediator}):\\
 	This mediator adds the DiffServ value and the priority as two custom SOAP header items. We use these fields on the client side in order for the clients to use the same DiffServ value.
 \\\\
 MS mediator(Fig:~\ref{fig:MSmediatorsequence}):\\
-    This mediator retrieves the \gls{ipaddress}\footnote{\gls{ipaddress} - A numerical label assigned to each device connected to the Internet} of the receiving client from the endpoint reference in the message context. It sends this IP address to the Monitoring Service and gets an identifier for the last Tactical Router on the path to the client, as well as the limiting bandwidth on the path. The mediator then sets this information as properties in the message context before sending the message to the next mediator.
+    This mediator retrieves the \gls{ipaddress}\footnote{\gls{ipaddress} - A numerical label assigned to each device connected to the Internet} of the receiving client from the endpoint reference in the message context. It sends this IP address to the Monitoring Service and gets an identifier for the last \gls{tr} on the path to the client, as well as the limiting bandwidth on the path. The mediator then sets this information as properties in the message context before sending the message to the next mediator.
 \\\\
 Prioritized Message store:\\
     This is not a mediator, but it is an important part of the response mediation sequence. This is a message store that stores messages in a priority queue. The queue is mainly ordered by the priority property of the message context, and secondly by the time when added. When retrieving messages from this store, the message on the top of the queue is returned. This ensures that high priority messages are processed before lower priority messages.
@@ -149,7 +150,7 @@ DiffServ mediator(Fig:~\ref{fig:DiffServmediator}):\\
 	The DiffServ mediator sets the correct DiffServ value on the Socket. The DiffServ value is retrieved from the same value as the OutMetadata mediator put in earlier. Since correct use of DiffServ was very important to the client this mediator also does extensive logging which is important to look at when debugging.
 \\\\
 Throttle mediator(Fig:~\ref{fig:Throttlemediator}):\\
-    This mediator is used to ensure that high priority messages are sent first, by disrupting already sending messages, and it tries to ensure that the network is not being overflowed by this server by holding back messages. To determine what to disrupt and what to hold back, and for how long, several properties are used; the priority of the message, the available bandwidth, the IP address of the client side Tactical Router, and the real time demand of the request. In order to do this, the mediator must keep a list of sending messages and where those messages are going.
+    This mediator is used to ensure that high priority messages are sent first, by disrupting already sending messages, and it tries to ensure that the network is not being overflowed by this server by holding back messages. To determine what to disrupt and what to hold back, and for how long, several properties are used; the priority of the message, the available bandwidth, the IP address of the client side \gls{tr}, and the real time demand of the request. In order to do this, the mediator must keep a list of sending messages and where those messages are going.
 \\\\
 SendBack mediator:\\
     This mediator sends the message back to the client, but before it is sent it is mediated through the out sequence of the ESB.
@@ -264,7 +265,7 @@ Sampling Message Processor:\\
 </config>
 \end{lstlisting}
 
-	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last Tactical Router before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KiBps. Below is an example configuration.\\
+	Next we look at a file that is specific to our implementation of the MSCommunicator (Monitoring Service Communicator). Since our implementation does not actually have a monitoring service to contact we use the file “ms.xml” in “/path/to/wso2esb/” to configure data groups of destination IP, name of last \gls{tr} before client and the bandwidth capacity of the ‘weakest’ link on the path measured in KiBps. Below is an example configuration.\\
 
 \lstset{language=XML, style=eclipse}
 \lstset{showstringspaces=false}

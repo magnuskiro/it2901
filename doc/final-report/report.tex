@@ -60,9 +60,9 @@
 \newpage
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}\label{acknowledgements}
-    A big thank you is owed to our customer representatives at FFI for an interesting challenge as well as great feedback during the project.
+    A big thank you to our customer representatives at FFI for an interesting challenge as well as great feedback during the project.
     \\\\
-    A thank you is also owed to Magnus Skjegstad at FFI for use of the  MobiEmu library for easy system testing.
+    A thank you to Magnus Skjegstad at FFI for use of the  MobiEmu library for easy system testing.
     \\\\
     We’d also like to thank Oleg Kalnichevski on the Apache Synapse and Http Components mailing lists for all his help solving the issues we had and getting our patch accepted.
     \\\\
@@ -77,27 +77,27 @@
 \pagenumbering{arabic}
 
 %sections
-\input{Introduction}
-\input{TaskDescriptionAndRequirements}
-\input{Prestudy}
-\input{ProjectManagement}
-\input{DevelopmentMethodology}
-\input{designImpl/DesignAndImplementation}
-\input{testing/Testing}
-\input{evaluation/ProjectEvaluation}
-\input{conclusion/Conclusion}
+\include{Introduction}
+\include{TaskDescriptionAndRequirements}
+\include{Prestudy}
+\include{ProjectManagement}
+\include{DevelopmentMethodology}
+\include{designImpl/DesignAndImplementation}
+\include{testing/Testing}
+\include{evaluation/ProjectEvaluation}
+\include{conclusion/Conclusion}
 
 % appendixes. 
 \appendix
-\input{appendixes/ClientUserGuide}
-\input{appendixes/ServerSetupGuide}
-\input{appendixes/MobiemuSetup}
-\input{appendixes/ResultParsing}
-\input{appendixes/AllResults}
-\input{appendixes/NS3Problem}
-\input{appendixes/ToolsList}
-\input{appendixes/WorkBreakdownStructure}
-\input{appendixes/FileAttachments}
+\include{appendixes/ClientUserGuide}
+\include{appendixes/ServerSetupGuide}
+\include{appendixes/MobiemuSetup}
+\include{appendixes/ResultParsing}
+\include{appendixes/AllResults}
+\include{appendixes/NS3Problem}
+\include{appendixes/ToolsList}
+\include{appendixes/WorkBreakdownStructure}
+\include{appendixes/FileAttachments}
 
 %Glossary
 \addcontentsline{toc}{section}{Glossary}
@@ -110,7 +110,7 @@
 \bibliography{Bibliography}
 
 % attachments not directly needed in the report. 
-% Weekly reports, activity plans, schedules etc. 
-\input{appendixes/Attachments}
+% Weekly reports, activity plans, schedules and risk list. 
+\include{appendixes/Attachments}
 
 \end{document}
