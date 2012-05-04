@@ -1,8 +1,8 @@
 \subsection{Client Side}\label{client side}
 
-This chapter will introduce the client side design, and architecture of our system. Section \ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section \ref{client use cases} will describe the use cases, and section \ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description \ref{client architecture}. Finally, section \ref{client sequence diagrams} will go through the sequence diagrams.
+This chapter will introduce the client side design, and architecture of our system. Section ~\ref{client introduction} will introduce the different components that make up the entire client, and includes a description of the different components that make up the client library. Next, section ~\ref{client use cases} will describe the use cases, and section ~\ref{textual client data flow} will take care of the data flow, followed by a detailed architecture description in section ~\ref{client architecture}. Finally, section ~\ref{client sequence diagrams} will go through the sequence diagrams.
     
-    The class diagram, found in appendix \ref{File Attachments}, is a useful addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
+    The class diagram, found in appendix ~\ref{File Attachments}, is a useful addition when understanding the architecture of the client library and its functionality. The descriptions and diagrams in this section might become clearer when looking at the class diagram and see the connections between classes and the more specific contents of the classes. 
 		
     \subsubsection{Introduction}\label{client introduction}
 The client architecture consists of the following two components: The client application and the client library. Additionally, the library makes use of some external components to do some of its work.
@@ -42,7 +42,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			  \item[] 5a. Return error
 		\end{itemize}
 		\textbf{Precondition:}  None\\
-		\textbf{See:} Requirement 6 (Section \ref{Requirements})
+		\textbf{See:} Requirement 6 (Section ~\ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Accept data to be sent \\
@@ -71,7 +71,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			  \item[] 2a. Return error
 		\end{itemize}
 		\textbf{Precondition:} DataObject has been created, and contains both bandwidth info and a token \\
-		\textbf{See:} Accept client credentials, Accept data to be sent and Fetch bandwidth info, requirement 8 (Section \ref{Requirements})
+		\textbf{See:} Accept client credentials, Accept data to be sent and Fetch bandwidth info, requirement 8 (Section ~\ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Get SAML token \\
@@ -91,7 +91,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item[] 4a. Client library throws error
 		\end{itemize}
 		\textbf{Precondition:} Client has given library credentials and data to send, and a SAML token for the destination doesn't already exist. Connection to server has been established. \\
-		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info and Connect to server, requirement 2, 3 and 6 (Section \ref{Requirements})
+		\textbf{See:} Accept client credentials, Accept data to be sent, Fetch bandwidth info and Connect to server, requirement 2, 3 and 6 (Section ~\ref{Requirements})
 		\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\textbf{Title:} Transaction towards server \\
@@ -132,7 +132,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
         \label{fig:ClientDataFlowDiagram}
     \end{figure}
     
-	\textbf{Client credentials} (Visualized in Fig.\ref{fig:ClientCredentialsDataFlowDiagram})
+	\textbf{Client credentials} (Visualized in Fig:~\ref{fig:ClientCredentialsDataFlowDiagram})
 		\begin{enumerate}
 			\item The Client application sends credentials to the library interface
 			\item The interface passes the credentials on to the token manager, through the sequencer
@@ -144,7 +144,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\item The token manager stores the token in the credential storage
 		\end{enumerate}
 		\\\\	
-		\textbf{Client Data} (Visualized in Fig.\ref{fig:ClientDataFlowDiagram})
+		\textbf{Client Data} (Visualized in Fig:~\ref{fig:ClientDataFlowDiagram})
 		\begin{enumerate}
 			\item The client generates data and sends it to the library via API/Interface
 			\item The data moves on to the sequencer and down to the message hander
@@ -163,7 +163,7 @@ A lightweight component for easily setting up and using HTTP connections. While 
 			\label{fig:DetailedClientArchitecture}
 		\end{figure}
 
-    All the following sub paragraphs in this subsection are parts of the client library which is shown in figure \ref{fig:DetailedClientArchitecture}.  \\ 
+    All the following sub paragraphs in this subsection are parts of the client library which is shown in Fig:~\ref{fig:DetailedClientArchitecture}.  \\ 
     
 		\indent \textbf{Interface} \\
 Known in the class diagram as “QosClient”, responsible for providing a clean and easy to use interface for the clients.
