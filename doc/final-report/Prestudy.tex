@@ -59,15 +59,15 @@ help in the eventuality of someone getting sick. The advantage of developing in 
 
     \subsection{System testing}\label{System testing}
     
-    When it comes to system testing, the customer was quite insistent that we test the product thoroughly in an emulated network situation. Since we have had some experience with NS3\footnote{NS3 is a discrete-event network simulator for Internet systems, targeted primarily for research and educational use. - [\url{www.nsnam.org}]} we decided that we wanted to do the system testing on it. Following we describe the initial advantages of the testing freamework and test cases we were going to use. 
+    When it comes to system testing, the customer was quite insistent that we test the product thoroughly in an emulated network situation. Since we have had some experience with ns-3\footnote{ns-3 is a discrete-event network simulator for Internet systems, targeted primarily for research and educational use. - [\url{www.nsnam.org}]} we decided that we wanted to do the system testing on it. Following we describe the initial advantages of the testing freamework and test cases we were going to use. 
     
-    The advantage with this, is that the customer has already set up some testing scenarios and helper-scripts designed for NS3, which they offered for our use. This will greatly reduce the time needed for setting up the test suite, and it will also give us the ability to have automated tests, which we don’t have to monitor or interact with.
+    The advantage with this, is that the customer has already set up some testing scenarios and helper-scripts designed for ns-3, which they offered for our use. This will greatly reduce the time needed for setting up the test suite, and it will also give us the ability to have automated tests, which we don’t have to monitor or interact with.
     
-     Another added advantage is easy testing, as we only have to start a script in order to run the whole suite, but that comes at the cost of actually setting up the whole thing. As of the midterm report, we have set quite a lot of time aside in order for us to implement the proper NS3 support we need. 
+     Another added advantage is easy testing, as we only have to start a script in order to run the whole suite, but that comes at the cost of actually setting up the whole thing. As of the midterm report, we have set quite a lot of time aside in order for us to implement the proper ns-3 support we need. 
         
     To monitor what is happening during the test-runs, our applications will output all important information regarding what is going on, in addition to this we have a \gls{packet sniffer} on each end which will capture network traffic. Using this information we should be able to tell a whole lot about what is going on in the network and we should be able to decide whether we have met the requirements or not.
 
-    Below are some of the detailed test cases which we want to automate on top of NS3. The testing itself will be automated, but in order to get some result from the tests, some human interaction is needed to interpret the output data.
+    Below are some of the detailed test cases which we want to automate on top of ns-3. The testing itself will be automated, but in order to get some result from the tests, some human interaction is needed to interpret the output data.
 \\
     \begin{figure}[h]
         \centering
