@@ -1,5 +1,5 @@
 \subsection{Results}\label{Testing:Results}
-	In this section we go over the results for each of the test cases in the preceding section. We compare the results with each other and also compare most of the cases to the "No throttle mediator" scenario.
+	In this section we cover the results for each of the test cases in the preceding section. We compare the results with each other and also compare most of the cases to the "No throttle mediator" scenario.
 	
 	\begin{shaded}
 	To see all the results of our tests in their raw forms, we refer you to \mbox{appendix~\ref{RawResults}}.
@@ -156,7 +156,7 @@
 	
 	As we expected without our throttle mediator, the time taken to receive messages back at the client is increased on all bandwidths where the bandwidth is below a certain threshold. Where the bandwidth is large enough, i.e. 40kBps, the time is comparable to our other tests because the bandwidth is more than large enough.
 	
-	The trend is also clear when it comes to successful messages, without our throttle mediator more messages arrive even on lower bandwidths. This is because the throttlemediator discards messages after the timeout. This statement is strengthened by the fact that if we compare no throttle to 100 000 ms timout, the latter performs better, managing to get more high priority messages successfully back, on all capacities (ignoring 1kBps and 40kBps).
+	The trend is also clear when it comes to successful messages, without our throttle mediator more messages arrive even on lower bandwidths. This is because the throttlemediator discards messages after the timeout. This statement is strengthened by the fact that if we compare no throttle to 100 000 ms timeout, the latter performs better, managing to get more high priority messages successfully back, on all capacities (ignoring 1kBps and 40kBps).
 	
 	\begin{figure}[H]
 		\centering
@@ -169,4 +169,4 @@
 
     Because of lacks in the testing system, e.g. limited resources, the uncertainties regarding avarage times and responses received can be rather big. Even with this uncertainty we believe we can say something about the impact of the throttle mediator. \\
 
-    Checking for DiffServ: Running tests also produce "pcap"-files, these files contain network traffic data. Here we can check whether or not the diffserv field is set correctly, and it would seem it is. 
+    Checking for DiffServ: Running tests also produce "pcap"-files, these files contain network traffic data. Here we can check whether or not the DiffServ field is set correctly, and it would seem it is. 
