@@ -1,14 +1,14 @@
 \section{MobiEmu Setup Guide}\label{MobiEmu Setup Guide}
 
-    In this appendix we will show how to set up the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
+    In this appendix we show how to set up the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
 
-    We will start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
+    We start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
 
 Since this framework is quite nice and packages up everything before a system test all we need to do is unpack one of our run folders and we should be good to go. We have included a compressed folder which contains five compressed folders where each of these contains a test which we need to unpack in order to run.
 
 After you have unpacked one of these tests we only have to add the ESB and GlassFish to be able to run the tests.
 
-We will assume that you have unpacked one of our tests and created a folder named “system-test” which contains the whole experiment.
+We assume that you have unpacked one of our tests and created a folder named “system-test” which contains the whole experiment.
 
 \begin{shaded}
     In order to do the next part you will need to have set up the ESB with our changes, if you have not done so, please see appendix~\ref{Server Setup Guide}
@@ -55,7 +55,7 @@ $ sudo su
 
     The rest of this appendix will explain the different variables and testing files that we use in our setup, so it is not necessary to read this section if you only want to verify our tests.
 
-    Below are the full settings-files for all of our system test, the comments within it is from the MobiEmu creator, but we will try to explain them all and highlight the ones which have a real effect on our tests.
+    Below are the full settings-files for all of our system test, the comments within it is from the MobiEmu creator, but we try to explain them all and highlight the ones which have a real effect on our tests.
 
 \lstset{language=make, style=shell}
 \begin{lstlisting}[frame=single, caption={Setting.cfg}, label=mobiemu:setting.cfg, breaklines=true]
@@ -222,7 +222,7 @@ The most important variables and their meaning is described below.
 \item experiment=system\_test\_2.py - This is the experiment in “experiments” to run, please see Listing:~\ref{mobiemu:system-test-2.py} for more information.
 \end{itemize}
 
-Next we will take a look at our testing file. This file is what starts the ESB, GlassFish and each of the clients. It is run inside its own LXC and as such needs to check which node it is so as to start the right application.
+Next we take a look at our testing file. This file is what starts the ESB, GlassFish and each of the clients. It is run inside its own LXC and as such needs to check which node it is so as to start the right application.
 
 \lstset{language=Python, style=eclipse}
 \begin{lstlisting}[frame=single, caption={System-test-2.py}, label=mobiemu:system-test-2.py, breaklines=true]
@@ -275,7 +275,7 @@ There should really be nothing too special about this file. It first starts up G
 \item path = '/home/qos/server/mobiemu/system-test-2/experiments/' - This will need to be changed to reflect where it is run from, this has to be this way because it is run with root and it needs an absolute path.
 \end{itemize}
 
-The last file we will look at is the topology file, this defines the topology in NS3 and creates Tap-Bridges which we connect the LXCs to.
+The last file we look at is the topology file, this defines the topology in NS3 and creates Tap-Bridges which we connect the LXCs to.
 
 \lstset{language=C++, style=eclipse}
 \begin{lstlisting}[frame=single, caption={System-test-2 Topology}, label=mobiemu:topology, breaklines=true]

@@ -21,7 +21,7 @@ import no.ntnu.qos.client.QoSClient;
 import no.ntnu.qos.client.ReceiveObject;
 import no.ntnu.qos.client.impl.QoSClientImpl;
 /**
- * TestClient is a test web service client using the client library to request web services.
+ * TestClient is a test Web service client using the client library to request Web services.
  * @author Ola Martin
  *
  */

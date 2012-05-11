@@ -5,4 +5,4 @@ The design of the client library initially called for a sanity checker to valida
 \\\\
 MSCommunicator:\\
 Initially the plan was to integrate the MSCommunicator module in the client library. But we realized that bandwidth data is not necessary for deciding on the DiffServ-value, as that is decided by the Identity Server and returned through SAML.
-Additionally, due to the fact that the data sent by the client will be smaller than the data returned from the web service most of the time, and the network will usually consist of several clients connected to one service we saw no need to prioritize and hold back messages on the client side based on the bandwidth of the network.
+Additionally, due to the fact that the data sent by the client will be smaller than the data returned from the Web service most of the time, and the network will usually consist of several clients connected to one service we saw no need to prioritize and hold back messages on the client side based on the bandwidth of the network.
