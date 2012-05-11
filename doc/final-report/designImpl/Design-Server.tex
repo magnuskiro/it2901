@@ -8,6 +8,8 @@ have configured the framework, it will not contain description of how we have se
     The server side architecture consists of several components, the WSO2 ESB, the Monitoring Service and the GlassFish server. The GlassFish server is not necessary to modify and the MS is something we must assume to exist in the network. The ESB is what we have to modify, configure and extend to meet our requirements.
 
     The ESB will be used to implement QoS for the Web services. To do this, it will have to communicate with the MS, in addition to the clients and the services. The ESB must be configured to work as a proxy for the services on the GlassFish server. It will also be configured to use certain mediation sequences for incoming requests and outgoing responses. The extension to the ESB consists mainly of custom mediators used in the mediation sequences. These mediators have the tasks of determining priority of messages, contacting the MS for bandwidth data, and enforcing the priority. Also modifications to the source code of one of the ESBs libraries were made to allow DiffServ to be set in the IP header.
+
+    We have appended the javadoc for the server side code in appendix~\ref{attachment:file:Server Javadoc} (Javadoc-Server.zip).
     
     \subsubsection{Use Cases}\label{Server Use Cases}
     This section outlines the use cases that we have thought of in relation to the server side. With the help of these you should get a rough idea of what we want the server side to be able to do.\\\\
