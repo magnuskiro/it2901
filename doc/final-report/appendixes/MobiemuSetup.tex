@@ -2,7 +2,7 @@
 
     In this appendix we show how to set up the MobiEmu framework to make it ready to run the tests from Chapter~\ref{Testing}.
 
-    We start by downloading NS3 which is required in order to run our tests. Just download NS3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let NS3 configure itself.
+    We start by downloading ns-3 which is required in order to run our tests. Just download ns-3 from \url{http://www.nsnam.org/release/ns-allinone-3.13.tar.bz2} in order to get the same version as we used and then follow the instructions at \url{http://www.nsnam.org/docs/release/3.13/tutorial/html/getting-started.html#building-ns-3} in order to build and let ns-3 configure itself.
 
 Since this framework is quite nice and packages up everything before a system test all we need to do is unpack one of our run folders and we should be good to go. We have included a compressed folder which contains five compressed folders where each of these contains a test which we need to unpack in order to run.
 
@@ -41,7 +41,7 @@ $ cp /path/to/EchoClientClient.jar EchoClient/
 
     You may also need to change the path in “system-test-2.py” please have a look at Listing:~\ref{mobiemu:system-test-2.py} and change it to reflect your setup.
 
-    The last thing we need to do is edit the settings file and ensure that the “[ns3]” section points to the right path. In Listing:~\ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Edit the path under “[ns3]” to point to the path to NS3.
+    The last thing we need to do is edit the settings file and ensure that the “[ns3]” section points to the right path. In Listing:~\ref{mobiemu:setting.cfg} we have included our setting file, which is configured the way we set things up. Edit the path under “[ns3]” to point to the path to ns-3.
 
 Now the setup should be completed and it should now be possible to run the framework. In order to do so run:
 \lstset{language=bash, style=shell}
@@ -214,7 +214,7 @@ device=eth0
 The most important variables and their meaning is described below.
 
 \begin{itemize}
-\item total\_nodes=4 - This is the total number of nodes in the testing, this variable is passed to NS3 so it can use it and setup the right amount of nodes. Since we don’t have dynamic tests this should be coordinated with the NS3 topology.
+\item total\_nodes=4 - This is the total number of nodes in the testing, this variable is passed to ns-3 so it can use it and setup the right amount of nodes. Since we don’t have dynamic tests this should be coordinated with the ns-3 topology.
 \item initial\_random\_seed=31 - This seed is passed to all scripts which use random variables. In our testing we have no random variables so this should not be of great importance.
 \item repetitions=10 - The number of repetitions for each test. In our setup this means 10 repetitions for each bandwidth.
 \item experiment\_duration=600 - Total duration for the experiment, this must be coordinated with the “system-test-2.py” file you can see in Listing:~\ref{mobiemu:system-test-2.py}.
@@ -275,7 +275,7 @@ There should really be nothing too special about this file. It first starts up G
 \item path = '/home/qos/server/mobiemu/system-test-2/experiments/' - This will need to be changed to reflect where it is run from, this has to be this way because it is run with root and it needs an absolute path.
 \end{itemize}
 
-The last file we look at is the topology file, this defines the topology in NS3 and creates Tap-Bridges which we connect the LXCs to.
+The last file we look at is the topology file, this defines the topology in ns-3 and creates Tap-Bridges which we connect the LXCs to.
 
 \lstset{language=C++, style=eclipse}
 \begin{lstlisting}[frame=single, caption={System-test-2 Topology}, label=mobiemu:topology, breaklines=true]
@@ -403,4 +403,4 @@ int main (int argc, char *argv[])
 }
 \end{lstlisting}
 
-There should be very little which we could explain here, as NS3 in itself is quite complex. Therefore we refer you to the NS3\footnote{Documentation for NS3 \url{http://www.nsnam.org/docs/release/3.13/tutorial/singlehtml/index.html}} documentation if you would like to extend the topology.
+There should be very little which we could explain here, as ns-3 in itself is quite complex. Therefore we refer you to the ns-3\footnote{Documentation for ns-3 \url{http://www.nsnam.org/docs/release/3.13/tutorial/singlehtml/index.html}} documentation if you would like to extend the topology.
