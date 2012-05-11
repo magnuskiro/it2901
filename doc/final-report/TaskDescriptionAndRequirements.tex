@@ -1,9 +1,9 @@
 \section{Task Description and Requirements}\label{Task Description and Requirements} 
-    Our task was to provide a \gls{quality of service}\footnote{\gls{quality of service} refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements.[\url{http://en.Wikipedia.org/wiki/Quality_of_service}]}(from now on referred to as \gls{qos}) layer to Web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer will therefore prioritize between different messages, of varying importance, that clients and services want to send. Our software will have to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
+    Our task was to provide a \gls{quality of service}\footnote{\gls{quality of service} refers to several related aspects of telephony and computer networks that allow the transport of traffic with special requirements.[\url{http://en.Wikipedia.org/wiki/Quality_of_service}]}(from now on referred to as \gls{qos}) layer to Web services for use in military tactical networks. These networks tend to have severely limited bandwidth, and our QoS-layer will therefore prioritize between different messages, of varying importance, that clients and services want to send. Our software has to recognize the role of clients, and, together with the service they are trying to communicate with, decide the priority of the message.
     
     \subsection{Description}\label{Description}        
-    Our assignment was to create a Java application which will function as a \gls{middleware}\footnote{In the report \gls{middleware} will refer to the program we are making. Other distinctions should be made explicitly in the text.} layer between \glspl{webservice}\footnote{\glspl{webservice} - A software system designed to support interoperable machine-to-machine interaction over a network.[\url{http://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/\#soapmessage}]}, and clients trying to use these services. The middleware needs to process \gls{soap}\footnote{\gls{soap} - A lightweight protocol intended for exchanging structured information in the implementation of Web services in computer networks.[\url{http://www.w3.org/TR/soap12-part1/\#intro}]} messages, which is the communication protocol for most Web services, in order to be able to do its task. On the server side, the middleware needs to process messages and understand \gls{saml}\footnote{\gls{saml} - Security Assertion Markup Language.[\url{https://
-secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall quality of service the messages should receive. 
+    Our assignment was to create a Java application which functions as a \gls{middleware}\footnote{In the report \gls{middleware} refer to the program we are making. Other distinctions should be made explicitly in the text.} layer between \glspl{webservice}\footnote{\glspl{webservice} - A software system designed to support interoperable machine-to-machine interaction over a network.[\url{http://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/\#soapmessage}]}, and clients trying to use these services. The middleware needs to process \gls{soap}\footnote{\gls{soap} - A lightweight protocol intended for exchanging structured information in the implementation of Web services in computer networks.[\url{http://www.w3.org/TR/soap12-part1/\#intro}]} messages, which is the communication protocol for most Web services, in order to be able to do its task. On the server side, the middleware needs to process messages and understand \gls{saml}\footnote{\gls{saml} - Security Assertion Markup Language.[\url{https://
+secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of the client. This role, together with information about the service the client is trying to communicate with, decides the overall QoS the messages should receive. 
 
     Our software needs to be able to modify the \gls{tos}/\gls{diffserv} \gls{packet} header\footnote{\gls{tos} - Type of Service, a field in the IPv4 header, now obsolete and replaced by DiffServ.[\url{http://en.wikipedia.org/wiki/Type_of_Service}]} in order for the \Gls{tactical router}\footnote{\Gls{tactical router} - A Multi-topology router used in military networks}(from here referred to as \gls{tr}) to prioritize correctly. At the time of writing NATO has not defined any classes, but are working on defining DiffServ classes. This work is done in the upcoming IP QoS work. Our middleware must be able to handle this upcoming NATO standard gracefully and must therefor be quite flexible.
 
@@ -14,7 +14,7 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
     \subsection{Requirements}\label{Requirements}
     As the customer wanted all documentation written in English, we decided to use this for all written communication and documentation, in order to keep things consistent.
     
-    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we try to deliver a prototype to the customer before the final delivery in May.
+    The way the course is structured in terms of deliveries of reports and documentation also creates a fairly natural implicit sprint period to work off of, and using an agile methodology will help in easily producing and maintaining said reports and documentation. In addition to the  reports and documentation, we decided to deliver a prototype to the customer before the final delivery in May.
 
     The customer did not require any prototypes along the way, just a working piece of software by the end of the project, so the deadline we set for the prototype was self-imposed. 
 
@@ -38,9 +38,9 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline  
 		Functional & Working on all platforms that support Java. Not OS dependent. \\
 		\hline
-		Non-Functional & Ensure good code quality and code conventions \\ 
+		Non-Functional & Ensure good code quality and code conventions. \\ 
 		\hline
-		Design constraints & Because we chose to work with WSO2 ESB we decided that we would just use Java version 6. This is because the ESB is hardcoded to use Java version 6, we felt that this was not a big hindrance  \\
+		Design constraints & Because we chose to work with WSO2 ESB we decided that we would just use Java version 6. This is because the ESB is hardcoded to use Java version 6, we felt that this was not a big hindrance.  \\
 		\hline
 	\end{tabular}
 	\\  \ldots  \\
@@ -54,7 +54,7 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline
 		Priority & 1 \\
 		\hline
-		Purpose & Differentiate the messages being sent and make sure that high priority messages is sent before low priority messages. \\
+		Purpose & Differentiate the messages being sent and make sure that high priority messages are sent before low priority messages. \\
 		\hline 
 		Constraints, assumptions, dependencies & -\\
 		\hline  
@@ -76,11 +76,11 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline
 		Priority & 1 \\
 		\hline
-		Purpose & Use standards where they can be used \\
+		Purpose & Use standards where they can be used. \\
 		\hline 
 		Constraints, assumptions, dependencies & -\\
 		\hline  
-		Functional & SAML, Diffserv \\
+		Functional & SAML, DiffServ, SOAP, XML. \\
 		\hline
 		Non-Functional & Use web standards were we can and it makes sense \\ 
 		\hline
@@ -120,7 +120,7 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline
 		Priority & 2 \\
 		\hline
-		Purpose & To have extensive documentation on every part of our project. This will ensure that anyone can replicate our results later. This is also important to the customers as they want to replicate our results to see if this type of QoS could be used in an actual network.\\
+		Purpose & To have extensive documentation on every part of our project. This ensures that anyone can replicate our results later. This is also important to the customers as they want to replicate our results to see if this type of QoS could be used in an actual network.\\
 		\hline 
 		Constraints, assumptions, dependencies & -\\
 		\hline  
@@ -128,7 +128,7 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline
 		Non-Functional & All documentation shall be in English and be written to the best of our abilities to ensure good quality. \\ 
 		\hline
-		Design constraints & There are some constraints that were set by the institute. These constraint dictates sections that have to be present in the report. \\
+		Design constraints & There are some constraints that were set by the institute. These constraints dictate sections that have to be present in the report. \\
 		\hline
 	\end{tabular}
 	\\  \ldots  \\
@@ -186,7 +186,7 @@ secure.wikimedia.org/wikipedia/en/wiki/SAML}]} in order to deduce the role of th
 		\hline
 		Priority & 2 \\
 		\hline
-		Purpose & Currently there is only one priority class defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future. \\
+		Purpose & Currently there is only one priority class for Web services defined by NATO, the BULK class, but this will most likely change in the future, as such our middleware layer needs to be expandable enough to handle this change in the future. \\
 		\hline 
 		Constraints, assumptions, dependencies & Since we are using Java we are constrained to IPv4 as Java does not support setting the Type of Service field on IPv6.\\
 		\hline  
