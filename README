@@ -1,5 +1,14 @@
-Hei fra Jørgen :)
-Hei fra Ola :-)
-Hei fra Stig Tore ~=[,,_,,]:3  heisann
-Hei fra Jan c")
+Read the report found in doc/finalreport/report.pdf for a full explenation of this repository and it's purpous.
 
+The folders:
+client 
+- the client library that has to be used on the client side.
+
+doc 
+- The documentation and report for this project. See report.pdf in the final-report folder.
+
+msComm 
+- is our implementation of the communication between the server and a fictional monitoring service.
+
+server 
+- the server side of our application.
