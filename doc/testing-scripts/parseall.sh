@@ -9,19 +9,17 @@ for folder in *; do
 	for fold in *; do
 		echo ----------$fold,---------
 		cd "$DIR"
-        case "$1" in
-        *-g*)
-            GRAPHNAME=$folder$fold
-            ;;
-        *)
-            GRAPHNAME=""
-            ;;
-        esac
-        python2 ParseResults.py $1 $GRAPHNAME $2$folder/$fold/ $3
+		if [[ "$1" == *"-g" ]]; then
+			python2 ParseResults.py $1 $folder$fold $2$folder/$fold/ $3
+		else
+			python2 ParseResults.py $1 $2$folder/$fold/ $3
+		fi
 		echo
 	done
 	cd $2
 done
-cd "$DIR"
-mkdir graphs
-mv *.png graphs/
+if [[ "$1" == *"-g" ]]; then
+	cd "$DIR"
+	mkdir graphs
+	mv *.png graphs/
+fi
