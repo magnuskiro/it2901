@@ -1,5 +1,5 @@
 set terminal postscript monochrome
-set title "More concise"
+set title "Average sending time compared with Timeout"
 set xlabel "Timeout(ms)"
 set ylabel "Average sending time (ms)"
 set xtics ("500" 1, "1000" 2, "2000" 3, "5000" 4, "100000" 5)
