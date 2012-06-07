@@ -3,7 +3,7 @@ set title "Average sending time compared with Timeout"
 set xlabel "Timeout(ms)"
 set ylabel "Average sending time (ms)"
 set xtics ("500" 1, "1000" 2, "2000" 3, "5000" 4, "100000" 5)
-set xrange [0:6]
+set xrange [0:7]
 set output "concise-time-graph.ps"
 plot "concise-time.dat" using 1:2:3 notitle with yerrorbars, \
 	"concise-time.dat" using 1:2:3 title '5kBps-node2' with lines, \

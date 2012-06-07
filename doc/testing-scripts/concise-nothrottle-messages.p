@@ -1,9 +1,9 @@
 set terminal postscript monochrome
-set title "Successfull messages without Throttle mediator"
+set title "Successful messages without Throttle mediator"
 set xlabel "Bandwidth"
-set ylabel "Successfull messages received back(%)"
+set ylabel "Successful messages received back(%)"
 set xtics ("5kBps" 1, "10kBps" 2, "20kBps" 3)
-set xrange [0.5:3.5]
+set xrange [0.5:3.8]
 set yrange [0.0:1.0]
 set output "concise-message-graph-nothrottle.ps"
 plot "concise-nothrottle.dat" using 1:8 title 'Node 2' with lines, \
